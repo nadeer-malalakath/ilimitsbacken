@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Gallery – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Private Gallery brand: deep teal-slate */
+    --pg:           #2D6A6A;
+    --pg-mid:       #1E5050;
+    --pg-deep:      #0F3333;
+    --pg-light:     #F0FAFA;
+    --pg-bdr:       #9FD4D4;
+    --pg-text:      #0F3333;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+    --slate-bg:     #F4F6FA;
+    --slate-bdr:    #C8D4E8;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #071818 0%, #0D2A2A 50%, #112E2E 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(45,106,106,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,106,106,0.38) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(45,106,106,0.22);
+    border: 1px solid rgba(45,106,106,0.36);
+    color: #7FD4D4; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #071818 0%, #1E5050 55%, #3D9494 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(45,106,106,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Vault callout ── */
+  .vault-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pg-light);
+    border: 1.5px solid var(--pg-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .vault-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D4EEEE; border: 1.5px solid var(--pg-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .vault-title { font-size: 13px; font-weight: 700; color: var(--pg-text); line-height: 1.3; margin-bottom: 3px; }
+  .vault-body  { font-size: 12px; color: #1A4040; font-weight: 400; line-height: 1.55; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-high risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDE68A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Concealment note ── */
+  .conceal-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg);
+    border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .conceal-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .conceal-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .conceal-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #071818 0%, #0D2A2A 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,106,106,0.32) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner       { animation: fadeUp 0.42s ease both; }
+  .card             { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid        { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card          { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box         { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .vault-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip       { animation: fadeUp 0.42s ease 0.04s both; }
+  .conceal-note     { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing          { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔒</div>
+        <div>
+          <div class="app-name-text">Private Gallery</div>
+          <div class="app-sub">Hidden Media Vault / Secret Storage</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Hidden Storage / Media Vault</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows photos and videos to be hidden in a private password-protected gallery, concealing device activity from parents</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block vault-style apps instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Private Gallery — a vault-style application that hides photos and videos behind a passcode, making them invisible to standard gallery apps and anyone looking at the device.</p>
+  </div>
+
+  <div class="vault-callout">
+    <div class="vault-ico">🗄️</div>
+    <div>
+      <div class="vault-title">Private Gallery Hides Media Files Behind a Secret Password-Protected Vault</div>
+      <div class="vault-body">Unlike standard photo albums, Private Gallery is specifically engineered to make media disappear from the device's normal gallery view. Files moved into the vault become inaccessible without the correct PIN, password or biometric authentication — and are entirely invisible to any parent casually browsing the device.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2D6A6A;"></span> Hidden Photo Vault</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Video Concealment</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> PIN / Biometric Lock</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Decoy Lock Screen</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> File Manager Access</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Private Gallery is a <strong>hidden media vault application</strong> designed to store photos and videos inside a secure, password-protected area of the device that is completely hidden from standard gallery apps, file managers and casual inspection. Once media is moved into the vault, it cannot be seen without the correct authentication — making it effectively invisible to anyone who does not know the vault exists.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FAFA;">🔐</div>
+      <div>
+        <div class="feat-name">Password-Protected Hidden Vault</div>
+        <div class="feat-desc">The core feature of Private Gallery is a secure vault that stores photos and videos behind a PIN, password or biometric authentication. Files placed inside the vault are completely removed from the device's standard media library and are inaccessible without the correct credentials — making the vault's contents entirely hidden from any casual viewer.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🖼️</div>
+      <div>
+        <div class="feat-name">Transfer From Standard Gallery to Vault</div>
+        <div class="feat-desc">Users can select any photo or video from their device's regular gallery and move it into the private vault with a few taps. Once transferred, the media disappears entirely from the standard gallery, leaving no visible trace that the files exist on the device at all — unless the vault is explicitly opened and authenticated.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🎭</div>
+      <div>
+        <div class="feat-name">Decoy Lock Screen</div>
+        <div class="feat-desc">Many versions of Private Gallery include a decoy lock screen feature — where a wrong PIN shows a fake empty vault or a decoy calculator interface, concealing not just the contents but the existence of a hidden vault entirely. This feature is specifically designed to deceive anyone who asks a child to unlock the app.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📂</div>
+      <div>
+        <div class="feat-name">File Manager and Folder Organisation</div>
+        <div class="feat-desc">Private Gallery typically provides a full file management system within the vault — allowing users to organise hidden media into named folders, albums and categories. This makes it easy for a child to maintain a fully organised and extensive hidden library of content that is completely separated from any parental view of their device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F7F4FF;">📤</div>
+      <div>
+        <div class="feat-name">Restore and Export Hidden Media</div>
+        <div class="feat-desc">Vault apps allow hidden media to be restored back to the standard gallery or exported at any time. This means a child can temporarily remove media before handing a device to a parent for inspection and restore it again afterward — significantly undermining the reliability of any device review as a parental oversight tool.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key concerns around hidden media storage, reduced parental visibility, and the deliberate concealment of device activity.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Hidden From Parents</div>
+      <div class="rc-desc">Media moved to the vault disappears entirely from the standard gallery — parents browsing the device have no way of knowing concealed files exist</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Storage of Inappropriate Content</div>
+      <div class="rc-desc">A private vault provides a protected space where children can store inappropriate, explicit or harmful media with no parental visibility or intervention</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Decoy Screen Designed to Deceive</div>
+      <div class="rc-desc">The built-in decoy feature is explicitly engineered to mislead parents and carers — showing a fake empty vault when a false PIN is entered</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Bypasses Parental Supervision</div>
+      <div class="rc-desc">Vault-style apps are specifically designed to circumvent oversight — undermining even active parental monitoring strategies and device check-ins</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🤳</span>
+      <div class="rc-name">Sharing and Receiving Risks</div>
+      <div class="rc-desc">Children can receive and store inappropriate images or videos shared via messaging apps directly into the vault — with no trace visible during device review</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔄</span>
+      <div class="rc-name">Hide-and-Restore Before Inspection</div>
+      <div class="rc-desc">Files can be moved in and out of the vault at any time — allowing content to be concealed before handing a device to a parent and restored immediately after</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Private Gallery Carries a Medium–High Risk Rating</strong>
+      <span>While the app itself does not expose children to harmful external contact, its core function — deliberately concealing device content from parents — significantly undermines parental supervision and makes it easier for children to store and hide problematic media without detection.</span>
+    </div>
+  </div>
+
+  <div class="conceal-note">
+    <div class="conceal-ico">🫣</div>
+    <div>
+      <div class="conceal-title">Vault Apps Are Engineered for Concealment — That Is Their Entire Purpose</div>
+      <div class="conceal-body">Unlike apps that may carry incidental privacy risks, Private Gallery and similar vault applications are built entirely around the goal of hiding content from anyone who might look. Features like decoy screens, hidden app icons and seamless gallery removal are not incidental — they are deliberate design decisions made to ensure concealment succeeds, including against parents and carers.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Vault Apps Are Designed Specifically to Defeat Parental Oversight</div>
+        <div class="know-body">Private gallery and vault-style apps are not general-purpose apps that happen to have privacy features — they are tools specifically built to make it impossible for anyone other than the user to know what media is on the device. Decoy screens, invisible app icons and hidden file management are all features that exist to ensure a parent checking a device finds nothing, even when content is present. Standard device reviews are not sufficient to detect the presence or contents of a vault app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Install Vault Apps to Hide Inappropriate or Shared Content</div>
+        <div class="know-body">Although some adults use vault apps for legitimate personal privacy, children are more likely to use them to conceal content they know parents would disapprove of — including screenshots of inappropriate content, images received via messaging apps, or media related to online interactions they wish to keep hidden. The presence of a vault app on a child's device is itself a significant signal worth a calm, open conversation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Vault Apps Are Common and Often Disguised as Everyday Utilities</div>
+        <div class="know-body">Many vault apps are deliberately styled to look like ordinary applications — calculators, note-taking tools or file managers — to avoid detection. A child's device may have a vault app installed that appears to be a benign utility app on the home screen. Without device-level restrictions, these apps can be installed, used and deleted without a parent ever being aware they were present.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking Vault Apps Is More Effective Than Searching for Them</div>
+        <div class="know-body">Because vault apps are specifically designed to evade detection, trying to identify and find them on a device is significantly less reliable than preventing their installation in the first place. Device-level restrictions applied through iLimits — blocking the entire hidden gallery and vault category — prevent these apps from being installed at all, removing the need to search for something designed not to be found.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block vault-style hidden gallery apps like Private Gallery — no technical knowledge required, with no disruption to the rest of your child's device experience.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block hidden gallery and vault-style apps entirely by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar apps — including calculator-disguised vaults</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied to the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged vault or hidden storage apps are installed</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Private Gallery as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. You are always in control of what is and is not allowed on your child's device.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around hidden apps, digital privacy and responsible device use.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have an Open Conversation About Digital Honesty</div>
+        <div class="tip-body">If you discover a vault app on your child's device, approach the conversation with curiosity rather than confrontation. Ask why they felt they needed to hide things, and listen without immediately judging. Children who feel safe to be honest with a parent — even about mistakes or things they are embarrassed about — are far less likely to seek out tools designed for concealment. Building a culture of openness at home reduces the motivation to hide in the first place.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">📋</div>
+      <div>
+        <div class="tip-name">Discuss Responsible Device Use and Privacy Boundaries</div>
+        <div class="tip-body">Talk with your child about the difference between healthy personal privacy — which every child deserves — and secrecy that puts them at risk. Explain why hidden vault apps sit in a different category from having a private diary or personal space. Help them understand that your interest in what is on their device is about keeping them safe, not monitoring their every thought. Children who understand the reasoning behind boundaries are far more likely to respect them.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Prevent Hidden Gallery Apps at Device Level</div>
+        <div class="tip-body">Apply iLimits restrictions across every device your child uses, including tablets and secondary or older phones. Vault apps are frequently reinstalled quickly after deletion — device-level restrictions that prevent installation entirely are significantly more reliable than manual checking. Pair category-level blocking with regular honest conversations about why hidden apps are a concern, and your child will benefit from both layers of protection working together.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🛡️</span>
+    <h3 class="closing-title">Trust Is Built in the Open, Not Behind a Lock</h3>
+    <p class="closing-body">
+      Children thrive when they know the boundaries of their digital world are set with care — not surveillance, but genuine protection. iLimits helps families build that structure: giving parents the tools to stay informed and in control, so the focus can always return to trust, conversation and connection rather than hidden vaults and secret passcodes.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

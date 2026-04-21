@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tumile – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Tumile brand: deep saffron-amber */
+    --tm:           #D97706;
+    --tm-mid:       #B45309;
+    --tm-deep:      #78350F;
+    --tm-light:     #FFFBEB;
+    --tm-bdr:       #FCD34D;
+    --tm-text:      #451A03;
+
+    /* High risk red palette */
+    --hr-bg:        #FFF5F5;
+    --hr-bdr:       #FFBEBE;
+    --hr-text:      #800000;
+    --hr-sub:       #5C0000;
+    --hr-badge-bg:  #FFE4E4;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1C0800 0%, #321200 50%, #3E1600 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(217,119,6,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,119,6,0.42) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(217,119,6,0.18);
+    border: 1px solid rgba(217,119,6,0.36);
+    color: #FCD34D; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card in Hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #78350F 0%, #D97706 55%, #FCD34D 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(217,119,6,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.danger { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Tumile callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tm-light);
+    border: 1.5px solid var(--tm-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--tm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--tm-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #5C2A08; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── HIGH risk strip (red) ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--hr-bg);
+    border: 1.5px solid var(--hr-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--hr-badge-bg); border: 1.5px solid var(--hr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: var(--hr-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: var(--hr-sub); font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tm-light);
+    border: 1.5px solid var(--tm-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--tm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--tm-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #5C2A08; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1C0800 0%, #321200 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,119,6,0.30) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎲</div>
+        <div>
+          <div class="app-name-text">Tumile</div>
+          <div class="app-sub">Random Video Chat / Stranger Interaction</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Random Video Chat</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val danger">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables live video conversations with unknown users worldwide</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">🎲 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Tumile — a random video chat platform that instantly connects users face-to-face with complete strangers worldwide, with no screening, no mutual consent and no control over who appears on screen before the session is already live.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">⚡</div>
+    <div>
+      <div class="instant-title">Tumile Places Users Live on Video With a Random Stranger the Moment They Open the App</div>
+      <div class="instant-body">Tumile's entire design is built around a single, zero-friction interaction: one tap connects a user face-to-face with a randomly selected stranger anywhere in the world, with no profile preview, no opt-in from either party and no intermediate step between opening the app and being in live two-way video with an unknown individual. For younger users, this absence of any protective buffer — combined with the unpredictability of who will appear — places Tumile in the highest risk category for child safety.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Instant Video Match</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Live Stranger Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Gender Filter</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Text Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B5BDB;"></span> Country Select</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Tumile is a <strong>random video chat platform</strong> that connects users with strangers through live, two-way video conversations. The app matches users with unknown individuals from around the world instantly — with no pre-session profile review, no mutual opt-in and no control over who a user is connected with before the video session is already active. Users can also communicate through text messaging with strangers they have been matched with, with no monitoring or content filtering applied to any of these interactions.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--tm-light);">⚡</div>
+      <div>
+        <div class="feat-name">Zero-Friction Instant Matching With Random Strangers</div>
+        <div class="feat-desc">Tumile connects users to a randomly selected stranger via live two-way video within seconds — with no profile preview, no mutual opt-in and no buffer between opening the app and being face-to-face with an unknown individual. The speed of connection is a deliberate design choice that removes every moment of reflection before live contact is already established.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌍</div>
+      <div>
+        <div class="feat-name">Global Random Matching Across All Countries</div>
+        <div class="feat-desc">Tumile matches users with strangers from anywhere in the world, with optional country selection filters. This exposes a child to a genuinely global adult user pool — with no filtering by age, no regional safeguarding and no criterion designed to protect younger users from contact with unknown adults worldwide.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Private Text Messaging With Matched Strangers</div>
+        <div class="feat-desc">Beyond live video, Tumile allows matched users to continue contact through private text messaging. These conversations are unmonitored, contain no content filtering and are completely invisible to parents — meaning all communication between a child and an unknown adult is entirely private and leaves no accessible record.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">Tumile requires only a self-reported date of birth with no verification of the information provided. A child gains full access to the platform — including instant live video matching with adults worldwide — within moments of installing the app. Adults can equally claim any age, with no mechanism in place to challenge what they state or prevent contact with minors.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from instant live video with random strangers, exposure to explicit or disturbing content in real time, completely unpredictable interactions and significant privacy and safety concerns with no protective buffer of any kind.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Video With Unknown Strangers</div>
+      <div class="rc-desc">Children are placed immediately into live two-way video with a random adult from anywhere in the world — with no preview of who will appear, no opt-in process and no way to know who the next match will be before the session is already active and running</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Exposure to Inappropriate or Explicit Behaviour</div>
+      <div class="rc-desc">Random live video with an unfiltered global adult pool means children can be exposed to explicit, adult or deeply disturbing content in real time — with no content warning, no pre-screening and no moderation buffer between the behaviour occurring and the child seeing it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Completely Unpredictable Conversations</div>
+      <div class="rc-desc">Because matching is entirely random and interactions are live, the tone and content of any conversation is entirely beyond prediction or control. A child has no way of knowing what a stranger will say or do before they are already face-to-face and the session is live</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy and Safety Concerns</div>
+      <div class="rc-desc">Children may share personal information — their face, name, school, location or home environment — with unknown adults during live video sessions, with no verification of who is receiving that information or how it might be used, saved or shared beyond the session</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">😰</span>
+      <div class="rc-name">Harassment and Manipulation Risk</div>
+      <div class="rc-desc">The anonymous, live video environment creates significant risk of direct harassment, sexual solicitation, emotional manipulation or threatening behaviour — with no effective in-app mechanism capable of protecting a child during an active session</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Record or Parental Visibility</div>
+      <div class="rc-desc">Live video sessions on Tumile leave no log, no transcript and no record of any kind that parents can access or review. A child can have a dangerous or deeply distressing experience and close the app within seconds, with nothing available to a parent seeking to understand what occurred</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Tumile Carries a High Risk Rating</strong>
+      <span>Instant live video with random global strangers, zero content filtering, no age verification, completely unpredictable interactions and no record of any kind combine to place Tumile in the highest risk category for child safety on this platform.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🎲</div>
+    <div>
+      <div class="control-title">Random Video Chat Apps Are Among the Highest-Risk Platforms for Children — With No Protective Buffer of Any Kind</div>
+      <div class="control-body">Tumile removes every layer of protection that exists on conventional social platforms — there are no known contacts, no content records, no moderation delay and no opt-in. A child is placed live on two-way video with a stranger the moment they tap the screen, in an environment where what the stranger does is entirely unpredictable and immediately visible. Because interactions are live and anonymous, there is no transcript to review, no way to report before harm has already occurred and no mechanism to undo what a child has already been exposed to. This makes random video chat apps fundamentally more dangerous for children than any other category of social platform.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Random Video Chat Platforms Are the Highest-Risk Category of Social App</div>
+        <div class="know-body">Tumile sits at the extreme end of the risk spectrum for online platforms used by children. Unlike social networks, messaging apps or even live streaming platforms, random video chat apps offer no prior relationship, no mutual connection, no content record and no gap between opening the app and being in live two-way video with an unknown adult. There is no safer version of this experience — the risk is inherent to the platform's fundamental design, and no setting or restriction within the app meaningfully reduces a child's exposure to it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Interactions Are Instant, Live and Leave Absolutely No Record</div>
+        <div class="know-body">Unlike messaging apps where conversations can be reviewed, or live streaming platforms where broadcasts may be retained, video sessions on Tumile leave no trace of any kind that parents can access. A child can be exposed to explicit content, targeted with inappropriate or threatening behaviour, or manipulated by an unknown adult — and close the app within seconds with nothing logged, no notification sent and no way for a parent to know any of it occurred. The absence of any reviewable record makes open, honest conversation the only realistic safeguard available to parents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Platform's Design Actively Removes a Child's Ability to Self-Protect</div>
+        <div class="know-body">Tumile is engineered for impulsive, immediate engagement — the next random stranger is a single tap away, with no pause, no profile to consider and no time to reflect before the session is live. Children are not well-equipped to recognise or resist these design patterns, particularly when the live interaction involves a real adult who may be actively working to build trust, normalise inappropriate behaviour or obtain personal information before a child has the opportunity to disengage.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Children Can Access Tumile Instantly and Without Warning</div>
+        <div class="know-body">Tumile's interface is visually casual and simple, with no explicit content visible at the point of installation. A child may install the app without any awareness of what the matching experience involves, and can be exposed to inappropriate content or adult behaviour before they — or their parents — recognise that the platform is fundamentally unsafe for younger users. Age is trivially easy to falsify at registration, removing the only intended gatekeeping mechanism the app provides.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block random video chat apps like Tumile instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block random video chat apps entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Tumile as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around random video chat platforms, stranger interaction and responsible digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🗣️</div>
+      <div>
+        <div class="tip-name">Teach Children About the Risks of Interacting With Strangers Online</div>
+        <div class="tip-body">Help your child understand that being matched with a random stranger on a platform like Tumile is not a safe activity — regardless of how simple, casual or social the app makes it feel. Explain that random video chat platforms connect users with unknown adults whose identity, age and intentions cannot be verified, that conversations can escalate quickly and without warning, and that a live video session means there is no opportunity to preview who will appear or undo what happens before it has already occurred. Make clear that the same caution that applies to talking with strangers in person applies equally to live video with strangers online — and establish clear household rules about which platforms are appropriate before your child installs anything new.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Responsible Digital Behaviour and Privacy Awareness</div>
+        <div class="tip-body">Talk regularly with your child about what information is safe to share online and what should always remain private — particularly in the context of live video, where their face, voice, home environment and location clues are all visible to whoever they are matched with. Discuss specifically why personal details should never be shared with someone met on a random video chat platform, regardless of how friendly or trustworthy that person appears. Children who understand the reasoning behind privacy rules and who feel comfortable coming to a parent when something online makes them uncomfortable are significantly better protected than those who are simply told not to use certain apps.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools to Restrict Access to Random Video Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family devices included. Random video chat apps like Tumile are frequently reinstalled within minutes of being deleted from a device, making device-level controls significantly more reliable than manual monitoring or app-by-app removal. Combine technical restrictions with consistent, open conversations about online safety — the strongest protection available to any family comes from pairing clear access controls with a child who genuinely understands why those controls are in place and feels safe coming to you when something online concerns them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safety Online Starts With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the protection that comes from a child who understands why certain platforms are unsafe and feels comfortable talking to their parents about what they encounter online. iLimits gives you the technical layer — the conversations, trust and awareness your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

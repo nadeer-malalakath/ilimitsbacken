@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>My11Circle – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* My11Circle brand: deep forest green */
+    --mc:           #1A6B3C;
+    --mc-mid:       #145C31;
+    --mc-deep:      #0C3D21;
+    --mc-light:     #F0FAF4;
+    --mc-bdr:       #86EFAC;
+    --mc-text:      #052E16;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #030E07 0%, #081A0E 50%, #0C2614 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(26,107,60,0.40) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,60,0.46) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(26,107,60,0.22);
+    border: 1px solid rgba(26,107,60,0.40);
+    color: #86EFAC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #052E16 0%, #1A6B3C 55%, #4ADE80 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(26,107,60,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── My11Circle callout ── */
+  .mc-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mc-light);
+    border: 1.5px solid var(--mc-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .mc-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BBFAD4; border: 1.5px solid var(--mc-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mc-title { font-size: 13px; font-weight: 700; color: var(--mc-text); line-height: 1.3; margin-bottom: 3px; }
+  .mc-body  { font-size: 12px; color: #07380F; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5;
+    border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mc-light);
+    border: 1.5px solid var(--mc-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BBFAD4; border: 1.5px solid var(--mc-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--mc-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #07380F; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #030E07 0%, #081A0E 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,60,0.38) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .mc-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🏏</div>
+        <div>
+          <div class="app-name-text">My11Circle</div>
+          <div class="app-sub">Fantasy Sports / Real-Money Gaming</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Fantasy Sports Gaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows participation in fantasy sports contests that may involve real money</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of My11Circle — a fantasy sports platform where users construct virtual teams from real-world players and enter paid contests whose prize outcomes are determined by those players' live match performances, making it a real-money competitive gaming platform framed as sports entertainment.</p>
+  </div>
+
+  <div class="mc-callout">
+    <div class="mc-ico">🏆</div>
+    <div>
+      <div class="mc-title">My11Circle Is a Real-Money Gaming Platform Where Entry Fees and Prize Money Are Central to the Core Experience</div>
+      <div class="mc-body">My11Circle is not a free-to-play sports simulation — real money is integral to how the platform works. Users pay cash entry fees to join contests, and winnings are distributed based on how well a user's virtual team performs relative to other paying participants. The platform's entire incentive structure — its contests, leaderboards, cash rewards and promotional offers — is built around real financial stakes. This places My11Circle squarely in the category of real-money competitive gaming, regardless of the sports knowledge element it uses to frame the experience.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A6B3C;"></span> Team Building</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Cash Contests</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Live Scoring</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0EA5E9;"></span> Prize Withdrawals</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Leaderboards</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      My11Circle is a <strong>fantasy sports platform</strong> where users create virtual teams using real-world sports players. Participants compete in contests based on the real-life performance of those players during matches. Some contests may involve entry fees and offer monetary prizes depending on the results — making the financial outcome of each contest directly tied to real-world sporting events and the user's ability to outperform other paying participants.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--mc-light);">👥</div>
+      <div>
+        <div class="feat-name">Virtual Team Creation Using Real-World Players</div>
+        <div class="feat-desc">Users build a team of eleven players selected from the real-world squads participating in upcoming matches, working within a virtual budget that forces trade-off decisions between high-value and lower-cost player selections. The quality of these decisions directly determines contest outcomes and, where money is involved, the size of any financial return. The platform is designed to reward knowledge of player form, match conditions and selection strategy — framing a financial contest as a test of sporting expertise.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💰</div>
+      <div>
+        <div class="feat-name">Paid Entry Contests With Cash Prize Pools</div>
+        <div class="feat-desc">The majority of My11Circle's contests require users to pay a real-money entry fee to participate. Prize pools are funded by these aggregated entry fees, and winnings are distributed to the highest-scoring participants at the end of each match. A user who enters ten contests in a day has committed real money to each one, with financial outcomes that are uncertain at the point of entry and determined entirely after the match concludes. The platform actively promotes large prize pools to drive contest participation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📊</div>
+      <div>
+        <div class="feat-name">Live Match Scoring and Real-Time Contest Standings</div>
+        <div class="feat-desc">During live matches, My11Circle tracks the real-time performance of every selected player and updates each user's contest score continuously. Users can monitor their standing against other paying participants in real time throughout the match — creating a sustained, emotionally intense engagement loop tied directly to the financial outcome of the contest. This real-time score tracking is specifically designed to maximise session length and emotional investment during live sporting events.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🏦</div>
+      <div>
+        <div class="feat-name">Real Money Deposits, Winnings and Withdrawals</div>
+        <div class="feat-desc">My11Circle maintains a real-money wallet system where users deposit funds, pay contest entry fees and receive prize winnings — all of which can be withdrawn to a linked bank account. The platform accepts deposits through standard payment gateways and offers promotional bonus funds to encourage top-up transactions. The full financial infrastructure of a real-money gaming platform — deposits, entries, winnings and withdrawals — is accessible to any user who creates an account and links a payment method.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Age Verification That Can Be Bypassed at Registration</div>
+        <div class="feat-desc">While My11Circle states an 18+ age requirement, the verification process at registration relies primarily on self-declaration and, in some cases, document submission that may not be consistently enforced or reviewed before a user can participate in paid contests. A determined minor with access to a parent's payment method and identity documents may be able to participate in real-money contests before any age verification barrier is reliably applied.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from direct real-money financial exposure, reward-based gameplay mechanics that encourage compulsive participation, underdeveloped financial understanding in younger users, and the normalisation of paid gaming as sports entertainment.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">Real Money Financial Exposure</div>
+      <div class="rc-desc">Every paid contest requires a genuine financial commitment — children who access the platform risk losing real money on each entry, with no cap on the number of contests they can enter or the total amount they can spend in a single session</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎰</span>
+      <div class="rc-name">Reward-Based Gameplay Encouraging Compulsive Use</div>
+      <div class="rc-desc">The combination of financial stakes, live scoring, leaderboard competition and prize anticipation creates an emotionally intense reward loop that mirrors the psychological mechanics of gambling — encouraging repeated participation beyond what a child can afford or should engage in</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📉</span>
+      <div class="rc-name">Financial Risk Children Cannot Fully Assess</div>
+      <div class="rc-desc">Children do not yet have the financial literacy or emotional regulation to accurately assess the risk of repeated contest entry — they are susceptible to the sunk-cost fallacy and may continue entering contests in an attempt to recover previous losses</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏆</span>
+      <div class="rc-name">Competitive Gaming Linked to Real Sports Events</div>
+      <div class="rc-desc">Tying financial contests to real sporting events creates a persistent daily opportunity for paid participation — every cricket or football match becomes a potential entry point for real-money contest engagement, normalising habitual paid gaming as sports fandom</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Unauthorised Access to Family Payment Methods</div>
+      <div class="rc-desc">Children who discover the platform may use a parent's linked payment method to fund their account, either without the parent's awareness or by convincing a parent that entry fees are trivial — leading to unintended financial losses from a family account</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔁</span>
+      <div class="rc-name">Promotional Offers That Drive Repeated Deposits</div>
+      <div class="rc-desc">My11Circle uses bonus cash and deposit-match promotional offers to encourage top-up transactions — mechanics familiar from adult gambling platforms that are specifically designed to increase the frequency and volume of deposits from active users</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>My11Circle Carries a High Risk Rating</strong>
+      <span>Direct real-money financial stakes, psychologically compelling reward-based contest mechanics, promotional deposit incentives and the financial literacy gap between younger users and the adult gaming environment combine to place My11Circle in the highest risk category for child safety on digital platforms.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚠️</div>
+    <div>
+      <div class="control-title">Fantasy Sports Platforms Use Sports Knowledge as a Frame for Real-Money Gaming Mechanics</div>
+      <div class="control-body">My11Circle and platforms like it are legally classified as skill-based gaming rather than gambling in the jurisdictions where they operate — but the financial mechanics are functionally identical to other real-money competitive platforms: users stake money, outcomes are uncertain at the point of entry, and the majority of participants lose more than they win over time. Children who are introduced to these platforms through cricket or football fandom may not perceive the financial risk involved, because the sports context frames entry fees as participation costs rather than financial stakes in an uncertain outcome.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Fantasy Sports Platforms May Include Contests That Involve Real Money and Prize-Based Competition</div>
+        <div class="know-body">My11Circle is not a free game — it is a real-money gaming platform where entry fees are paid in cash and prizes are distributed from pooled participant funds. A child who participates in paid contests is not playing a sports simulation; they are entering a competitive financial environment where the majority of participants do not recoup their total entry fees over time. Parents should be aware that the sports framing of the platform does not change the underlying financial mechanics: money goes in, outcomes are uncertain, and money may or may not come back out.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Not Fully Understand the Financial Aspects or Risks Associated With the Platform</div>
+        <div class="know-body">Children and adolescents are particularly vulnerable to the psychological mechanics that real-money gaming platforms use to drive engagement — the anticipation of a prize, the emotional intensity of live score tracking, the competitive pressure of leaderboard standings, and the rationalisation that a loss can be recovered with the next entry. These are the same psychological mechanisms studied in adult problem gambling, and younger users are significantly less equipped to recognise them, resist them or understand the cumulative financial cost of sustained participation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Platform's Promotional Structure Is Designed to Increase Deposit Frequency and Volume</div>
+        <div class="know-body">My11Circle actively uses deposit bonuses, referral rewards and promotional contest credits to encourage users to add money to their account more frequently and in larger amounts. These promotional mechanics are standard practice in adult real-money gaming platforms and are designed by specialists in engagement psychology to maximise lifetime user spending. Children who are attracted by a promotional offer may not understand that bonus funds typically carry wagering requirements that necessitate additional spending before any withdrawal can be made.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Access to a Parent's Payment Method Creates a Direct Risk of Unauthorised Family Expenditure</div>
+        <div class="know-body">Children who access My11Circle using a device where a parent's payment credentials are stored — or who request funds from a parent by describing entry fees as minor or routine — can accumulate significant financial losses from a family account without the full extent of spending becoming visible until a bank statement is reviewed. Parents should be aware that the per-contest entry fee model, combined with the frequency of daily cricket and football matches, creates conditions for very rapid cumulative spending that can be easy to underestimate in the moment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block fantasy sports gaming apps like My11Circle instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block fantasy sports and real-money gaming apps by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar gaming platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like My11Circle as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting financial awareness around the real risks of real-money gaming platforms framed as sports entertainment.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🎮</div>
+      <div>
+        <div class="tip-name">Discuss Responsible Gaming Habits With Children</div>
+        <div class="tip-body">Help your child understand the difference between playing a free sports game and participating in a real-money contest where actual financial outcomes are uncertain. Be specific: explain that every entry fee paid on My11Circle is real money that may not be returned, that winning is not guaranteed regardless of how strong the team selection appears, and that the platform's design — live scoring, leaderboards, prize notifications — is intentionally engineered to feel exciting precisely because that excitement drives more contest entries. Establish a clear household principle that real-money competitive gaming platforms are adult environments that carry genuine financial risk, and that this risk applies regardless of how sports-focused the framing appears.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">💰</div>
+      <div>
+        <div class="tip-name">Explain the Financial Risks Involved in Fantasy Sports Contests</div>
+        <div class="tip-body">Talk with your child about how real-money contest platforms make money — by retaining a percentage of every entry fee pool before prizes are distributed, meaning that the total prize money available is always less than the total money paid in by participants as a group. This structural fact means that the average participant across all contests loses money over time, regardless of skill level. Help your child understand the sunk-cost fallacy in this context: the feeling that a loss should be followed by another entry to recover the previous amount is a predictable psychological response that these platforms are specifically designed to exploit, and that recognising this feeling is the first step to not acting on it.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Gaming Platforms Involving Real Money</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family devices included. Also review the payment methods stored on shared devices and consider setting up purchase authentication requirements that prevent transactions without active parental approval. Fantasy sports apps are frequently downloaded during cricket or football seasons when peer discussion of the platform is at its highest, making proactive device-level restrictions significantly more effective than waiting until a child has already created an account and made their first deposit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safety Online Starts With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the protection that comes from a child who understands why certain platforms carry real financial risk and feels comfortable talking to their parents about money, gaming and the pressures they encounter online. iLimits gives you the technical layer — the conversations, trust and financial awareness your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

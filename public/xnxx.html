@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XNXX – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:          #F0436A;
+    --rose-deep:     #C9294F;
+    --rose-hover:    #D63860;
+    --rose-light:    #FFF0F4;
+    --rose-mid:      #FFD0DA;
+    --blush:         #FEF6F8;
+    --blush-2:       #FDF2F5;
+    --ink:           #18121E;
+    --ink-soft:      #342540;
+    --ink-mid:       #695878;
+    --ink-muted:     #A494B0;
+    --border:        #F0E5EA;
+    --border-soft:   #F8EEF2;
+    --surface:       #FFFFFF;
+    --amber:         #E8920A;
+    --amber-bg:      #FFFBF0;
+    --amber-border:  #FDDDA0;
+    --green:         #0A8A5C;
+    --green-bg:      #F0FDF7;
+    --green-border:  #9FE8CE;
+    --blue-bg:       #F0F5FF;
+    --blue-border:   #C7D9FF;
+    --blue-text:     #2E5ECC;
+    --radius-sm:     12px;
+    --radius-md:     18px;
+    --radius-lg:     26px;
+    --radius-xl:     32px;
+    --shadow-xs:     0 1px 4px rgba(240,67,106,0.07);
+    --shadow-sm:     0 2px 14px rgba(240,67,106,0.09);
+    --shadow-md:     0 6px 32px rgba(240,67,106,0.13);
+    --shadow-lg:     0 14px 52px rgba(240,67,106,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ════════════════════════════════════════
+     HERO
+  ════════════════════════════════════════ */
+  .hero {
+    background: linear-gradient(160deg, #150A1B 0%, #220F2B 50%, #2E1238 100%);
+    padding: 44px 20px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* ambient glows */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 115% 5%,  rgba(240,67,106,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 40% at -8%  95%, rgba(240,67,106,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* wave cutout */
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px;
+    background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-blob {
+    position: absolute; top: -80px; right: -80px;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.2) 0%, transparent 68%);
+    filter: blur(24px);
+    pointer-events: none;
+  }
+  .hero-blob-2 {
+    position: absolute; bottom: 20px; left: -60px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.1) 0%, transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  /* iLimits eyebrow pill */
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.30);
+    color: #FF9DB5;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.9px;
+    text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.35);
+    animation: pulse-dot 2.2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.35); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.12); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700;
+    color: #FFFFFF; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FF9DB5; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.54);
+    font-weight: 400; line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  /* ── App Card inside hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.065);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .app-card-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-logo {
+    width: 58px; height: 58px; border-radius: 15px;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative; overflow: hidden;
+  }
+  .app-logo::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 46%;
+    background: rgba(255,255,255,0.08);
+    border-radius: 15px 15px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: #FFFFFF; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-category {
+    font-size: 11.5px; color: rgba(255,255,255,0.46);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 12px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-label {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.34);
+    margin-bottom: 3px;
+  }
+  .meta-value { font-size: 12.5px; font-weight: 600; color: #FFFFFF; }
+  .meta-value.danger { color: #FF9DB5; }
+  .meta-value.span2 { grid-column: 1 / -1; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.30);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .flag-icon { font-size: 20px; flex-shrink: 0; }
+  .flag-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .flag-sub   { font-size: 11px; color: rgba(255,155,181,0.72); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ════════════════════════════════════════
+     MAIN CONTENT
+  ════════════════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  /* ── Section header ── */
+  .sec-hd { margin-bottom: 16px; }
+  .sec-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sec-sub {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  /* ── Base card ── */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ════ SECTION 1 — WHAT THIS PLATFORM IS ════ */
+  .platform-intro {
+    padding: 18px 20px;
+    font-size: 13.5px; color: var(--ink-mid);
+    font-weight: 400; line-height: 1.7;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .platform-intro strong { color: var(--ink); font-weight: 600; }
+
+  .what-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .what-row:last-child { border-bottom: none; }
+  .what-icon {
+    width: 38px; height: 38px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .what-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .what-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ════ SECTION 2 — RISK GRID ════ */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 14px 15px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .risk-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .risk-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .risk-sub   { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ════ SECTION 3 — WHAT PARENTS SHOULD KNOW ════ */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ════ SECTION 4 — HOW iLIMITS HELPS ════ */
+  .ilimits-dark {
+    background: linear-gradient(148deg, #1A0B22 0%, #150820 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .ilimits-dark::before {
+    content: '';
+    position: absolute; top: -50px; right: -50px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 68%);
+    filter: blur(18px); pointer-events: none;
+  }
+  .ilimits-dark::after {
+    content: '';
+    position: absolute; bottom: -30px; left: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.10) 0%, transparent 70%);
+    filter: blur(14px); pointer-events: none;
+  }
+  .il-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: #FFFFFF; line-height: 1.25; margin-bottom: 6px;
+    position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.56);
+    line-height: 1.65; margin-bottom: 18px;
+    position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-check {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ════ SECTION 5 — IMPORTANT NOTE ════ */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-border);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-icon-wrap {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7C4A03; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: #6B3B02; font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ════ SECTION 6 — GUIDANCE ════ */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-icon {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+    border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ════ CLOSING CARD ════ */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF2F5 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .closing-icon  { font-size: 46px; margin-bottom: 14px; display: block; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25;
+  }
+  .closing-body { font-size: 13px; color: #5E2035; font-weight: 400; line-height: 1.7; }
+
+  /* ════ FOOTER ════ */
+  .footer {
+    text-align: center;
+    padding: 4px 20px 18px;
+  }
+  .footer-brand {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-bottom: 6px;
+  }
+  .footer-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .footer-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700; color: var(--ink-soft);
+  }
+  .footer-text {
+    font-size: 11px; color: var(--ink-muted);
+    font-weight: 400; line-height: 1.6;
+  }
+
+  /* ════ ANIMATIONS ════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+  .hero-inner       { animation: fadeUp 0.45s ease both; }
+  .card             { animation: fadeUp 0.45s ease both; }
+  .risk-grid        { animation: fadeUp 0.45s ease 0.05s both; }
+  .ilimits-dark     { animation: fadeUp 0.45s ease 0.1s both; }
+  .note-box         { animation: fadeUp 0.45s ease 0.08s both; }
+  .closing          { animation: fadeUp 0.45s ease 0.12s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<header class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-inner">
+
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">
+      Why This App Is<br>Marked as <em>Restricted</em>
+    </h1>
+    <p class="hero-sub">
+      Understanding why certain apps or websites may not be appropriate for children and how you can take action.
+    </p>
+
+    <!-- App info card -->
+    <div class="app-card">
+      <div class="app-card-top">
+        <div class="app-logo">🔞</div>
+        <div>
+          <div class="app-name-text">XNXX</div>
+          <div class="app-category">Adult Content Platform</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-label">Category</div>
+          <div class="meta-value">Adult Content</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Risk Level</div>
+          <div class="meta-value danger">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-label">Primary Reason</div>
+        <div class="meta-value">Explicit adult material intended for mature audiences only</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="flag-icon">🚫</div>
+        <div>
+          <div class="flag-title">Flagged as Restricted in iLimits</div>
+          <div class="flag-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════════════════ CONTENT ══════════════════════ -->
+<main class="main">
+
+  <!-- ── Section 1: What This Platform Is ── -->
+  <div class="sec-hd">
+    <div class="sec-pill">📱 Section 1</div>
+    <h2 class="sec-title">What This Platform Is</h2>
+    <p class="sec-sub">A clear explanation of this platform's purpose and why it exists outside the bounds of child-appropriate content.</p>
+  </div>
+
+  <div class="card">
+    <div class="platform-intro">
+      XNXX is an adult video website that hosts <strong>explicit sexual content</strong> intended strictly for adults aged 18 and over. The platform is not designed for children or teenagers in any capacity, and contains material that is wholly inappropriate for young audiences.
+    </div>
+    <div class="what-row">
+      <div class="what-icon" style="background:#FFF0F4;">🎬</div>
+      <div>
+        <div class="what-name">Hosts Explicit Adult Video Content</div>
+        <div class="what-desc">The platform's entire library consists of graphic sexual videos — there is no family-safe or age-appropriate content section. All material is explicitly adult in nature.</div>
+      </div>
+    </div>
+    <div class="what-row">
+      <div class="what-icon" style="background:#FFF7F0;">🌐</div>
+      <div>
+        <div class="what-name">Freely Accessible Without Verification</div>
+        <div class="what-desc">The site can be reached via any web browser without robust age verification, meaning children can encounter it through a single accidental search or shared link.</div>
+      </div>
+    </div>
+    <div class="what-row">
+      <div class="what-icon" style="background:#FFF0F8;">🔍</div>
+      <div>
+        <div class="what-name">Discoverable Through Search Engines</div>
+        <div class="what-desc">The platform ranks prominently in search results for many common queries. Children may reach it incidentally while searching for unrelated content online.</div>
+      </div>
+    </div>
+    <div class="what-row">
+      <div class="what-icon" style="background:#F0F5FF;">📢</div>
+      <div>
+        <div class="what-name">Contains Aggressive Third-Party Advertising</div>
+        <div class="what-desc">Pages are filled with explicit pop-up and banner advertisements that load automatically and cannot be dismissed without additional redirects or clicks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 2: Why Harmful ── -->
+  <div class="gap"></div>
+  <div class="sec-hd">
+    <div class="sec-pill">⚠️ Section 2</div>
+    <h2 class="sec-title">Why It May Be Harmful for Children</h2>
+    <p class="sec-sub">Specific developmental and psychological risks of exposure to explicit adult content at a young age.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="risk-emoji">👁️</span>
+      <div class="risk-name">Explicit Content Exposure</div>
+      <div class="risk-sub">Graphic material is developmentally inappropriate and deeply unsuitable for children at any age</div>
+    </div>
+    <div class="risk-card">
+      <span class="risk-emoji">💔</span>
+      <div class="risk-name">Distorted View of Relationships</div>
+      <div class="risk-sub">Unrealistic portrayals can skew a child's understanding of healthy intimacy and consent</div>
+    </div>
+    <div class="risk-card">
+      <span class="risk-emoji">🧠</span>
+      <div class="risk-name">Psychological Impact</div>
+      <div class="risk-sub">Early exposure is linked to anxiety, distorted body image, and confusion about sexuality</div>
+    </div>
+    <div class="risk-card">
+      <span class="risk-emoji">📺</span>
+      <div class="risk-name">Harmful Advertising</div>
+      <div class="risk-sub">Auto-playing explicit ads and pop-ups expose children to additional inappropriate material</div>
+    </div>
+    <div class="risk-card">
+      <span class="risk-emoji">🔁</span>
+      <div class="risk-name">Compulsive Usage Patterns</div>
+      <div class="risk-sub">Platform design encourages extended browsing sessions, creating habitual return visits</div>
+    </div>
+    <div class="risk-card">
+      <span class="risk-emoji">🔗</span>
+      <div class="risk-name">Links to Harmful Content</div>
+      <div class="risk-sub">Related site recommendations can lead children deeper into networks of adult platforms</div>
+    </div>
+  </div>
+
+  <!-- ── Section 3: What Parents Should Know ── -->
+  <div class="gap"></div>
+  <div class="sec-hd">
+    <div class="sec-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sec-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Accidental Discovery Is Very Common</div>
+        <div class="know-body">Children frequently encounter adult platforms through mistyped URLs, auto-complete suggestions, shared links in messaging apps, or ads embedded in games and free video apps — often without any intent to find such content.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Curiosity Is Natural — Guidance Matters More</div>
+        <div class="know-body">Adolescent curiosity about sexuality is normal. The key is ensuring children encounter that curiosity in a guided, age-appropriate context rather than stumbling onto graphic adult platforms unsupported.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children Rarely Self-Report Exposure</div>
+        <div class="know-body">Due to embarrassment or fear of consequences, children are unlikely to tell a parent they've seen inappropriate content. Proactive monitoring and open trust-based conversations are more effective than waiting for disclosure.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Guide Toward Healthy Digital Experiences</div>
+        <div class="know-body">Replacing restriction with a positive alternative — age-appropriate education about relationships, digital literacy programmes, or open family conversations — builds lasting protective resilience in children.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 4: How iLimits Helps ── -->
+  <div class="gap"></div>
+  <div class="sec-hd">
+    <div class="sec-pill">🛡️ Section 4</div>
+    <h2 class="sec-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="ilimits-dark">
+    <div class="il-badge">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives every parent the tools to build a safer digital environment — without needing technical expertise. Block adult content platforms instantly, at any time.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-check">✓</div>
+        <div class="il-label">Block adult websites and apps entirely by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-check">✓</div>
+        <div class="il-label">Restricted categories enable instant one-tap blocking</div>
+      </div>
+      <div class="il-row">
+        <div class="il-check">✓</div>
+        <div class="il-label">Parents remain fully in control of every restriction</div>
+      </div>
+      <div class="il-row">
+        <div class="il-check">✓</div>
+        <div class="il-label">Receive alerts when flagged apps are installed or accessed</div>
+      </div>
+      <div class="il-row">
+        <div class="il-check">✓</div>
+        <div class="il-label">Works quietly in the background — no disruption to the child's device experience</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 5: Important Note ── -->
+  <div class="gap"></div>
+  <div class="sec-hd">
+    <div class="sec-pill">📌 Section 5</div>
+    <h2 class="sec-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-icon-wrap">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like XNXX as restricted — but <strong>no app is ever blocked without your explicit choice</strong>. Every restriction is set by you, based on your family's values and your child's specific needs. You are always in full control.</div>
+    </div>
+  </div>
+
+  <!-- ── Section 6: Guidance for Parents ── -->
+  <div class="gap"></div>
+  <div class="sec-hd">
+    <div class="sec-pill">💡 Section 6</div>
+    <h2 class="sec-title">Guidance for Parents</h2>
+    <p class="sec-sub">Three practical steps to protect and empower your child online.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-icon" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have Open Conversations About Internet Safety</div>
+        <div class="tip-body">Talk to your child — in age-appropriate terms — about the kinds of content that exist online and why some of it is not suitable for them. Children who feel comfortable talking to a parent are better equipped to seek help when they encounter something disturbing.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon" style="background:#F0FDF7; border-color: var(--green-border);">🌱</div>
+      <div>
+        <div class="tip-name">Teach Responsible Online Behaviour</div>
+        <div class="tip-body">Help your child understand that the internet reflects the full range of human behaviour — including content that is designed for adults. Building their ability to recognise, avoid, and report inappropriate content is a lifelong skill.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon" style="background: var(--blue-bg); border-color: var(--blue-border);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls Consistently</div>
+        <div class="tip-body">Technology-based safeguards work best when applied consistently across all devices your child uses. Review your iLimits settings regularly as children's device access evolves and new platforms emerge. Controls are a safety net — not a substitute for open dialogue.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <div class="closing">
+    <span class="closing-icon">💗</span>
+    <h3 class="closing-title">You're Building Something Important</h3>
+    <p class="closing-body">
+      Every boundary you set with care is a gift to your child's future self. iLimits is here to support you — not just with tools, but with the clarity to make thoughtful, confident decisions about your family's digital life.
+    </p>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="footer-icon">i</div>
+      <div class="footer-name">iLimits</div>
+    </div>
+    <p class="footer-text">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chamet – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Chamet brand: emerald green */
+    --ch:           #00897B;
+    --ch-mid:       #00695C;
+    --ch-deep:      #004D40;
+    --ch-light:     #F0FDF9;
+    --ch-bdr:       #80CBC4;
+    --ch-text:      #003D36;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #001A16 0%, #002E27 50%, #003D33 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,137,123,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,137,123,0.36) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,137,123,0.20);
+    border: 1px solid rgba(128,203,196,0.35);
+    color: #80CBC4; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #004D40 0%, #00897B 55%, #4DB6AC 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,137,123,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Chamet live callout ── */
+  .chamet-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ch-light);
+    border: 1.5px solid var(--ch-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .chamet-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #B2DFDB; border: 1.5px solid var(--ch-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .chamet-title { font-size: 13px; font-weight: 700; color: var(--ch-text); line-height: 1.3; margin-bottom: 3px; }
+  .chamet-body  { font-size: 12px; color: #002820; font-weight: 400; line-height: 1.55; }
+
+  /* ── Dual-mode banner ── */
+  .dual-banner { display: flex; gap: 10px; margin-bottom: 14px; }
+  .dual-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .dual-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:3px;
+    border-radius: 3px 3px 0 0;
+  }
+  .dual-card.ch-a::before { background: linear-gradient(90deg, #00897B, #4DB6AC); }
+  .dual-card.ch-b::before { background: linear-gradient(90deg, #F0436A, #FF9DB5); }
+  .dual-lbl  { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); margin-bottom: 5px; }
+  .dual-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 4px; }
+  .dual-desc { font-size: 11.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.5; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High-risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5;
+    border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Real-time note ── */
+  .realtime-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg);
+    border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .realtime-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .realtime-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .realtime-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #001A16 0%, #002E27 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,137,123,0.30) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner       { animation: fadeUp 0.42s ease both; }
+  .card             { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid        { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card          { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box         { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .chamet-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .dual-banner      { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip       { animation: fadeUp 0.42s ease 0.04s both; }
+  .realtime-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing          { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💚</div>
+        <div>
+          <div class="app-name-text">Chamet</div>
+          <div class="app-sub">Random Video Chat / Stranger Chat</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Video Chat</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables live video interactions with unknown users worldwide</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Chamet — a live video chat and social discovery platform that connects users with strangers around the world through real-time video calls and instant messaging.</p>
+  </div>
+
+  <div class="chamet-callout">
+    <div class="chamet-ico">🎥</div>
+    <div>
+      <div class="chamet-title">Chamet Combines Live Video With Social Discovery — Amplifying the Risk</div>
+      <div class="chamet-body">Chamet is not a standalone random video app — it layers social discovery features on top of live video matching, allowing users to browse profiles, follow strangers and build ongoing contact beyond any single session. This combination makes it more persistent and harder to monitor than a purely random video platform, as interactions can develop into sustained relationships between a child and an unknown adult entirely outside parental view.</div>
+    </div>
+  </div>
+
+  <div class="dual-banner">
+    <div class="dual-card ch-a">
+      <div class="dual-lbl">Feature 1</div>
+      <div class="dual-name">Live Video Chat</div>
+      <div class="dual-desc">Instant real-time video with random strangers worldwide — no profile preview before the connection is already live</div>
+    </div>
+    <div class="dual-card ch-b">
+      <div class="dual-lbl">Feature 2</div>
+      <div class="dual-name">Social Discovery</div>
+      <div class="dual-desc">Browse stranger profiles globally, follow users and develop ongoing contact far beyond a one-time video match</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00897B;"></span> Live Video Match</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Stranger Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Profile Browse</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Follow & Message</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Global Matching</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Chamet is a <strong>live video chat and social discovery platform</strong> that allows users to connect with people around the world through real-time video calls. Users can start conversations with strangers instantly and interact through video chat or messaging — with no prior relationship, no profile review before the video connection is live, and no meaningful verification of who is on the other side. The platform is designed entirely for meeting new people and social interaction with global strangers.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ch-light);">🎥</div>
+      <div>
+        <div class="feat-name">Real-Time Video Calls With Strangers</div>
+        <div class="feat-desc">Chamet connects users to a random stranger through live two-way video with no profile preview, no mutual consent step and no intermediate stage before the connection is active. A child using the app is immediately face-to-face via live video with an unknown adult from anywhere in the world within seconds of opening it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌍</div>
+      <div>
+        <div class="feat-name">Global Social Discovery</div>
+        <div class="feat-desc">Beyond random video matching, Chamet allows users to browse the profiles of strangers from around the world. This means adults can identify and seek out specific users — including children — before initiating contact, adding a targeted dimension to the platform's risk that purely random apps do not carry.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Private Messaging With Unknown Users</div>
+        <div class="feat-desc">Chamet supports private text messaging between matched users, entirely unmonitored and with no content filtering. All conversations between a child and an unknown adult are invisible to parents, with no word screening, no content moderation and no record that can be reviewed after the fact.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">👤</div>
+      <div>
+        <div class="feat-name">Follow and Ongoing Contact Features</div>
+        <div class="feat-desc">Users can follow profiles and request continued connection beyond any initial video match. A random live encounter on Chamet can evolve into a persistent relationship — with a child receiving ongoing messages, video requests and social attention from an adult stranger, all entirely outside a parent's knowledge or view.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">Chamet requires only a self-reported date of birth at registration with no verification of the age provided. A child can access the full platform — including real-time live video with global strangers and unrestricted private messaging — within moments of installation. Adults can equally enter any age they choose with no challenge, check or consequence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from live video with strangers, exposure to adult content, unpredictable interactions and significant privacy and safety concerns unique to real-time anonymous contact.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Video With Strangers</div>
+      <div class="rc-desc">Children are instantly connected via real-time two-way video with a random adult from anywhere in the world — with no preview, no opt-in and no knowledge of who will appear before the session is already live</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Inappropriate or Adult Content</div>
+      <div class="rc-desc">Random live video with an unfiltered global adult user base means children can be exposed to explicit, adult or disturbing behaviour in real time with no content warning and no moderation buffer between the match and the exposure</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Unpredictable Interactions</div>
+      <div class="rc-desc">Because matching is random and interactions are live, the nature of any given conversation is entirely unpredictable — children have no way to anticipate what a stranger will say or do before they are already connected via live video</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy and Safety Concerns</div>
+      <div class="rc-desc">Children may share personal information — their face, name, school or location — with unknown adults during video calls or private messages, with no oversight and no verification of who receives that information or how it may be used</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">😰</span>
+      <div class="rc-name">Harassment and Unsafe Contact</div>
+      <div class="rc-desc">The live, anonymous and real-time nature of Chamet creates significant risk of direct harassment, manipulation or threatening behaviour, with no effective protective mechanism during an active video or chat session</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Ongoing Stranger Relationships</div>
+      <div class="rc-desc">Follow and messaging features allow live encounters to become persistent, private contact between a child and an unknown adult — well beyond any isolated video match and entirely hidden from parents</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Chamet Carries a High Risk Rating</strong>
+      <span>Real-time live video with unknown global users, social discovery features that enable targeted stranger contact, no content filtering and no age verification combine to place Chamet in the highest risk category for child safety.</span>
+    </div>
+  </div>
+
+  <div class="realtime-note">
+    <div class="realtime-ico">⏱️</div>
+    <div>
+      <div class="realtime-title">Real-Time and Often Anonymous — There Is No Window to Intervene</div>
+      <div class="realtime-body">Live video chat platforms connect children with strangers instantly and in real time. Because these interactions happen live and often anonymously, children may encounter inappropriate conversations, unsafe individuals or content that is not suitable for their age before any opportunity to disengage — and long before a parent is aware that an interaction has taken place. There is no moderation delay, no content review and no record of what occurred once the session ends.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Chamet Combines the Two Highest-Risk Features Into One Platform</div>
+        <div class="know-body">By layering social discovery on top of live random video, Chamet creates a risk environment more complex than either feature in isolation. Children are not only exposed to unpredictable live video with strangers — they can also be found, profiled and followed by adults who have seen them in a match. This combination of immediate exposure and ongoing contact potential makes Chamet among the highest-risk platforms available to younger users.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Interactions Are Live, Real-Time and Leave No Recoverable Record</div>
+        <div class="know-body">Live video sessions on Chamet produce no log that parents can review. A child can have a distressing or harmful interaction, close the app and say nothing — with nothing recorded, no alert sent and no trace for a parent to find. This absence of any recoverable record makes Chamet exceptionally difficult to monitor through conventional means, and underscores why device-level controls are more reliable than retrospective review for this category of app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Not Perceive the Risk Until Exposure Has Already Occurred</div>
+        <div class="know-body">Chamet's clean, social interface does not signal its risks visibly at the point of installation or first use. A child may open the app with curiosity and be connected live to an unknown adult before they have formed any expectation of what that match might involve. The real-time nature of the platform means there is no preview, no buffer and no moment of reflection between tapping to match and being face-to-face with a stranger on screen.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Social Discovery Features Create Risk That Outlasts Any Single Session</div>
+        <div class="know-body">Unlike purely random video apps, Chamet's follow and private messaging features mean that risk does not end when a video session closes. An adult who encountered a child through a live match can follow their profile, send messages and request further video contact — creating an ongoing dynamic that parents may have no awareness of for an extended period of time. The cumulative risk of sustained contact with an unknown adult is significantly greater than that of a single random encounter.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block random video chat apps like Chamet instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block random video chat apps entirely by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar live-stranger apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Chamet as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around live stranger contact and safe digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Teach Children About the Risks of Interacting With Strangers Online</div>
+        <div class="tip-body">Have a calm, direct conversation with your child about why live video with strangers is unsafe — not as an abstract rule but as something they genuinely understand. Explain that a friendly or relatable person on a live video call cannot be verified, that conversations can escalate quickly and without warning, and that the real-time nature of the platform means there is no opportunity to review or undo what happens once a session has begun. Establish that if they ever encounter something unsettling on any platform, they can come to you without fear of judgement or punishment — children who feel safe disclosing are significantly better protected than those who stay silent.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Open Conversations About Online Safety</div>
+        <div class="tip-body">Online safety is most effective when it is an ongoing conversation rather than a single warning. Ask your child regularly about what they are using, who they are speaking to and what they enjoy about those platforms. Discuss why live video with strangers carries risks that conventional social media does not, and help them identify safer ways to meet the same social needs — school activities, existing friend groups, interest communities with known members. Children who feel genuinely heard and connected in their real-world social life are less likely to seek connection through open-access stranger platforms.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Restrict Access to Anonymous Video Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses — tablets, secondary phones and shared household devices included. Apps like Chamet are frequently reinstalled within minutes of being deleted, making device-level controls significantly more reliable than manual app removal. Combine technical restrictions with regular, honest conversations about online safety for the most complete and durable layer of protection your family can build together.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🌿</span>
+    <h3 class="closing-title">Healthy Connections Grow From Trust — Not Random Chance</h3>
+    <p class="closing-body">
+      Children thrive socially when their connections are built on genuine trust with people they know and can rely on. iLimits helps you ensure their digital world reflects those same values — safe, considered and shaped by your family's care rather than the unpredictable outcomes of anonymous stranger contact.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

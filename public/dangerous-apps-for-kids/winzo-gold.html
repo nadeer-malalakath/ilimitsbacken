@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>WinZO Gold – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* WinZO brand: deep gold-amber */
+    --wz:           #D4900A;
+    --wz-mid:       #B07508;
+    --wz-deep:      #6B4500;
+    --wz-light:     #FFFCF0;
+    --wz-bdr:       #FDE68A;
+    --wz-text:      #3D2800;
+
+    /* High risk red palette */
+    --hr-bg:        #FFF5F5;
+    --hr-bdr:       #FFBEBE;
+    --hr-text:      #800000;
+    --hr-sub:       #5C0000;
+    --hr-badge-bg:  #FFE4E4;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FECACA;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0E00 0%, #2E1900 50%, #3A2000 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(212,144,10,0.34) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,144,10,0.46) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(212,144,10,0.20);
+    border: 1px solid rgba(212,144,10,0.40);
+    color: #FDE68A; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card in Hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #6B4500 0%, #D4900A 55%, #FDE68A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(212,144,10,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.danger { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── WinZO callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wz-light);
+    border: 1.5px solid var(--wz-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF9C3; border: 1.5px solid var(--wz-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--wz-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #5C3A00; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── HIGH risk strip (red) ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--hr-bg);
+    border: 1.5px solid var(--hr-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--hr-badge-bg); border: 1.5px solid var(--hr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: var(--hr-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: var(--hr-sub); font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note (red warning) ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg);
+    border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0E00 0%, #2E1900 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,144,10,0.32) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🪙</div>
+        <div>
+          <div class="app-name-text">WinZO Gold</div>
+          <div class="app-sub">Real-Money Gaming / Online Gaming Platform</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Real-Money Gaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val danger">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows participation in competitive games that may involve real money or rewards</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">🪙 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of WinZO Gold — a real-money gaming platform that layers prize incentives and entry-fee tournaments across casual mobile game formats, creating financial stakes inside an experience designed to feel like ordinary entertainment.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">💰</div>
+    <div>
+      <div class="instant-title">WinZO Gold Places Real Financial Stakes Inside Games That Look Like Harmless Casual Entertainment</div>
+      <div class="instant-body">WinZO Gold presents itself through the familiar imagery of casual mobile gaming — bright colours, well-known game formats and a tournament atmosphere that resembles competitive fun. The underlying reality is a platform where real money is deposited, spent on entry fees and won or lost through gameplay outcomes. For younger users, the lighthearted visual presentation of the platform makes it significantly harder to recognise that every paid competition involves a genuine financial transaction — not a virtual points system or in-game currency.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#D4900A;"></span> Multi-Game Platform</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Cash Tournaments</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Prize Pools</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Wallet Deposits</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B5BDB;"></span> Leaderboard Rankings</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      WinZO Gold is a <strong>real-money mobile gaming platform</strong> that hosts a large library of competitive games — spanning casual, arcade, fantasy sports, card and puzzle formats — where users pay entry fees to compete in matches and tournaments with cash prizes distributed based on performance. The platform operates an in-app wallet system funded with real money, and tournament prize pools scale with the number of fee-paying participants. The game formats are deliberately familiar and accessible, while the financial mechanics beneath them are the defining feature of how the platform operates.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--wz-light);">🎮</div>
+      <div>
+        <div class="feat-name">Multi-Format Competitive Games With Paid Entry</div>
+        <div class="feat-desc">WinZO Gold hosts dozens of game formats across casual, arcade, card and fantasy sports categories — each available in paid tournament modes where a real-money entry fee is required to compete. The breadth of game types means a child is likely to find familiar and appealing formats quickly, lowering the perceived barrier to spending on entry fees before the financial structure of the platform is fully understood.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🏆</div>
+      <div>
+        <div class="feat-name">Prize Pool Tournaments With Cash Payouts</div>
+        <div class="feat-desc">WinZO Gold runs prize pool tournaments where entry fees from all participants accumulate into a shared pot distributed among top performers. This structure means prize amounts are visible and attractive before competition begins — creating financial incentive to enter, re-enter after losses and pursue higher-stakes tournaments as perceived skill increases. For children, the visible prize amounts create a misleading impression of accessible financial returns that distorts the realistic probability of winning.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--wz-light);">💳</div>
+      <div>
+        <div class="feat-name">Real-Money Wallet System for Deposits and Withdrawals</div>
+        <div class="feat-desc">WinZO Gold operates through an in-app wallet funded with real money via bank transfer, UPI or linked payment methods. Users deposit funds that are then spent on tournament entry fees, with winnings withdrawable back to a bank account. Once a wallet is funded, a child can conduct multiple paid tournament entries without any further parental interaction required at the point of each individual transaction.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">📊</div>
+      <div>
+        <div class="feat-name">Ranking Systems and Limited-Time Events Driving Repeated Engagement</div>
+        <div class="feat-desc">WinZO Gold uses leaderboards, rank tiers, daily challenges and limited-time prize events to sustain platform engagement and encourage regular return visits. These mechanics create ongoing competitive pressure that makes it harder for younger users to disengage — particularly when their ranking or prize eligibility depends on continued participation within a defined time window.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Mandatory Parental Approval for Financial Transactions</div>
+        <div class="feat-desc">WinZO Gold does not require parental confirmation before a child deposits funds into the in-app wallet or pays tournament entry fees. Once a payment method is linked or a wallet balance is available, all subsequent spending within the platform occurs without any mandatory notification or approval step, making it possible for a child to conduct repeated financial transactions entirely without a parent's awareness.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from real-money prize competitions, unsupervised financial transactions, engagement mechanics that encourage repeated spending and a platform structure that frames financial wagering as a natural extension of playing games.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">Exposure to Real-Money Prize Competitions</div>
+      <div class="rc-desc">WinZO Gold's core proposition is real-money competition — children who use the platform are exposed to an environment where paying to play and receiving cash based on outcomes is presented as the normal and expected gaming experience</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Financial Transactions Without Oversight</div>
+      <div class="rc-desc">Wallet deposits and tournament entry fees can be completed by a child with no mandatory parental notification or approval at each step. Spending can accumulate significantly across multiple sessions before a parent has any visibility into what has been spent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎰</span>
+      <div class="rc-name">Gambling-Adjacent Reward Mechanics</div>
+      <div class="rc-desc">The combination of paid entry, variable outcomes and cash prizes replicates the core reward loop of gambling within a gaming interface. Children's developing decision-making frameworks are particularly susceptible to these variable-reward patterns, making disengagement significantly harder than with standard gaming</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔁</span>
+      <div class="rc-name">Encouragement of Excessive Play</div>
+      <div class="rc-desc">WinZO Gold's leaderboard rankings, time-limited events and prize pool structures create sustained competitive pressure that makes disengagement feel costly — particularly when a child's rank, prize eligibility or tournament progress stands to be lost by stopping play within a given session</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📉</span>
+      <div class="rc-name">Spending Incentives Linked to Gameplay Outcomes</div>
+      <div class="rc-desc">Entry fees, visible prize pools and performance-linked rewards create powerful spending incentives at every stage of the platform — from the initial tournament entry to the decision to re-enter after a loss or progress to a higher-stakes competition after a win</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Normalisation of Pay-to-Compete During Formative Years</div>
+      <div class="rc-desc">Regular use of WinZO Gold during childhood and adolescence can establish an expectation that competitive gaming naturally involves real financial stakes — shaping attitudes toward risk, spending and gambling that persist and influence behaviour well into adulthood</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>WinZO Gold Carries a High Risk Rating</strong>
+      <span>Real-money entry fees, cash prize tournaments, an unsupervised wallet system, gambling-adjacent reward mechanics and competitive engagement structures designed to maximise spending combine to make WinZO Gold a high-risk platform for children of all ages.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🚨</div>
+    <div>
+      <div class="control-title">Gaming Platforms Involving Real Money Carry a Distinct Category of Risk That Extends Beyond Screen Time or Content Concerns</div>
+      <div class="control-body">Most digital safety concerns centre on content exposure, stranger contact or excessive screen time. WinZO Gold presents a fundamentally different and more serious risk category: genuine financial harm. A child using this platform is not accumulating points or virtual rewards — they are depositing, spending and potentially losing real money across paid competitions, with no mandatory step in that process requiring a parent to be aware or to consent. The financial harm possible on WinZO Gold is concrete, cumulative and may not become visible to parents until meaningful spending has already occurred.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Gaming Platforms With Rewards and Financial Incentives May Encourage Children to Spend Real Money</div>
+        <div class="know-body">WinZO Gold uses familiar game formats and a tournament atmosphere to make the financial transaction at the heart of each paid competition feel incidental to the gameplay experience — but every paid tournament entry is a real-money spend. Children who associate the app with entertainment rather than financial risk are significantly more likely to make repeated entries without understanding the cumulative cost. A child may perceive their spending as small on a per-entry basis while accumulating a meaningful total across multiple sessions that only becomes visible to a parent when bank or payment records are reviewed.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Parents Should Understand How the Platform's Financial Structure Operates</div>
+        <div class="know-body">WinZO Gold is not a standard mobile game — it is a real-money competition platform. The in-app wallet system means that once a payment method has been linked and funds deposited, a child can participate in any number of paid tournaments without returning to the payment step. Parents should understand that the wallet balance visible in the app represents real money that has already been transferred into the platform, and that each tournament entry fee deducted from that balance is a genuine financial transaction — not a virtual spend.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Prize Competitions Can Encourage Loss-Chasing Behaviour in Younger Users</div>
+        <div class="know-body">When a child loses an entry fee in a WinZO Gold tournament, the competitive experience of that loss — combined with the visible prize pools of subsequent competitions — creates psychological pressure to continue spending in order to recover the money lost or achieve the performance level needed to win. This loss-chasing pattern is a well-documented feature of gambling behaviour, and is a particular risk for younger users who lack the financial maturity and impulse-control capacity to recognise when continued spending is making their position worse rather than better.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Monitor Access Accordingly and Review Payment Methods Linked to Your Child's Device</div>
+        <div class="know-body">In addition to applying iLimits restrictions on your child's device, parents should review which payment methods are stored or accessible on the device and consider enabling purchase confirmation requirements through the device's app store settings. Real-money gaming platforms like WinZO Gold are specifically designed for low-friction financial transactions — adding any additional confirmation step between a child and a payment reduces the likelihood of impulsive or unconsidered spending. Regular, open conversations about which apps are installed and what they involve are the most effective complement to technical controls.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block gaming platforms with monetary elements like WinZO Gold instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block gaming platforms with financial elements entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like WinZO Gold as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting financial awareness around real-money gaming platforms, responsible spending habits and the risks of prize-based competition.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🗣️</div>
+      <div>
+        <div class="tip-name">Teach Children About Responsible Gaming Habits</div>
+        <div class="tip-body">Help your child understand the fundamental difference between conventional mobile games and platforms like WinZO Gold — that the tournament entry fees are real money spent from a real balance, not points or tokens, and that the outcome of each competition is uncertain regardless of how confident or skilled they feel going in. Explain that the platform's tournament structure, prize pools and leaderboards are designed to make continued engagement and spending feel natural and worthwhile — and that feeling motivated to keep playing and entering is exactly the response the platform is engineered to produce. Establish clear, consistent household rules about real-money gaming platforms and make sure your child understands the reasoning behind those rules, not just the restriction itself.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--wz-light); border-color: var(--wz-bdr);">💰</div>
+      <div>
+        <div class="tip-name">Discuss the Risks of Spending Money in Games</div>
+        <div class="tip-body">Use WinZO Gold as a starting point for a broader conversation about how money works within gaming environments — the difference between spending and winning, how entry fees accumulate across multiple sessions, and why the visible prize amounts in tournaments create a misleading impression of how often players actually win versus lose. Discuss specifically the loss-chasing impulse — the powerful feeling of wanting to re-enter a competition to recover a previous loss — and why that impulse tends to lead to more spending rather than to recovered money. Children who develop genuine financial literacy around gaming, and who understand the mathematical reality of prize distribution across all participants, are significantly better equipped to make sound decisions on any platform involving real financial stakes.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Competitive Gaming Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses — tablets, secondary phones and shared family devices included. Alongside blocking WinZO Gold through iLimits, review all payment methods stored on your child's device and consider enabling purchase confirmation or parental approval requirements at the app store level to add a step between your child and any financial transaction. Real-money gaming platforms are specifically designed for low-friction entry — any additional confirmation requirement meaningfully reduces the likelihood of impulsive or unconsidered spending. The combination of device-level access controls, payment method management and clear, ongoing conversations about why real-money gaming is restricted provides the strongest protection available to families navigating this category of platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Healthy Gaming Habits Start With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the financial awareness and sound judgement that comes from a child who genuinely understands why real-money gaming platforms are inappropriate for their age. iLimits gives you the technical layer — the conversations, boundaries and financial literacy your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

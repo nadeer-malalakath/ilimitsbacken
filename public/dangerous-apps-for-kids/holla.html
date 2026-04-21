@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOLLA – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:       #F0436A;
+    --rose-deep:  #C72E54;
+    --rose-light: #FFF0F4;
+    --rose-mid:   #FFCCD8;
+    --blush:      #FEF7F9;
+    --blush-2:    #FDF2F5;
+    --ink:        #19121F;
+    --ink-soft:   #35253F;
+    --ink-mid:    #6B5879;
+    --ink-muted:  #A594B2;
+    --border:     #F0E6EC;
+    --bdr-soft:   #F8EEF3;
+    --surface:    #FFFFFF;
+
+    /* HOLLA brand: vivid coral-orange-red */
+    --ho:         #FF4500;
+    --ho-mid:     #D93A00;
+    --ho-deep:    #A02B00;
+    --ho-light:   #FFF6F3;
+    --ho-bdr:     #FFBCAA;
+    --ho-text:    #5C1500;
+    --ho-sub:     #7A2000;
+
+    --amber-bg:   #FFFBF0;
+    --amber-bdr:  #FDDCB0;
+    --amber-text: #7A3C08;
+    --red-bg:     #FFF5F5;
+    --red-bdr:    #FFCACA;
+    --red-text:   #7A0C0C;
+    --teal-bg:    #F0FDFB;
+    --teal-bdr:   #9FEDE0;
+    --blue-bg:    #F0F6FF;
+    --blue-bdr:   #BFDBFE;
+
+    --r-md: 18px;
+    --r-lg: 26px;
+    --sh-xs: 0 1px 5px rgba(255,69,0,0.07);
+    --sh-sm: 0 2px 14px rgba(255,69,0,0.10);
+    --sh-lg: 0 14px 52px rgba(255,69,0,0.20);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush); color: var(--ink);
+    line-height: 1.6; min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1C0400 0%, #300800 50%, #3E0A00 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115%  0%,  rgba(255,69,0,0.34) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at  -8% 96%,  rgba(240,67,106,0.15) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hg-a {
+    position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,69,0,0.30) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hg-b {
+    position: absolute; bottom: 24px; left: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hg-c {
+    position: absolute; top: 45%; left: 15%;
+    width: 280px; height: 120px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(255,100,20,0.08) 0%, transparent 70%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-in {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .e-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB49A; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.48);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* app card */
+  .ac {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--r-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .ac-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .ac-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #5C1500 0%, #FF4500 55%, #FF8C66 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(255,69,0,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .ac-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .ac-name {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .ac-cat {
+    font-size: 11.5px; color: rgba(255,255,255,0.40);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .mg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .mc {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .ml { font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 3px; }
+  .mv { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .mv.high { color: #FCA5A5; }
+  .mf {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .rflag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-t { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-s { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--r-lg);
+    border: 1px solid var(--border); box-shadow: var(--sh-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* callout variants */
+  .cbox {
+    display: flex; align-items: flex-start; gap: 12px;
+    border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px;
+    border: 1.5px solid;
+  }
+  .cbox.coral { background: var(--ho-light); border-color: var(--ho-bdr); }
+  .cbox.red   { background: var(--red-bg);   border-color: var(--red-bdr); }
+  .cbox-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; border: 1.5px solid;
+  }
+  .cbox.coral .cbox-ico { background: #FFD8CC; border-color: var(--ho-bdr); }
+  .cbox.red   .cbox-ico { background: #FFE0E0; border-color: var(--red-bdr); }
+  .cbox-title { font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 3px; }
+  .cbox.coral .cbox-title { color: var(--ho-text); }
+  .cbox.red   .cbox-title { color: var(--red-text); }
+  .cbox-body { font-size: 12px; font-weight: 400; line-height: 1.55; }
+  .cbox.coral .cbox-body { color: var(--ho-sub); }
+  .cbox.red   .cbox-body { color: #5C0808; }
+
+  /* chips */
+  .chips {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--sh-xs);
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+
+  /* s1 card */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--bdr-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .frow {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .frow:last-child { border-bottom: none; }
+  .fico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .fn { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .fd { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* high risk strip */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .rs-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE0E0; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .rs-text strong { font-size: 13.5px; font-weight: 700; color: var(--red-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .rs-text span   { font-size: 12px; color: #5C0808; font-weight: 400; line-height: 1.5; }
+
+  /* risk grid */
+  .rgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .rcard {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 16px 13px 14px;
+    box-shadow: var(--sh-xs); position: relative; overflow: hidden;
+  }
+  .rcard::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .re { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rn { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rb { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* know rows */
+  .krow {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .krow:last-child { border-bottom: none; }
+  .knum {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .kt { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .kb { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* iLimits dark card */
+  .ilcard {
+    background: linear-gradient(150deg, #1C0400 0%, #300800 100%);
+    border-radius: var(--r-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--sh-lg);
+    position: relative; overflow: hidden;
+  }
+  .ilcard::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,69,0,0.26) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .ilcard::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-ey {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-t {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-d { font-size: 13px; color: rgba(255,255,255,0.52); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .ilrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .ilrow:last-child { border-bottom: none; padding-bottom: 0; }
+  .ilck {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ilbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* note */
+  .nbox {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--r-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .nico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .nt { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .nb { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .nb strong { font-weight: 700; }
+
+  /* tip rows */
+  .trow {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .trow:last-child { border-bottom: none; }
+  .tico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .ttn { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .ttb { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* closing */
+  .closing {
+    background: linear-gradient(135deg, #FFF6F3 0%, #FFF0EB 100%);
+    border: 1.5px solid var(--ho-bdr); border-radius: var(--r-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--sh-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,69,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cl-em { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .cl-t  {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--ho-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .cl-b  { font-size: 13px; color: var(--ho-text); font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* footer */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .fb { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .fi {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .fn-brand { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .ft { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-in    { animation: fadeUp 0.42s ease both; }
+  .cbox       { animation: fadeUp 0.42s ease 0.03s both; }
+  .chips      { animation: fadeUp 0.42s ease 0.04s both; }
+  .card       { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-strip { animation: fadeUp 0.42s ease 0.05s both; }
+  .rgrid      { animation: fadeUp 0.42s ease 0.06s both; }
+  .ilcard     { animation: fadeUp 0.42s ease 0.08s both; }
+  .nbox       { animation: fadeUp 0.42s ease 0.06s both; }
+  .closing    { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hg-a"></div>
+  <div class="hg-b"></div>
+  <div class="hg-c"></div>
+  <div class="hero-in">
+
+    <div class="eyebrow"><div class="e-dot"></div> iLimits Parental Controls</div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="ac">
+      <div class="ac-top">
+        <div class="ac-icon">📣</div>
+        <div>
+          <div class="ac-name">HOLLA</div>
+          <div class="ac-cat">Random Video Chat / Stranger Chat</div>
+        </div>
+      </div>
+      <div class="mg">
+        <div class="mc"><div class="ml">Category</div><div class="mv">Random Video Chat</div></div>
+        <div class="mc"><div class="ml">Risk Level</div><div class="mv high">🔴 High</div></div>
+      </div>
+      <div class="mf">
+        <div class="ml">Primary Reason</div>
+        <div class="mv">Allows live video conversations with strangers worldwide</div>
+      </div>
+      <div class="rflag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-t">Flagged as Restricted in iLimits</div>
+          <div class="rf-s">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- § 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of HOLLA's instant-match live video model, its social features and why spontaneous stranger contact makes meaningful child protection impossible.</p>
+  </div>
+
+  <div class="cbox coral">
+    <div class="cbox-ico">📣</div>
+    <div>
+      <div class="cbox-title">HOLLA Is Designed for Spontaneous, Instant Live Video Contact With Strangers Worldwide</div>
+      <div class="cbox-body">HOLLA markets itself as "the world's #1 social video app" — built explicitly around spontaneous live video encounters with new people. Its entire product design prioritises the speed and immediacy of stranger contact. For children, this means a live two-way video feed with an anonymous adult from anywhere in the world begins the moment they engage with the app — before any assessment of the other person is possible. Spontaneity is HOLLA's selling point and its primary risk in equal measure.</div>
+    </div>
+  </div>
+
+  <div class="chips">
+    <div class="chip"><span class="dot" style="background:#FF4500;"></span> Instant Match</div>
+    <div class="chip"><span class="dot" style="background:#F0436A;"></span> Live Video</div>
+    <div class="chip"><span class="dot" style="background:#7B2FBE;"></span> Moments Feed</div>
+    <div class="chip"><span class="dot" style="background:#FF8C00;"></span> Virtual Coins</div>
+    <div class="chip"><span class="dot" style="background:#0099E6;"></span> Text Chat</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      HOLLA is a <strong>random video chat platform</strong> that connects users with strangers from around the world through instant live video conversations. Users are matched with other users in seconds, can start video calls or text chats with people they have never met, and participate in a social feed of short video moments — all within an open, anonymous environment designed to maximise spontaneous stranger contact.
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF6F3;">⚡</div>
+      <div>
+        <div class="fn">Instant Random Video Matching</div>
+        <div class="fd">HOLLA connects users to a live two-way video feed with a random global stranger within seconds of opening the app. There is no profile review, no consent mechanism and no opportunity to assess who is on the other side before the video connection is already active on both screens.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF8F5;">🌍</div>
+      <div>
+        <div class="fn">Global Reach — Strangers From Every Country</div>
+        <div class="fd">HOLLA connects users across its global community, meaning a child using the app is matched from a pool of adult strangers spanning every country and timezone. HOLLA claims tens of millions of users — the breadth of the pool does not add safety, it multiplies exposure.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F6F1FF;">📸</div>
+      <div>
+        <div class="fn">Moments Feed — Social Media Layer on Top of Stranger Chat</div>
+        <div class="fd">HOLLA includes a "Moments" feed where users post short video clips visible to the community. This social media layer extends stranger exposure beyond live video calls — children can be discovered and contacted through their public Moments posts by adults across the platform, creating a second vector for inappropriate contact beyond the random match system.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF8F0;">🪙</div>
+      <div>
+        <div class="fn">Virtual Coins &amp; In-App Economy</div>
+        <div class="fd">HOLLA uses a virtual coins system for sending gifts and unlocking premium interactions within the app. Coins are purchased with real money. Children with access to a parent's payment method could make purchases without parental awareness — and virtual gifts from strangers create the same social pressure dynamics seen across other platforms in this category.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="fn">Text Chat Alongside Live Video</div>
+        <div class="fd">HOLLA provides concurrent text messaging during and between video sessions. This dual-channel model creates simultaneous pathways for contact, link sharing and inappropriate content — in video, in text, or both at the same time — with no moderation active across either channel in real time.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F0FDFB;">🔞</div>
+      <div>
+        <div class="fn">No Meaningful Age Verification</div>
+        <div class="fd">HOLLA's age gate is a date-of-birth field that can be falsified in seconds. No identity verification is performed at any point. A child who enters a false birthdate has immediate, unrestricted access to the full platform — live video matching, Moments posting, text chat and in-app purchases — with no further checks ever requested.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="rs-badge">🔴</div>
+    <div class="rs-text">
+      <strong>HOLLA Is Rated 🔴 High Risk in iLimits</strong>
+      <span>Instant anonymous live video matching, a public social feed creating a second contact vector, virtual coin pressure and a total absence of real-time moderation place HOLLA firmly in iLimits' highest risk category.</span>
+    </div>
+  </div>
+
+  <div class="cbox red" style="margin-bottom:22px;">
+    <div class="cbox-ico">🚫</div>
+    <div>
+      <div class="cbox-title">HOLLA's "Live" Nature Means Harmful Exposure Cannot Be Prevented — Only Reported After</div>
+      <div class="cbox-body">HOLLA references community guidelines and automated moderation in its safety documentation. Parents should understand that on a platform built around real-time live video with strangers, moderation is structurally reactive — it can remove accounts and log reports after harmful contact has occurred, but it cannot prevent a child from seeing inappropriate behaviour or content the moment a live connection opens. The platform's core design and its child-safety claims are fundamentally in conflict: you cannot simultaneously optimise for spontaneous live stranger contact and prevent children from experiencing its consequences.</div>
+    </div>
+  </div>
+
+  <!-- § 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from HOLLA's instant matching, public Moments feed, dual-channel contact and unmoderated live environment.</p>
+  </div>
+
+  <div class="rgrid">
+    <div class="rcard">
+      <span class="re">📹</span>
+      <div class="rn">Instant Live Video With Strangers</div>
+      <div class="rb">Children are live on two-way video with an anonymous global stranger within seconds — with no profile preview, no consent gate and no way to exit before the connection is open</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🔞</span>
+      <div class="rn">Explicit Content Exposure</div>
+      <div class="rb">Unmoderated live video means children can encounter explicit adult behaviour in real time — before any automated or human moderation system has had an opportunity to act</div>
+    </div>
+    <div class="rcard">
+      <span class="re">📸</span>
+      <div class="rn">Moments Feed Exposure</div>
+      <div class="rb">Public video posts on the Moments feed make a child discoverable and contactable by adult strangers across the platform — beyond and independently of the live match system</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🎭</span>
+      <div class="rn">No Identity Verification</div>
+      <div class="rb">Adults can falsify age and identity with no check at any point — a child cannot confirm who they are speaking to, or whether the other person is who they claim to be</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🪙</span>
+      <div class="rn">Coin-Based Social Pressure</div>
+      <div class="rb">Virtual gifts from unknown adults create social obligation — a dynamic that can pressure children to continue engaging with strangers who have been "generous" to them</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🔒</span>
+      <div class="rn">Limited Control Over Interactions</div>
+      <div class="rb">Once a live connection is open, children have limited meaningful control over what appears on their screen or what the other person chooses to do or say in real time</div>
+    </div>
+  </div>
+
+  <!-- § 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="krow">
+      <div class="knum">1</div>
+      <div>
+        <div class="kt">Random Video Chat Apps Allow Instant Live Connections With Unknown Adults — With No Preview</div>
+        <div class="kb">On HOLLA, the live video feed is active within seconds of engagement. There is no community of known contacts, no mutual interest requirement and no way to see who is on the other side before the connection is already live and bidirectional. Every match is drawn from a global pool of adult strangers — and the app's design ensures this happens as quickly and frictionlessly as possible, because speed of contact is central to its value proposition.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">2</div>
+      <div>
+        <div class="kt">The Moments Feed Creates a Second Layer of Stranger Exposure Beyond Live Matching</div>
+        <div class="kb">Unlike pure random-match platforms, HOLLA's Moments feed gives children a public presence on the platform independent of live matching. A child who posts a Moment becomes discoverable to every adult user on the platform — who can view, react to and message them directly outside of the match system. This second-layer exposure is less visible to parents who may focus on the live video feature, but represents an equally significant contact risk.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">3</div>
+      <div>
+        <div class="kt">Because Interactions Are Live and Unpredictable, Children May Encounter Unsafe Situations Before They Can React</div>
+        <div class="kb">Live video contact is qualitatively different from text or image-based exposure. A child watching an explicit or disturbing live video cannot un-see what they have already seen — the experience is immediate, visual and visceral in ways that text content is not. Children are often not equipped to process unexpected adult or explicit content in real time, and the social pressure of a live two-way connection makes it harder to disengage than closing a message thread. Parents should understand that the psychological impact of a bad interaction on HOLLA can be significant even if it is brief.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">4</div>
+      <div>
+        <div class="kt">Children Are Attracted to These Platforms by the Novelty of Spontaneous Connection</div>
+        <div class="kb">HOLLA's appeal to younger users is rooted in its spontaneity and the novelty of meeting genuinely new people from around the world. Children may see this as exciting, adventurous or worldly — a way to have experiences and encounters unavailable to them offline. Parents should approach this curiosity with understanding as well as firmness: the desire for new social experiences is healthy and normal, but HOLLA is not a safe environment in which to explore it, and the risks are real regardless of how mature or careful a child believes they are.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="ilcard">
+    <div class="il-ey">✦ iLimits Protection</div>
+    <h3 class="il-t">You Stay Fully in Control</h3>
+    <p class="il-d">iLimits gives parents simple, reliable tools to block random video chat apps like HOLLA instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Block random video chat apps by category with a single tap</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Restricted categories allow instant blocking of similar high-risk platforms</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Parents remain fully in control of which apps are allowed or restricted</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Receive alerts when flagged apps are installed on your child's device</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Works quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- § 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="nbox">
+    <div class="nico">⚠️</div>
+    <div>
+      <div class="nt">iLimits Does Not Block Apps Automatically</div>
+      <div class="nb">iLimits identifies and flags apps like HOLLA as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- § 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build the right conversations around stranger contact and live video safety.</p>
+  </div>
+
+  <div class="card">
+    <div class="trow">
+      <div class="tico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="ttn">Teach Children About the Risks of Talking to Strangers Through Live Video</div>
+        <div class="ttb">Have an honest, age-appropriate conversation about why platforms like HOLLA — where strangers appear live on their camera before any assessment is possible — carry risks that cannot be managed through caution alone. Help children understand that the excitement of meeting new people from around the world does not make a platform safe, and that live video contact with an anonymous adult is fundamentally different from messaging a friend. Specifically discuss the Moments feed and how posting public video content makes them discoverable beyond the live match system — this is a risk many children are not aware of.</div>
+      </div>
+    </div>
+    <div class="trow">
+      <div class="tico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="ttn">Encourage Responsible Digital Behaviour and Privacy Awareness</div>
+        <div class="ttb">Help your child develop a concrete understanding of what privacy means in a live video context — that appearing on camera shares their face, voice, surroundings and physical location in real time with an anonymous global stranger. Discuss what information should never be shared in a live video session, and why the other person's anonymity protects them from consequences for their behaviour. Encourage your child to come to you if they encounter anything that makes them uncomfortable online, without fear of judgment or having their device taken away — the goal is open communication, not surveillance.</div>
+      </div>
+    </div>
+    <div class="trow">
+      <div class="tico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="ttn">Use Parental Controls to Restrict Access to Anonymous Video Chat Platforms</div>
+        <div class="ttb">Apply iLimits restrictions consistently across every device your child uses — tablets, spare phones and shared family devices included. Because HOLLA can be accessed via browser in addition to app install, consider restricting both vectors if your child is likely to seek the platform out. Device-level category blocking is more reliable than monitoring for specific app names, since the random video chat category includes multiple interchangeable platforms. Pair consistent technical controls with ongoing family conversations — restrictions are most effective when children understand the reasoning behind them, not just the rule itself.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="cl-em">🌅</span>
+    <h3 class="cl-t">The World Is Wide — But Not Every Door Should Open Instantly</h3>
+    <p class="cl-b">Children's natural curiosity about the world and the people in it is something to encourage and celebrate — in the right environments, at the right pace, with the right safeguards. iLimits helps you ensure that your child's journey outward happens with you alongside them, not through a live video feed to an anonymous stranger on the other side of the world.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="fb">
+      <div class="fi">i</div>
+      <div class="fn-brand">iLimits</div>
+    </div>
+    <p class="ft">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

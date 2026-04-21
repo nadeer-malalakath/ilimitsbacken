@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MICO Live – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* MICO Live brand: deep indigo-blue */
+    --mc:           #3B5BDB;
+    --mc-mid:       #2F4AC4;
+    --mc-deep:      #1A2D80;
+    --mc-light:     #EEF2FF;
+    --mc-bdr:       #A5B4FC;
+    --mc-text:      #0F1D5C;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #06091F 0%, #0F1845 50%, #141E55 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(59,91,219,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,91,219,0.40) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(59,91,219,0.20);
+    border: 1px solid rgba(59,91,219,0.38);
+    color: #A5B4FC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card in Hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1A2D80 0%, #3B5BDB 55%, #818CF8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(59,91,219,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── MICO Live broadcast callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mc-light);
+    border: 1.5px solid var(--mc-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0E7FF; border: 1.5px solid var(--mc-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--mc-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF8F0;
+    border: 1.5px solid #FFCC80;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE0B2; border: 1.5px solid #FFCC80;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #5C2C00; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #7A3800; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mc-light);
+    border: 1.5px solid var(--mc-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0E7FF; border: 1.5px solid var(--mc-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--mc-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #06091F 0%, #0F1845 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,91,219,0.30) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📡</div>
+        <div>
+          <div class="app-name-text">MICO Live</div>
+          <div class="app-sub">Live Streaming / Social Discovery</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Streaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables live video streaming and interaction with unknown users</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📡 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of MICO Live — a live streaming and social networking platform that combines public broadcasting with real-time audience interaction and stranger discovery, creating a layered environment of potential risk for younger users.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">🔴</div>
+    <div>
+      <div class="instant-title">MICO Live Combines Live Broadcasting With Social Networking — Removing Every Barrier Between a Child and Unknown Adults</div>
+      <div class="instant-body">MICO Live is not just a live streaming app — it merges live video broadcasting with social discovery and networking features, creating an environment where children can simultaneously broadcast themselves, be discovered by strangers and build ongoing social connections with people they have never met. This combination of features compounds the risk of each individual component: a child is not only on camera in front of an unknown audience, but is also embedded in a social platform designed to sustain and deepen those connections over time.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#3B5BDB;"></span> Live Broadcasting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Open Live Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Virtual Gifting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Social Networking</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Stranger Discovery</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      MICO Live is a <strong>live streaming and social networking platform</strong> that allows users to broadcast live video to a public global audience and interact with viewers in real time through open chat and virtual gifting. Beyond live streaming, MICO Live also functions as a social discovery app — enabling users to find, follow and communicate with strangers through a combined feed of live content and social profiles. The platform provides no meaningful moderation of live content and no verification of user identity or age.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--mc-light);">🔴</div>
+      <div>
+        <div class="feat-name">Public Live Video Broadcasting to an Unknown Global Audience</div>
+        <div class="feat-desc">MICO Live allows any user to broadcast live video of themselves publicly to a global audience instantly — with no pre-approval, no identity verification and no content review before a stream begins. A child can be live on camera in front of an unlimited number of unknown adults within seconds of opening the app, with no control over who is watching or how that audience is assembled.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Open Live Chat During Broadcasts</div>
+        <div class="feat-desc">All live streams on MICO Live include an open chat feature where viewers can send messages directly to the broadcaster in real time. There is no content filter on live chat, no requirement for a broadcaster to approve messages before they appear on screen, and no effective moderation of what any viewer chooses to write. A child broadcasting live is exposed to whatever an anonymous global audience chooses to send.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🎁</div>
+      <div>
+        <div class="feat-name">Virtual Gifting and Audience Engagement Mechanics</div>
+        <div class="feat-desc">MICO Live includes a virtual gift system where viewers send gifts to broadcasters during live streams. These mechanics create social and financial incentives for children to continue broadcasting — rewarding prolonged public self-exposure with visible, real-time attention from an unknown audience. Gifting also enables unknown adults to direct sustained, targeted attention toward a specific child broadcaster.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Social Networking and Stranger Discovery Beyond Live Streams</div>
+        <div class="feat-desc">Unlike standalone streaming apps, MICO Live also functions as a social discovery platform — allowing users to browse profiles, follow strangers and build ongoing social connections outside of live broadcasts. This means a child is not only at risk during a stream, but remains embedded in an environment designed to deepen their contact with unknown individuals across the entire platform experience.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">MICO Live requires only a self-reported date of birth with no verification of the information provided. A child gains full access to the platform — including the ability to broadcast live to a global public audience and interact with any adult user through social networking features — within moments of installing the app. Adults can equally claim any age, with nothing in place to challenge what they state.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from public live broadcasting, unfiltered audience interaction, exposure to inappropriate streams, privacy dangers and a social networking layer that sustains and deepens stranger contact over time.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📺</span>
+      <div class="rc-name">Exposure to Inappropriate Live Streams</div>
+      <div class="rc-desc">MICO Live's discovery feed surfaces streams from around the world with no pre-screening. Children browsing the platform may encounter adult, sexually explicit or otherwise harmful live content before any moderation action is possible</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Interaction With Unknown Viewers</div>
+      <div class="rc-desc">Any adult globally can watch a child's live stream and interact through open live chat — creating direct, real-time contact with unknown individuals whose identity, age and intentions cannot be verified by the child or their parents</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Live Chat Content</div>
+      <div class="rc-desc">Open live chat is unmoderated and unfiltered. A child broadcasting can receive inappropriate, explicit or threatening messages from viewers in real time, with no delay between a message being sent and it appearing on the child's screen</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy Risks During Broadcasts</div>
+      <div class="rc-desc">A child on camera may inadvertently reveal their location, school, home environment or daily routine — providing unknown viewers with enough personal detail to identify or locate them in the physical world without the child's awareness</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Social Networking Deepens Stranger Contact</div>
+      <div class="rc-desc">MICO Live's social networking layer allows unknown adults who encounter a child through a live stream to follow their profile, initiate private messages and build an ongoing relationship — extending risk well beyond the duration of any individual broadcast</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎁</span>
+      <div class="rc-name">Gifting Mechanics Reward Prolonged Exposure</div>
+      <div class="rc-desc">Virtual gifts create incentives for children to broadcast more frequently and for longer — rewarding public self-exposure with visible attention and enabling unknown adults to use gifts as a tool to build familiarity and ongoing contact with a specific child</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>MICO Live Carries a Medium–High Risk Rating</strong>
+      <span>The combination of public live broadcasting, open unmoderated chat, virtual gifting mechanics, social networking features designed to sustain stranger contact, and no meaningful age verification places MICO Live in an elevated risk category for younger users.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📡</div>
+    <div>
+      <div class="control-title">Live Streaming Plus Social Networking Creates a Risk Environment That Extends Far Beyond Any Single Broadcast</div>
+      <div class="control-body">On a standalone streaming app, the risk is largely contained to the duration of a live session. MICO Live's integrated social networking features mean that unknown adults who discover a child through a live stream can follow them, message them and build an ongoing relationship across the entire platform — long after any individual broadcast has ended. This makes MICO Live meaningfully more risky than a streaming-only platform, and makes device-level controls significantly more important as a protective measure for families.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Live Streaming Puts Children on Camera in Front of a Public Audience With No Safety Net</div>
+        <div class="know-body">When a child broadcasts on MICO Live, they are placing themselves live on camera in front of anyone on the platform who chooses to watch — with no control over who that audience is, no way to know whether viewers are adults or peers, and no mechanism to prevent unknown individuals from watching repeatedly. The moment a stream begins, the broadcaster is visible to an unknown global audience and what they share cannot be retrieved or undone.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Encounter Inappropriate Content While Browsing</div>
+        <div class="know-body">A child who uses MICO Live as a viewer — without broadcasting — is still at risk from the platform's discovery feed, which surfaces live streams from around the world with no meaningful pre-moderation. A child scrolling through available streams can encounter adult, sexually explicit or otherwise harmful live content at any point, with no content warning, no filter and no delay between the content appearing and the child seeing it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Social Networking Features Allow Strangers to Pursue Ongoing Contact After a Stream</div>
+        <div class="know-body">Unlike a streaming-only platform, MICO Live allows users who encounter a child during a live broadcast to follow their profile and initiate private messaging — creating a pathway for an unknown adult to build a sustained, private relationship with a child that continues long after any individual stream has ended. This makes MICO Live's risk profile meaningfully more complex than that of a platform focused solely on live content.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Live Broadcasts Leave No Record That Parents Can Review</div>
+        <div class="know-body">A live stream on MICO Live is a real-time event — when it ends, there is no accessible log of what was shown, said or received in chat that a parent can review after the fact. A child can have a harmful or distressing experience during a broadcast and close the app within seconds, leaving no trace of what occurred. Regular, open conversation with your child about what they encounter on the platform remains the only realistic monitoring tool available for parents of live streaming app users.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block live streaming and social networking apps like MICO Live instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block live streaming apps entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like MICO Live as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around live streaming platforms, public self-exposure and responsible digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🎥</div>
+      <div>
+        <div class="tip-name">Talk With Children About Responsible Use of Live Streaming Platforms</div>
+        <div class="tip-body">Help your child understand what live streaming on a platform like MICO Live actually means — that broadcasting places them on camera in front of a public, global audience of people they do not know, with no control over who is watching, no moderation of what viewers say to them and no way to undo what has already been shared. Explain that MICO Live is not just a streaming app — it also functions as a social network that allows unknown individuals to follow and message them after a stream has ended. Establish clear household rules about which platforms are appropriate, and make sure your child understands the reasoning before they install something new.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Safe Online Behaviour and Privacy Awareness</div>
+        <div class="tip-body">Talk regularly with your child about what is and is not safe to share online — particularly in the context of live video, where personal details, home environments, school uniforms and location clues can be visible without a child realising what they are revealing. Discuss the specific risk that live streams and social profiles on MICO Live are publicly discoverable, that viewers may screenshot or record content, and that virtual gifts from unknown adults do not indicate genuine friendship or safe intentions. Children who understand why privacy matters are significantly more likely to protect it, even in situations where you cannot be present.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Live Streaming Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family devices included. Live streaming and social networking apps like MICO Live are frequently reinstalled quickly after being removed from a primary device, making device-level controls significantly more reliable than manual monitoring or app-by-app deletion. The strongest protection available to families comes from pairing clear, consistent access controls with a child who genuinely understands why those controls are in place — and feels comfortable coming to you when something online makes them uncomfortable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safety Online Starts With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the protection that comes from a child who understands why certain platforms are unsafe and feels comfortable talking to their parents about what they encounter online. iLimits gives you the technical layer — the conversations, trust and awareness your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

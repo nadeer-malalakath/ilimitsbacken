@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmeTV – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --rose-soft:    #FFE4EC;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #18121E;
+    --ink-soft:     #342540;
+    --ink-mid:      #6A5878;
+    --ink-muted:    #A494B0;
+    --border:       #F0E5EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+    --purple-bg:    #F5F0FF;
+    --purple-bdr:   #DDD0FF;
+    --purple-text:  #5B21B6;
+    --teal-bg:      #F0FDFC;
+    --teal-bdr:     #99F6E4;
+    --teal-text:    #0D7A6A;
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDDA0;
+    --amber-text:   #78400A;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --blue-text:    #1D4ED8;
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.09);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 50px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #130C1A 0%, #1E1028 48%, #281538 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 50% at 112% 0%,   rgba(240,67,106,0.26) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 35% at -5%  100%, rgba(240,67,106,0.11) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-1 {
+    position: absolute; top: -70px; right: -70px;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute; bottom: 30px; left: -50px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(150,80,240,0.12) 0%, transparent 70%);
+    filter: blur(18px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FF9DB5; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Info Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.065);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon-wrap {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1A0E2E 0%, #2E1A4A 50%, #3D2060 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.07);
+    position: relative; overflow: hidden;
+  }
+  .app-icon-wrap::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; }
+  .meta-val.high { color: #FF9DB5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+
+  .restricted-pill {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rp-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    flex-shrink: 0;
+    animation: pdot 2s infinite;
+  }
+  .rp-title  { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rp-sub    { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════════════
+     MAIN
+  ══════════════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  /* Section header */
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  /* Base card */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Section 1 – What This App Does ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.7;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Section 2 – Risk Grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Section 3 – What Parents Should Know ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Section 4 – iLimits ── */
+  .il-card {
+    background: linear-gradient(150deg, #170B22 0%, #120818 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 190px; height: 190px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-30px; left:-30px;
+    width: 130px; height: 130px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(150,80,240,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Section 5 – Important Note ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7C3A03; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Section 6 – Guidance ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 130px; height: 130px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25;
+    position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand {
+    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px;
+  }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700; color: var(--ink-soft);
+  }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner { animation: fadeUp 0.42s ease both; }
+  .card       { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid  { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card    { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box   { animation: fadeUp 0.42s ease 0.06s both; }
+  .closing    { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why some apps may not be appropriate for children and what you can do about it.</p>
+
+    <!-- App card -->
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon-wrap">📹</div>
+        <div>
+          <div class="app-name">OmeTV</div>
+          <div class="app-sub">Random Video Chat Platform</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Stranger Chat</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Random communication with unknown users worldwide</div>
+      </div>
+
+      <div class="restricted-pill">
+        <div class="rp-dot"></div>
+        <div>
+          <div class="rp-title">Flagged as Restricted in iLimits</div>
+          <div class="rp-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 — What This App Does -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear look at how OmeTV works and why its design creates specific risks for younger users.</p>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      OmeTV connects users to <strong>completely random strangers</strong> through live video chat — instantly, with no prior relationship, screening or context. Users can be matched with anyone in the world, at any time, with no way of knowing who they will encounter next.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎲</div>
+      <div>
+        <div class="feat-name">Instant Random Matching</div>
+        <div class="feat-desc">Every session connects the user live with a completely unknown person. There is no friend list, no mutual connection and no shared context — just a random live video feed.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F5F0FF;">🌍</div>
+      <div>
+        <div class="feat-name">Global, Unfiltered Reach</div>
+        <div class="feat-desc">Matches can come from anywhere in the world. Children may be connected with adults of any background, intent or disposition with no geographic or demographic filtering.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF7F0;">🪪</div>
+      <div>
+        <div class="feat-name">No Identity Verification</div>
+        <div class="feat-desc">The platform does not verify a user's age, identity or location. Anyone — including adults with harmful intentions — can join and begin matching immediately.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F8FF;">⏭️</div>
+      <div>
+        <div class="feat-name">One-Tap Skip Design</div>
+        <div class="feat-desc">Users skip through strangers in rapid succession. The fast-paced, game-like format is designed to maximise time on the platform and can make unsafe interactions feel ordinary.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FFF8;">💬</div>
+      <div>
+        <div class="feat-name">Text Chat Runs Alongside Video</div>
+        <div class="feat-desc">A live text chat panel accompanies every video connection, enabling strangers to share links, personal information requests or inappropriate messages in real time.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 — Why Risky -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Specific dangers that arise when children use anonymous live video platforms.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Unknown Adults</div>
+      <div class="rc-desc">Children can be instantly connected with unverified adults — with no moderation or pre-screening</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Inappropriate Behaviour</div>
+      <div class="rc-desc">Users have full latitude to display, say or share anything before a child can skip or report them</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Age Verification</div>
+      <div class="rc-desc">Anyone of any age can sign up — children and predatory adults coexist on the same platform</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🪤</span>
+      <div class="rc-name">Grooming Risk</div>
+      <div class="rc-desc">Anonymous chat is a known tool for building inappropriate trust with children over time</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📸</span>
+      <div class="rc-name">Recording Without Consent</div>
+      <div class="rc-desc">Third parties can silently record video sessions — children may not realise they are being captured on film</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Link to Other Platforms</div>
+      <div class="rc-desc">Strangers routinely share links directing children to external sites with unsuitable or harmful content</div>
+    </div>
+  </div>
+
+  <!-- Section 3 — What Parents Should Know -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Curiosity and Boredom Are the Main Drivers</div>
+        <div class="know-body">Children are often drawn to random chat apps out of genuine social curiosity or simply looking for entertainment. The novelty of meeting new people online can feel exciting and harmless — without awareness of the risks involved.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Unpredictable Interactions Are the Feature, Not the Bug</div>
+        <div class="know-body">The entire appeal of OmeTV is randomness. This same unpredictability is precisely what creates danger. There is no way for the platform — or the child — to know who will appear next or what that person intends.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Harmful Encounters Can Happen in Seconds</div>
+        <div class="know-body">Unlike social media where exposure is gradual, live video delivers a harmful interaction the instant a match begins. Children can be exposed to adult content or inappropriate behaviour before they have any chance to react.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Guide Children Toward Safe Social Alternatives</div>
+        <div class="know-body">The underlying need — to socialise, be seen and make connections — is entirely healthy. The goal isn't to shut down the impulse but to channel it toward platforms where identities are known, communities are moderated and interactions are age-appropriate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 — How iLimits Helps -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents clear, simple tools to block random chat platforms like OmeTV — instantly and without requiring technical knowledge.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block stranger-chat apps entirely by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories enable instant one-tap blocking</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every app restriction</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background with no disruption to the child's experience</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 — Important Note -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like OmeTV as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own values, guidelines and your child's specific needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 — Guidance -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to keep your child safer online.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Communication Only With Known People</div>
+        <div class="tip-body">Help children understand the clear distinction between online strangers and people they know in real life. Explain that even a friendly-seeming stranger online is still unknown — and that no one online is owed personal information, photos or video access.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--purple-bg); border-color: var(--purple-bdr);">🔐</div>
+      <div>
+        <div class="tip-name">Discuss Online Privacy and Safety</div>
+        <div class="tip-body">Teach children never to share their name, school, location or any images with strangers online. Explain that video calls can be recorded without their knowledge — and that once something is shared, it cannot be taken back.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Prevent Unsafe Access</div>
+        <div class="tip-body">Technology-based safeguards are most effective when applied consistently across every device your child uses. Pair iLimits restrictions with regular, open conversations — controls set the boundary, but trust and dialogue are what make it last.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">💗</span>
+    <h3 class="closing-title">Connection Matters — So Does Safety</h3>
+    <p class="closing-body">
+      Children's desire to connect and explore is beautiful and worth nurturing. iLimits helps you protect that openness by ensuring the spaces where your child socialises are ones you trust — giving them freedom within boundaries that keep them safe.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

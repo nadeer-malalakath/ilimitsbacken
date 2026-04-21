@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamba – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Mamba brand: deep forest green */
+    --mamba:        #00A86B;
+    --mamba-mid:    #008F5A;
+    --mamba-deep:   #005C3A;
+    --mamba-light:  #F0FFF8;
+    --mamba-bdr:    #A0EDD0;
+    --mamba-text:   #003D26;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --purple-bg:    #F6F1FF;
+    --purple-bdr:   #DCCEFF;
+    --purple-text:  #3B1075;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(0,168,107,0.07);
+    --shadow-sm:    0 2px 14px rgba(0,168,107,0.09);
+    --shadow-md:    0 6px 30px rgba(0,168,107,0.12);
+    --shadow-lg:    0 14px 52px rgba(0,168,107,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #021410 0%, #05221A 50%, #072E22 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,168,107,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.13) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,168,107,0.26) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FF9DB5; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #003D26 0%, #00A86B 55%, #40D49A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,168,107,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════
+     MAIN
+  ══════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── CIS market callout ── */
+  .region-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mamba-light);
+    border: 1.5px solid var(--mamba-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .region-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C0F2DC; border: 1.5px solid var(--mamba-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .region-title { font-size: 13px; font-weight: 700; color: var(--mamba-text); line-height: 1.3; margin-bottom: 3px; }
+  .region-body  { font-size: 12px; color: #004A30; font-weight: 400; line-height: 1.55; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Tokens/coins callout ── */
+  .coins-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--purple-bg);
+    border: 1.5px solid var(--purple-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .coins-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE8FF; border: 1.5px solid var(--purple-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .coins-title { font-size: 13px; font-weight: 700; color: #3B1075; line-height: 1.3; margin-bottom: 3px; }
+  .coins-body  { font-size: 12px; color: var(--purple-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Age strip ── */
+  .age-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--mamba-light);
+    border: 1.5px solid var(--mamba-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .age-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #C0F2DC; border: 1.5px solid var(--mamba-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .age-text strong { font-size: 13.5px; font-weight: 700; color: var(--mamba-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .age-text span   { font-size: 12px; color: #004A30; font-weight: 400; line-height: 1.5; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #021410 0%, #052018 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,168,107,0.26) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand {
+    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px;
+  }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700; color: var(--ink-soft);
+  }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .age-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .region-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.03s both; }
+  .coins-note      { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🐍</div>
+        <div>
+          <div class="app-name-text">Mamba</div>
+          <div class="app-sub">Dating / Social Networking</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Dating / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Designed for adult social and dating interactions</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Mamba's CIS-focused dating platform, features and the adult community it is built for.</p>
+  </div>
+
+  <!-- Mamba's defining context: dominant CIS dating platform -->
+  <div class="region-callout">
+    <div class="region-ico">🌍</div>
+    <div>
+      <div class="region-title">Mamba Is One of the Largest Dating Platforms in Russia and the CIS Region</div>
+      <div class="region-body">Launched in Russia and widely used across Russia, Ukraine, Belarus and neighbouring countries, Mamba has tens of millions of registered users and is one of the most downloaded dating apps in the CIS region. Its combination of location-based discovery, video features and a virtual economy makes it significantly more feature-rich than many comparable platforms — and therefore carries a broader range of risks for children who access it.</div>
+    </div>
+  </div>
+
+  <!-- Mode chips -->
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00A86B;"></span> Nearby & Radar</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Swipe & Match</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Video Dating</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Gifts & Coins</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0099E6;"></span> Private Chat</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Mamba is a <strong>location-based social networking and dating application</strong> that allows adults to discover and communicate with new people nearby or around the world. Users create profiles, browse others through swipe-style matching and a live radar map, and interact through messaging, video calls and a feature-rich virtual economy — all within an environment designed exclusively for adult romantic and social connection.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FFF8;">📡</div>
+      <div>
+        <div class="feat-name">Radar — Location-Based Nearby Discovery</div>
+        <div class="feat-desc">Mamba's radar feature surfaces other users ordered by physical proximity in real time. A child using the app is immediately visible on this radar to all nearby adult users — creating both a digital and a real-world proximity risk from the moment the app is opened.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">❤️</div>
+      <div>
+        <div class="feat-name">Swipe-Based Profile Matching</div>
+        <div class="feat-desc">Users browse profiles with a swipe interface to express interest. Mutual likes open a private messaging channel between adult strangers explicitly for social or romantic engagement.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🎥</div>
+      <div>
+        <div class="feat-name">Video Dating & Live Calls</div>
+        <div class="feat-desc">Mamba offers built-in video dating features including live video calls between matched users. Children accessing these features are exposed to real-time adult interactions with no content screening or age filtering in place.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Unmoderated Private Messaging</div>
+        <div class="feat-desc">Matched users exchange private messages, photos and media with no content moderation or parental visibility. All conversations are entirely private between the two users.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF8F0;">👁️</div>
+      <div>
+        <div class="feat-name">Profile Visitor Notifications</div>
+        <div class="feat-desc">Mamba notifies users when their profile has been viewed, creating mutual awareness between strangers. Children become passively discoverable and contactable simply by having an active profile — without any deliberate outreach on their part.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDFB;">🪙</div>
+      <div>
+        <div class="feat-name">Coins, Gifts & Premium Features</div>
+        <div class="feat-desc">Mamba operates a virtual coins economy used to send gifts, boost profiles and unlock premium features. Coins are purchased with real money through in-app payments, creating a financial risk if a child gains access to the platform using a parent's device or saved payment method.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age strip -->
+  <div class="age-strip">
+    <div class="age-badge">🔞</div>
+    <div class="age-text">
+      <strong>Mamba Requires Users to Be 18 or Older</strong>
+      <span>The platform's radar discovery, video dating, unmoderated messaging and adult community are designed entirely for adult interaction. No child-safe mode, content tier or restricted experience is available.</span>
+    </div>
+  </div>
+
+  <!-- Coins / in-app purchase callout -->
+  <div class="coins-note">
+    <div class="coins-ico">🪙</div>
+    <div>
+      <div class="coins-title">Mamba's Coins Economy Creates a Hidden Financial Risk</div>
+      <div class="coins-body">Mamba's virtual coins are used throughout the platform for gifts, profile boosts and premium features. Coins are purchased directly through in-app payments using real money — and a child with access to a parent's device or stored payment method could purchase coins without any parental awareness. Review payment settings and saved cards on all shared devices regularly.</div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Not Be Appropriate for Children</h2>
+    <p class="sh-desc">Key risks from Mamba's radar, video dating, adult community and virtual coins economy.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📡</span>
+      <div class="rc-name">Real-Time Radar Exposure</div>
+      <div class="rc-desc">The radar feature broadcasts a child's physical location to nearby adult users as soon as the app is opened — before any deliberate action is taken</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💑</span>
+      <div class="rc-name">Adult Dating Environment</div>
+      <div class="rc-desc">Mamba's entire platform — matching, profiles, community norms and features — is built for adult romantic and social interaction with no provision for younger users</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎥</span>
+      <div class="rc-name">Video Dating With Strangers</div>
+      <div class="rc-desc">Built-in video calls enable live, real-time contact between children and unknown adults — with no moderation, age filtering or content screening</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Mature Private Messaging</div>
+      <div class="rc-desc">Unmoderated private chats may expose children to explicit or adult-oriented content from strangers with no warning, filter or parental visibility</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Passive Discoverability</div>
+      <div class="rc-desc">Profile visitor notifications create mutual awareness between a child and adult strangers — even before the child has taken any active step to connect</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🪙</span>
+      <div class="rc-name">In-App Purchase Risk</div>
+      <div class="rc-desc">Real-money coin purchases can be made in-app — a child with access to saved payment details may spend real money without a parent's knowledge</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Mamba Is Designed Exclusively for Adults 18 and Older</div>
+        <div class="know-body">Every feature on Mamba — from its matching algorithm and radar discovery to its video dating and virtual gifts system — is built around adult social and romantic life. The platform makes no provision for younger users and applies no content filtering to profiles, messages or live video within the app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Video Dating Escalates the Risk Significantly Beyond Text Chat</div>
+        <div class="know-body">Mamba's built-in video dating feature means that contact between a child and an unknown adult is not limited to text. Live video calls create real-time, face-to-face interaction between strangers — enabling far more intimate and potentially harmful contact than a messaging exchange alone, and creating a substantially higher risk of exploitation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Curiosity and Regional Peer Influence Drive Installation</div>
+        <div class="know-body">In the CIS region, Mamba is widely known among older teenagers and young adults. Children may install the app after encountering it through peers, older siblings or social media — particularly given its high profile in Russian-speaking markets. Its broad social reputation can make it seem more acceptable than apps marketed more explicitly as dating platforms.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Age Verification Can Be Bypassed in Seconds</div>
+        <div class="know-body">Mamba requires only a date of birth and contact details to register. A child can create a complete adult account by entering a false birthdate — gaining immediate access to the full platform, including radar discovery, swipe matching, video calls and private messaging, without any further identity check.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block dating and adult-focused apps like Mamba instantly — no technical expertise needed, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block dating and adult-focused apps entirely by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow instant one-tap blocking of similar apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Mamba as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting digital awareness.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Discuss Online Relationships and Digital Safety With Children</div>
+        <div class="tip-body">Have open conversations about how location-based dating platforms like Mamba work — particularly that the radar feature shares their real-time physical location with nearby unknown adults, and that video calls enable live contact with strangers. Help children understand that a familiar app store listing does not make an adult platform safe, and that contact with unknown adults carries real-world risks regardless of the medium.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Communication Within Trusted Social Circles</div>
+        <div class="tip-body">Help your child build and invest in the friendships and family relationships they already have, rather than seeking connection with unknown adults through dating platforms. Children with strong, trusted real-world relationships are significantly better protected against the appeal of adult social discovery apps — regardless of how the platform is marketed or how widespread it is among peers.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Limit Access to Adult-Focused Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — including tablets, spare phones and shared family devices. Review saved payment methods and in-app purchase settings to prevent coin purchases. Revisit your controls regularly as your child grows, and keep honest family conversations running alongside them for the most complete layer of protection.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">💚</span>
+    <h3 class="closing-title">Healthy Connections Grow From Safe Ground</h3>
+    <p class="closing-body">
+      Every child deserves the space to grow into their own understanding of relationships and connection — at their own pace and in environments built with their wellbeing in mind. iLimits helps you provide that space: clear, caring boundaries that keep the door open for honest conversation and the trust that makes those boundaries feel like the love they are.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

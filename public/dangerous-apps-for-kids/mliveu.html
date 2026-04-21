@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MLiveU – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* MLiveU brand: warm coral-red */
+    --ml:           #E84545;
+    --ml-mid:       #C73030;
+    --ml-deep:      #7F1D1D;
+    --ml-light:     #FFF5F5;
+    --ml-bdr:       #FECACA;
+    --ml-text:      #450A0A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0000 0%, #3B0A0A 50%, #4A0E0E 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(232,69,69,0.30) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,69,69,0.40) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(232,69,69,0.18);
+    border: 1px solid rgba(232,69,69,0.36);
+    color: #FECACA; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card in Hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #7F1D1D 0%, #E84545 55%, #FCA5A5 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(232,69,69,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── MLiveU broadcast callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ml-light);
+    border: 1.5px solid var(--ml-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--ml-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--ml-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #6B1A1A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF8F0;
+    border: 1.5px solid #FFCC80;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE0B2; border: 1.5px solid #FFCC80;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #5C2C00; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #7A3800; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ml-light);
+    border: 1.5px solid var(--ml-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--ml-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ml-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #6B1A1A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0000 0%, #3B0A0A 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,69,69,0.30) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎬</div>
+        <div>
+          <div class="app-name-text">MLiveU</div>
+          <div class="app-sub">Live Streaming / Social Discovery</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Streaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables live video broadcasting and interaction with unknown viewers</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">🎬 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of MLiveU — a live streaming and social video platform that lets anyone broadcast themselves publicly to an unknown global audience, with open real-time interaction between streamers and viewers and no meaningful gatekeeping for younger users.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">🔴</div>
+    <div>
+      <div class="instant-title">MLiveU Connects Users Live on Camera With a Global Public Audience — Instantly and Without Screening</div>
+      <div class="instant-body">MLiveU is designed for speed and immediacy — the path from installing the app to broadcasting live video to strangers worldwide is as short as the platform can make it. There is no pre-approval process, no content review before a stream goes live, and no identity check before a child is on camera in front of an unknown public audience. Simultaneously, any viewer anywhere in the world can interact with that child in real time through open live chat — with no filter and no moderation standing between an anonymous adult and a broadcasting child.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#E84545;"></span> Live Broadcasting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Open Live Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Virtual Gifting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Stream Discovery</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Viewer Following</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      MLiveU is a <strong>live streaming and social video platform</strong> that allows users to broadcast live video to a public global audience and interact with viewers in real time. Users can both stream themselves and watch others — engaging through open live chat, virtual gifts and social connections built during and after streams. The platform provides no meaningful review of broadcaster content before a stream begins, and no verification of viewer identity or age.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ml-light);">🔴</div>
+      <div>
+        <div class="feat-name">Instant Public Live Video Broadcasting</div>
+        <div class="feat-desc">MLiveU allows any user to broadcast live video of themselves to a public, global audience within moments of opening the app — with no pre-approval, no identity verification and no content moderation before the stream goes live. A child can be on camera in front of an unlimited number of unknown adults instantly, with no control over who is in that audience or how they engage with what they see.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Open Live Chat With All Viewers During Streams</div>
+        <div class="feat-desc">Every live stream on MLiveU includes open chat where any viewer can send messages directly to the broadcaster in real time. There is no content filter on live chat, no requirement for a broadcaster to approve messages before they appear on screen, and no moderation of what an anonymous global audience chooses to write. A child broadcasting live is exposed to whatever any unknown viewer sends.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🎁</div>
+      <div>
+        <div class="feat-name">Virtual Gifts and Broadcast Engagement Mechanics</div>
+        <div class="feat-desc">MLiveU includes a virtual gift system where viewers send gifts to broadcasters during live streams. These mechanics create social incentives for children to continue broadcasting and build larger audiences — rewarding extended public self-exposure while enabling unknown adults to direct targeted attention toward a specific child using gifts as a relationship-building tool.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔍</div>
+      <div>
+        <div class="feat-name">Public Stream Discovery Without Consent</div>
+        <div class="feat-desc">MLiveU surfaces live streams to users through a public discovery feed, making any broadcaster — including children — findable and watchable by unknown adults without any connection or prior interaction required. A child broadcasting on MLiveU may attract an audience well beyond their awareness, with no control over who finds, watches or follows their stream.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">MLiveU requires only a self-reported date of birth with no verification of the information provided. A child gains full access to the platform — including the ability to broadcast themselves live to a global public audience — within moments of installing the app. Adults can equally state any age, with nothing in place to challenge what they claim.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from public live broadcasting, unfiltered viewer interaction, exposure to inappropriate stream content, privacy dangers during broadcasts and platform mechanics that incentivise prolonged public self-exposure.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📺</span>
+      <div class="rc-name">Exposure to Inappropriate Live Streams</div>
+      <div class="rc-desc">MLiveU's discovery feed surfaces streams from around the world with no pre-screening. Children browsing the platform can encounter adult, sexually explicit or otherwise harmful live content before any moderation is possible — with no content warning and no age filter</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Interaction With Unknown Viewers</div>
+      <div class="rc-desc">Any adult globally can watch a child's live stream without restriction and interact through open live chat — creating direct real-time contact between a child on camera and unknown individuals whose identity, age and intentions are entirely unverified</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Live Chat Conversations</div>
+      <div class="rc-desc">Open live chat during broadcasts is unmoderated and unfiltered. A child broadcasting live can receive inappropriate, explicit or threatening messages from viewers in real time, with no buffer between a message being sent and the child seeing it appear on screen</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy Risks During Broadcasts</div>
+      <div class="rc-desc">A child broadcasting live may inadvertently reveal their location, school, home environment or daily routine — providing unknown viewers with personal information sufficient to identify or locate them in the real world, often without the child being aware of what they are sharing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Grooming Risk via Gifts and Attention</div>
+      <div class="rc-desc">Adults can use virtual gifts to direct sustained, targeted attention toward a specific child broadcaster — building familiarity and a sense of obligation through repeated engagement that may feel like genuine appreciation but functions as a relationship-building mechanism</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Public Discoverability Without Consent</div>
+      <div class="rc-desc">Children who broadcast on MLiveU are publicly discoverable by anyone on the platform. Unknown adults can find, follow and watch a child's streams repeatedly — building familiarity with someone who is, from the child's perspective, a complete stranger</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>MLiveU Carries a Medium–High Risk Rating</strong>
+      <span>Instant public live broadcasting with no pre-screening, open unmoderated live chat, virtual gifting mechanics, zero age verification and full public discoverability together create a sustained environment of risk for younger users on this platform.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🎬</div>
+    <div>
+      <div class="control-title">Live Streaming Places a Child on Camera in Front of Unknown Adults in Real Time — With No Safety Net</div>
+      <div class="control-body">Unlike social media posts that can be deleted or messages that can be blocked, a live broadcast on MLiveU happens in real time and cannot be undone once it has occurred. A child who streams on this platform is placing themselves on camera in front of a public, unvetted global audience — with no moderator present, no content filter active and no effective mechanism available to protect them if something goes wrong during the session. The irreversibility of live content, combined with the openness of the platform's audience, is precisely what makes MLiveU a meaningful risk for younger users.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Live Streaming Platforms Expose Children to a Public, Uncontrolled Audience</div>
+        <div class="know-body">When a child broadcasts on MLiveU, they are on live camera in front of anyone on the platform who chooses to watch — with no control over who that audience is, no way of knowing whether viewers are adults or peers, and no mechanism to prevent unknown individuals from repeatedly watching their streams. The moment a broadcast begins, the child is visible to a global audience and the content of what they share cannot be retrieved.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Encounter Inappropriate Content While Browsing</div>
+        <div class="know-body">Even a child who never broadcasts on MLiveU is at risk simply from using the app as a viewer. The discovery feed surfaces live streams from around the world with no meaningful pre-moderation — a child scrolling through available streams may encounter adult, sexually explicit or otherwise harmful content at any point, with no content warning, no age filter and no delay between inappropriate content appearing and the child being exposed to it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Live Broadcasts Leave No Record That Parents Can Review</div>
+        <div class="know-body">A live stream on MLiveU is a real-time event — when it ends, there is no accessible log of what was shown, said or received in chat that a parent can review after the fact. A child can have a distressing or dangerous experience during a broadcast and close the app within seconds, with nothing logged, no notification sent and no record of what occurred available to a parent. Open, regular conversation with your child about what they encounter online is the only realistic monitoring tool available in the absence of device-level controls.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Gift Mechanics Incentivise Children to Broadcast More and for Longer</div>
+        <div class="know-body">MLiveU's virtual gift system creates a direct incentive for children to stream more frequently, for longer periods and to a larger audience — because gifts come from viewers, and more viewers mean more gifts. Children are not well-equipped to recognise when an adult's gifting behaviour is being used to build inappropriate familiarity rather than to express genuine appreciation. The platform's reward structure actively works against a younger user's ability to protect themselves in this environment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block live streaming apps like MLiveU instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block live streaming apps entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like MLiveU as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around live streaming platforms, public self-exposure and responsible digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🎥</div>
+      <div>
+        <div class="tip-name">Talk With Children About Responsible Use of Live Streaming Platforms</div>
+        <div class="tip-body">Help your child understand what live streaming on a platform like MLiveU actually means — that broadcasting places them on camera in front of a public, global audience of people they have never met, with no control over who is watching, no moderation of what viewers say to them and no way to undo what has already been shown or shared. Explain that virtual gifts and attention from unknown viewers do not indicate genuine friendship or safe intentions, and that the casual, entertaining feel of the platform does not change the real-world risks of being on live camera in front of strangers. Establish clear household rules about which platforms are appropriate before your child installs something new, and explain the reasoning — children respond far better to understanding than to unexplained restrictions.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Safe Online Behaviour and Privacy Awareness</div>
+        <div class="tip-body">Talk regularly with your child about what is and is not safe to share online — particularly in the context of live video, where personal details, home environments, school uniforms and location clues can be visible on screen without a child realising what they are revealing to an unknown audience. Discuss the specific risk that live streams can expose far more than a child intends to share, and that viewers may record or screenshot content without the broadcaster's knowledge or consent. Children who understand why privacy matters — and who know what to do if an online interaction makes them feel uncomfortable — are significantly better protected than those who are simply told not to use certain apps.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Live Streaming Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family devices included. Live streaming apps like MLiveU are frequently reinstalled within minutes of being removed from a primary device, making device-level controls significantly more reliable than app-by-app deletion or manual monitoring alone. The strongest protection available to families comes from combining clear, consistent access controls with honest, ongoing conversations about why those controls are in place — and building an environment where your child feels comfortable coming to you if something online makes them uncomfortable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safety Online Starts With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the protection that comes from a child who understands why certain platforms are unsafe and feels comfortable talking to their parents about what they encounter online. iLimits gives you the technical layer — the conversations, trust and awareness your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

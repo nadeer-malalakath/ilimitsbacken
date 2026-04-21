@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>XVideos – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    --xv:           #2D3748;
+    --xv-mid:       #1A202C;
+    --xv-deep:      #0D1117;
+    --xv-light:     #F7F8FA;
+    --xv-bdr:       #A0AEC0;
+    --xv-text:      #0D1117;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #07080A 0%, #0F1117 50%, #161B22 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(45,55,72,0.70) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,55,72,0.80) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(160,174,192,0.14);
+    border: 1px solid rgba(160,174,192,0.26);
+    color: #A0AEC0; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0D1117 0%, #2D3748 55%, #718096 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(45,55,72,0.70), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.10); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Platform callout ── */
+  .xv-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--xv-light); border: 1.5px solid var(--xv-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .xv-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E2E8F0; border: 1.5px solid var(--xv-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .xv-title { font-size: 13px; font-weight: 700; color: var(--xv-text); line-height: 1.3; margin-bottom: 3px; }
+  .xv-body  { font-size: 12px; color: #1A202C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 body ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--xv-light); border: 1.5px solid var(--xv-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E2E8F0; border: 1.5px solid var(--xv-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--xv-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1A202C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #07080A 0%, #0F1117 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,55,72,0.70) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .xv-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔞</div>
+        <div>
+          <div class="app-name-text">XVideos</div>
+          <div class="app-sub">Adult Content Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Content</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Hosts explicit adult video content intended only for adults</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of XVideos — one of the world's largest adult video platforms, hosting and distributing explicit sexual content that is intended exclusively for adult audiences and is wholly unsuitable for children of any age.</p>
+  </div>
+
+  <div class="xv-callout">
+    <div class="xv-ico">🔞</div>
+    <div>
+      <div class="xv-title">XVideos Is an Explicit Adult Platform — Its Content Is Not Suitable for Children at Any Age or Stage of Development</div>
+      <div class="xv-body">XVideos exists solely to host and distribute explicit adult video content. Unlike platforms that contain some inappropriate content alongside mainstream material, every piece of content on XVideos is intended for adult audiences only. There is no age-appropriate area of the platform, no safe section for younger users, and no content that a child would be appropriate to encounter. The platform's scale — consistently ranked among the highest-traffic websites on the internet — means that exposure is not limited or controlled in any way once access is obtained. Blocking this platform entirely is the only appropriate course of action for any household with children.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2D3748;"></span> Adult Video</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> User Uploads</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Search & Discovery</div>
+    <div class="mode-chip"><span class="cdot" style="background:#718096;"></span> Recommendations</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Community Features</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      XVideos is an <strong>online platform that hosts and distributes adult-oriented video content</strong> intended for mature audiences. Users can view, upload and interact with videos that contain explicit material. The platform is designed for adult entertainment and is legally required to be accessible only to viewers who meet the minimum age requirement in their jurisdiction — a requirement that, in practice, it cannot reliably enforce.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--xv-light);">🎬</div>
+      <div>
+        <div class="feat-name">Hosting of Explicit Adult Video at Scale</div>
+        <div class="feat-desc">XVideos hosts one of the largest libraries of explicit adult video content of any platform in the world, with many millions of videos publicly accessible to any visitor who reaches the site. This content is the platform's sole purpose and is accessible to anyone who arrives, subject only to a self-declaration age gate requiring no verification and bypassable by any child in seconds by clicking a single button. There is no content on the platform appropriate for children and no mechanism that prevents a child from accessing all of it once the age gate is dismissed.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔍</div>
+      <div>
+        <div class="feat-name">Search and Algorithmic Content Discovery</div>
+        <div class="feat-desc">The platform includes a full search system and an algorithmic recommendation engine that surfaces related content based on viewing history and browsing patterns. A child who accesses the platform does not encounter a single video and stop — the discovery system is specifically designed to extend viewing sessions and deepen engagement by continuously serving additional content. Accidental or brief initial exposure is rapidly extended by the platform's own mechanics into a prolonged and varied viewing session.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📤</div>
+      <div>
+        <div class="feat-name">User-Generated Content Uploads</div>
+        <div class="feat-desc">XVideos accepts video uploads from registered users, meaning the platform's content is not limited to professionally produced material — it includes user-generated content of highly variable nature with less consistent prior review. The platform has faced significant scrutiny over the adequacy of its content moderation processes. For children encountering the platform, this means exposure is not only to produced adult content but potentially to a much broader range of material that has received minimal review before publication.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">💬</div>
+      <div>
+        <div class="feat-name">Community Features Including Comments and Profiles</div>
+        <div class="feat-desc">Beyond video content, XVideos includes community features — user profiles, video comment sections and content interaction tools. These social features create a secondary layer of adult platform engagement that extends beyond passive video viewing. A child who creates an account on the platform enters an adult social environment where the community norms and content of all interactions are shaped entirely by the explicit adult nature of the platform itself.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Age Verification That Provides No Meaningful Protection</div>
+        <div class="feat-desc">Access to XVideos requires users to confirm they are of legal adult age — but this confirmation is a single self-declaration click with no identity check, document submission or any other verification mechanism whatsoever. Any child old enough to read the prompt can bypass this gate in under a second. It provides no meaningful protection against underage access and should not be relied upon by parents as any form of safeguard.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unrestricted exposure to explicit adult content, the documented developmental impact of early pornography exposure on children and adolescents, the absence of any meaningful content protection for younger audiences, and the algorithmic systems that extend and deepen engagement.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Explicit Adult Content Exposure</div>
+      <div class="rc-desc">The platform's entire content library consists of explicit adult material — there is no age-appropriate content and no safe area of the platform. Any access by a child constitutes exposure to material wholly unsuitable for their age and stage of development.</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Developmental Impact on Children</div>
+      <div class="rc-desc">Research consistently documents that early exposure to pornographic content can distort children's understanding of relationships, consent, body image and sexuality in ways that may have lasting effects on their emotional and psychological development.</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Not Appropriate for Any Age of Child</div>
+      <div class="rc-desc">Unlike platforms with age-rated content tiers, there is no version of XVideos' content appropriate for children or teenagers at any stage — the platform exists solely to serve adult audiences with explicit material that has no developmental benefit for younger viewers.</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">Impact on Healthy Digital Habits</div>
+      <div class="rc-desc">The platform's algorithmic recommendation engine is designed to maximise session length and return frequency. Children who access it face the same engagement-maximising design patterns that drive compulsive use in adults, with far less capacity to recognise or resist those patterns.</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Safeguards for Younger Audiences</div>
+      <div class="rc-desc">XVideos has no content moderation system designed to protect children. Every element of the platform — its content, recommendation algorithm and community features — is designed entirely around adult users with no accommodation for younger audiences whatsoever.</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Easy Discovery by Children</div>
+      <div class="rc-desc">The platform is easily discovered through search engines, accessible on any device with an internet connection and requires no download or installation — making it one of the most accessible adult platforms children are likely to encounter without proactive parental intervention.</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>XVideos Carries the Highest Possible Risk Rating</strong>
+      <span>The platform's sole purpose is to host and distribute explicit adult content. There is no appropriate use case for children of any age, no meaningful age verification in place, and documented developmental harm associated with early exposure. This platform should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">Adult Content Platforms Are Accessible Through Any Browser — App Removal Alone Is Not Sufficient Protection</div>
+      <div class="control-body">Unlike apps that must be downloaded from an app store, adult content platforms like XVideos are accessible through any web browser on any device with an internet connection. A child does not need to install anything to access the platform — they can reach it through a phone browser, a tablet browser or a shared computer browser within seconds. Device-level controls that address web browsing, not just app installations, are necessary to block access effectively across all devices a child uses.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Adult Content Platforms Are Intended Only for Mature Audiences and Contain Material Wholly Unsuitable for Children</div>
+        <div class="know-body">XVideos is not a general entertainment platform with some adult content — it is exclusively an adult platform whose entire content library consists of explicit sexual material intended for adult viewers. There is no version of the platform, no section of its content and no use of it that is appropriate for any child at any age. The platform is legally required to be accessible only to adults in most jurisdictions, and the failure of its age verification to enforce this makes parental intervention the only effective protection.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Early Exposure to Pornographic Content Is Associated With Documented Developmental Harm</div>
+        <div class="know-body">A substantial body of research documents harm associated with children and adolescents accessing pornographic content before they have the emotional maturity to contextualise what they are seeing. Documented effects include distorted attitudes towards relationships, consent, gender and body image; unrealistic expectations about sexuality; and, in some cases, normalisation of content depicting harmful or coercive behaviour. These are the consistent findings of research conducted across different countries and age groups over many years.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Platform's Self-Declaration Age Gate Provides No Meaningful Protection</div>
+        <div class="know-body">The single button users must click to confirm they are adults provides no actual verification. Any child who can read the page can access the platform's entire content library in under a second. Parents should not assume that age gates on adult content platforms provide any meaningful protection against their child accessing the content — they do not, and should not be factored into any assessment of whether intervention is necessary.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Maintaining a Safe and Age-Appropriate Digital Environment Requires Proactive Action on All Devices</div>
+        <div class="know-body">Because adult content platforms are accessible through web browsers without any installation, protecting children requires controls that address browser-based access across every device they use — not just app-level restrictions on a single phone. Parents who wish to maintain an age-appropriate digital environment should ensure iLimits restrictions are applied consistently across all devices, and should consider reviewing browser history on shared devices periodically as part of their broader approach to family digital safety.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block adult content platforms like XVideos instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block adult content platforms and websites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar adult platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps or platforms are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like XVideos as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from adult content and build a foundation of open, honest conversation about responsible internet use and age-appropriate digital habits.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Responsible Internet Use</div>
+        <div class="tip-body">Age-appropriate, honest conversation about what adult content is, why it is not suitable for children and how children are likely to encounter it online is one of the most effective protective tools available to parents — more durable in many situations than technical controls alone. Children who are given a clear, honest explanation of why adult content platforms are restricted, rather than simply being told they are off-limits, are significantly better equipped to make the right decision if they encounter such content in an uncontrolled environment. The conversation does not need to be extensive — it needs to be honest, calm and framed around the child's wellbeing. Children who feel they can come to a parent without fear of a negative reaction when they encounter something online that concerns them are the best-protected children of all.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Encourage Healthy and Age-Appropriate Digital Habits</div>
+        <div class="tip-body">Help your child develop a healthy, balanced relationship with the internet by establishing household norms around screen time, the kinds of content that are and are not appropriate for their age, and the importance of coming to a parent when they encounter something online that makes them feel uncomfortable, confused or upset. Children who have a clear framework for what appropriate digital behaviour looks like — and who have practised that framework through regular, calm conversation — are significantly more resilient to harmful content encounters. Reinforce that blocking a platform is not a punishment but a protection, in the same way that an age rating on a film is a protection rather than a restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Restrict Access to Adult Content Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently and immediately across every device your child has access to — including tablets, secondary phones, shared family computers and any device that connects to the internet in your home. Adult content platforms are accessible through browsers without installation, making consistent device-level controls essential rather than optional. Review restrictions periodically as children acquire new devices or access new networks, and consider enabling safe-search settings on all browsers as an additional layer of protection alongside iLimits. Technical controls and open conversation together form the most complete and durable protection available for your family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safe Digital Environment Begins With the Boundaries You Set at Home</h3>
+    <p class="closing-body">
+      Protecting children from adult content is one of the most straightforward and important steps any parent can take in their family's digital safety. iLimits gives you the tools to enforce that protection technically — and the conversations you have with your child about why those protections are in place give them the understanding and resilience to stay safe even when you are not there to intervene.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

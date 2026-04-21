@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NaughtyDog – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* NaughtyDog brand: deep violet-plum */
+    --nd:           #6D28D9;
+    --nd-mid:       #5B21B6;
+    --nd-deep:      #3B0764;
+    --nd-light:     #FAF5FF;
+    --nd-bdr:       #C4B5FD;
+    --nd-text:      #2E1065;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0D0520 0%, #160838 50%, #1E0A4A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(109,40,217,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(109,40,217,0.50) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(109,40,217,0.20);
+    border: 1px solid rgba(109,40,217,0.36);
+    color: #C4B5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #3B0764 0%, #6D28D9 55%, #C4B5FD 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(109,40,217,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── NaughtyDog callout ── */
+  .nd-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--nd-light); border: 1.5px solid var(--nd-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .nd-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--nd-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .nd-title { font-size: 13px; font-weight: 700; color: var(--nd-text); line-height: 1.3; margin-bottom: 3px; }
+  .nd-body  { font-size: 12px; color: #3B0764; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--nd-light); border: 1.5px solid var(--nd-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--nd-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--nd-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3B0764; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0D0520 0%, #160838 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(109,40,217,0.40) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .nd-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💬</div>
+        <div>
+          <div class="app-name-text">NaughtyDog</div>
+          <div class="app-sub">Adult Chat / Dating Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Chat & Dating</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables adult-oriented conversations and connections with strangers</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of NaughtyDog — an adult-oriented social platform built around chat, private messaging and stranger connections, explicitly designed for adult dating and social interactions of a mature nature that are wholly inappropriate for children.</p>
+  </div>
+
+  <div class="nd-callout">
+    <div class="nd-ico">⚠️</div>
+    <div>
+      <div class="nd-title">NaughtyDog Is Designed Specifically for Adult-Oriented Social Connections — Its Name, Purpose and User Environment Are All Adult in Nature</div>
+      <div class="nd-body">NaughtyDog is an adult chat and social discovery platform whose name, branding and core features are explicitly adult in orientation. The platform exists to facilitate connections between adult users through chat, private messaging and profile-based social discovery — in a social environment where adult-themed conversation and interaction are the expected norm. There is no version of this platform's experience that is appropriate for children. A child who accesses NaughtyDog enters an adult social space designed around mature interactions with strangers, with no content moderation or community standards oriented toward protecting younger users.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#6D28D9;"></span> Stranger Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Private Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Profile Discovery</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0EA5E9;"></span> Social Matching</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Adult Dating</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      NaughtyDog is a <strong>social platform designed for adults</strong> to meet new people and engage in conversations through chat features. Users may connect with other individuals for dating, private messaging or social interaction within the platform. The app focuses on <strong>adult-oriented interactions and social connections</strong> between users — in an environment that is built around and normalises adult themes, explicit conversation and social discovery between strangers.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--nd-light);">👥</div>
+      <div>
+        <div class="feat-name">Stranger Discovery and Profile-Based Social Matching</div>
+        <div class="feat-desc">NaughtyDog allows users to browse and discover other users through profile-based social matching — a system that surfaces strangers to each other based on location, preferences and platform activity. This discovery mechanism is the platform's core feature and is explicitly designed to facilitate new connections between unknown adults. A child who creates a profile on the platform is immediately placed into this discovery system, becoming visible to adult strangers on the platform and able to view and initiate contact with unknown adults in return.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Open Chat With Unknown Adult Users</div>
+        <div class="feat-desc">The platform's chat system allows users to initiate and receive conversations from other users, including strangers who have not been verified or vetted in any way. Because the platform is adult-oriented in nature, the conversations that take place within its chat environment are shaped by adult social norms and adult intentions. A child participating in open chat on NaughtyDog is communicating in an adult social space where the conversation partner's identity, age and intentions are entirely unknown and unverified.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🔒</div>
+      <div>
+        <div class="feat-name">Private Messaging Between Users</div>
+        <div class="feat-desc">Beyond open chat, NaughtyDog offers private direct messaging between users — a feature that moves conversation from any shared or semi-public context into a completely private, one-to-one channel. Private messaging on an adult-oriented platform creates a communication environment where an adult with harmful intent toward a child has a direct, unmonitored channel for conversation. The private nature of direct messaging also means that concerning interactions are significantly less likely to be noticed by a parent reviewing a child's device casually.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">📍</div>
+      <div>
+        <div class="feat-name">Location-Based Discovery Features</div>
+        <div class="feat-desc">Like many adult dating and social discovery platforms, NaughtyDog may use location data to surface nearby users — enabling geographic proximity as a matching factor between users. For a child on the platform, location-based discovery creates the additional risk that adult strangers shown in their discovery feed are not only unknown but physically nearby, and that the child's own location is potentially being shared with adults in the same geographic area.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification at Registration</div>
+        <div class="feat-desc">NaughtyDog requires users to confirm they are of adult age at registration, but this confirmation is a self-declaration that requires no identity verification, document submission or any other check that would prevent a child from creating an account. Any child capable of navigating a registration form can create a profile on the platform and gain immediate access to its full social discovery and messaging features — including visibility to adult users on the platform who have no means of verifying that the profile they are interacting with belongs to an adult.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unmonitored contact with unknown adult strangers, exposure to adult-themed conversations and content, serious privacy risks from profile visibility and location sharing, and the platform's complete absence of child-protective safeguards.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Interaction With Unknown Strangers</div>
+      <div class="rc-desc">The platform's core purpose is to connect unknown adults — a child on the platform has unfiltered access to strangers whose identity, age and intentions are entirely unverified, with no mechanism to distinguish safe contacts from those with harmful intent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Exposure to Adult-Themed Conversations</div>
+      <div class="rc-desc">NaughtyDog's adult-oriented social environment means that conversations on the platform routinely involve mature themes, explicit language and adult social norms — a child participating in chat is exposed to conversation content that is wholly inappropriate for their age</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Explicit or Inappropriate Content</div>
+      <div class="rc-desc">On adult chat and dating platforms, users may send explicit images, videos or messages through the platform's messaging features — a child with a profile on NaughtyDog may receive unsolicited explicit content from adult users with no platform mechanism to prevent it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔐</span>
+      <div class="rc-name">Privacy Risks From Unknown User Contact</div>
+      <div class="rc-desc">A child with a profile on the platform may be encouraged to share personal information — their name, school, location or contact details — by adult strangers who build trust through initial conversation before requesting details that compromise the child's privacy and safety</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Grooming Risk via Private Messaging</div>
+      <div class="rc-desc">The private direct messaging feature creates an unmonitored channel through which an adult with harmful intent can build a relationship with a child over time — the private nature of the channel makes it the highest-risk feature of the platform for child safety</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location Exposure to Nearby Strangers</div>
+      <div class="rc-desc">Location-based discovery features may make a child's approximate physical location visible to adult strangers on the platform — and surface adults who are geographically close to the child, creating a risk that extends beyond digital interaction into the child's physical environment</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>NaughtyDog Carries a High Risk Rating</strong>
+      <span>Direct, unmonitored contact with unknown adult strangers, an explicitly adult-oriented social environment, private messaging with no oversight, potential location exposure and a complete absence of child-protective safeguards combine to place NaughtyDog in the highest risk category for children on digital platforms.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">💡</div>
+    <div>
+      <div class="control-title">Adult Chat and Dating Platforms Present a Distinctly Different Risk to Children Than Social Media or Messaging Apps</div>
+      <div class="control-body">Unlike mainstream social platforms where children may encounter inappropriate content or contact from unknown users, NaughtyDog is an adult dating and chat platform where every adult user has joined specifically to engage in adult-oriented social connections with strangers. A child on this platform is not a young person in a general social environment that is misused by some bad actors — they are a child in a space explicitly designed for adult stranger interaction, where the adult user base has no expectation of encountering children and no mechanism to identify them. This makes the risk profile categorically more serious than the risk posed by mainstream platforms that are misused.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Adult Chat and Dating Platforms Are Designed for Mature Audiences and Place Children in Contact With Unknown Adults</div>
+        <div class="know-body">NaughtyDog is designed for adult social discovery and dating — not for general social use by people of all ages. Every feature of the platform is oriented toward facilitating new connections between adults, and the platform's social environment is shaped by adult norms and adult intentions. A child who accesses the platform is not entering a youth-friendly space that happens to have some adult users — they are entering a platform where every other user has joined specifically to meet and communicate with adults, and where the child's presence is entirely invisible to the platform's safety design because children are not supposed to be there at all.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Encounter Conversations, Behaviour or Content That Is Not Appropriate for Their Age</div>
+        <div class="know-body">The conversations that take place on adult chat and dating platforms are shaped by the platform's adult social context — mature themes, explicit language, discussions of adult relationships and sexual content are all routine features of the communication environment that a child would encounter. Children who access NaughtyDog may receive unsolicited messages from adult strangers, encounter explicit conversation content, receive inappropriate images or be subjected to communication that is manipulative or harmful. None of these encounters requires an adult user to have harmful intent — they may simply reflect the normal adult social behaviour of the platform's user base responding to what they believe is another adult user.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Grooming Risk Is Elevated on Adult-Oriented Platforms With Private Messaging</div>
+        <div class="know-body">Individuals who seek to harm children online actively use adult dating and chat platforms to find and communicate with young people who have accessed the platform without their parents' awareness. The private messaging features of platforms like NaughtyDog provide the unmonitored communication channel that grooming typically requires — a way to build a private relationship with a child over time, to establish trust, to request personal information and, eventually, to encourage meetings or solicit images. Parents should be aware that a child's presence on a platform like NaughtyDog may not be visible on the device at all if the app has been hidden or if the child is accessing the platform through a browser rather than a dedicated app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Parents May Want to Monitor or Restrict Access and Have an Open Conversation With Their Child</div>
+        <div class="know-body">Restricting access to NaughtyDog is the immediate protective step — but the most durable protection comes from a child who understands why adult chat and dating platforms are not appropriate for them, and who feels comfortable coming to a parent if they have encountered something on the platform or if they have been contacted by someone in a way that concerned or confused them. Children who have discovered the platform may be reluctant to disclose this to a parent for fear of punishment — an approach that frames the conversation around safety rather than rule-breaking will produce a more open response and a better outcome for the child's ongoing wellbeing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block adult chat and dating platforms like NaughtyDog instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block adult chat and dating platforms by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps and platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps or platforms are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like NaughtyDog as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from adult chat and dating platforms and build lasting awareness around online safety, responsible digital communication and the risks of stranger contact.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Online Safety and Stranger Interactions</div>
+        <div class="tip-body">Help your child understand clearly and specifically what makes adult chat and dating platforms unsafe for them — not in abstract terms, but concretely: that the platform is designed for adults to meet other adults, that every user on the platform is a stranger whose identity and intentions cannot be verified, and that some adults specifically use these platforms to find and communicate with children who have gained access to them. Make clear that an adult who initiates contact on a platform like this and seems friendly, understanding or interested in the child's life is not necessarily safe — and that building a private online relationship with an unknown adult is always a situation to tell a parent about. Reinforce that coming to you will not result in punishment but in support.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Responsible Digital Communication</div>
+        <div class="tip-body">Help your child develop clear, practical habits around who they communicate with online and what information they share in digital conversations. The core principles are simple and worth stating explicitly: never share your real name, school, address or location with someone you have not met in person and whose identity has not been confirmed by a trusted adult; never move a conversation from a known platform to a private channel at the request of someone you only know online; and always tell a trusted adult if someone online makes you feel uncomfortable, asks you to keep conversations secret, or requests anything that feels unusual or inappropriate. These habits — practised and normalised through regular, calm conversation — provide protection that no technical control alone can replicate.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Restrict Access to Adult Chat and Dating Apps</div>
+        <div class="tip-body">Apply iLimits restrictions immediately and consistently across every device your child has access to, including tablets, secondary phones and shared household devices. Because adult chat platforms are often accessible through browsers as well as dedicated apps, browser-level controls should be applied in addition to app-level restrictions. Review app installations on your child's device periodically — adult-oriented apps are sometimes hidden using disguised icons or moved to folders that are less likely to be noticed casually. If you discover that your child has already been using a platform like NaughtyDog, approach the conversation with a focus on their safety and wellbeing rather than the breach of rules, and consider whether reporting the platform to iLimits will help protect other families too.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Safest Children Online Are Those Who Know They Can Talk to a Parent</h3>
+    <p class="closing-body">
+      Technical restrictions are the first and fastest line of defence against adult chat and dating platforms — but the deepest protection comes from a child who understands why these platforms are dangerous, who has the vocabulary to recognise concerning online behaviour, and who trusts completely that bringing a concern to a parent will be met with support rather than blame. iLimits gives you the tools; the trust you build at home gives your child the confidence to use them.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

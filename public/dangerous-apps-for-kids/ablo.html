@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ablo – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    --ab:           #5B3BDB;
+    --ab-mid:       #4527C0;
+    --ab-deep:      #311B8A;
+    --ab-light:     #F4F1FF;
+    --ab-bdr:       #C4B5FD;
+    --ab-text:      #2A1870;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0D0826 0%, #1A1050 50%, #231560 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(91,59,219,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,59,219,0.38) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(91,59,219,0.20);
+    border: 1px solid rgba(91,59,219,0.36);
+    color: #C4B5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #2A1870 0%, #5B3BDB 55%, #9B7BFF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(91,59,219,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FDE68A; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  .discovery-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ab-light);
+    border: 1.5px solid var(--ab-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .discovery-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE8FF; border: 1.5px solid var(--ab-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .discovery-title { font-size: 13px; font-weight: 700; color: var(--ab-text); line-height: 1.3; margin-bottom: 3px; }
+  .discovery-body  { font-size: 12px; color: #2A1870; font-weight: 400; line-height: 1.55; }
+
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDE68A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #6B3A0E; font-weight: 400; line-height: 1.5; }
+
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ab-light);
+    border: 1.5px solid var(--ab-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE8FF; border: 1.5px solid var(--ab-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ab-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #2A1870; font-weight: 400; line-height: 1.55; }
+
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  .il-card {
+    background: linear-gradient(150deg, #0D0826 0%, #1A1050 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,59,219,0.32) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner        { animation: fadeUp 0.42s ease both; }
+  .card              { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid         { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card           { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box          { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip        { animation: fadeUp 0.42s ease 0.05s both; }
+  .discovery-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip        { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note      { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing           { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🌍</div>
+        <div>
+          <div class="app-name-text">Ablo</div>
+          <div class="app-sub">Social Discovery / Stranger Chat</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Discovery</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables conversations and connections with unknown users worldwide</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Ablo — a social discovery platform that connects users with strangers from around the world through chat, messaging and social interactions, with no control over who children are matched with.</p>
+  </div>
+
+  <div class="discovery-callout">
+    <div class="discovery-ico">🌐</div>
+    <div>
+      <div class="discovery-title">Ablo Is Built Around Meeting and Chatting With Strangers Globally</div>
+      <div class="discovery-body">Ablo's core design encourages users to reach out to people they have never met before, from any country in the world. The platform positions stranger contact as a feature — not a risk — framing global connections as an exciting and desirable social activity. This design philosophy makes the app fundamentally different from messaging platforms where children communicate with people they already know, and introduces a level of social exposure that is difficult for younger users to navigate safely.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#5B3BDB;"></span> Global Discovery</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Stranger Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Video Calls</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Text Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Friend Requests</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Ablo is a <strong>social discovery platform</strong> that allows users to meet and communicate with people from around the world. Users can chat, share messages and interact with strangers online — often connecting with people they have never met before. The app focuses on building new friendships and social interactions globally, presenting international stranger contact as its primary value proposition.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ab-light);">🌍</div>
+      <div>
+        <div class="feat-name">Global Stranger Discovery and Matching</div>
+        <div class="feat-desc">Ablo matches users with people from different countries and cultures, actively promoting connections with individuals they have never encountered before. Children are presented with a continuously refreshing stream of strangers to interact with — with no filter based on age, location proximity or any demographic criterion designed to protect younger users from contact with adults.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Open Chat and Private Messaging With Unknown Users</div>
+        <div class="feat-desc">Once a connection is initiated, Ablo allows users to exchange text messages, images and other content through private chats. These conversations are unmonitored, contain no content filtering and are entirely invisible to parents — meaning all communication between a child and an unknown adult happens in a private channel that offers no oversight.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📹</div>
+      <div>
+        <div class="feat-name">Video and Voice Calls With Strangers</div>
+        <div class="feat-desc">Beyond text chat, Ablo enables live video and voice calls between matched users. A child can be engaged in a real-time video conversation with an unknown adult within moments of first contact — in an unmoderated, unrecorded session that leaves no trace a parent can review after the call has ended.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">👤</div>
+      <div>
+        <div class="feat-name">Profile-Based Social Connections and Friend Requests</div>
+        <div class="feat-desc">Ablo allows users to send and accept friend requests, building an ongoing contact list of strangers they have previously encountered on the platform. This transforms a one-time stranger interaction into a persistent social connection — one that children may maintain and develop over time without any parental awareness of who is in their network.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Effective Age Verification</div>
+        <div class="feat-desc">Ablo requires only a self-reported date of birth at registration with no verification of the information provided. A child gains full access to global stranger matching, chat, video calls and friend requests within moments of installing the app. Adults may equally enter any age, with no mechanism in place to challenge what they claim.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from contact with strangers worldwide, exposure to inappropriate conversations, privacy concerns and the difficulty of verifying who children are truly communicating with.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Interaction With Strangers Worldwide</div>
+      <div class="rc-desc">Children are connected with unknown adults from any country with no safeguards, age filtering or oversight of who initiates contact or what their intentions are</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Conversations or Content</div>
+      <div class="rc-desc">Unmonitored private chats with unknown users mean children may receive messages, images or requests that are entirely inappropriate for their age, with no filtering in place</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy and Personal Information</div>
+      <div class="rc-desc">Children may share their name, school, location or images with strangers without understanding the risks — and with no control over how that information is used</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">❓</span>
+      <div class="rc-name">Unverified User Identity and Age</div>
+      <div class="rc-desc">The app cannot verify the true age or identity of any user — adults can present themselves as peers, and children have no reliable way of knowing who they are communicating with</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">😟</span>
+      <div class="rc-name">Grooming and Manipulation Risk</div>
+      <div class="rc-desc">The platform's emphasis on building new friendships with strangers creates conditions that can be exploited by adults who build trust with children gradually over time</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Persistent Stranger Contacts</div>
+      <div class="rc-desc">Friend request features allow one-time stranger interactions to become ongoing, unmonitored relationships entirely hidden within a contact list parents cannot see</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Ablo Carries a Medium–High Risk Rating</strong>
+      <span>Stranger discovery as a core feature, unmonitored private messaging, video calls with unknown adults and no age verification combine to place Ablo in a category that requires careful parental consideration before allowing children to use it.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🧭</div>
+    <div>
+      <div class="control-title">Designed for Socialising With Strangers — Not for Connecting With Known Contacts</div>
+      <div class="control-body">Unlike messaging apps where children communicate with people they already know, Ablo is specifically built to encourage interaction with complete strangers. Children may begin a conversation with someone who presents as a peer or a friendly adult — but without any way to verify who that person is, what they want, or how they may use the information and images shared in the conversation. This fundamental difference in design intent is the central reason the app appears in the iLimits restricted category.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Social Discovery Apps Are Fundamentally Different From Ordinary Social Media</div>
+        <div class="know-body">Conventional social media platforms are primarily used to connect with people a child already knows — classmates, family members or friends from other contexts. Ablo inverts this entirely: its purpose is to connect children with people they have never met. This means every interaction on the platform is with a stranger, and the social norms that govern known-contact platforms do not apply in the same way.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Private Chats Are Invisible to Parents and Leave No Trace by Default</div>
+        <div class="know-body">Conversations on Ablo happen in private, unmonitored chats that parents cannot access. Unlike some platforms where activity can be reviewed after the fact, there is no parental view of message content, contact lists or the volume of interactions a child is having. A child may be in regular, ongoing contact with multiple unknown adults without a parent ever becoming aware that these relationships exist.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Not Recognise Risk in Conversations That Begin Innocuously</div>
+        <div class="know-body">Social discovery apps encourage interactions that start in a friendly, casual way — which is exactly how inappropriate contact can develop over time. Children are not well-equipped to identify gradual manipulation or to recognise when a conversation has moved from friendly to concerning, particularly when the platform itself frames stranger contact as a normal and positive activity.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The App Is Easy to Install and Appears Casual on the Surface</div>
+        <div class="know-body">Ablo has an accessible, visually engaging interface with no explicit adult content visible at the point of download. A child may install the app out of curiosity, with no awareness of what global stranger matching involves, and may already be in private conversations with unknown adults before a parent notices the app on their device. Age is straightforward to falsify at registration, removing the only access control the platform nominally applies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block social discovery apps like Ablo instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block social discovery apps entirely by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar stranger chat apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Ablo as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around safe online communication and responsible digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🗣️</div>
+      <div>
+        <div class="tip-name">Teach Children About Safe Online Communication</div>
+        <div class="tip-body">Help your child understand the difference between communicating with people they know and interacting with strangers online. Explain that platforms like Ablo connect users with people whose true identity and intentions cannot be verified — regardless of how friendly or genuine they appear in conversation. Establish a clear household rule about stranger contact apps and explain the reasoning behind it, as children who understand the why are far more likely to apply safe behaviour consistently, including in situations where you are not present to intervene.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Responsible Digital Behaviour and Privacy Awareness</div>
+        <div class="tip-body">Talk regularly with your child about what responsible online behaviour looks like — what information should never be shared with strangers, how to recognise when a conversation feels uncomfortable, and what to do when it does. Discuss why personal details — their name, school, location, daily routine or images — should not be shared with people they have only met through an app. Children equipped with this awareness are significantly better at protecting themselves in situations where parental oversight is limited or unavailable in real time.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Stranger Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — including tablets, secondary phones and shared family devices. Social discovery apps are easy to reinstall quickly after being removed from a device, making app-level controls far more reliable than manual monitoring or app-by-app deletion. Combine technical restrictions with open, ongoing conversations about online safety to provide the most complete and sustainable layer of protection available for your family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safety Online Starts With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the protection that comes from a child who understands why certain platforms are unsafe and feels comfortable talking to their parents about what they encounter online. iLimits gives you the technical layer — the conversations, trust and awareness your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

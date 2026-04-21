@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Meets Bagel – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* CMB brand: rich espresso-brown + warm cream */
+    --cmb:          #5C2D0E;
+    --cmb-mid:      #7B3F1A;
+    --cmb-accent:   #C8682A;
+    --cmb-light:    #FBF4EE;
+    --cmb-bdr:      #F0CEAD;
+    --cmb-text:     #4A2008;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --green-bg:     #F0FDF7;
+    --green-bdr:    #A7F3D0;
+    --green-text:   #065F46;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(92,45,14,0.07);
+    --shadow-sm:    0 2px 14px rgba(92,45,14,0.09);
+    --shadow-md:    0 6px 30px rgba(92,45,14,0.13);
+    --shadow-lg:    0 14px 52px rgba(92,45,14,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #1A0A04 0%, #2A1008 50%, #361408 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(200,104,42,0.26) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.14) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,104,42,0.22) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FF9DB5; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #3D1A06 0%, #7B3F1A 50%, #C8682A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(92,45,14,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════
+     MAIN
+  ══════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── CMB curated match callout ── */
+  .curated-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cmb-light);
+    border: 1.5px solid var(--cmb-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .curated-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #F8E4D0; border: 1.5px solid var(--cmb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .curated-title { font-size: 13px; font-weight: 700; color: var(--cmb-text); line-height: 1.3; margin-bottom: 3px; }
+  .curated-body  { font-size: 12px; color: #6B3515; font-weight: 400; line-height: 1.55; }
+
+  /* ── CMB daily bagels concept note ── */
+  .bagel-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--cmb-light);
+    border: 1.5px solid var(--cmb-bdr);
+    border-radius: var(--radius-md);
+    padding: 13px 16px;
+    margin-bottom: 22px;
+  }
+  .bagel-ico {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: #F8E4D0; border: 1.5px solid var(--cmb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .bagel-text strong { font-size: 13px; font-weight: 700; color: var(--cmb-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .bagel-text span   { font-size: 12px; color: #6B3515; font-weight: 400; line-height: 1.5; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0A04 0%, #250E06 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,104,42,0.24) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Age strip ── */
+  .age-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--cmb-light);
+    border: 1.5px solid var(--cmb-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .age-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #F8E4D0; border: 1.5px solid var(--cmb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .age-text strong { font-size: 13.5px; font-weight: 700; color: var(--cmb-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .age-text span   { font-size: 12px; color: #6B3515; font-weight: 400; line-height: 1.5; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand {
+    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px;
+  }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700; color: var(--ink-soft);
+  }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .age-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .bagel-strip     { animation: fadeUp 0.42s ease 0.05s both; }
+  .curated-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">☕</div>
+        <div>
+          <div class="app-name-text">Coffee Meets Bagel</div>
+          <div class="app-sub">Dating / Social Networking</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Dating / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Designed for adult dating and relationship interactions</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Coffee Meets Bagel's curated matching approach and the adult audience it serves.</p>
+  </div>
+
+  <!-- CMB's unique daily bagel mechanic -->
+  <div class="curated-callout">
+    <div class="curated-ico">☕</div>
+    <div>
+      <div class="curated-title">Coffee Meets Bagel's Unique Daily Match Model</div>
+      <div class="curated-body">Unlike unlimited swipe apps, Coffee Meets Bagel sends users a limited number of curated adult matches ("Bagels") each day based on mutual connections and compatibility. This deliberate, relationship-focused design is built entirely around adult romantic partnership — making it one of the more intentionally adult-oriented dating platforms available.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Coffee Meets Bagel is a <strong>curated adult dating platform</strong> that helps users discover potential romantic partners through a daily selection of compatibility-matched profiles. Users create detailed personal profiles, review their daily matches and communicate through messaging — all within an environment built exclusively for adult dating and relationship-building.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FBF4EE;">☕</div>
+      <div>
+        <div class="feat-name">Daily Curated Match Delivery</div>
+        <div class="feat-desc">Each day the platform delivers a small selection of compatible adult profiles — "Bagels" — based on mutual connections, preferences and relationship goals. The curated model is intentionally designed for serious adult romantic intent.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">❤️</div>
+      <div>
+        <div class="feat-name">Like & Match System</div>
+        <div class="feat-desc">Users can like or pass on each suggested match. When both parties like each other, a private messaging connection is opened between adult strangers for the purpose of pursuing a romantic relationship.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Private Time-Limited Messaging</div>
+        <div class="feat-desc">Matched users are given a conversation window to communicate privately. While the time-limit is designed to encourage quality over quantity, the messaging itself is private, unmoderated and adult-focused in nature.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">👤</div>
+      <div>
+        <div class="feat-name">Detailed Relationship-Focused Profiles</div>
+        <div class="feat-desc">User profiles include relationship goals, lifestyle preferences, faith, ethnicity and other personal characteristics designed to identify adult romantic compatibility — not casual social connection.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF8F0;">🫘</div>
+      <div>
+        <div class="feat-name">Beans — Virtual Currency System</div>
+        <div class="feat-desc">The platform uses a virtual currency called "Beans" to unlock premium interactions such as viewing activity data and extending conversation windows. Beans can be purchased in-app using real money.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDFB;">✨</div>
+      <div>
+        <div class="feat-name">Premium Subscription Tier</div>
+        <div class="feat-desc">A paid subscription unlocks read receipts, activity insights and additional daily matches. The premium tier is designed to deepen engagement with adult romantic content and connections on the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age strip -->
+  <div class="age-strip">
+    <div class="age-badge">🔞</div>
+    <div class="age-text">
+      <strong>Coffee Meets Bagel Requires Users to Be 18 or Older</strong>
+      <span>The platform's intentional relationship-focused design, adult community and all matching features are calibrated for adult romantic life — there is no child-appropriate mode or content tier.</span>
+    </div>
+  </div>
+
+  <!-- "Beans" currency awareness callout -->
+  <div class="bagel-strip">
+    <div class="bagel-ico">🫘</div>
+    <div class="bagel-text">
+      <strong>Virtual Currency Creates an In-App Purchase Risk</strong>
+      <span>Coffee Meets Bagel's "Beans" currency can be purchased via saved payment methods on a device. Children with access to a parent's phone or linked account could make real purchases without parental awareness.</span>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Not Be Appropriate for Children</h2>
+    <p class="sh-desc">Key risks when children access platforms built around adult romantic relationships and curated partner discovery.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">💑</span>
+      <div class="rc-name">Adult Relationship Focus</div>
+      <div class="rc-desc">Coffee Meets Bagel is explicitly designed for adults pursuing serious romantic relationships — wholly inappropriate for children at any age</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Mature Conversations</div>
+      <div class="rc-desc">Private messaging between matches is unmoderated and reflects adult romantic intent — not suitable for children</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Contact With Unknown Adults</div>
+      <div class="rc-desc">Children can be matched and exchange private messages with adult strangers who have no awareness of the child's real age</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Privacy Concerns</div>
+      <div class="rc-desc">Detailed personal profiles — including relationship goals, faith, lifestyle and location — are shared with a large adult user base</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">In-App Purchase Risk</div>
+      <div class="rc-desc">Virtual "Beans" currency and premium subscriptions can be purchased in-app — children may use saved payment methods unknowingly</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🪞</span>
+      <div class="rc-name">Self-Worth & Expectations</div>
+      <div class="rc-desc">Being evaluated as a romantic partner shapes self-image and creates unrealistic expectations about relationships in developing adolescents</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Dating Apps Are Intended for Adults 18 and Older</div>
+        <div class="know-body">Coffee Meets Bagel's entire design philosophy — from curated daily matches to relationship-goal profiles and private messaging — is built for adults actively seeking romantic partnerships. The platform has no child-safe mode and makes no provision for younger users.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The "Slower Pace" Does Not Make It Safer for Children</div>
+        <div class="know-body">Coffee Meets Bagel markets itself as a more thoughtful, slower-paced alternative to swipe apps. While this may reduce some impulsive engagement patterns for adult users, it does not change the fact that the platform is built for adult romantic connection — and is wholly unsuitable for children regardless of its pace.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Curiosity and Peer Influence Drive Installation</div>
+        <div class="know-body">Teenagers may install dating apps because peers use them, or simply out of curiosity about the dating world. This is natural and expected — but accessing an adult romantic platform exposes them to content, conversations and expectations that are not appropriate for their developmental stage.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Age Verification Is Straightforward to Bypass</div>
+        <div class="know-body">Coffee Meets Bagel requires a date of birth and an email or Facebook account to register. A child can create a full account by providing a false birthdate in seconds. Review saved payment methods on shared devices to prevent in-app Bean purchases from going unnoticed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents simple, reliable tools to block adult dating apps like Coffee Meets Bagel instantly — without technical expertise and without disrupting the child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block dating and adult-focused apps entirely by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow instant one-tap blocking of similar apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Coffee Meets Bagel as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own rules and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting digital wisdom.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Online Relationships and Digital Safety</div>
+        <div class="tip-body">Have open, age-appropriate conversations about how adult dating apps work, why they exist for adults, and what healthy relationship dynamics actually look like. Help children understand that being evaluated as a romantic partner — even digitally — shapes self-image in ways that matter, and that there is no rush to enter that world.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Interaction Within Trusted Social Circles</div>
+        <div class="tip-body">Help your child invest in their existing friendships and family relationships rather than seeking connection with unknown adults through dating platforms. Strong, trusted bonds in the real world reduce the appeal of anonymous adult social apps and give children a healthier foundation for future relationships.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Limit Access to Adult-Focused Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across all devices your child uses. Check in-app purchase settings and review saved payment methods on shared devices to prevent Bean purchases. Combine controls with regular, open family conversations — both together provide the most complete protection.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">💗</span>
+    <h3 class="closing-title">The Best Connections Are Worth Waiting For</h3>
+    <p class="closing-body">
+      There is no hurry for children to enter the world of adult romantic relationships. iLimits helps you hold that space with intention and care — so your child can grow into their own story at the right pace, with the right foundations, and with your support along the way.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

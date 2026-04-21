@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dual Space – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Dual Space: split cobalt-slate — "two worlds" visual metaphor */
+    --ds:           #1A5C9E;
+    --ds-mid:       #104880;
+    --ds-deep:      #082D55;
+    --ds-light:     #F0F6FF;
+    --ds-bdr:       #93C4F0;
+    --ds-text:      #082D55;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #030D1C 0%, #082D55 50%, #0D3A6C 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(26,92,158,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+
+  /* Dual vertical split glows — visual "two spaces" metaphor */
+  .hero-glow-a {
+    position: absolute; top: -50px; right: -50px;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,92,158,0.48) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 20px; left: -50px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-glow-c {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px; height: 70%; opacity: 0.08;
+    background: linear-gradient(180deg, transparent 0%, rgba(147,196,240,0.6) 50%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(26,92,158,0.24);
+    border: 1px solid rgba(80,150,220,0.38);
+    color: #93C4F0; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #030D1C 0%, #104880 52%, #2E80C8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(26,92,158,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  /* Split line inside icon */
+  .app-icon::before {
+    content: '';
+    position: absolute; top: 20%; bottom: 20%; left: 50%;
+    width: 1px; background: rgba(255,255,255,0.25);
+    transform: translateX(-50%);
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Dual callout ── */
+  .dual-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ds-light);
+    border: 1.5px solid var(--ds-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .dual-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C8E0F8; border: 1.5px solid var(--ds-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dual-title { font-size: 13px; font-weight: 700; color: var(--ds-text); line-height: 1.3; margin-bottom: 3px; }
+  .dual-body  { font-size: 12px; color: #0A2D52; font-weight: 400; line-height: 1.55; }
+
+  /* ── Two-world visual split ── */
+  .two-world {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-xs);
+  }
+  .two-world-header {
+    background: var(--blush-2);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 9px 16px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--ink-muted);
+    text-align: center;
+  }
+  .two-world-cols {
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .tw-col {
+    padding: 14px 16px;
+  }
+  .tw-col:first-child {
+    border-right: 1.5px dashed var(--border);
+  }
+  .tw-col-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tw-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+  .tw-item {
+    font-size: 11.5px; color: var(--ink-mid);
+    padding: 5px 0; border-bottom: 1px solid var(--border-soft);
+    display: flex; align-items: center; gap: 7px; line-height: 1.35;
+  }
+  .tw-item:last-child { border-bottom: none; }
+  .tw-item-dot {
+    width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDE68A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Dual-world note ── */
+  .dual-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg);
+    border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .dual-note-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dual-note-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .dual-note-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #030D1C 0%, #082D55 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,92,158,0.38) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner    { animation: fadeUp 0.42s ease both; }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .dual-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .two-world     { animation: fadeUp 0.42s ease 0.04s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .dual-note     { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-glow-c"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">◧</div>
+        <div>
+          <div class="app-name-text">Dual Space</div>
+          <div class="app-sub">App Cloning / Multiple Accounts Tool</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">App Cloning / Multi-Account</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows multiple app instances to run independently in a separate "space", enabling hidden secondary accounts that may not be visible through standard parental monitoring</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block app cloning tools instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Dual Space — a dedicated app cloning tool that creates a completely separate "second space" on the device, where duplicated apps run with independent accounts, data and activity streams that are invisible to the primary environment.</p>
+  </div>
+
+  <div class="dual-callout">
+    <div class="dual-ico">◧</div>
+    <div>
+      <div class="dual-title">Dual Space Creates a Second, Hidden Environment on the Device — Entirely Separate From the Apps and Accounts a Parent Can See</div>
+      <div class="dual-body">Dual Space creates what its name describes: a second virtual "space" that sits alongside the device's standard environment. Apps cloned into this space run with their own independent accounts, data and notifications — completely disconnected from the originals. A parent reviewing the primary space sees nothing of what is happening in the duplicate, because the two environments share no data, no notifications and no visible connection of any kind.</div>
+    </div>
+  </div>
+
+  <!-- Two-world visual split -->
+  <div class="two-world">
+    <div class="two-world-header">What exists on the device when Dual Space is installed</div>
+    <div class="two-world-cols">
+      <div class="tw-col">
+        <div class="tw-col-label" style="color:#0F5845;">
+          <span class="tw-dot" style="background:#1A9E75;"></span>
+          Primary Space
+        </div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:#1A9E75;"></span>Apps parent can see</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:#1A9E75;"></span>Known accounts</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:#1A9E75;"></span>Visible notifications</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:#1A9E75;"></span>Monitored activity</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:#1A9E75;"></span>Standard app history</div>
+      </div>
+      <div class="tw-col">
+        <div class="tw-col-label" style="color:var(--rose-deep);">
+          <span class="tw-dot" style="background:var(--rose);"></span>
+          Dual Space
+        </div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:var(--rose);"></span>Cloned apps — hidden</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:var(--rose);"></span>Separate accounts</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:var(--rose);"></span>Independent notifications</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:var(--rose);"></span>Unmonitored activity</div>
+        <div class="tw-item"><span class="tw-item-dot" style="background:var(--rose);"></span>No shared data</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A5C9E;"></span> Dual Environment</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> App Cloning</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Separate Accounts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Isolated Data</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> Independent Notifications</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Dual Space is a <strong>dedicated app cloning and dual-environment tool</strong> designed to run a second, fully isolated copy of any installed app alongside the original. Each duplicated app in the Dual Space environment operates with its own independent login, contacts, messages, activity and notifications — completely separated from the primary version. The app is built around the concept of a parallel "space" on the device: a second layer that shares nothing with the standard environment a parent can inspect.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ds-light);">◧</div>
+      <div>
+        <div class="feat-name">A Completely Separate Second Space on the Device</div>
+        <div class="feat-desc">Unlike simple app copying tools, Dual Space is architecturally built around the concept of a parallel device environment. The "second space" it creates is not just an isolated app instance — it is a separate operational layer where all cloned apps run together, share no data with the primary environment, and are collectively invisible to anyone browsing the standard device. The two spaces coexist on the same physical device but present no information about each other.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📲</div>
+      <div>
+        <div class="feat-name">Clone Any App Into the Second Space With a Separate Account</div>
+        <div class="feat-desc">Dual Space can duplicate any app installed on the device into its isolated second space. Each clone runs with a completely independent account — its own login credentials, contacts, message history and activity — with no shared data with the original. A child can use an entirely different profile on any messaging app, social platform or game in Dual Space's environment, invisible to anyone examining the primary space.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🔔</div>
+      <div>
+        <div class="feat-name">Independent Notification Streams Per Space</div>
+        <div class="feat-desc">The Dual Space environment manages its own notifications independently from the primary space. Incoming messages, activity alerts and other notifications on cloned apps within Dual Space do not surface in the standard notification bar alongside the primary apps' alerts. A parent checking the device's lock screen or notification panel sees only the primary space's notification activity, with no indication that a second stream of communications is occurring in parallel.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🗂️</div>
+      <div>
+        <div class="feat-name">Organised Dual-Account Management Interface</div>
+        <div class="feat-desc">Dual Space provides a dedicated interface for managing all cloned apps within the second space — making it easy to organise, launch and switch between duplicated apps and their independent accounts. For a child, this creates a well-organised hub for maintaining multiple hidden accounts across different platforms simultaneously, with all the tools needed to sustain that activity reliably over time from a single managed environment.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F3FF;">🌐</div>
+      <div>
+        <div class="feat-name">No Cross-Space Data Sharing</div>
+        <div class="feat-desc">By design, Dual Space enforces strict separation between the primary space and the second space — no contacts, media, messages, login credentials or activity data are shared between the two environments. This means the content of the second space cannot be discovered by examining the primary space's apps, files or account settings. The only way to see what is in the second space is to open Dual Space itself and navigate the cloned environment directly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key concerns around a hidden second device environment, separate account activity, monitoring gaps created by the dual-space architecture, and reduced transparency about how apps are actually being used.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">◧</span>
+      <div class="rc-name">A Hidden Second Environment</div>
+      <div class="rc-desc">The "second space" architecture means an entire parallel operating environment exists on the device — completely invisible to anyone inspecting the primary space</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Separate Hidden Accounts</div>
+      <div class="rc-desc">Every app cloned into the second space runs with an independent account — a child can maintain a second identity on any platform entirely separate from accounts parents know about</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🕳️</span>
+      <div class="rc-name">Monitoring Cannot See the Second Space</div>
+      <div class="rc-desc">Parental monitoring tools tracking activity in the primary environment have no visibility into what is happening inside Dual Space's isolated second environment</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔕</span>
+      <div class="rc-name">Notification Separation</div>
+      <div class="rc-desc">The second space's independent notification stream means messages and alerts from cloned apps do not appear alongside primary-space notifications — leaving no visible trace of activity</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Unmonitored Private Messaging</div>
+      <div class="rc-desc">Cloned messaging apps in the second space have entirely separate contact lists and conversations — providing a private communication channel that shares no data with any known account</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Not Detectable by Normal Review</div>
+      <div class="rc-desc">Examining the primary space's apps, files, notification history and account settings reveals nothing about the second space's contents — no trace crosses the space boundary</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Dual Space Carries a Medium–High Risk Rating</strong>
+      <span>Dual Space's architectural design — a fully isolated second environment with no data crossing to the primary space — means it creates a more complete and structurally robust blind spot in parental oversight than basic app cloning tools. The entire second space is invisible from the primary space by design, not just as a side effect.</span>
+    </div>
+  </div>
+
+  <div class="dual-note">
+    <div class="dual-note-ico">◧</div>
+    <div>
+      <div class="dual-note-title">Dual Space Is Designed Around Separation — Not Just as a Feature, but as Its Core Architecture</div>
+      <div class="dual-note-body">The name "Dual Space" describes exactly what it creates: two separate spaces on the same device that share no information about each other. This is not a privacy side effect — it is the fundamental design goal of the app. For a parent, this means that a child using Dual Space is not just running a hidden copy of one app: they are operating a second, complete device environment that is structurally designed to be invisible from the one the parent can see.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">App Cloning Tools Let Children Run a Separate Online Life on the Same Device</div>
+        <div class="know-body">Dual Space and similar cloning tools are marketed for adults who need to manage multiple accounts across professional and personal contexts. For children, the practical purpose is almost always to create a hidden version of their online presence — running known, visible accounts in the primary space alongside secondary accounts in the Dual Space environment that parents are not aware of. Because the two spaces share no data by design, the secondary presence is not just difficult to find: it is structurally separated from anything a parent inspecting the device would see.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Second Space Is Specifically Designed So That Examining the Primary Space Reveals Nothing</div>
+        <div class="know-body">Dual Space's no-cross-space data-sharing architecture means that standard device review approaches — checking installed app accounts, reviewing notification history, browsing app settings or examining message threads — will find no trace of the second space's contents. The boundary between the two environments is enforced by the app's design, not by a child manually hiding files. A parent who has recently reviewed the device's primary apps may have a completely accurate picture of that environment while the second space operates entirely undiscovered alongside it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Use Dual Space to Maintain Accounts They Know Would Be Restricted</div>
+        <div class="know-body">Dual Space is sometimes used by children specifically for apps or account types that a parent has already discussed or restricted in the primary environment. A child who has been asked not to use a particular platform may set up an account for it within Dual Space, where it exists entirely outside the monitored primary space. This pattern is worth considering when a conversation about Dual Space's presence on a device takes place — the secondary account may be for something the child already knows is a concern.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking Before Installation Is the Only Fully Reliable Approach</div>
+        <div class="know-body">Because the second space is architecturally invisible from the primary space, attempting to detect and investigate Dual Space activity after the app has been installed requires knowing where to look and how to navigate the second space directly — which most parents will not naturally know to do. Device-level restrictions that prevent Dual Space from being installed at all are significantly more reliable than attempting to find something that is specifically designed not to be visible from the environment a parent is most likely to inspect.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents clear tools to block dual-space and app cloning tools like Dual Space before a second environment can be established — keeping your oversight complete without needing to navigate a separate hidden layer on the device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block app cloning and dual-space tools entirely by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover the full range of similar multi-account and virtual space tools</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied to the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged app cloning tools are installed on the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Dual Space as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. You remain fully in control of which apps are permitted or restricted on your child's device at all times.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address dual-space tools on your child's device and build a lasting foundation of honest, transparent online behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Open Discussions About Responsible Online Behaviour</div>
+        <div class="tip-body">If you find Dual Space on your child's device, begin with a calm and genuinely curious conversation rather than an immediate confrontation. Ask what was running in the second space and what platforms or accounts were being used there. Because the second space is architecturally separate from the primary environment, its contents are unlikely to have surfaced accidentally — a child using Dual Space has typically made deliberate choices about what to put there and why. Understanding those choices — the platforms, the contacts, the reasons for keeping it private — gives you the right foundation for a meaningful conversation about online safety, trust and the risks of maintaining hidden accounts.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="tip-name">Explain the Risks of Maintaining Hidden or Secondary Accounts</div>
+        <div class="tip-body">Help your child understand that the risks of the Dual Space environment are not just about what parents can see — they are about what the child themselves may encounter there. Accounts operating in a hidden second space typically involve less caution, different contacts, and fewer of the natural social safeguards that protect children in their primary online environment. A messaging conversation that a child would handle carefully in their visible account may be managed very differently in an environment they believe no one can reach. The second space is not just private from parents — it is a context where a child is operating with less protection and less accountability than in the environment they are careful about.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to App Cloning Tools</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses, including older or secondary phones. Dual Space's second environment is specifically designed to be invisible from primary space inspection — making detection-based approaches to oversight fundamentally unreliable against this type of tool. Category-level blocking in iLimits prevents Dual Space and similar dual-environment and app cloning tools from being installed before a second space can be established. Combine this with regular honest conversations about which platforms and accounts your child is using so that your oversight covers both the device layer and the broader relationship of trust and transparency that makes all of it work.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🛡️</span>
+    <h3 class="closing-title">There Should Only Be One Space — and It Should Be One You Can Both See</h3>
+    <p class="closing-body">
+      Dual Space is built to create a division on the device that mirrors a division in trust. iLimits blocks the tool before that division can be established — so your child's device stays a single, shared environment rather than two worlds: one visible, one hidden. Keeping the space whole starts with keeping the tools to split it off the device entirely.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

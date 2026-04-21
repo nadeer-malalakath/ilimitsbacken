@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Calculator Lock – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Calculator Lock brand: cobalt-indigo */
+    --cl:           #3730A3;
+    --cl-mid:       #312E81;
+    --cl-deep:      #1E1B4B;
+    --cl-light:     #EEF2FF;
+    --cl-bdr:       #A5B4FC;
+    --cl-text:      #1E1B4B;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #060614 0%, #0E0C28 50%, #16143A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(55,48,163,0.46) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(165,180,252,0.28) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(55,48,163,0.20);
+    border: 1px solid rgba(55,48,163,0.38);
+    color: #A5B4FC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1E1B4B 0%, #3730A3 55%, #A5B4FC 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(55,48,163,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.11); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Calculator Lock callout ── */
+  .cl-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cl-light); border: 1.5px solid var(--cl-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .cl-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C7D2FE; border: 1.5px solid var(--cl-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cl-title { font-size: 13px; font-weight: 700; color: var(--cl-text); line-height: 1.3; margin-bottom: 3px; }
+  .cl-body  { font-size: 12px; color: #312E81; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip (amber) ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7A3C08; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: var(--amber-text); font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cl-light); border: 1.5px solid var(--cl-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C7D2FE; border: 1.5px solid var(--cl-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--cl-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #312E81; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #060614 0%, #0E0C28 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(55,48,163,0.40) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .cl-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔒</div>
+        <div>
+          <div class="app-name-text">Calculator Lock</div>
+          <div class="app-sub">Hidden Storage / Vault App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Hidden Storage App</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Disguises a private vault behind a calculator interface to hide files and apps</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Calculator Lock — a vault app that presents itself as an ordinary calculator while secretly providing password-protected hidden storage for photos, videos, documents and other apps, with content completely removed from the device's standard file system where a parent would normally look.</p>
+  </div>
+
+  <div class="cl-callout">
+    <div class="cl-ico">🔍</div>
+    <div>
+      <div class="cl-title">Calculator Lock Looks Exactly Like a Normal Calculator — What's Behind It Is Designed to Be Invisible to Anyone Without the PIN</div>
+      <div class="cl-body">Calculator Lock's name describes precisely what it does: it puts a lock — a hidden vault — behind a calculator. The app functions as a real calculator for ordinary use, performing standard arithmetic with no visible indication that a secret storage area exists. The vault is unlocked by entering a specific PIN sequence into the calculator that appears to be a normal calculation but instead opens the hidden file system. A parent who picks up a child's phone, scrolls through the app drawer and opens what appears to be a calculator will see exactly a calculator — with no sign that anything is stored behind it. The concealment is the product.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#3730A3;"></span> Calculator Front</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Photo Vault</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Video Vault</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0EA5E9;"></span> App Hider</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> PIN Lock</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Calculator Lock is an application <strong>designed to hide private content on a mobile device</strong>. It appears to function as a normal calculator but <strong>secretly acts as a secure vault</strong>. Users can store photos, videos, documents and sometimes even other apps in a hidden area protected by a password or PIN. <strong>Files stored inside the vault are not visible in the phone's standard gallery or file manager</strong> — they exist only within the app's encrypted hidden storage, inaccessible to anyone without the correct PIN.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--cl-light);">🔢</div>
+      <div>
+        <div class="feat-name">Functional Calculator Interface Concealing a Hidden Vault</div>
+        <div class="feat-desc">Calculator Lock presents a standard calculator interface that works correctly for everyday arithmetic — this is not a broken or obviously fake utility but a fully functional calculator that passes casual inspection without raising suspicion. The vault entrance is a PIN sequence entered as though performing a calculation: a specific number sequence followed by an operator or equals key opens the hidden storage instead of displaying a result. The interface is designed to be indistinguishable from a genuine calculator app to anyone who does not already know the vault exists.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📸</div>
+      <div>
+        <div class="feat-name">Photo and Video Storage Removed From the Device Gallery</div>
+        <div class="feat-desc">Photos and videos imported into Calculator Lock are moved out of the device's standard gallery into the app's encrypted private storage — they no longer appear anywhere in the phone's normal media library. A parent who reviews a child's photo gallery will see only what the child has not chosen to hide. There is no visible count of hidden items and no gap or missing-photo indicator in the gallery to suggest that content has been removed. The hidden media is accessible only through the vault interface using the correct PIN.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📁</div>
+      <div>
+        <div class="feat-name">Document and File Vault Outside the Standard File System</div>
+        <div class="feat-desc">Beyond photos and videos, Calculator Lock can store any file type within its hidden storage — documents, screenshots, PDFs, saved content from other platforms and any other digital file that a user wants to keep out of the phone's visible file system. This means the vault can conceal not only images but entire records of activity: screenshots of conversations, files received through messaging apps, downloaded content from websites, or any other material the child does not want a parent to find during a routine device review.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">📱</div>
+      <div>
+        <div class="feat-name">App Hiding That Makes Other Applications Disappear From View</div>
+        <div class="feat-desc">Some versions of Calculator Lock include app-hiding functionality that removes other installed applications from the device's home screen and app drawer — making them accessible only through the vault. An app that a parent has restricted or that a child knows would not be approved — a social media platform, an anonymous chat app, a game — can be installed and used entirely out of sight. A parent reviewing the device's visible apps would have no indication that the hidden app was present, installed or being used.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔐</div>
+      <div>
+        <div class="feat-name">PIN-Only Access With No External Recovery Method</div>
+        <div class="feat-desc">Calculator Lock's vault is secured by a PIN that the child sets at setup — and in many versions of the app, if the PIN is forgotten, the vault contents cannot be recovered through any external process. There is no parental override, no recovery email and no administrative access that allows a parent to view the vault's contents without the PIN. This means that if a child declines to share the PIN, the contents of the vault may be permanently inaccessible to a parent even after the child's cooperation is requested.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from deliberate content concealment, systematic reduction of device transparency, the ability to hide restricted apps behind an undetectable front, and a PIN-only vault that parents cannot access even when they know it exists.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🙈</span>
+      <div class="rc-name">Hiding Photos, Videos or Files From Parents</div>
+      <div class="rc-desc">Media moved into Calculator Lock vanishes from the device gallery with no trace — a parent reviewing a child's photos sees a complete and unbroken gallery that gives no indication any content has been removed or is being stored elsewhere on the device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📉</span>
+      <div class="rc-name">Reduced Transparency About Device Usage</div>
+      <div class="rc-desc">A device running Calculator Lock does not give parents an accurate picture of the child's digital activity — hidden files, hidden apps and a calculator-disguised interface combine to create systematic blind spots across the areas of the device that parental review would normally cover</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">Storage of Inappropriate or Restricted Content</div>
+      <div class="rc-desc">The vault may contain content a child knows a parent would not approve of — inappropriate images received from peers or strangers online, screenshots of restricted platform activity, downloaded content from blocked websites, or evidence of online interactions a parent is unaware of</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚧</span>
+      <div class="rc-name">Bypassing Parental Supervision Entirely</div>
+      <div class="rc-desc">The app-hiding feature allows apps that have been blocked or restricted by a parent to continue to be installed and actively used — accessible through the vault and completely hidden from the home screen, defeating app-level restrictions without requiring the child to remove the blocking tool</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔑</span>
+      <div class="rc-name">PIN-Only Vault With No Parental Override</div>
+      <div class="rc-desc">If a child refuses to share the vault PIN, parents cannot access the hidden content through any external recovery process — the vault's encryption makes the contents permanently inaccessible without the correct PIN, giving the child complete control over what a parent can and cannot see</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Extremely Convincing Calculator Disguise</div>
+      <div class="rc-desc">Calculator Lock's interface is a genuine, working calculator — not a visual placeholder. Parents who are not already aware of the vault app category are unlikely to recognise it as concealment software during a device review, making it one of the most effective disguises in the category</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Calculator Lock Carries a Medium–High Risk Rating</strong>
+      <span>The app's fully functional calculator disguise, PIN-only vault with no parental recovery path, gallery-invisible media storage and optional app-hiding capability make it a comprehensive tool for defeating parental device oversight. Its risk is as an enabler — the content inside the vault determines the severity, but the app's design maximises a parent's difficulty in finding and accessing that content.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">💡</div>
+    <div>
+      <div class="control-title">Many Apps Share the Calculator-Vault Model Under Different Names — Blocking the Category Matters More Than Blocking a Single App</div>
+      <div class="control-body">Calculator Lock is one of dozens of vault apps that use the calculator-disguise model — others include Calculator+, Secret Calculator, Private Calculator Vault and many more, each publishing under a slightly different name while operating identically. A child aware of the vault app concept who has Calculator Lock removed can install a functionally identical alternative within minutes. iLimits's category-based restrictions address this by flagging the vault app category as a whole, so that newly installed apps operating on the same model are detected without requiring the specific app name to already be on a blocklist.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Vault-Style Apps Use Disguised Interfaces Like Calculators to Conceal Hidden Storage Areas That Are Not Visible Anywhere Else on the Device</div>
+        <div class="know-body">Calculator Lock is part of a broad category of apps that exist entirely to make content and applications invisible on a device. The calculator interface is the disguise — the app's only legitimate function is to open when tapped, perform calculations convincingly, and reveal nothing about the hidden storage behind it unless the correct PIN is entered. A parent reviewing a child's device who opens Calculator Lock expecting to find a calculator will find exactly that. The vault, the hidden photos, the hidden apps — none of it is visible without the PIN, and nothing about the app's appearance reveals that any of it exists.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">While Some Users Install Vault Apps for Privacy Reasons, Children May Use Them to Hide Apps or Files That Parents Cannot Easily Detect</div>
+        <div class="know-body">Vault apps are used by adults for genuinely legitimate privacy purposes — keeping sensitive personal documents secure on a shared device, storing private photos away from a family shared photo library, or maintaining professional confidentiality. Children who install vault apps, however, are typically doing so in the context of household device oversight — and the most common reasons are that they want to keep content or apps private from the specific adults who are responsible for their safety. The distinction matters because the conversation that follows discovering a vault app on a child's device will be more productive if it starts from genuine curiosity about what the child felt they needed to hide, rather than an assumption that it was necessarily serious.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Vault PIN Cannot Be Bypassed — Parents Who Need to Know the Contents Will Need the Child's Cooperation</div>
+        <div class="know-body">Calculator Lock's encryption means that the vault's contents are inaccessible to anyone without the correct PIN — including parents. Unlike some device security features where a manufacturer or carrier can provide administrative access, vault app encryption has no parental override and no recovery mechanism. A parent who discovers Calculator Lock and needs to understand what it contains will need to ask the child directly for the PIN. This makes the quality of the conversation — and the trust and honesty it is able to draw on — the primary determinant of whether a parent can understand what has been kept hidden and why.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking Vault Apps Works Best When Combined With an Honest Conversation About Why Concealment Is a Concern</div>
+        <div class="know-body">A child who understands why vault apps are flagged — and who understands that parental oversight is a form of care for their safety rather than a form of control for its own sake — is less likely to seek out alternative concealment methods after a vault app is removed. The conversation matters as much as the restriction. A child who is approached with genuine curiosity and without immediate punishment when a vault app is found is significantly more likely to disclose what was in it, which is the information a parent actually needs to understand whether anything concerning was happening on the device.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to detect and block vault-style apps like Calculator Lock instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block vault-style apps that hide files or media with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category restrictions flag vault apps regardless of the name they use</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when vault-style apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Calculator Lock as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address vault app use constructively, maintain an open digital environment at home, and build the kind of parent-child relationship where a child feels less need to conceal their device activity in the first place.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Open Conversations About Digital Habits</div>
+        <div class="tip-body">If Calculator Lock appears on a child's device, the most effective first response is a calm, curious conversation rather than an immediate consequence. Ask the child what they felt they needed to keep private and why — and listen to the answer fully before responding. Children who are approached with genuine curiosity are more likely to answer honestly, and the honest answer is what a parent actually needs in order to understand whether something on the device warrants concern. Children who know that disclosing something difficult will be met with support rather than punishment are the ones most likely to come to a parent when they genuinely need help — which is the outcome that matters most for their safety. Treat the app's discovery as an opening for conversation, not just as a rule violation requiring a consequence.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Discuss Responsible Device Use With Children</div>
+        <div class="tip-body">Help your child develop a clear and honest understanding of what responsible device use means in your household, and why it includes a level of parental visibility that is appropriate to their age. Explain the reasoning behind device oversight in terms the child can genuinely understand — that online environments carry real risks that adults are better equipped to recognise and help with, that parental awareness of what is on a device is a form of care rather than surveillance, and that the goal of household rules around devices is the child's safety and wellbeing rather than control for its own sake. Children who genuinely understand and accept the reasoning behind a household rule are significantly more likely to follow it — and to raise concerns when they encounter something online that troubles them — than those who see rules as arbitrary restrictions to be worked around.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools to Monitor or Restrict Vault-Style Applications</div>
+        <div class="tip-body">Apply iLimits category restrictions to vault apps across every device your child uses — including tablets and shared household devices, not just their primary phone. Because the vault app category includes many apps operating under different names with the same calculator-disguise model, category-level blocking is significantly more effective than trying to identify and block individual app names. Also be aware that some vault apps do not use "calculator" or "vault" in their name — they may appear as utilities, tools or security apps with generic or innocuous names. If a child is reluctant to open a utility app in your presence or becomes noticeably uncomfortable when you pick up their phone, this may warrant a calm direct conversation about what they are keeping private and why.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Device Transparency Begins With the Trust You Build, Not Just the Apps You Block</h3>
+    <p class="closing-body">
+      Restricting Calculator Lock removes one tool for concealment — but a child who genuinely trusts that they can come to a parent with something difficult online has less reason to conceal anything. iLimits gives you the visibility to know what is installed on a child's device. The relationship you build at home is what gives your child the confidence to keep that device open.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

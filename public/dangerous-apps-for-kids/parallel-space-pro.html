@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallel Space Pro – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Parallel Space Pro: deep graphite-violet — "pro" sophistication */
+    --psp:          #4C3575;
+    --psp-mid:      #372459;
+    --psp-deep:     #1E1035;
+    --psp-light:    #F6F3FF;
+    --psp-bdr:      #C4B0F0;
+    --psp-text:     #1E1035;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0C0820 0%, #1A1038 50%, #221444 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(76,53,117,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,53,117,0.48) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  /* Extra pro glow — centre top */
+  .hero-glow-c {
+    position: absolute; top: 20px; left: 50%;
+    transform: translateX(-50%);
+    width: 160px; height: 80px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(180,140,255,0.18) 0%, transparent 70%);
+    filter: blur(18px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(76,53,117,0.26);
+    border: 1px solid rgba(150,110,220,0.38);
+    color: #C4B0F0; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0C0820 0%, #2C1C58 50%, #6B4AC8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 24px rgba(76,53,117,0.65), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Pro callout ── */
+  .pro-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--psp-light);
+    border: 1.5px solid var(--psp-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .pro-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0D4FF; border: 1.5px solid var(--psp-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pro-title { font-size: 13px; font-weight: 700; color: var(--psp-text); line-height: 1.3; margin-bottom: 3px; }
+  .pro-body  { font-size: 12px; color: #2A1650; font-weight: 400; line-height: 1.55; }
+
+  /* ── Pro tier feature banner ── */
+  .pro-tier {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-xs);
+  }
+  .pro-tier-header {
+    background: linear-gradient(90deg, #1E1035 0%, #4C3575 100%);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pro-tier-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #E0D4FF; font-size: 9.5px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 100px;
+  }
+  .pro-tier-label {
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.80);
+  }
+  .pro-tier-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .pro-tier-row:last-child { border-bottom: none; }
+  .pt-bullet {
+    width: 20px; height: 20px; border-radius: 6px;
+    background: var(--psp-light); border: 1px solid var(--psp-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; flex-shrink: 0; margin-top: 1px; color: var(--psp-text);
+  }
+  .pt-text { font-size: 12px; color: var(--ink-mid); font-weight: 400; line-height: 1.5; }
+  .pt-text strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDE68A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Advanced risk note ── */
+  .adv-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg);
+    border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .adv-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .adv-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .adv-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0C0820 0%, #1A1038 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,53,117,0.40) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .pro-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .pro-tier     { animation: fadeUp 0.42s ease 0.04s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .adv-note     { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-glow-c"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔷</div>
+        <div>
+          <div class="app-name-text">Parallel Space Pro</div>
+          <div class="app-sub">Advanced App Cloning / Multi-Account Tool</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">App Cloning / Multi-Account</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows multiple app instances to run independently in an isolated environment, with advanced features that make hidden accounts harder to detect and remove</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block app cloning tools instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Parallel Space Pro — the advanced, feature-expanded edition of the Parallel Space app cloning family, offering enhanced customisation, deeper app isolation and additional tools that extend both its utility and its ability to conceal usage from parents.</p>
+  </div>
+
+  <div class="pro-callout">
+    <div class="pro-ico">🔷</div>
+    <div>
+      <div class="pro-title">Parallel Space Pro Adds Advanced Features on Top of Full Cloning — Including Tools That Specifically Increase Concealment</div>
+      <div class="pro-body">Where the standard and Lite editions offer core app cloning, Parallel Space Pro extends the feature set with enhanced customisation, deeper system integration, and additional controls over how the cloned environment presents itself on the device. These advanced features do not just improve the cloning experience — several of them directly increase how difficult the cloned environment is to detect, identify and remove by anyone other than the person who set it up.</div>
+    </div>
+  </div>
+
+  <!-- Pro tier feature banner -->
+  <div class="pro-tier">
+    <div class="pro-tier-header">
+      <span class="pro-tier-badge">Pro</span>
+      <span class="pro-tier-label">Advanced features beyond the standard edition</span>
+    </div>
+    <div class="pro-tier-row">
+      <div class="pt-bullet">✦</div>
+      <div class="pt-text"><strong>Enhanced icon and name disguise</strong> — cloned apps can be renamed and given completely custom icons, making them harder to identify in any home screen review</div>
+    </div>
+    <div class="pro-tier-row">
+      <div class="pt-bullet">✦</div>
+      <div class="pt-text"><strong>Deeper notification control</strong> — fine-grained management of which cloned apps show notifications and when, reducing visible traces of secondary account activity</div>
+    </div>
+    <div class="pro-tier-row">
+      <div class="pt-bullet">✦</div>
+      <div class="pt-text"><strong>Ad-free environment</strong> — the Pro edition removes in-app advertising, making sessions in the cloned environment cleaner and more consistent for regular use</div>
+    </div>
+    <div class="pro-tier-row">
+      <div class="pt-bullet">✦</div>
+      <div class="pt-text"><strong>Priority support and updates</strong> — Pro users receive faster app updates, meaning the cloned environment stays compatible with the latest versions of cloned apps</div>
+    </div>
+    <div class="pro-tier-row">
+      <div class="pt-bullet">✦</div>
+      <div class="pt-text"><strong>Extended multi-instance support</strong> — the Pro tier allows a greater range of apps to be cloned simultaneously, broadening the scope of secondary account activity possible on one device</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#4C3575;"></span> Advanced Cloning</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Dual Accounts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Custom Icon Disguise</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Notification Control</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Ad-Free Sessions</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Parallel Space Pro is the <strong>advanced paid edition of the Parallel Space app cloning tool</strong>, offering full app instance cloning alongside an expanded set of features that extend customisation, deepen system integration, and give users greater control over how the cloned environment appears and behaves on the device. As with all editions in the Parallel Space family, cloned apps run in a completely isolated environment with separate logins, messages, notifications and activity history — entirely independent from the original app installed on the device.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--psp-light);">📲</div>
+      <div>
+        <div class="feat-name">Full App Instance Cloning With Independent Accounts</div>
+        <div class="feat-desc">Parallel Space Pro clones any app on the device into a fully independent instance running in an isolated virtual container. Each clone has its own login, contacts, message history, media and activity entirely separate from the original. A child can run a visible, primary account on any platform alongside a completely separate secondary account — with no shared data, notifications or indication that the second account exists.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎨</div>
+      <div>
+        <div class="feat-name">Custom Icon and App Name for Cloned Instances</div>
+        <div class="feat-desc">The Pro edition allows each cloned app to be assigned a completely custom icon and display name on the home screen. A cloned messaging app can be made to appear as a weather app, a utility tool or any other name a child chooses — making it impossible for a parent reviewing the device's home screen to identify the clone without specifically knowing what to look for and how to investigate it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🔕</div>
+      <div>
+        <div class="feat-name">Fine-Grained Notification Suppression</div>
+        <div class="feat-desc">Parallel Space Pro gives users detailed control over which cloned apps generate visible notifications and under what circumstances. A child can configure the cloned environment so that incoming messages on hidden accounts generate no visible notifications on the device's lock screen or notification bar — removing what might otherwise be the most visible indication that a second account is actively receiving communications.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🧩</div>
+      <div>
+        <div class="feat-name">Fully Isolated Virtual Container Environment</div>
+        <div class="feat-desc">All cloned apps in Parallel Space Pro operate inside a virtual environment completely separated from the standard Android app layer. Activity within this container — messages, browsing, content viewed, contacts communicated with — may not be visible to parental monitoring tools that observe standard installed apps. The Pro tier's deeper system integration makes this isolation more robust than in the standard or Lite editions.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F3FF;">🔄</div>
+      <div>
+        <div class="feat-name">Expanded Multi-Instance Range and Priority Updates</div>
+        <div class="feat-desc">The Pro edition supports a broader range of simultaneously cloned apps and receives priority application updates, ensuring compatibility with the latest versions of social media, messaging and other platforms. For a child, this means the cloned environment is more reliable, more comprehensive, and less likely to break or require reinstallation — reducing the practical barriers to maintaining multiple hidden accounts over an extended period.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key concerns around hidden secondary accounts, advanced concealment features, monitoring blind spots, and the greater difficulty of detecting Pro-tier cloning compared to standard editions.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Disguised App Icons</div>
+      <div class="rc-desc">Pro's custom icon and name feature allows cloned apps to appear as entirely different utilities on the home screen — making them unidentifiable to a parent reviewing the device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Hidden Secondary Accounts</div>
+      <div class="rc-desc">Children can maintain fully separate accounts on any platform — with different contacts, conversations and activity — entirely invisible to the primary account parents are aware of</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🕳️</span>
+      <div class="rc-name">Deeper Monitoring Blind Spot</div>
+      <div class="rc-desc">The Pro edition's enhanced isolation means activity inside the cloned environment may be even less visible to parental monitoring tools than the standard or Lite editions</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔕</span>
+      <div class="rc-name">Notification Traces Removed</div>
+      <div class="rc-desc">Fine-grained notification suppression eliminates visible signs of activity on hidden accounts — a parent checking the notification bar sees nothing from cloned apps in use</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔄</span>
+      <div class="rc-name">Reliable Long-Term Use</div>
+      <div class="rc-desc">Priority updates keep cloned apps compatible with the latest platforms — meaning hidden accounts can be maintained reliably over months rather than breaking with app updates</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Unmonitored Private Messaging</div>
+      <div class="rc-desc">Cloned messaging apps have entirely separate contact lists and message histories — providing a hidden communication channel that shares no data with any known account</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Parallel Space Pro Carries a Medium–High Risk Rating</strong>
+      <span>Parallel Space Pro poses the same core risks as the standard and Lite editions — but its advanced feature set, including custom icon disguise, granular notification control, and deeper virtual isolation, makes the cloned environment significantly harder to detect, investigate and remove. The Pro edition does not just clone apps — it provides tools specifically suited to maintaining hidden accounts that survive parental scrutiny.</span>
+    </div>
+  </div>
+
+  <div class="adv-note">
+    <div class="adv-ico">🔷</div>
+    <div>
+      <div class="adv-title">"Pro" Means More Powerful Concealment — Not Just More Features</div>
+      <div class="adv-body">Parents reviewing the Parallel Space family may assume that the Pro edition is simply a premium upgrade for adult users who need more cloning capacity. In practice, the features that distinguish Pro from the standard edition — custom icon disguise, fine-grained notification suppression, deeper system isolation — are precisely the features that make hidden accounts harder to find and easier to maintain long-term. The upgrade from standard to Pro is an upgrade in concealment capability, not just in convenience.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">App Cloning Tools Let Children Operate a Hidden Online Life Alongside Their Visible One</div>
+        <div class="know-body">Parallel Space Pro's core function — creating fully isolated copies of apps with separate accounts — enables a child to maintain two entirely distinct online presences on one device. The visible accounts that parents know about continue to function normally, while the cloned accounts in the Pro environment run independently with different contacts, conversations and behaviour. The Pro tier's advanced features make this split presence particularly difficult to detect, as cloned apps can be disguised behind custom icons and names that bear no resemblance to the underlying application.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Standard Device Checks May Not Reveal What Is Running in the Pro Environment</div>
+        <div class="know-body">A parent who reviews their child's device by scrolling through the home screen, app list or notifications may encounter no visible trace of the Parallel Space Pro environment or the apps running inside it. Custom icons can disguise clones as unrelated apps. Notification suppression removes incoming message alerts. The Pro virtual container may not be tracked by monitoring tools operating at the standard Android app layer. A thorough review of device settings and installed apps — combined with device-level restrictions — is significantly more reliable than casual device inspection.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Pro Edition Is Marketed to Adults But Chosen by Children for Its Concealment Features</div>
+        <div class="know-body">Parallel Space Pro is positioned as a premium productivity tool for adults who need to manage multiple professional accounts. Children who choose the Pro edition over the free or Lite version are typically doing so because they are aware of its advanced features — particularly icon disguise and notification control — and want a more robust hidden environment. Finding the Pro edition specifically on a child's device is a strong signal that they have sought out and deliberately paid for enhanced concealment capability.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Prevention at Device Level Is Far More Reliable Than Discovery</div>
+        <div class="know-body">Because the Pro edition's advanced features are specifically designed to make the cloned environment undetectable — through disguised icons, suppressed notifications and deeper system isolation — attempting to find and investigate hidden accounts after the fact is significantly harder than blocking the entire category of cloning tools before installation. iLimits category-level blocking prevents all editions of Parallel Space from being installed, eliminating the need to try to see through an environment designed not to be seen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents clear tools to block the entire Parallel Space family — including the Pro edition — before any cloned environment can be established, ensuring oversight stays complete without requiring the ability to see through disguised icons or suppressed notifications.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block app cloning tools entirely by category — covering Pro, standard and Lite editions</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories extend to similar advanced dual-space and virtual phone apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied to the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged app cloning tools are installed on the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Parallel Space Pro as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. You remain fully in control of which apps are permitted or restricted on your child's device at all times.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address advanced app cloning on your child's device and build lasting habits around honest, transparent online behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Open Discussions About Responsible Online Behaviour</div>
+        <div class="tip-body">If you find Parallel Space Pro on your child's device, begin with an honest and non-confrontational conversation. Ask what was being cloned, which accounts were being run in the hidden environment, and — most importantly — why they felt a separate, concealed online presence was something they needed. Children who choose the Pro edition have often put deliberate thought into maintaining privacy, which makes the conversation more nuanced. Understanding the motivation behind a hidden identity — whether it is social exploration, peer pressure or something more concerning — allows you to respond proportionately and helpfully.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="tip-name">Explain the Risks of Maintaining Hidden or Secondary Accounts</div>
+        <div class="tip-body">Help your child understand that the risks of a hidden secondary account are not just about parental oversight — they are risks to the child themselves. A secondary account operating outside a child's known social environment tends to involve less caution: different standards around who to trust, what personal information to share, and how to respond to people they do not know. Without the social anchors of their primary account — friends, peers, shared context — children in hidden account environments are more exposed to manipulation, and less likely to apply the protective judgement they would use in a visible setting.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to App Cloning Tools</div>
+        <div class="tip-body">Apply iLimits restrictions across every device your child uses — including any secondary or older phones. Category-level blocking of app cloning tools prevents all editions of Parallel Space from being installed, which is significantly more reliable than searching for specific app names or custom icon disguises after the fact. The Pro edition's advanced concealment features make discovery-based approaches particularly unreliable — restriction before installation is the only approach that is consistently effective. Pair device-level blocking with regular open conversations about which accounts your child uses so that oversight covers both the technical and the relational dimensions of their safety.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🛡️</span>
+    <h3 class="closing-title">Advanced Features, Same Goal — Caught Before They Create a Hidden World</h3>
+    <p class="closing-body">
+      Parallel Space Pro gives children more sophisticated tools to maintain a second, invisible online life — but iLimits blocks the entire category before any cloned environment can be set up. No disguised icon, suppressed notification or isolated container can create a blind spot in oversight if the app never reaches the device. Keeping your child's digital world visible starts with blocking the tools designed to make it invisible.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MPL – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* MPL brand: electric blue */
+    --mp:           #0066FF;
+    --mp-mid:       #0052CC;
+    --mp-deep:      #003380;
+    --mp-light:     #F0F6FF;
+    --mp-bdr:       #93C5FD;
+    --mp-text:      #001A40;
+
+    /* High risk red palette */
+    --hr-bg:        #FFF5F5;
+    --hr-bdr:       #FFBEBE;
+    --hr-text:      #800000;
+    --hr-sub:       #5C0000;
+    --hr-badge-bg:  #FFE4E4;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --gold-bg:      #FFFDF0;
+    --gold-bdr:     #FDE68A;
+    --gold-text:    #78350F;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #000D26 0%, #001A4D 50%, #00205C 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,102,255,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,102,255,0.42) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,102,255,0.20);
+    border: 1px solid rgba(0,102,255,0.38);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card in Hero ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #003380 0%, #0066FF 55%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,102,255,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.danger { color: #FCA5A5; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── MPL callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mp-light);
+    border: 1.5px solid var(--mp-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--mp-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--mp-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #1E3A6E; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── HIGH risk strip (red) ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--hr-bg);
+    border: 1.5px solid var(--hr-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--hr-badge-bg); border: 1.5px solid var(--hr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: var(--hr-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: var(--hr-sub); font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gold-bg);
+    border: 1.5px solid var(--gold-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF9C3; border: 1.5px solid var(--gold-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--gold-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #000D26 0%, #001A4D 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,102,255,0.30) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🏆</div>
+        <div>
+          <div class="app-name-text">MPL – Mobile Premier League</div>
+          <div class="app-sub">Online Gaming / Real-Money Gaming</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Real-Money Gaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val danger">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables competitive games that may involve monetary rewards or financial transactions</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">🏆 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of MPL — a mobile gaming platform that combines familiar skill-based games with competitive tournaments, real-money entry fees and cash prize payouts, creating a financial incentive structure that is fundamentally inappropriate for younger users.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">💰</div>
+    <div>
+      <div class="instant-title">MPL Wraps Real-Money Wagering Inside Games That Look and Feel Like Casual Entertainment</div>
+      <div class="instant-body">MPL presents itself through the familiar language of casual mobile gaming — colourful interfaces, recognisable game formats and a tournament structure that resembles competitive sports. Beneath this presentation, the platform operates a real-money entry and prize system where users pay to compete and receive cash based on performance. For younger users, the casual gaming aesthetic makes it significantly harder to recognise that MPL involves genuine financial transactions with real monetary risk — not points, tokens or virtual rewards.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0066FF;"></span> Skill-Based Games</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Cash Tournaments</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Real-Money Entry</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Prize Withdrawals</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Leaderboards</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      MPL (Mobile Premier League) is a <strong>mobile gaming platform that combines skill-based games with real-money competitive tournaments</strong>. Users play familiar game formats — puzzles, arcade games, fantasy sports and card games — in competitions that require paid entry and offer cash prizes based on performance. The platform uses a leaderboard and tournament structure designed to sustain engagement and encourage repeated spending, with real money deposited, wagered and withdrawn through the app.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--mp-light);">🎮</div>
+      <div>
+        <div class="feat-name">Skill-Based Games With Real-Money Entry Fees</div>
+        <div class="feat-desc">MPL hosts a variety of skill-based games — including puzzle, arcade, fantasy sports and card game formats — where users pay a real-money entry fee to participate in competitive matches. The games themselves are presented in the style of casual entertainment, but the entry mechanism is a genuine financial transaction. A child with access to a linked payment method can spend real money on tournament entries without any safeguard requiring parental approval.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🏅</div>
+      <div>
+        <div class="feat-name">Cash Prize Payouts Based on Competitive Performance</div>
+        <div class="feat-desc">MPL awards real cash prizes to users who perform well in tournaments, with winnings withdrawable to linked bank accounts or payment wallets. This prize structure creates a direct financial incentive to play more frequently and spend more on entry fees — functioning as a reward system that conditions repeated financial engagement in the same way that gambling mechanics operate.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--gold-bg);">💳</div>
+      <div>
+        <div class="feat-name">Real Financial Transactions Embedded in Gameplay</div>
+        <div class="feat-desc">MPL requires users to deposit real money into the platform's in-app wallet to access paid tournaments. These deposits, entry fees and prize withdrawals are genuine financial transactions — not virtual currency or points systems. A child with access to a parent's linked payment method or their own stored balance can conduct multiple real-money transactions within the app with no mandatory parental confirmation required at each step.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">📊</div>
+      <div>
+        <div class="feat-name">Leaderboards and Tournament Mechanics That Drive Continued Spending</div>
+        <div class="feat-desc">MPL's competitive structure — ranked leaderboards, limited-time tournaments and prize pools that scale with participation — is specifically designed to drive repeated engagement and continued entry fee spending. Children are particularly susceptible to these competitive mechanics, as the desire to improve rank, recoup previous losses or reach the next prize tier can override sound judgement about the cumulative financial cost of continued play.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Mandatory Parental Approval for Financial Transactions</div>
+        <div class="feat-desc">MPL does not require parental confirmation before a child conducts financial transactions within the app. Once a payment method is linked or an in-app wallet is funded, a child can deposit money, pay tournament entry fees and participate in real-money competitions without any step in the process requiring a parent to be notified or to approve the transaction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from real-money competitive gaming, financial transaction exposure, engagement mechanics that encourage repeated spending and a platform design that normalises wagering as a natural part of playing games.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">Exposure to Real-Money Gaming</div>
+      <div class="rc-desc">MPL involves genuine financial transactions — real money is deposited, spent on entry fees and won or lost through competition. For children, this exposure normalises wagering as a routine part of gaming before they have the financial maturity to understand or manage the risks involved</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎰</span>
+      <div class="rc-name">Gambling-Adjacent Mechanics</div>
+      <div class="rc-desc">The combination of paid entry, uncertain outcomes and cash prizes creates a functional reward loop that mirrors gambling mechanics — even when the platform frames competitions as skill-based. Children's developing brains are significantly more susceptible to these reward patterns than adults</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Financial Transactions Without Parental Oversight</div>
+      <div class="rc-desc">A child with access to a linked payment method can deposit money and pay entry fees repeatedly with no mandatory parental notification or approval at each transaction. Spending can accumulate quickly across multiple tournament entries before a parent is aware any transactions have occurred</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔁</span>
+      <div class="rc-name">Risk of Excessive Gaming Behaviour</div>
+      <div class="rc-desc">MPL's leaderboard rankings, tournament countdowns and prize-tier structures are specifically designed to maximise session length and return visits. The combination of competitive stakes and financial incentive creates powerful pressure to continue playing that is significantly harder for children to disengage from than conventional gaming</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📉</span>
+      <div class="rc-name">Loss-Chasing and Financial Harm</div>
+      <div class="rc-desc">When children lose entry fees in competitive tournaments, the same competitive drive that motivates participation can lead them to spend additional money to recover perceived losses. This loss-chasing pattern — well-documented in gambling research — is a particular risk for younger users who lack the financial perspective to recognise when continued spending has become harmful</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎮</span>
+      <div class="rc-name">Normalisation of Pay-to-Compete Gaming</div>
+      <div class="rc-desc">Regular use of MPL during formative years can normalise the expectation that competitive gaming involves real financial stakes — conditioning children to associate gaming with monetary risk in ways that may influence their relationship with gambling platforms as they grow older</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>MPL Carries a High Risk Rating</strong>
+      <span>Real-money entry fees, cash prize payouts, no mandatory parental approval for financial transactions, gambling-adjacent reward mechanics and competitive structures specifically designed to drive repeated spending combine to make MPL a high-risk platform for children and adolescents.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚠️</div>
+    <div>
+      <div class="control-title">Real-Money Gaming Platforms Present a Distinct Category of Risk That Goes Beyond Excessive Screen Time</div>
+      <div class="control-body">Most concerns about children and gaming centre on screen time, social exposure or age-inappropriate content. MPL introduces a different and more serious category of risk: genuine financial transactions embedded within a gaming experience that is deliberately presented to feel like casual entertainment. A child using MPL is not accumulating virtual points or in-game currency — they are depositing, wagering and potentially losing real money in an environment designed to maximise the impulse to keep playing and spending. The financial harm possible on this platform is concrete and cumulative in ways that standard gaming risks are not.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Gaming Platforms With Financial Rewards May Encourage Children to Spend Real Money</div>
+        <div class="know-body">MPL's combination of familiar game formats and real-money competition is deliberately designed to feel like an extension of casual gaming — while operating as a platform where genuine financial transactions occur with every paid tournament entry. Children who associate the app with entertainment rather than financial risk are significantly more likely to spend without fully understanding the cumulative monetary cost of repeated participation. Parents should be aware that on MPL, a single session can involve multiple separate financial transactions, each small enough to feel inconsequential but meaningful in aggregate.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Prize-Based Competitions Can Encourage Loss-Chasing Behaviour</div>
+        <div class="know-body">The prospect of winning cash prizes — combined with the competitive experience of losing an entry fee — creates a psychological environment in which children may feel compelled to continue spending in order to recoup losses or reach the next prize tier. This pattern of escalating engagement in response to financial loss is a well-documented feature of gambling behaviour, and is particularly concerning in younger users who lack the financial perspective and impulse-control capacity to recognise when continued spending has become harmful.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Financial Transactions on MPL May Occur Without a Parent's Knowledge</div>
+        <div class="know-body">Once a payment method is linked to an MPL account or an in-app wallet is funded, a child can make multiple real-money deposits and pay tournament entry fees with no step in the process requiring parental notification or approval. Parents who are unaware that MPL is installed on their child's device may not discover that financial transactions have occurred until they review bank or card statements — by which point a pattern of spending may already be established.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Regular Exposure to Paid Competition Can Normalise Wagering During Formative Years</div>
+        <div class="know-body">Children who grow up with platforms like MPL as a regular part of their gaming experience may develop an expectation that competitive play naturally involves financial stakes. This normalisation of pay-to-compete gaming during formative years can shape attitudes toward risk, spending and gambling that persist into adulthood — making early exposure to real-money gaming platforms a concern that extends well beyond the immediate financial risk of any individual session or tournament.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block gaming platforms with financial elements like MPL instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block real-money gaming platforms entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like MPL as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around responsible gaming habits, financial literacy and the risks of real-money competitive gaming platforms.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🗣️</div>
+      <div>
+        <div class="tip-name">Talk With Children About Responsible Gaming Habits</div>
+        <div class="tip-body">Help your child understand the difference between free gaming and platforms like MPL where real money is involved in every paid tournament entry. Explain that the competitive structure of the app is specifically designed to encourage more play and more spending — and that the excitement of competition does not change the fact that real money is at stake. Discuss how winning in a paid competition does not mean the platform is a reliable source of income, and that for every prize winner there are many more players who spent entry fees without recovering them. Establish clear household rules about which gaming platforms are appropriate and ensure your child understands why real-money gaming is not suitable for their age group.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--gold-bg); border-color: var(--gold-bdr);">💰</div>
+      <div>
+        <div class="tip-name">Explain the Risks of Spending Money Within Games</div>
+        <div class="tip-body">Use MPL as an opportunity to have a broader conversation about how money works in gaming environments — the difference between earning, spending and losing, and why platforms are designed to make spending feel smaller and less significant than it actually is. Discuss specifically how tournament entry fees add up across multiple sessions, how the desire to recover a loss can lead to further spending and why cash prizes create a false impression of reliable financial returns. Children who develop genuine financial literacy around gaming — understanding the real cost of each transaction and the statistical reality of prize distribution — are significantly better equipped to make sound decisions on any platform involving real money.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Competitive Gaming Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family devices included. In addition to blocking MPL through iLimits, review linked payment methods on your child's device and consider removing stored card details or enabling purchase authorisation requirements on your device's app store to add a further layer of friction before any financial transaction can be completed. The most effective protection combines device-level access controls with clear financial conversations — children who understand why real-money gaming platforms are restricted are significantly more likely to respect that boundary than those who receive a block without explanation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Healthy Gaming Habits Start With the Conversations You Have at Home</h3>
+    <p class="closing-body">
+      No parental control tool can replace the financial awareness and sound judgement that comes from a child who genuinely understands why real-money gaming platforms are inappropriate for their age. iLimits gives you the technical layer — the conversations, boundaries and financial literacy your family builds together provide the rest.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

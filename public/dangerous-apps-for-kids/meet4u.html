@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet4U – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Meet4U brand: electric violet-purple */
+    --m4u:          #7B2FBE;
+    --m4u-mid:      #6620A0;
+    --m4u-deep:     #45147A;
+    --m4u-light:    #F8F3FF;
+    --m4u-bdr:      #D4B4F8;
+    --m4u-text:     #2D0B5C;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFCACA;
+    --red-text:     #7A0C0C;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(123,47,190,0.07);
+    --shadow-sm:    0 2px 14px rgba(123,47,190,0.10);
+    --shadow-md:    0 6px 30px rgba(123,47,190,0.13);
+    --shadow-lg:    0 14px 52px rgba(123,47,190,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════
+     HERO — deep violet-indigo night
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #0D0418 0%, #180830 50%, #200A3E 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(123,47,190,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.14) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,190,0.30) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.13) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-glow-c {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px; height: 160px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(156,80,220,0.10) 0%, transparent 70%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #CFA8F8; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.50);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #2D0B5C 0%, #7B2FBE 55%, #B47EF0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(123,47,190,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════
+     MAIN
+  ══════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Speed-of-contact callout ── */
+  .speed-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--m4u-light);
+    border: 1.5px solid var(--m4u-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .speed-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E8D4FF; border: 1.5px solid var(--m4u-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .speed-title { font-size: 13px; font-weight: 700; color: var(--m4u-text); line-height: 1.3; margin-bottom: 3px; }
+  .speed-body  { font-size: 12px; color: #3D1475; font-weight: 400; line-height: 1.55; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Coins/IAP warning ── */
+  .coins-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg);
+    border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .coins-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0E0; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .coins-title { font-size: 13px; font-weight: 700; color: var(--red-text); line-height: 1.3; margin-bottom: 3px; }
+  .coins-body  { font-size: 12px; color: #5C0808; font-weight: 400; line-height: 1.55; }
+
+  /* ── Age strip ── */
+  .age-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--m4u-light);
+    border: 1.5px solid var(--m4u-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .age-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #E8D4FF; border: 1.5px solid var(--m4u-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .age-text strong { font-size: 13.5px; font-weight: 700; color: var(--m4u-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .age-text span   { font-size: 12px; color: #3D1475; font-weight: 400; line-height: 1.5; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0D0418 0%, #180830 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,190,0.28) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,190,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner    { animation: fadeUp 0.42s ease both; }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .age-strip     { animation: fadeUp 0.42s ease 0.05s both; }
+  .speed-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .coins-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-glow-c"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💜</div>
+        <div>
+          <div class="app-name-text">Meet4U</div>
+          <div class="app-sub">Social Discovery / Stranger Chat</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Discovery</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows communication with unknown users worldwide</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Meet4U's fast-contact social discovery design, its coins economy and why its low-friction stranger access is its defining risk.</p>
+  </div>
+
+  <!-- Speed-of-contact callout — Meet4U's defining trait -->
+  <div class="speed-callout">
+    <div class="speed-ico">⚡</div>
+    <div>
+      <div class="speed-title">Meet4U Is Designed for Fast, Low-Friction Stranger Contact</div>
+      <div class="speed-body">Meet4U's core design philosophy is speed of connection — the app is built to get users into conversation with strangers as quickly and frictionlessly as possible. Profile creation is minimal, browsing is immediate and messaging can begin before any meaningful profile has been reviewed. For children, this low-friction model means contact with unknown adults can happen within seconds of opening the app — with no cooling-off period, no matching requirement and no consent gate.</div>
+    </div>
+  </div>
+
+  <!-- Mode chips -->
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#7B2FBE;"></span> Instant Browse</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Nearby People</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FF8C00;"></span> Coins & Gifts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0099E6;"></span> Video Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#00C9A7;"></span> Private Messaging</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Meet4U is a <strong>social networking and discovery platform</strong> that allows users to meet and communicate with new people through fast profile browsing and instant chat. Users discover nearby users, send messages and interact with people they have never met — within a deliberately low-friction environment where stranger contact requires minimal steps and no mutual consent.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F8F3FF;">⚡</div>
+      <div>
+        <div class="feat-name">Instant Profile Browse & Contact</div>
+        <div class="feat-desc">Meet4U surfaces profiles immediately on launch with no onboarding delay. Any user can view any other user's profile and initiate contact instantly — a child's profile becomes visible and contactable by unknown adults from the moment the app is opened for the first time.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📍</div>
+      <div>
+        <div class="feat-name">Nearby People Discovery</div>
+        <div class="feat-desc">Meet4U uses location data to surface nearby users, enabling adults to discover and contact children based on physical proximity. A child's approximate location is shared with all local app users by default — creating a real-world dimension to the stranger-contact risk.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🎥</div>
+      <div>
+        <div class="feat-name">Video Chat With Strangers</div>
+        <div class="feat-desc">Meet4U includes video calling features that allow users to connect face-to-face with strangers in real time. These calls are unmoderated — children can be drawn into live video interactions with unknown adults with no safety filtering in place.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Open Private Messaging</div>
+        <div class="feat-desc">Any user can send a private message to any other without a match or mutual interest requirement. Private messages are entirely unscreened — there is no content moderation or parental visibility for conversations between children and adult strangers.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF8F0;">🪙</div>
+      <div>
+        <div class="feat-name">Coins, Gifts & Premium Features</div>
+        <div class="feat-desc">Meet4U operates a virtual coins economy for sending gifts and unlocking premium interactions. Coins are purchased using real money through in-app payments. Children with access to a parent's device or saved payment method could spend real money without parental awareness.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDFB;">🌐</div>
+      <div>
+        <div class="feat-name">Global User Base With No Identity Verification</div>
+        <div class="feat-desc">Meet4U connects users worldwide with no identity verification at any stage. Registration requires only basic details and a date of birth — adults can create profiles presenting as any age with no check to confirm who they actually are.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age strip -->
+  <div class="age-strip">
+    <div class="age-badge">🔞</div>
+    <div class="age-text">
+      <strong>Meet4U Is Intended for Users 17 or Older</strong>
+      <span>The platform's instant open-contact model, video chat with strangers, coins economy and unmoderated private messaging are not appropriate for children at any age. No child-safe mode or restricted experience exists.</span>
+    </div>
+  </div>
+
+  <!-- Coins/IAP and video chat combined warning -->
+  <div class="coins-note">
+    <div class="coins-ico">🪙</div>
+    <div>
+      <div class="coins-title">Coins Can Be Used to Pressure Children Into Continued Engagement</div>
+      <div class="coins-body">Meet4U's coins economy is not only a financial risk — it is also a social pressure mechanism. Users can send gifts to others to signal interest, which creates a dynamic where children may feel obligated to engage with adults who gift them coins or premium interactions. This is a grooming-adjacent risk that parents should be aware of: virtual gifts on stranger platforms are rarely purely social gestures.</div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from Meet4U's zero-friction design, video chat, coins pressure and global open-contact community.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Zero-Friction Stranger Access</div>
+      <div class="rc-desc">Meet4U's design gets children into contact with unknown adults within seconds — no match, consent or waiting period stands between them</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎥</span>
+      <div class="rc-name">Unmoderated Video Chat</div>
+      <div class="rc-desc">Live video calls with strangers expose children to real-time adult contact and potentially inappropriate content with no filtering or oversight</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location-Based Targeting</div>
+      <div class="rc-desc">Nearby discovery exposes a child's approximate physical location to local strangers — enabling adults to specifically find and contact nearby children</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Conversations</div>
+      <div class="rc-desc">Unmoderated private messaging may expose children to adult, explicit or manipulative content from strangers with no content screening or parental visibility</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🪙</span>
+      <div class="rc-name">Coins as Pressure Tools</div>
+      <div class="rc-desc">Virtual gifts from strangers can create social obligation — pressuring children to continue engaging with unknown adults who have sent them coins or premium interactions</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">No Identity Verification</div>
+      <div class="rc-desc">Adults can create profiles presenting as peers with no verification — leaving children with no way to confirm who they are genuinely speaking to</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Meet4U Is Designed to Minimise the Barriers Between Children and Unknown Adults</div>
+        <div class="know-body">Unlike platforms where some form of mutual interest, matching or connection request slows the pace of contact, Meet4U is built to remove friction entirely. This deliberate design choice — optimised for engagement metrics rather than user safety — means that children can be in active conversation with unknown adults within seconds of downloading the app. There is no system-level pause between installation and exposure.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Virtual Gifts Are a Social Pressure Mechanism, Not Just a Financial Risk</div>
+        <div class="know-body">Meet4U's coins and gift system creates a dynamic that goes beyond in-app spending. When an adult sends a child coins or virtual gifts, it creates a social debt — an implicit expectation of continued engagement. Children, who may not recognise this as a manipulation tactic, can feel obligated to keep talking to an adult who has "been generous" to them. Parents should discuss this dynamic directly with their child when talking about online safety.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Install It Due to Curiosity or Peer Influence</div>
+        <div class="know-body">Meet4U's clean, modern interface and social discovery framing make it appear to be a general social app. Children may install it after encountering it through peers or app store recommendations, without recognising that its design specifically optimises for stranger contact. The minimal onboarding and instant access model means exposure begins before most children have had a chance to assess the environment they've entered.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">A False Birthdate Is All That Stands Between a Child and Full Platform Access</div>
+        <div class="know-body">Meet4U's age requirement is enforced only by a date-of-birth field at registration. Entering a false birthdate grants a child immediate, unrestricted access to the full platform — including instant profile discovery, nearby people browsing, video chat and private messaging with any adult worldwide. No further verification is requested at any subsequent point in the app.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable, simple tools to block stranger-chat and social discovery apps like Meet4U instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block stranger-chat and social discovery apps by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow instant one-tap blocking of similar apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Meet4U as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from Meet4U's specific risks and build lasting digital resilience.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Teach Children Not to Communicate With Strangers Online</div>
+        <div class="tip-body">Have a frank conversation about why apps like Meet4U — designed specifically to make contact with unknown adults fast and frictionless — are not safe environments. Help children understand that the speed and ease of an app's design does not make it safe, and that a friendly stranger who sends gifts or compliments online is not the same as a trusted person in their life. Specifically discuss how virtual gifts can create social pressure and what that pressure might look and feel like — so children can recognise it in the moment.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="tip-name">Discuss Privacy and Responsible Digital Behaviour</div>
+        <div class="tip-body">Talk with your child about the specific information they should never share on open-contact platforms — real name, school, home area, phone number, social media handles and photos of identifiable locations. Emphasise that location-based discovery on apps like Meet4U means unknown adults can find them because of where they physically are — not just who they are online. Establishing clear family expectations about digital behaviour is most effective before a child encounters these platforms, not in response to a problem.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Prevent Access to Risky Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses — including tablets, spare phones and shared family devices. Because Meet4U's low-friction design makes reinstallation as quick as first installation, device-level category blocking is more reliable than monitoring for specific app names. Review in-app purchase settings and saved payment methods to prevent coins purchases. Combine controls with open, regular family conversations about online safety — technology and trust work best together.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">💜</span>
+    <h3 class="closing-title">Speed Is Not the Same as Safety</h3>
+    <p class="closing-body">
+      An app that gets children talking to strangers in seconds is not offering them connection — it is offering them exposure. iLimits helps you ensure that your child's digital world moves at a pace that matches their readiness: guided by your values, shaped by your care, and protected by boundaries that are built on love.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

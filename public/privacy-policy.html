@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – iLimits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rose:        #F0436A;
+  --rose-deep:   #C8284E;
+  --rose-soft:   #F9728E;
+  --blush:       #FDE8EC;
+  --blush-mid:   #FBC8D3;
+  --petal:       #FEF3F5;
+  --ink:         #18100E;
+  --ink-mid:     #3D2820;
+  --text:        #2D1F1B;
+  --muted:       #7A6560;
+  --faint:       #C4B5B0;
+  --surface:     #FFFAF9;
+  --white:       #FFFFFF;
+  --border:      #EDE0DC;
+  --border-soft: #F5ECEB;
+  --green:       #0D7A5F;
+  --green-bg:    #EDFAF5;
+  --green-border:#A7F3D0;
+  --amber:       #C47B0A;
+  --amber-bg:    #FEF7E6;
+  --amber-border:#FDE68A;
+  --shadow-xs:  0 1px 4px rgba(24,16,14,0.06);
+  --shadow-sm:  0 2px 12px rgba(24,16,14,0.07);
+  --shadow-md:  0 6px 28px rgba(24,16,14,0.09);
+  --shadow-lg:  0 16px 60px rgba(24,16,14,0.12);
+  --r-sm:  12px;
+  --r-md:  20px;
+  --r-lg:  28px;
+  --r-xl:  40px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,250,249,0.88);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  padding: 0 28px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--ink);
+}
+.nav-logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(145deg, var(--rose) 0%, var(--rose-soft) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: white;
+  box-shadow: 0 4px 12px rgba(240,67,106,0.35);
+  overflow: hidden;
+}
+.nav-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+.nav-logo span {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.25rem; color: var(--ink);
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--muted); text-decoration: none;
+  font-size: 0.875rem; font-weight: 600;
+  padding: 8px 16px; border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-xs);
+}
+.nav-back:hover { color: var(--ink); border-color: var(--faint); transform: translateY(-1px); }
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  padding: 120px 28px 100px;
+  background: linear-gradient(160deg, #FEF0F3 0%, #FDF5F7 50%, var(--surface) 100%);
+  position: relative; overflow: hidden;
+  margin-top: 64px;
+}
+.hero-orb {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+.hero-orb.a {
+  width: 560px; height: 560px;
+  top: -140px; right: -140px;
+  background: radial-gradient(circle, rgba(240,67,106,0.09) 0%, transparent 70%);
+}
+.hero-orb.b {
+  width: 360px; height: 360px;
+  bottom: -80px; left: -80px;
+  background: radial-gradient(circle, rgba(240,67,106,0.06) 0%, transparent 70%);
+}
+.hero-inner {
+  max-width: 760px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); border: 1px solid var(--blush-mid);
+  border-radius: 100px; padding: 7px 16px;
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--rose-deep); margin-bottom: 24px;
+  box-shadow: var(--shadow-xs);
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.85); }
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--rose); }
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted);
+  line-height: 1.75; max-width: 560px;
+  margin-bottom: 40px;
+}
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 100px; padding: 8px 16px;
+  font-size: 0.83rem; font-weight: 600; color: var(--ink-mid);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ── MAIN CONTENT ────────────────────── */
+.content {
+  max-width: 760px; margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+
+/* intro card */
+.intro-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 32px 36px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--rose);
+}
+.intro-card p { color: var(--muted); font-size: 1rem; line-height: 1.75; margin: 0; }
+.intro-card p + p { margin-top: 12px; }
+.intro-card strong { color: var(--ink); font-weight: 700; }
+
+/* policy card */
+.policy-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 36px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.policy-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.card-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 22px;
+}
+.section-num {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: var(--blush); color: var(--rose-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem; font-weight: 700;
+}
+.card-header h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.45rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1rem; font-weight: 700; color: var(--ink-mid);
+  margin: 22px 0 10px; letter-spacing: -0.01em;
+}
+
+p { color: var(--muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+p strong { color: var(--ink); font-weight: 700; }
+
+a { color: var(--rose); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+a:hover { color: var(--rose-deep); text-decoration: underline; }
+
+/* custom list */
+.policy-list { list-style: none; margin: 14px 0; }
+.policy-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--muted); font-size: 0.93rem; line-height: 1.6;
+}
+.policy-list li:first-child { padding-top: 0; }
+.policy-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.li-check {
+  width: 22px; height: 22px; border-radius: 7px; flex-shrink: 0;
+  background: var(--blush); color: var(--rose);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; margin-top: 1px;
+}
+.policy-list li strong { color: var(--ink); font-weight: 700; }
+
+/* highlight block */
+.highlight {
+  background: var(--petal);
+  border: 1px solid var(--blush-mid);
+  border-left: 4px solid var(--rose);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  margin: 20px 0;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.highlight-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.highlight p { color: var(--ink-mid); font-weight: 600; font-size: 0.93rem; margin: 0; }
+
+/* warning block */
+.warning-block {
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  margin: 20px 0;
+}
+.warning-title {
+  font-size: 0.82rem; font-weight: 800; color: var(--amber);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+}
+.warning-block .policy-list li { border-bottom-color: rgba(196,123,10,0.15); }
+.warning-block .li-check { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+
+/* mini grid cards */
+.mini-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin: 20px 0;
+}
+.mini-card {
+  background: var(--petal);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  padding: 18px 14px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.mini-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.mini-icon { font-size: 26px; margin-bottom: 8px; }
+.mini-title { font-size: 0.85rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.mini-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+/* security grid */
+.sec-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin: 20px 0;
+}
+.sec-card {
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: var(--r-md);
+  padding: 18px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.sec-icon { font-size: 22px; flex-shrink: 0; }
+.sec-title { font-size: 0.88rem; font-weight: 800; color: var(--green); margin-bottom: 3px; }
+.sec-desc { font-size: 0.78rem; color: #065F46; line-height: 1.5; }
+
+/* permissions table */
+.perm-list { list-style: none; margin: 16px 0; }
+.perm-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.perm-item:first-child { padding-top: 0; }
+.perm-item:last-child { border-bottom: none; padding-bottom: 0; }
+.perm-icon-wrap {
+  width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+  background: var(--blush);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.perm-name { font-size: 0.92rem; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
+.perm-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+/* section divider label */
+.sub-label {
+  font-size: 0.78rem; font-weight: 800; color: var(--rose);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  margin: 24px 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sub-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border-soft);
+}
+
+/* ── CONTACT CTA ──────────────────────── */
+.contact-cta {
+  background: linear-gradient(145deg, var(--rose) 0%, #F9607E 50%, #FCA7B3 100%);
+  border-radius: var(--r-xl);
+  padding: 56px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 20px 60px rgba(240,67,106,0.28);
+}
+.contact-cta::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+}
+.contact-cta::after {
+  content: '';
+  position: absolute; bottom: -60px; left: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.contact-cta h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700; color: white;
+  letter-spacing: -0.02em; margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.contact-cta p {
+  color: rgba(255,255,255,0.85); font-size: 1rem;
+  margin-bottom: 28px; position: relative; z-index: 1;
+}
+.cta-btns {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; position: relative; z-index: 1;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; color: var(--rose-deep);
+  padding: 12px 24px; border-radius: 100px;
+  text-decoration: none; font-weight: 700;
+  font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: var(--rose-deep); text-decoration: none; }
+.cta-btn-outline {
+  background: rgba(255,255,255,0.15);
+  color: white !important;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  box-shadow: none;
+}
+.cta-btn-outline:hover { background: rgba(255,255,255,0.25); box-shadow: none; }
+
+/* ── FOOTER ───────────────────────────── */
+footer {
+  background: var(--ink); color: white;
+  padding: 36px 28px;
+}
+.footer-inner {
+  max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none;
+}
+.footer-logo-mark {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(145deg, var(--rose), var(--rose-soft));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; overflow: hidden;
+}
+.footer-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+.footer-logo span {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.05rem; color: white;
+}
+.footer-copy {
+  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+}
+.footer-links {
+  display: flex; gap: 18px;
+}
+.footer-links a {
+  font-size: 0.8rem; font-weight: 600;
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: white; }
+
+/* ── RESPONSIVE ──────────────────────── */
+@media (max-width: 640px) {
+  .hero { padding: 100px 20px 72px; }
+  .content { padding: 36px 20px 64px; }
+  .policy-card { padding: 28px 22px; }
+  .intro-card { padding: 24px 22px; }
+  .mini-grid { grid-template-columns: 1fr 1fr; }
+  .sec-grid { grid-template-columns: 1fr; }
+  .contact-cta { padding: 40px 24px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+  .cta-btns { flex-direction: column; align-items: center; }
+}
+@media (max-width: 400px) {
+  .mini-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
+      </div>
+      <span>iLimits</span>
+    </a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb a"></div>
+  <div class="hero-orb b"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Last Updated: December 29, 2025
+    </div>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="hero-sub">Your family's privacy and security are our highest priorities. Here's exactly how iLimits collects, uses, and protects your information.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">🔒 Data Encrypted</span>
+      <span class="hero-pill">🚫 Zero Ads to Children</span>
+      <span class="hero-pill">👨‍👩‍👧 Child Privacy Focused</span>
+      <span class="hero-pill">✋ We Never Sell Data</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main class="content">
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <p>This Privacy Policy explains how <strong>iLimits – Parental Control &amp; Screen Time App</strong> ("iLimits", "we", "our", or "us") collects, uses, and protects information when parents or legal guardians use our application.</p>
+    <p>By using iLimits, you agree to the practices described in this policy.</p>
+  </div>
+
+  <!-- 1. WHO THIS APP IS FOR -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">1</div>
+      <h2>Who This App Is For</h2>
+    </div>
+    <p>iLimits is designed exclusively for <strong>parents or legal guardians</strong> to manage and monitor their child's device usage. Children do not create independent accounts without parental involvement.</p>
+  </div>
+
+  <!-- 2. INFORMATION WE COLLECT -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">2</div>
+      <h2>Information We Collect</h2>
+    </div>
+
+    <div class="sub-label">Information provided by parents</div>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> Parent account email address</li>
+      <li><span class="li-check">✓</span> Child profile details (name or nickname – optional)</li>
+      <li><span class="li-check">✓</span> Screen time limits, app rules, and schedules</li>
+    </ul>
+
+    <div class="sub-label">Automatically collected information</div>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> App usage duration and screen time statistics</li>
+      <li><span class="li-check">✓</span> List of installed apps (package names only, for categorization and limit enforcement)</li>
+      <li><span class="li-check">✓</span> Device identifiers (non-personal) for syncing parent and child devices</li>
+      <li><span class="li-check">✓</span> App configuration and enforcement settings</li>
+    </ul>
+  </div>
+
+  <!-- 3. ACCESSIBILITY -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">3</div>
+      <h2>Accessibility Service Usage</h2>
+    </div>
+
+    <div class="highlight">
+      <span class="highlight-icon">🔒</span>
+      <p>iLimits uses Android Accessibility Service strictly to enforce parental controls set by you as a parent. This access is never used to monitor personal content or communications.</p>
+    </div>
+
+    <div class="sub-label">Accessibility access is used only to</div>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> Detect which app is currently active on the device</li>
+      <li><span class="li-check">✓</span> Apply app blocking and screen time limits</li>
+      <li><span class="li-check">✓</span> Prevent access to restricted apps as configured by parents</li>
+    </ul>
+
+    <div class="warning-block">
+      <div class="warning-title">⚠️ Important Clarifications</div>
+      <ul class="policy-list">
+        <li><span class="li-check">✗</span> We do <strong>NOT</strong> read, record, or transmit screen content</li>
+        <li><span class="li-check">✗</span> We do <strong>NOT</strong> capture keystrokes, passwords, or any text input</li>
+        <li><span class="li-check">✗</span> We do <strong>NOT</strong> access messages, calls, photos, contacts, or personal communications</li>
+        <li><span class="li-check">✗</span> Accessibility permissions are used solely for enforcing the parental controls you set</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. CHILD DATA PROTECTION -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">4</div>
+      <h2>Child Data Protection</h2>
+    </div>
+    <p>Protecting children's privacy is a core principle at iLimits. Every decision about data is made with children's safety and wellbeing in mind.</p>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <div class="mini-icon">🛡️</div>
+        <div class="mini-title">No Ads</div>
+        <div class="mini-desc">Zero advertisements are ever shown to children</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">🔐</div>
+        <div class="mini-title">Private Data</div>
+        <div class="mini-desc">We never sell or share child data with third parties</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">👨‍👩‍👧</div>
+        <div class="mini-title">Parent Control</div>
+        <div class="mini-desc">Data is only accessible by parents and guardians</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. HOW WE USE INFORMATION -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">5</div>
+      <h2>How We Use Information</h2>
+    </div>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> Enforce screen time and app usage limits as configured</li>
+      <li><span class="li-check">✓</span> Provide clear and accurate usage reports to parents</li>
+      <li><span class="li-check">✓</span> Sync settings across linked parent and child devices</li>
+      <li><span class="li-check">✓</span> Improve app stability, reliability, and performance</li>
+    </ul>
+    <div class="highlight">
+      <span class="highlight-icon">🚫</span>
+      <p>iLimits does <strong>not</strong> use your data for advertising, profiling, or cross-app tracking. Ever.</p>
+    </div>
+  </div>
+
+  <!-- 6. DATA SHARING -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">6</div>
+      <h2>Data Sharing</h2>
+    </div>
+    <div class="highlight">
+      <span class="highlight-icon">✋</span>
+      <p><strong>We do not sell, rent, or share personal information or child data with third parties for marketing or advertising purposes.</strong></p>
+    </div>
+    <p>Data may only be disclosed in the following limited circumstances:</p>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> When legally required (e.g., valid court order or law enforcement request)</li>
+      <li><span class="li-check">✓</span> To protect the safety, rights, or security of iLimits, our users, or others</li>
+      <li><span class="li-check">✓</span> With service providers who help operate our app (e.g., cloud hosting), under strict confidentiality agreements</li>
+    </ul>
+  </div>
+
+  <!-- 7. DATA STORAGE & SECURITY -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">7</div>
+      <h2>Data Storage &amp; Security</h2>
+    </div>
+    <p>Data is stored securely using encryption and industry-standard security practices. We use secure cloud infrastructure with restricted access controls. While no system is 100% secure, we continuously monitor and update our security measures.</p>
+    <div class="sec-grid">
+      <div class="sec-card">
+        <span class="sec-icon">🔐</span>
+        <div>
+          <div class="sec-title">End-to-End Encryption</div>
+          <div class="sec-desc">All data encrypted in transit and at rest</div>
+        </div>
+      </div>
+      <div class="sec-card">
+        <span class="sec-icon">🏢</span>
+        <div>
+          <div class="sec-title">Secure Infrastructure</div>
+          <div class="sec-desc">Industry-standard cloud servers with restricted access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. DATA RETENTION & DELETION -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">8</div>
+      <h2>Data Retention &amp; Deletion</h2>
+    </div>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> Data is retained only while the parent account is active</li>
+      <li><span class="li-check">✓</span> Parents may request deletion of their account at any time</li>
+      <li><span class="li-check">✓</span> Upon account deletion, all associated child and parent data is permanently removed, except where retention is required by law</li>
+    </ul>
+
+    <div class="sub-label">Account &amp; Data Deletion</div>
+    <p>Users may request deletion of their iLimits account and all associated personal data by contacting us at <a href="mailto:support@ilimits.app">support@ilimits.app</a> from their registered email address, or by following the account deletion instructions provided within the app.</p>
+    <div class="highlight">
+      <span class="highlight-icon">ℹ️</span>
+      <p>Partial data deletion without deleting the account is not currently supported.</p>
+    </div>
+  </div>
+
+  <!-- 9. PERMISSIONS -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">9</div>
+      <h2>Permissions Used</h2>
+    </div>
+    <ul class="perm-list">
+      <li class="perm-item">
+        <div class="perm-icon-wrap">♿</div>
+        <div>
+          <div class="perm-name">Accessibility Service</div>
+          <div class="perm-desc">Used exclusively to detect the active app and enforce screen time limits and app blocking rules set by parents.</div>
+        </div>
+      </li>
+      <li class="perm-item">
+        <div class="perm-icon-wrap">📊</div>
+        <div>
+          <div class="perm-name">Usage Access (App Usage Stats)</div>
+          <div class="perm-desc">Required to calculate accurate screen time and generate usage reports visible to parents.</div>
+        </div>
+      </li>
+      <li class="perm-item">
+        <div class="perm-icon-wrap">⚙️</div>
+        <div>
+          <div class="perm-name">Foreground Service</div>
+          <div class="perm-desc">Ensures parental controls remain active in the background and cannot be easily bypassed.</div>
+        </div>
+      </li>
+      <li class="perm-item">
+        <div class="perm-icon-wrap">🔐</div>
+        <div>
+          <div class="perm-name">Device Admin (optional)</div>
+          <div class="perm-desc">Prevents uninstallation of the app without explicit parent permission.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 10. POLICY UPDATES -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">10</div>
+      <h2>Policy Updates</h2>
+    </div>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date. We encourage parents to review this policy periodically to stay informed about how we protect your family's data.</p>
+  </div>
+
+  <!-- 11. YOUR RIGHTS -->
+  <div class="policy-card">
+    <div class="card-header">
+      <div class="section-num">11</div>
+      <h2>Your Rights</h2>
+    </div>
+    <p>As a parent or legal guardian, you have the following rights regarding your data:</p>
+    <ul class="policy-list">
+      <li><span class="li-check">✓</span> Access and review the data we collect about your child</li>
+      <li><span class="li-check">✓</span> Request correction of inaccurate information</li>
+      <li><span class="li-check">✓</span> Request deletion of your account and associated child data</li>
+      <li><span class="li-check">✓</span> Withdraw consent and stop using the app at any time</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href="mailto:support@ilimits.app">support@ilimits.app</a></p>
+  </div>
+
+  <!-- CONTACT CTA -->
+  <div class="contact-cta">
+    <h2>Questions or Concerns?</h2>
+    <p>We're here to help. Reach out to our support team anytime.</p>
+    <div class="cta-btns">
+      <a href="mailto:support@ilimits.app" class="cta-btn">📧 Email Support</a>
+      <a href="index.html" class="cta-btn cta-btn-outline">🌐 Back to Website</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <div class="footer-logo-mark">
+        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
+      </div>
+      <span>iLimits</span>
+    </a>
+    <span class="footer-copy">© 2025 iLimits. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:support@ilimits.app">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

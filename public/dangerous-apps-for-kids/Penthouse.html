@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Penthouse – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Penthouse brand: deep onyx-gold */
+    --pn:           #8B6914;
+    --pn-mid:       #6D530F;
+    --pn-deep:      #3D2E08;
+    --pn-light:     #FDFAF0;
+    --pn-bdr:       #D4AF37;
+    --pn-text:      #2C1E04;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #100C01 0%, #1E1602 50%, #2C2003 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(139,105,20,0.40) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.34) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(212,175,55,0.14);
+    border: 1px solid rgba(212,175,55,0.28);
+    color: #D4AF37; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1E1602 0%, #8B6914 55%, #D4AF37 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(139,105,20,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Penthouse callout ── */
+  .pn-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pn-light); border: 1.5px solid var(--pn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .pn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #F5E9C0; border: 1.5px solid var(--pn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pn-title { font-size: 13px; font-weight: 700; color: var(--pn-text); line-height: 1.3; margin-bottom: 3px; }
+  .pn-body  { font-size: 12px; color: #3D2E08; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pn-light); border: 1.5px solid var(--pn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #F5E9C0; border: 1.5px solid var(--pn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--pn-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3D2E08; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #100C01 0%, #1E1602 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .pn-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔞</div>
+        <div>
+          <div class="app-name-text">Penthouse</div>
+          <div class="app-sub">Adult Content Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Entertainment</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Hosts adult entertainment content intended for mature audiences</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Penthouse — a long-established adult entertainment brand that publishes and distributes explicit and sexually themed content across print, digital, and video formats, all of which is intended exclusively for adult audiences and is wholly unsuitable for children.</p>
+  </div>
+
+  <div class="pn-callout">
+    <div class="pn-ico">🔞</div>
+    <div>
+      <div class="pn-title">Penthouse Is an Adult Entertainment Brand — Every Element of Its Content Is Intended for Adult Audiences Only</div>
+      <div class="pn-body">Penthouse is one of the world's most established adult entertainment brands, with a history spanning decades across print magazines, digital publications and online video platforms. Every product the brand produces — its magazine, its digital content library and its video platform — is explicitly adult in nature. There is no age-appropriate section of any Penthouse property, no content suitable for children at any age, and no legitimate reason for a child to access any of its platforms. Digital access to Penthouse properties requires no verification of age beyond a self-declaration, making parental restriction the only effective safeguard.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#8B6914;"></span> Adult Video</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Digital Magazine</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D4AF37;"></span> Photo Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#718096;"></span> Subscription Access</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Online Platform</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Penthouse is a platform associated with <strong>adult entertainment media</strong>, including magazines, videos and online content intended for adult audiences. The platform publishes and distributes explicit or mature-themed material designed for viewers who meet legal age requirements — across both its long-standing print publication and its digital and video properties, which are accessible online through any device connected to the internet.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--pn-light);">📖</div>
+      <div>
+        <div class="feat-name">Adult Magazine Content Published in Digital Format</div>
+        <div class="feat-desc">Penthouse's flagship publication — one of the most widely recognised adult magazines in the world — is available in digital format accessible through its online platforms. The magazine's content is explicitly adult in nature across every issue and every section. Digital accessibility means that what was once a physical publication with some practical barrier to access for children is now reachable by any child with an internet-connected device and a basic understanding of how to reach the platform's website.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎬</div>
+      <div>
+        <div class="feat-name">Explicit Adult Video Content on Subscription Platform</div>
+        <div class="feat-desc">Penthouse operates a digital video platform hosting explicit adult content, accessible through subscription or pay-per-view arrangements. The platform's video library is entirely adult in nature, hosted behind a paywall that requires payment — but payment barriers do not prevent children from accessing content where a parent's payment credentials are stored on the device or where a child has access to a payment method. The platform's age gate, where present, typically requires only a self-declaration of age with no identity verification.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🖼️</div>
+      <div>
+        <div class="feat-name">Photo and Editorial Content Across Digital Properties</div>
+        <div class="feat-desc">Beyond its video platform, Penthouse distributes explicit adult photographic content and editorial material across its digital properties. This content is the core of the brand's publishing identity and has been explicit in nature throughout the brand's history. The transition to digital distribution has made all of this content searchable, indexable and accessible through standard web browsing — removing the practical barriers that previously limited access to the brand's physical publications.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🌐</div>
+      <div>
+        <div class="feat-name">Broad Online Presence Accessible Through Standard Web Browsing</div>
+        <div class="feat-desc">Penthouse's digital presence spans multiple domains and platforms, making the brand's explicit content accessible through standard web searches as well as direct navigation to its properties. A child searching for the brand name by any of its widely recognised variations can reach adult content through any browser without requiring an app download, account creation or any verification process that would prevent access. Browser-level restrictions are therefore necessary in addition to app-level controls.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification Before Content Access</div>
+        <div class="feat-desc">Where age gates exist on Penthouse digital properties, they require only a self-declaration of adult age — a single click or button press that any child can complete in seconds without providing any verifiable information. This provides no meaningful protection against underage access and should not be relied upon as a safeguard. Parental restriction at the device or network level is the only approach that reliably prevents a child from accessing the platform's content.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unrestricted exposure to explicit adult entertainment content, the documented developmental impact of early exposure, the absence of child-appropriate safeguards across all platform properties, and the ease with which the brand's digital content can be discovered and accessed.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Exposure to Explicit Adult Content</div>
+      <div class="rc-desc">Every piece of content across Penthouse's digital properties is explicit adult material — there is no safe, age-appropriate section and no version of the platform suitable for any child at any stage of development</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚸</span>
+      <div class="rc-name">Content Not Suitable for Children or Teenagers</div>
+      <div class="rc-desc">Penthouse content is not simply mature or age-rated — it is explicitly adult in nature across its full catalogue, with no content tiers or restricted areas appropriate for younger audiences at any age</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Influence on Healthy Development</div>
+      <div class="rc-desc">Research consistently documents that early exposure to explicit adult content can distort a child's developing understanding of relationships, consent, body image and sexuality in ways that may have lasting effects on their emotional and psychological wellbeing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Safeguards for Younger Audiences</div>
+      <div class="rc-desc">No element of Penthouse's publishing or digital platform is designed with child safety in mind — the platform has no age-appropriate content tier, no moderation system oriented toward protecting younger users, and no technical safeguard that meaningfully limits access by minors</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Discoverable Through Standard Web Search</div>
+      <div class="rc-desc">The Penthouse brand name is widely known and easily discoverable through standard search engines — a child searching for the brand by name can reach explicit content through a browser on any device without any installation or account creation</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Payment Access via Stored Parent Credentials</div>
+      <div class="rc-desc">Subscription and pay-per-view content on Penthouse's video platform can be accessed by children using a parent's stored payment credentials on a shared device — a payment barrier is not a child safety barrier on devices where payment methods are already saved</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Penthouse Carries the Highest Possible Risk Rating</strong>
+      <span>The platform's entire content catalogue is explicit adult material with no age-appropriate content at any level, no meaningful age verification in place, documented developmental harm associated with early exposure, and broad discoverability through standard web browsing. This platform should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">Adult Entertainment Brands Are Accessible Through Web Browsers Without Any App Installation — Browser-Level Controls Are Essential</div>
+      <div class="control-body">Penthouse's digital content is accessible through any web browser on any internet-connected device without downloading an app, creating an account or completing any meaningful verification. A child can reach the platform's content through a phone browser, a shared household computer or a tablet in seconds. Device-level controls that restrict browser-based access — not just app installations — are necessary to block this content reliably across all the devices and networks a child uses. iLimits provides controls that address this broader access vector, not just individual app installations.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Adult Entertainment Platforms Are Designed for Mature Audiences and Contain Explicit Material Not Suitable for Children</div>
+        <div class="know-body">Penthouse is not a general media brand with some adult content alongside mainstream material — it is an adult entertainment brand whose entire published catalogue, across every format and every platform property, is explicit in nature and intended for adult audiences only. Parents may be familiar with the brand from its long history as a print magazine, but the brand's digital presence makes its content as easily accessible to a child as any website — without the practical barriers that once came with a physical publication. Treating Penthouse's digital properties with the same seriousness as any other adult content platform is the appropriate response.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Parents May Wish to Restrict Access to Help Maintain a Safe and Age-Appropriate Digital Environment</div>
+        <div class="know-body">Maintaining an age-appropriate digital environment for children requires proactive restriction of adult content platforms, because the platforms themselves do not apply meaningful age verification and because children are capable of discovering and accessing this content independently through standard browsing. The decision to restrict access to a platform like Penthouse is a straightforward one for most families — the content is wholly inappropriate for children at any age, and no use case exists that would make access appropriate. The question for parents is not whether to restrict access but how comprehensively to do so across all of a child's devices and browsing contexts.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Brand's Long History and Wide Recognition Makes It Easily Discoverable by Older Children and Teenagers</div>
+        <div class="know-body">Penthouse is one of the most widely recognised adult entertainment brand names in the world, with decades of cultural visibility. Older children and teenagers are likely to be aware of the brand name through cultural references, peer discussion or media — and the ease with which the brand's digital properties can be found through a basic web search means that awareness of the name is a very short step from access to the content. Parents of older children and teenagers should be aware that familiarity with the brand name does not require prior access to the content, but makes independent discovery significantly more likely.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Comprehensive Device-Level Restrictions Are More Effective Than Removing a Single App</div>
+        <div class="know-body">Because Penthouse's content is accessible through browsers without any app installation, removing an app from a child's device does not prevent access. Effective restriction requires controls applied at the browser and network level across every device a child can use — including shared family devices, tablets and any device on a home or school network that the child has access to. Parents who rely solely on app-level controls may believe access is blocked when in fact the platform remains reachable through any browser. iLimits provides the controls necessary to address this broader access vector.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block adult content platforms like Penthouse instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block adult content platforms and websites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar adult entertainment platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps or platforms are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Penthouse as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from adult entertainment content and build a foundation of open, honest conversation about responsible internet use and age-appropriate digital habits.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Responsible Internet Use</div>
+        <div class="tip-body">Age-appropriate, honest conversation about adult content — what it is, why it exists and why it is not suitable for children — is one of the most effective protective tools available to parents. Children who receive a clear and honest explanation of why certain platforms are restricted, rather than simply being told they are off-limits without explanation, are better equipped to make the right decision when they encounter adult content in an uncontrolled environment. The conversation does not need to be extensive or clinical — it needs to be calm, honest and framed around the child's wellbeing rather than punishment or shame. Equally important is ensuring that children know they can come to a parent without fear if they encounter something online that concerns or confuses them.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Encourage Healthy and Age-Appropriate Digital Habits</div>
+        <div class="tip-body">Help your child develop a thoughtful, balanced approach to the internet by establishing household norms around the kinds of content that are and are not appropriate at their current age, and by making it normal to discuss what they are seeing online rather than treating it as a private or hidden activity. Children who feel that their digital life is something they can share with a parent — rather than something they need to conceal — are significantly more resilient to harmful content encounters. Reinforce that restrictions on adult content platforms are not punishments but protections, in the same way that age ratings on films, television and games protect children from content that is not appropriate for their stage of development.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools to Restrict Access to Adult Content Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — tablets, secondary phones and shared family computers included — and review those restrictions periodically as children acquire new devices or access new networks. Because adult entertainment platforms are accessible through browsers without any installation, consider enabling safe-search settings on all browsers used by children as an additional layer of protection. Also review the payment methods stored on shared devices to prevent a subscription service from being accessed using saved payment credentials. Technical controls and open conversation together form the most complete and durable protection available to your family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safe Digital Environment Begins With the Boundaries You Set at Home</h3>
+    <p class="closing-body">
+      Protecting children from adult entertainment content is one of the most straightforward and important steps any parent can take as part of their family's approach to digital safety. iLimits gives you the tools to enforce that protection technically — and the open, honest conversations you have with your child about why those boundaries exist give them the understanding and resilience to stay safe even when you are not there to intervene directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

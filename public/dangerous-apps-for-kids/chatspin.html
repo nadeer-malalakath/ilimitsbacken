@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatspin – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:       #F0436A;
+    --rose-deep:  #C72E54;
+    --rose-light: #FFF0F4;
+    --rose-mid:   #FFCCD8;
+    --blush:      #FEF7F9;
+    --blush-2:    #FDF2F5;
+    --ink:        #19121F;
+    --ink-soft:   #35253F;
+    --ink-mid:    #6B5879;
+    --ink-muted:  #A594B2;
+    --border:     #F0E6EC;
+    --bdr-soft:   #F8EEF3;
+    --surface:    #FFFFFF;
+
+    /* Chatspin brand: vivid violet-indigo */
+    --cs:         #6C3EFF;
+    --cs-mid:     #5628E0;
+    --cs-deep:    #3A17A8;
+    --cs-light:   #F5F2FF;
+    --cs-bdr:     #C8B8FF;
+    --cs-text:    #1E0878;
+    --cs-sub:     #2D0FA0;
+
+    --amber-bg:   #FFFBF0;
+    --amber-bdr:  #FDDCB0;
+    --amber-text: #7A3C08;
+    --red-bg:     #FFF5F5;
+    --red-bdr:    #FFCACA;
+    --red-text:   #7A0C0C;
+    --teal-bg:    #F0FDFB;
+    --teal-bdr:   #9FEDE0;
+    --blue-bg:    #F0F6FF;
+    --blue-bdr:   #BFDBFE;
+
+    --r-md: 18px;
+    --r-lg: 26px;
+    --sh-xs: 0 1px 5px rgba(108,62,255,0.07);
+    --sh-sm: 0 2px 14px rgba(108,62,255,0.10);
+    --sh-lg: 0 14px 52px rgba(108,62,255,0.20);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush); color: var(--ink);
+    line-height: 1.6; min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #08021E 0%, #120535 50%, #1A0645 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115%  0%,  rgba(108,62,255,0.34) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at  -8% 96%,  rgba(240,67,106,0.14) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hg-a {
+    position: absolute; top: -80px; right: -80px;
+    width: 310px; height: 310px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,62,255,0.30) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hg-b {
+    position: absolute; bottom: 24px; left: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.13) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hg-c {
+    position: absolute; top: 42%; left: 18%;
+    width: 280px; height: 130px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(130,80,255,0.09) 0%, transparent 70%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-in {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .e-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #C4AAFF; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.48);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* app card */
+  .ac {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--r-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .ac-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .ac-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1E0878 0%, #6C3EFF 55%, #B090FF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(108,62,255,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .ac-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .ac-name {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .ac-cat {
+    font-size: 11.5px; color: rgba(255,255,255,0.40);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .mg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .mc {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .ml { font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 3px; }
+  .mv { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .mv.high { color: #FCA5A5; }
+  .mf {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .rflag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-t { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-s { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--r-lg);
+    border: 1px solid var(--border); box-shadow: var(--sh-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* callout variants */
+  .cbox {
+    display: flex; align-items: flex-start; gap: 12px;
+    border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px;
+    border: 1.5px solid;
+  }
+  .cbox.violet { background: var(--cs-light); border-color: var(--cs-bdr); }
+  .cbox.red    { background: var(--red-bg);   border-color: var(--red-bdr); }
+  .cbox-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; border: 1.5px solid;
+  }
+  .cbox.violet .cbox-ico { background: #DDD0FF; border-color: var(--cs-bdr); }
+  .cbox.red    .cbox-ico { background: #FFE0E0; border-color: var(--red-bdr); }
+  .cbox-title { font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 3px; }
+  .cbox.violet .cbox-title { color: var(--cs-text); }
+  .cbox.red    .cbox-title { color: var(--red-text); }
+  .cbox-body { font-size: 12px; font-weight: 400; line-height: 1.55; }
+  .cbox.violet .cbox-body { color: var(--cs-sub); }
+  .cbox.red    .cbox-body { color: #5C0808; }
+
+  /* chips */
+  .chips {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--sh-xs);
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+
+  /* s1 card */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--bdr-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .frow {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .frow:last-child { border-bottom: none; }
+  .fico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .fn { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .fd { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* high risk strip */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .rs-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE0E0; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .rs-text strong { font-size: 13.5px; font-weight: 700; color: var(--red-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .rs-text span   { font-size: 12px; color: #5C0808; font-weight: 400; line-height: 1.5; }
+
+  /* risk grid */
+  .rgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .rcard {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 16px 13px 14px;
+    box-shadow: var(--sh-xs); position: relative; overflow: hidden;
+  }
+  .rcard::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .re { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rn { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rb { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* know rows */
+  .krow {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .krow:last-child { border-bottom: none; }
+  .knum {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .kt { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .kb { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* iLimits dark card */
+  .ilcard {
+    background: linear-gradient(150deg, #08021E 0%, #120535 100%);
+    border-radius: var(--r-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--sh-lg);
+    position: relative; overflow: hidden;
+  }
+  .ilcard::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,62,255,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .ilcard::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-ey {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-t {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-d { font-size: 13px; color: rgba(255,255,255,0.52); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .ilrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .ilrow:last-child { border-bottom: none; padding-bottom: 0; }
+  .ilck {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ilbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* note */
+  .nbox {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--r-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .nico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .nt { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .nb { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .nb strong { font-weight: 700; }
+
+  /* tip rows */
+  .trow {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--bdr-soft);
+  }
+  .trow:last-child { border-bottom: none; }
+  .tico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .ttn { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .ttb { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* closing */
+  .closing {
+    background: linear-gradient(135deg, #F5F2FF 0%, #EEE8FF 100%);
+    border: 1.5px solid var(--cs-bdr); border-radius: var(--r-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--sh-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,62,255,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cl-em { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .cl-t  {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--cs-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .cl-b  { font-size: 13px; color: var(--cs-text); font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* footer */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .fb { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .fi {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .fn-brand { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .ft { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-in    { animation: fadeUp 0.42s ease both; }
+  .cbox       { animation: fadeUp 0.42s ease 0.03s both; }
+  .chips      { animation: fadeUp 0.42s ease 0.04s both; }
+  .card       { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-strip { animation: fadeUp 0.42s ease 0.05s both; }
+  .rgrid      { animation: fadeUp 0.42s ease 0.06s both; }
+  .ilcard     { animation: fadeUp 0.42s ease 0.08s both; }
+  .nbox       { animation: fadeUp 0.42s ease 0.06s both; }
+  .closing    { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hg-a"></div>
+  <div class="hg-b"></div>
+  <div class="hg-c"></div>
+  <div class="hero-in">
+
+    <div class="eyebrow"><div class="e-dot"></div> iLimits Parental Controls</div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="ac">
+      <div class="ac-top">
+        <div class="ac-icon">🎡</div>
+        <div>
+          <div class="ac-name">Chatspin</div>
+          <div class="ac-cat">Random Video Chat / Stranger Chat</div>
+        </div>
+      </div>
+      <div class="mg">
+        <div class="mc"><div class="ml">Category</div><div class="mv">Random Video Chat</div></div>
+        <div class="mc"><div class="ml">Risk Level</div><div class="mv high">🔴 High</div></div>
+      </div>
+      <div class="mf">
+        <div class="ml">Primary Reason</div>
+        <div class="mv">Enables anonymous live video conversations with strangers worldwide</div>
+      </div>
+      <div class="rflag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-t">Flagged as Restricted in iLimits</div>
+          <div class="rf-s">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- § 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Chatspin's random live video model, its gender and interest filters, and why its design makes meaningful child protection structurally impossible.</p>
+  </div>
+
+  <div class="cbox violet">
+    <div class="cbox-ico">🎡</div>
+    <div>
+      <div class="cbox-title">Chatspin Is Built Around the "Spin" — A Single Tap Connects Children Live to a Random Stranger</div>
+      <div class="cbox-body">Chatspin's name reflects its core mechanic: a single tap "spins" to a random live video connection with a stranger anywhere in the world. The experience is designed to feel like a game of chance — exciting, immediate and unpredictable. For children, this means live two-way video exposure to an anonymous adult begins before there is any opportunity to assess, filter or exit. The spin mechanic deliberately gamifies human contact to maximise repeat engagement.</div>
+    </div>
+  </div>
+
+  <div class="chips">
+    <div class="chip"><span class="dot" style="background:#6C3EFF;"></span> Spin &amp; Match</div>
+    <div class="chip"><span class="dot" style="background:#F0436A;"></span> Gender Filter</div>
+    <div class="chip"><span class="dot" style="background:#FF8C00;"></span> Country Filter</div>
+    <div class="chip"><span class="dot" style="background:#00C9A7;"></span> AR Face Masks</div>
+    <div class="chip"><span class="dot" style="background:#0099E6;"></span> Text + Video</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Chatspin is a <strong>random video chat platform</strong> that connects users with strangers from around the world through instant live video conversations. Users tap to spin, start video chats, send messages and meet new people without any prior connection — in a fully anonymous environment designed around speed, unpredictability and repeat engagement rather than user safety.
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F5F2FF;">🎡</div>
+      <div>
+        <div class="fn">Spin-Based Instant Video Matching</div>
+        <div class="fd">Chatspin's signature "spin" mechanic opens a live two-way video connection with a random global stranger in a single tap. There is no profile, no delay and no preview — the live feed is active and visible before a child can assess who is on the other side.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF0F4;">⚧️</div>
+      <div>
+        <div class="fn">Gender Filter — A False Sense of Control</div>
+        <div class="fd">Chatspin offers a gender filter that allows users to select a preferred match gender. For children, this feature creates a false sense of safety and control — it narrows the match pool but does not verify identity, age or intent. Adults can select any gender presentation and the filter provides no meaningful protection against inappropriate contact.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF8F0;">🌍</div>
+      <div>
+        <div class="fn">Country Filter — Global Reach Remains</div>
+        <div class="fd">A country or region filter allows users to preference matches from specific locations. Like the gender filter, this narrows the pool without meaningfully reducing risk — inappropriate adults exist in every region, and the filter does nothing to screen for age, intent or identity.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F0FDFB;">🎭</div>
+      <div>
+        <div class="fn">AR Face Masks — Anonymity Made More Appealing</div>
+        <div class="fd">Chatspin includes augmented reality face filters and masks during video sessions. These features are deliberately designed to make anonymous video chat feel lighter, more playful and more appealing — lowering the perceived seriousness of interacting with unknown adults and making the platform more attractive to children.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="fn">Simultaneous Text Chat</div>
+        <div class="fd">Alongside the live video feed, Chatspin provides a concurrent text chat channel. This dual-channel design allows strangers to share contact information, links or inappropriate content in text while the live video connection is simultaneously active — doubling the vectors through which inappropriate material can reach a child.</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fico" style="background:#FFF5F5;">🔑</div>
+      <div>
+        <div class="fn">Premium Unlocks — Paid Features Lower Safeguards Further</div>
+        <div class="fd">Chatspin offers paid premium tiers that remove ads, unlock additional filters and extend the gender-match feature. The in-app economy creates financial incentives for adults to invest in the platform — and gives paying users more refined tools to target specific match profiles, including by apparent age range.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="rs-badge">🔴</div>
+    <div class="rs-text">
+      <strong>Chatspin Is Rated 🔴 High Risk in iLimits</strong>
+      <span>Anonymous live video matching, gamified repeat engagement, filters that create false safety signals and a dual-channel contact model place Chatspin in iLimits' highest risk category for children.</span>
+    </div>
+  </div>
+
+  <div class="cbox red" style="margin-bottom:22px;">
+    <div class="cbox-ico">🚫</div>
+    <div>
+      <div class="cbox-title">Chatspin's Filters Create the Appearance of Safety Without the Reality</div>
+      <div class="cbox-body">Chatspin's gender and country filters are frequently cited as evidence that the platform gives users control over their experience. Parents should understand that these filters operate on self-reported, unverified data only. Any adult can select any gender, report any location and use any face mask to present as something they are not. The filters make the platform feel more controllable — and are therefore more likely to convince a child it is safe to use — without providing any actual protection against inappropriate contact.</div>
+    </div>
+  </div>
+
+  <!-- § 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from Chatspin's spin mechanic, false-safety filters, AR anonymisation tools and dual-channel contact model.</p>
+  </div>
+
+  <div class="rgrid">
+    <div class="rcard">
+      <span class="re">🎡</span>
+      <div class="rn">Gamified Stranger Contact</div>
+      <div class="rb">The spin mechanic frames random adult contact as a game — engineered to maximise repeat engagement and make the risk feel exciting rather than real</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🔞</span>
+      <div class="rn">Explicit Content Exposure</div>
+      <div class="rb">Anonymous live video with no age verification means children can encounter explicit adult behaviour in real time before any moderation system can act</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🎭</span>
+      <div class="rn">Identity Concealment Tools</div>
+      <div class="rb">AR face masks and anonymous profiles allow adults to disguise their appearance and identity — making it harder for children to recognise they are speaking with an adult</div>
+    </div>
+    <div class="rcard">
+      <span class="re">⚠️</span>
+      <div class="rn">False Safety Signals</div>
+      <div class="rb">Gender and country filters create an unwarranted sense of control — convincing children the platform is safer than it is, while providing no actual protection against inappropriate contact</div>
+    </div>
+    <div class="rcard">
+      <span class="re">💬</span>
+      <div class="rn">Dual-Channel Contact</div>
+      <div class="rb">Simultaneous video and text chat doubles the pathways for inappropriate content — links, contact requests and explicit material can arrive through text while video is active</div>
+    </div>
+    <div class="rcard">
+      <span class="re">🔓</span>
+      <div class="rn">No Age Verification</div>
+      <div class="rb">Chatspin requires no registration or age check to begin. Any child can access the full platform anonymously and immediately — with no account, no record and no recourse</div>
+    </div>
+  </div>
+
+  <!-- § 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="krow">
+      <div class="knum">1</div>
+      <div>
+        <div class="kt">Anonymous Video Chat Platforms Connect Children With Strangers in Real Time — With No Preview</div>
+        <div class="kb">On Chatspin, the live video feed is active the moment a child taps spin. There is no profile to review, no community to assess and no way to know who is on the other side before the connection is already open and both parties are live on camera. This structural immediacy — combined with full anonymity — means that on every single spin, a child is taking a completely unscreened live video call from a global pool of unknown adults.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">2</div>
+      <div>
+        <div class="kt">The Unpredictability Is the Point — And That Is Exactly What Makes It Dangerous</div>
+        <div class="kb">Chatspin's spin mechanic is not a neutral design feature — it is a deliberate application of variable-reward psychology, the same mechanism that makes slot machines compelling. Children who use Chatspin are not primarily seeking connection; they are seeking the rush of unpredictability. This psychological pull means children may return to the platform not despite encountering uncomfortable or inappropriate content, but because the overall experience is compelling in a way that overrides their better judgment.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">3</div>
+      <div>
+        <div class="kt">The Filters May Actually Increase Risk by Reducing a Child's Alertness</div>
+        <div class="kb">A child who believes they have set a "safe" gender filter or country preference may be less guarded than one who knows they have no controls at all. Because Chatspin's filters are built on entirely self-reported, unverified data, they provide the psychological comfort of apparent safety while delivering none of its substance. Parents should understand that a child who says "it's fine, I have the filter on" may in fact be more vulnerable, not less.</div>
+      </div>
+    </div>
+    <div class="krow">
+      <div class="knum">4</div>
+      <div>
+        <div class="kt">No Account Means No Record, No Evidence and No Recourse</div>
+        <div class="kb">Chatspin does not require registration to use in its basic form. This means there is no account history, no interaction log and no verifiable identity attached to any session. If a child encounters a predatory adult or harmful content on Chatspin, there is nothing to report, no account to flag and no practical investigative trail for parents or authorities. The platform's anonymity is total — and symmetrical for both parties.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="ilcard">
+    <div class="il-ey">✦ iLimits Protection</div>
+    <h3 class="il-t">You Stay Fully in Control</h3>
+    <p class="il-d">iLimits gives parents simple, reliable tools to block random video chat and stranger chat apps like Chatspin instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Block random video chat and anonymous stranger apps by category</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Restricted categories allow instant one-tap blocking of similar platforms</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Parents remain fully in control of every restriction applied</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Receive alerts when flagged apps are installed on your child's device</div></div>
+      <div class="ilrow"><div class="ilck">✓</div><div class="ilbl">Works quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- § 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="nbox">
+    <div class="nico">⚠️</div>
+    <div>
+      <div class="nt">iLimits Does Not Block Apps Automatically</div>
+      <div class="nb">iLimits identifies and flags apps like Chatspin as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- § 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from the specific high-risk design of gamified anonymous video chat.</p>
+  </div>
+
+  <div class="card">
+    <div class="trow">
+      <div class="tico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="ttn">Teach Children About the Risks of Interacting With Strangers Through Live Video</div>
+        <div class="ttb">Have a direct conversation about why platforms like Chatspin — where anonymous adults appear live on video before any assessment is possible — are categorically unsafe. Specifically address the spin mechanic and how its variable-reward design is engineered to make the risk feel exciting rather than dangerous. Help children understand that face-to-face video exposure to an unknown adult is qualitatively different from text-based contact — it is immediate, visual and far harder to process or forget. Make clear that the presence of filters does not mean the platform is safe, and explain why.</div>
+      </div>
+    </div>
+    <div class="trow">
+      <div class="tico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="ttn">Discuss Online Safety and Privacy Awareness</div>
+        <div class="ttb">Talk with your child about what it means to appear live on camera with a stranger who is entirely anonymous — who could be anywhere in the world, any age and presenting as anything they choose. Help them understand that "anonymous" protects the other person just as much as it protects them — and that this symmetry is not safety, it is the absence of accountability on both sides. Discuss what responsible digital behaviour looks like on video platforms specifically, and make sure your child feels comfortable coming to you if something makes them uncomfortable online.</div>
+      </div>
+    </div>
+    <div class="trow">
+      <div class="tico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="ttn">Use Parental Controls to Restrict Access to Anonymous Video Chat Platforms</div>
+        <div class="ttb">Apply iLimits restrictions consistently across every device your child uses — including tablets, spare phones and shared family devices. Because Chatspin can be accessed through a browser as well as an app install, consider addressing both vectors if your child is likely to seek it out. Device-level category blocking is more reliable than monitoring for specific app names, since the random video chat category includes multiple interchangeable platforms. Pair consistent controls with the kind of honest family conversation that makes restrictions feel like protection — and makes children more likely to come to you when something goes wrong.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="cl-em">✨</span>
+    <h3 class="cl-t">Some Spins Aren't Worth Taking</h3>
+    <p class="cl-b">The best connections in a child's life are not random — they are built with people who are known, trusted and genuinely safe. iLimits helps you ensure your child's digital world is one where the people they meet are chosen with care, not spun up by an algorithm designed to keep them scrolling.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="fb">
+      <div class="fi">i</div>
+      <div class="fn-brand">iLimits</div>
+    </div>
+    <p class="ft">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

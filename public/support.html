@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help & Support – iLimits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rose:         #F0436A;
+  --rose-deep:    #C8284E;
+  --rose-soft:    #F9728E;
+  --blush:        #FDE8EC;
+  --blush-mid:    #FBC8D3;
+  --petal:        #FEF3F5;
+  --ink:          #18100E;
+  --ink-mid:      #3D2820;
+  --text:         #2D1F1B;
+  --muted:        #7A6560;
+  --faint:        #C4B5B0;
+  --surface:      #FFFAF9;
+  --white:        #FFFFFF;
+  --border:       #EDE0DC;
+  --border-soft:  #F5ECEB;
+  --green:        #0D7A5F;
+  --green-bg:     #EDFAF5;
+  --green-border: #A7F3D0;
+  --amber:        #C47B0A;
+  --amber-bg:     #FEF7E6;
+  --amber-border: #FDE68A;
+  --blue:         #2358C8;
+  --blue-bg:      #EFF4FF;
+  --blue-border:  #BFCFFF;
+  --shadow-xs:   0 1px 4px rgba(24,16,14,0.06);
+  --shadow-sm:   0 2px 12px rgba(24,16,14,0.07);
+  --shadow-md:   0 6px 28px rgba(24,16,14,0.09);
+  --shadow-lg:   0 16px 60px rgba(24,16,14,0.12);
+  --r-sm:  12px;
+  --r-md:  20px;
+  --r-lg:  28px;
+  --r-xl:  40px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,250,249,0.88);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  padding: 0 28px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(145deg, var(--rose) 0%, var(--rose-soft) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: white;
+  box-shadow: 0 4px 12px rgba(240,67,106,0.35);
+  overflow: hidden;
+}
+.nav-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+.nav-logo span {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.25rem; color: var(--ink);
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--muted); text-decoration: none;
+  font-size: 0.875rem; font-weight: 600;
+  padding: 8px 16px; border-radius: 100px;
+  border: 1px solid var(--border); background: var(--white);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-xs);
+}
+.nav-back:hover { color: var(--ink); border-color: var(--faint); transform: translateY(-1px); }
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  padding: 120px 28px 100px;
+  background: linear-gradient(160deg, #FEF0F3 0%, #FDF5F7 52%, var(--surface) 100%);
+  position: relative; overflow: hidden;
+  margin-top: 64px;
+}
+.hero-orb {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+.hero-orb.a {
+  width: 520px; height: 520px; top: -130px; right: -130px;
+  background: radial-gradient(circle, rgba(240,67,106,0.09) 0%, transparent 70%);
+}
+.hero-orb.b {
+  width: 340px; height: 340px; bottom: -60px; left: -80px;
+  background: radial-gradient(circle, rgba(240,67,106,0.06) 0%, transparent 70%);
+}
+.hero-inner {
+  max-width: 720px; margin: 0 auto;
+  position: relative; z-index: 1; text-align: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); border: 1px solid var(--blush-mid);
+  border-radius: 100px; padding: 7px 16px;
+  font-size: 0.8rem; font-weight: 700; color: var(--rose-deep);
+  margin-bottom: 24px; box-shadow: var(--shadow-xs);
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.85); }
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.5rem, 5vw, 3.7rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--rose); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.75; max-width: 540px;
+  margin: 0 auto 36px;
+}
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 100px; padding: 8px 16px;
+  font-size: 0.83rem; font-weight: 600; color: var(--ink-mid);
+  box-shadow: var(--shadow-xs);
+}
+
+/* ── QUICK LINKS ──────────────────────── */
+.quicklinks-wrap {
+  max-width: 720px; margin: 0 auto;
+  padding: 40px 28px 0;
+}
+.quicklinks-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 26px 30px;
+  box-shadow: var(--shadow-xs);
+}
+.ql-label {
+  font-size: 0.75rem; font-weight: 800; color: var(--rose);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ql-label::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+.ql-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+}
+.ql-link {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none; color: var(--muted);
+  font-size: 0.875rem; font-weight: 500;
+  padding: 8px 0; border-bottom: 1px solid var(--border-soft);
+  transition: color 0.2s;
+}
+.ql-link:hover { color: var(--rose); }
+.ql-arrow {
+  font-size: 11px; color: var(--faint);
+  transition: color 0.2s, transform 0.2s;
+}
+.ql-link:hover .ql-arrow { color: var(--rose); transform: translateX(2px); }
+
+/* ── CONTENT ─────────────────────────── */
+.content {
+  max-width: 720px; margin: 0 auto;
+  padding: 36px 28px 80px;
+}
+
+/* section heading row */
+.section-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px; margin-top: 8px;
+}
+.section-row h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.section-row-line { flex: 1; height: 1px; background: var(--border-soft); }
+
+/* faq card */
+.faq-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  transition: box-shadow 0.25s;
+}
+.faq-card:hover { box-shadow: var(--shadow-sm); }
+
+.faq-question {
+  width: 100%; background: none; border: none;
+  padding: 22px 24px;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer; text-align: left;
+  transition: background 0.2s;
+}
+.faq-question:hover { background: var(--petal); }
+
+.faq-q-icon {
+  width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0;
+  background: var(--blush);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px;
+  transition: background 0.2s;
+}
+.faq-card.open .faq-q-icon { background: var(--rose); }
+
+.faq-q-text {
+  flex: 1;
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--ink); line-height: 1.35;
+}
+.faq-card.open .faq-q-text { color: var(--rose-deep); }
+
+.faq-chevron {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border-soft);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, background 0.2s;
+  color: var(--muted); font-size: 13px;
+}
+.faq-card.open .faq-chevron {
+  transform: rotate(180deg);
+  background: var(--blush); color: var(--rose-deep);
+}
+
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+}
+.faq-card.open .faq-answer { max-height: 800px; }
+
+.faq-answer-inner {
+  padding: 0 24px 22px 82px;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 18px;
+}
+
+.faq-answer-inner p {
+  color: var(--muted); font-size: 0.93rem;
+  line-height: 1.8; margin-bottom: 14px;
+}
+.faq-answer-inner p:last-child { margin-bottom: 0; }
+.faq-answer-inner strong { color: var(--ink); font-weight: 700; }
+
+/* answer list */
+.ans-list { list-style: none; margin: 10px 0 14px; }
+.ans-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border-soft);
+  color: var(--muted); font-size: 0.9rem; line-height: 1.65;
+}
+.ans-list li:first-child { padding-top: 0; }
+.ans-list li:last-child  { border-bottom: none; padding-bottom: 0; }
+.ans-dot {
+  width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+  background: var(--blush); color: var(--rose);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800; margin-top: 2px;
+}
+
+/* inline highlight */
+.ans-highlight {
+  background: var(--petal);
+  border: 1px solid var(--blush-mid);
+  border-left: 4px solid var(--rose);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin: 12px 0;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.ans-highlight-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.ans-highlight p {
+  color: var(--ink-mid); font-weight: 600;
+  font-size: 0.88rem; margin: 0; line-height: 1.65;
+}
+
+/* info block inside answer */
+.ans-info {
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-left: 4px solid var(--green);
+  border-radius: var(--r-sm);
+  padding: 14px 16px; margin: 12px 0;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.ans-info p { color: #065F46; font-weight: 500; font-size: 0.88rem; margin: 0; line-height: 1.65; }
+
+.ans-warning {
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--r-sm);
+  padding: 14px 16px; margin: 12px 0;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.ans-warning p { color: #7C4A00; font-weight: 500; font-size: 0.88rem; margin: 0; line-height: 1.65; }
+
+/* step chips */
+.step-row {
+  display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0;
+}
+.step-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blush); border: 1px solid var(--blush-mid);
+  border-radius: 100px; padding: 5px 12px;
+  font-size: 0.8rem; font-weight: 700; color: var(--rose-deep);
+}
+.step-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--rose); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800;
+}
+
+/* ── CONTACT CARD ─────────────────────── */
+.contact-cta {
+  background: linear-gradient(145deg, var(--rose) 0%, #F9607E 50%, #FCA7B3 100%);
+  border-radius: var(--r-xl);
+  padding: 56px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 20px 60px rgba(240,67,106,0.28);
+}
+.contact-cta::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+}
+.contact-cta::after {
+  content: ''; position: absolute; bottom: -60px; left: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.contact-cta h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700; color: white;
+  letter-spacing: -0.02em; margin-bottom: 10px;
+  position: relative; z-index: 1;
+}
+.contact-cta .cta-sub {
+  color: rgba(255,255,255,0.82); font-size: 0.97rem;
+  margin-bottom: 6px; position: relative; z-index: 1;
+}
+.cta-email {
+  color: white; font-weight: 800; font-size: 1.05rem;
+  letter-spacing: 0.2px; position: relative; z-index: 1;
+  display: block; margin-bottom: 28px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.cta-email:hover { opacity: 0.85; text-decoration: underline; color: white; }
+.cta-btns {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; position: relative; z-index: 1;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; color: var(--rose-deep);
+  padding: 12px 26px; border-radius: 100px;
+  text-decoration: none; font-weight: 700; font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: var(--rose-deep); text-decoration: none; }
+.cta-btn-outline {
+  background: rgba(255,255,255,0.15); color: white !important;
+  border: 1.5px solid rgba(255,255,255,0.4); box-shadow: none;
+}
+.cta-btn-outline:hover { background: rgba(255,255,255,0.25); box-shadow: none; color: white !important; }
+
+/* ── FOOTER ──────────────────────────── */
+footer {
+  background: var(--ink); color: white;
+  padding: 36px 28px;
+}
+.footer-inner {
+  max-width: 720px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none;
+}
+.footer-logo-mark {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(145deg, var(--rose), var(--rose-soft));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; overflow: hidden;
+}
+.footer-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+.footer-logo span {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.05rem; color: white;
+}
+.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 0.8rem; font-weight: 600;
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: white; }
+
+/* ── RESPONSIVE ──────────────────────── */
+@media (max-width: 640px) {
+  .hero          { padding: 100px 20px 72px; }
+  .quicklinks-wrap { padding: 32px 20px 0; }
+  .ql-grid       { grid-template-columns: 1fr; }
+  .content       { padding: 32px 20px 64px; }
+  .faq-answer-inner { padding-left: 24px; }
+  .contact-cta   { padding: 40px 24px; }
+  .cta-btns      { flex-direction: column; align-items: center; }
+  .footer-inner  { flex-direction: column; text-align: center; }
+  .footer-links  { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
+      </div>
+      <span>iLimits</span>
+    </a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb a"></div>
+  <div class="hero-orb b"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      We're here to help
+    </div>
+    <h1>Help &amp; <em>Support</em></h1>
+    <p class="hero-sub">Everything you need to set up iLimits, manage your family's screen time, and get the most from parental controls — answered clearly and simply.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">👨‍👩‍👧 Parent support</span>
+      <span class="hero-pill">⚡ Simple setup</span>
+      <span class="hero-pill">🔒 Privacy focused</span>
+      <span class="hero-pill">📧 Always reachable</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quicklinks-wrap">
+  <div class="quicklinks-card">
+    <div class="ql-label">Jump to a question</div>
+    <div class="ql-grid">
+      <a href="#q1" class="ql-link">How do I connect a child device? <span class="ql-arrow">→</span></a>
+      <a href="#q2" class="ql-link">Why does the app need Accessibility? <span class="ql-arrow">→</span></a>
+      <a href="#q3" class="ql-link">How do I block apps or categories? <span class="ql-arrow">→</span></a>
+      <a href="#q4" class="ql-link">How do I set screen time limits? <span class="ql-arrow">→</span></a>
+      <a href="#q5" class="ql-link">How do I uninstall iLimits? <span class="ql-arrow">→</span></a>
+      <a href="#q6" class="ql-link">Can I set a bedtime schedule? <span class="ql-arrow">→</span></a>
+      <a href="#q7" class="ql-link">What are restricted categories? <span class="ql-arrow">→</span></a>
+      <a href="#q8" class="ql-link">How do I delete my account? <span class="ql-arrow">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <div class="section-row">
+    <h2>Frequently Asked Questions</h2>
+    <span class="section-row-line"></span>
+  </div>
+
+  <!-- Q1: Connect a child device -->
+  <div class="faq-card open" id="q1">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="true">
+      <div class="faq-q-icon">📱</div>
+      <span class="faq-q-text">How do I connect a child device to my parent account?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Linking a child's device to your parent account is a straightforward process. You'll need brief access to both the parent device and the child's device to complete the setup.</p>
+        <div class="step-row">
+          <span class="step-chip"><span class="step-num">1</span> Install iLimits on child device</span>
+          <span class="step-chip"><span class="step-num">2</span> Open app on child device</span>
+          <span class="step-chip"><span class="step-num">3</span> Select "Connect to Parent"</span>
+          <span class="step-chip"><span class="step-num">4</span> Enter or scan the pairing code</span>
+          <span class="step-chip"><span class="step-num">5</span> Confirm from parent app</span>
+        </div>
+        <p>Once linked, the child device will appear in your parent dashboard and your configured limits and rules will begin applying immediately.</p>
+        <div class="ans-info">
+          <span style="font-size:16px; flex-shrink:0;">✅</span>
+          <p>You can link multiple child devices from a single parent account. Each device can have its own individual rules, schedules, and limits.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Accessibility permission -->
+  <div class="faq-card" id="q2">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">♿</div>
+      <span class="faq-q-text">Why does iLimits require Accessibility permission?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>iLimits uses Android's Accessibility Service because it is the only reliable way for an app to detect which application is currently active on a device and act on it in real time.</p>
+        <p><strong>This permission is used exclusively to:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">✓</span> Detect which app is currently open or in the foreground</li>
+          <li><span class="ans-dot">✓</span> Enforce screen time limits by prompting the user when a limit is reached</li>
+          <li><span class="ans-dot">✓</span> Block access to restricted or blocked apps as configured by the parent</li>
+        </ul>
+        <div class="ans-highlight">
+          <span class="ans-highlight-icon">🔒</span>
+          <p>iLimits does <strong>not</strong> read screen content, capture keystrokes, record messages, access photos, or monitor any personal communications. Accessibility access is strictly limited to enforcing the parental controls you set.</p>
+        </div>
+        <p>Without this permission, iLimits cannot enforce app blocking or screen time limits. It is a required permission for the core functionality of the app to work correctly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: Block apps or categories -->
+  <div class="faq-card" id="q3">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">🚫</div>
+      <span class="faq-q-text">How do I block apps or entire categories?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>iLimits gives you two flexible ways to manage access — you can block individual apps, or apply controls to entire categories at once.</p>
+
+        <p><strong>Blocking individual apps:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Open the iLimits parent app and go to <strong>App Management</strong></li>
+          <li><span class="ans-dot">2</span> Browse or search for the app you want to block</li>
+          <li><span class="ans-dot">3</span> Toggle the app to <strong>Blocked</strong> — it takes effect immediately</li>
+        </ul>
+
+        <p><strong>Blocking by category:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Go to <strong>Categories</strong> in the parent app</li>
+          <li><span class="ans-dot">2</span> Select the category (e.g. Games, Social, Gambling)</li>
+          <li><span class="ans-dot">3</span> Toggle the entire category to <strong>Blocked</strong> or set a time limit</li>
+        </ul>
+
+        <div class="ans-info">
+          <span style="font-size:16px; flex-shrink:0;">🗂️</span>
+          <p>Category-based blocking is the most efficient way to manage access. Instead of blocking apps one by one, a single toggle applies rules to all apps in that category simultaneously.</p>
+        </div>
+
+        <p>You can also create <strong>custom categories</strong> to group apps in ways that match your family's rules — for example, grouping all homework tools into an "Education" category with a minimum daily usage requirement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Screen time limits -->
+  <div class="faq-card" id="q4">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">⏰</div>
+      <span class="faq-q-text">How do I set daily screen time limits and schedules?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>iLimits lets you set flexible daily usage limits and automatic device schedules for each linked child device.</p>
+
+        <p><strong>Setting a daily screen time limit:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Open the parent app and select the child device</li>
+          <li><span class="ans-dot">2</span> Tap <strong>Screen Time Limits</strong></li>
+          <li><span class="ans-dot">3</span> Set a daily time budget (e.g. 2 hours)</li>
+          <li><span class="ans-dot">4</span> Optionally customise limits per day of the week</li>
+        </ul>
+
+        <p><strong>Setting a device schedule:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Go to <strong>Schedules</strong> in the child device settings</li>
+          <li><span class="ans-dot">2</span> Define time blocks when the device should be restricted (e.g. school hours, bedtime)</li>
+          <li><span class="ans-dot">3</span> Save the schedule — restrictions apply automatically</li>
+        </ul>
+
+        <div class="ans-highlight">
+          <span class="ans-highlight-icon">💡</span>
+          <p>You can set different limits for school days and weekends. For example, a stricter 1-hour limit on weekdays and a more relaxed 3-hour limit on Saturdays and Sundays.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Uninstall -->
+  <div class="faq-card" id="q5">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">🗑️</div>
+      <span class="faq-q-text">How do I uninstall iLimits from a device?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>iLimits uses an optional <strong>Device Administrator</strong> permission to prevent children from easily uninstalling the app without parental knowledge. If this permission is active, you must deactivate it first before the app can be removed.</p>
+
+        <div class="ans-warning">
+          <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+          <p>If you attempt to uninstall iLimits without first removing Device Admin permission, Android will block the uninstallation. This is intentional and protects the integrity of your parental controls.</p>
+        </div>
+
+        <p><strong>To uninstall iLimits:</strong></p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Open the parent iLimits app on the child device (requires parent PIN)</li>
+          <li><span class="ans-dot">2</span> Go to <strong>Settings → Device Admin</strong></li>
+          <li><span class="ans-dot">3</span> Tap <strong>Deactivate Device Admin</strong> and confirm with your parent PIN</li>
+          <li><span class="ans-dot">4</span> You can now uninstall iLimits via your device's standard app settings</li>
+        </ul>
+
+        <p>Alternatively, go to your device's <strong>Settings → Security → Device Admin Apps</strong>, deactivate iLimits, and then uninstall normally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6: Bedtime schedule -->
+  <div class="faq-card" id="q6">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">🌙</div>
+      <span class="faq-q-text">Can I set a bedtime or focus schedule?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Yes — iLimits supports automatic bedtime and focus schedules that restrict device access during specific hours without you needing to manually intervene each day.</p>
+        <ul class="ans-list">
+          <li><span class="ans-dot">1</span> Open the parent app and select the child device</li>
+          <li><span class="ans-dot">2</span> Tap <strong>Schedules → Add Schedule</strong></li>
+          <li><span class="ans-dot">3</span> Choose a type: <strong>Bedtime</strong>, <strong>School Hours</strong>, or <strong>Custom</strong></li>
+          <li><span class="ans-dot">4</span> Set the start and end times and select which days apply</li>
+          <li><span class="ans-dot">5</span> Save — restrictions will activate automatically</li>
+        </ul>
+        <div class="ans-info">
+          <span style="font-size:16px; flex-shrink:0;">🌟</span>
+          <p>During a scheduled restriction, the device screen is locked or limited to approved apps only. You can set exceptions — for example allowing certain educational apps during school hours even when social and gaming apps are blocked.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7: Restricted categories -->
+  <div class="faq-card" id="q7">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">🔒</div>
+      <span class="faq-q-text">What are restricted categories and how do they work?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Restricted categories are special app groupings — such as <strong>Gambling</strong>, <strong>Adult Content</strong>, or <strong>Betting</strong> — that iLimits flags as high-risk for children. These categories are pre-configured based on the type of content or financial risk the apps present.</p>
+        <p>As a parent, you can view the restricted categories list and choose to block all apps in a restricted category with a single toggle. iLimits also provides <strong>educational information</strong> about why certain apps in these categories may be harmful, helping you have informed conversations with your child.</p>
+        <div class="ans-highlight">
+          <span class="ans-highlight-icon">🛡️</span>
+          <p>iLimits never automatically blocks apps without your explicit action. Restricted categories are flagged to inform you — the decision to block always remains yours as the parent.</p>
+        </div>
+        <p>You can access restricted category information from <strong>Categories → Restricted</strong> in the parent app.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8: Delete account -->
+  <div class="faq-card" id="q8">
+    <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+      <div class="faq-q-icon">🗂️</div>
+      <span class="faq-q-text">How do I delete my iLimits account and data?</span>
+      <div class="faq-chevron">▾</div>
+    </button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>You can delete your iLimits account and all associated data at any time. Account deletion is permanent and removes all parent account data, child profiles, screen time history, and device configurations.</p>
+        <p><strong>Option 1 — Inside the app:</strong> Go to <strong>Settings → Account → Delete Account</strong> and confirm your choice.</p>
+        <p><strong>Option 2 — By email:</strong> Send a deletion request from your registered email address to <a href="mailto:support@ilimits.app">support@ilimits.app</a> with the subject line <em>"Account Deletion Request"</em>.</p>
+        <div class="ans-info">
+          <span style="font-size:16px; flex-shrink:0;">📄</span>
+          <p>For full details on what data gets deleted and how the process works, visit our <a href="account-deletion.html" style="color: var(--green); font-weight: 700;">Account &amp; Data Deletion page</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT CTA -->
+  <div class="contact-cta" style="margin-top: 40px;">
+    <h2>Still Need Help?</h2>
+    <p class="cta-sub">Our support team is here for you. Send us an email and we'll get back to you promptly.</p>
+    <a href="mailto:support@ilimits.app" class="cta-email">support@ilimits.app</a>
+    <div class="cta-btns">
+      <a href="mailto:support@ilimits.app" class="cta-btn">📧 Email Support</a>
+      <a href="index.html" class="cta-btn cta-btn-outline">🌐 Back to Website</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <div class="footer-logo-mark">
+        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
+      </div>
+      <span>iLimits</span>
+    </a>
+    <span class="footer-copy">© 2026 iLimits. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="account-deletion.html">Data Deletion</a>
+      <a href="mailto:support@ilimits.app">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const card = btn.closest('.faq-card');
+    const isOpen = card.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-card.open').forEach(c => {
+      c.classList.remove('open');
+      c.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    // open clicked if it was closed
+    if (!isOpen) {
+      card.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      // smooth scroll into view on mobile
+      setTimeout(() => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < 80) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  }
+</script>
+
+</body>
+</html>

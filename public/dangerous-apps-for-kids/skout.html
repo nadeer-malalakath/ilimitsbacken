@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skout – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Skout brand: vivid electric teal-green */
+    --skout:        #00C9A7;
+    --skout-mid:    #00A98C;
+    --skout-deep:   #007060;
+    --skout-light:  #F0FFFC;
+    --skout-bdr:    #9FEDE0;
+    --skout-text:   #00403A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFCACA;
+    --red-text:     #7A0C0C;
+    --slate-bg:     #F5F7FA;
+    --slate-bdr:    #D0D8E8;
+    --slate-text:   #2D3A52;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(0,201,167,0.07);
+    --shadow-sm:    0 2px 14px rgba(0,201,167,0.10);
+    --shadow-md:    0 6px 30px rgba(0,201,167,0.13);
+    --shadow-lg:    0 14px 52px rgba(0,201,167,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════
+     HERO — deep slate-teal
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #021A16 0%, #052820 50%, #073428 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,201,167,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.13) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,167,0.26) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #80F0E0; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #004840 0%, #00C9A7 55%, #4DEDD8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,201,167,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.15;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════
+     MAIN
+  ══════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── History callout – Skout's troubled past ── */
+  .history-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--skout-light);
+    border: 1.5px solid var(--skout-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .history-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #AAFAF0; border: 1.5px solid var(--skout-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .history-title { font-size: 13px; font-weight: 700; color: var(--skout-text); line-height: 1.3; margin-bottom: 3px; }
+  .history-body  { font-size: 12px; color: #004840; font-weight: 400; line-height: 1.55; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Live broadcast warning ── */
+  .live-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg);
+    border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .live-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0E0; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .live-title { font-size: 13px; font-weight: 700; color: var(--red-text); line-height: 1.3; margin-bottom: 3px; }
+  .live-body  { font-size: 12px; color: #5C0808; font-weight: 400; line-height: 1.55; }
+
+  /* ── Age strip ── */
+  .age-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--skout-light);
+    border: 1.5px solid var(--skout-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .age-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #AAFAF0; border: 1.5px solid var(--skout-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .age-text strong { font-size: 13.5px; font-weight: 700; color: var(--skout-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .age-text span   { font-size: 12px; color: #004840; font-weight: 400; line-height: 1.5; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #021A16 0%, #052820 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,167,0.24) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .age-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .history-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .live-note       { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔭</div>
+        <div>
+          <div class="app-name-text">Skout</div>
+          <div class="app-sub">Social Discovery / Stranger Chat</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Discovery</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows users to communicate with strangers worldwide</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Skout's global stranger-chat design, its history of child safety incidents and why it remains a concern for parents today.</p>
+  </div>
+
+  <!-- Skout's documented history of child safety issues -->
+  <div class="history-callout">
+    <div class="history-ico">📋</div>
+    <div>
+      <div class="history-title">Skout Has a Documented History of Child Safety Incidents</div>
+      <div class="history-body">Skout is one of the earlier location-based stranger-chat platforms, launched in 2007. In 2012 the company temporarily suspended its teen section following multiple reported sexual assaults on minors who had connected with adults through the app. While safeguards have been updated since, Skout remains a platform where adults and strangers can freely interact — with no meaningful identity verification and minimal content moderation in place.</div>
+    </div>
+  </div>
+
+  <!-- Mode chips -->
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00C9A7;"></span> Nearby Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Shake to Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Live Broadcast</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Points & Gifts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0099E6;"></span> Private Messaging</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Skout is a <strong>global social discovery and stranger-chat platform</strong> that allows users to meet and chat with new people nearby or around the world. Users create profiles, browse others by location, participate in live broadcasts and send messages — all within an open environment where no prior connection or mutual consent is required to make contact.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FFFC;">📍</div>
+      <div>
+        <div class="feat-name">Location-Based Nearby Discovery</div>
+        <div class="feat-desc">Skout's core feature surfaces other users based on their physical proximity. A child using the platform is immediately visible to unknown adults nearby — with no opt-out from local discovery available without fully disabling location access on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF5F9;">🤝</div>
+      <div>
+        <div class="feat-name">Shake to Chat — Random Contact</div>
+        <div class="feat-desc">Skout's "Shake to Chat" feature connects users with a random stranger on the platform. This removes even the limited gatekeeping of profile browsing — a child shaking their device is immediately connected with an unknown adult for unmoderated real-time chat.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">📺</div>
+      <div>
+        <div class="feat-name">Live Broadcasting</div>
+        <div class="feat-desc">Users can broadcast live video to the Skout community and receive real-time comments and virtual gifts. Live streams are largely unmoderated and expose viewers — including children — to adult behaviour and conversations without warning or filtering.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Open & Unmoderated Private Messaging</div>
+        <div class="feat-desc">Any user can send a message to any other user on the platform. Private chats are unscreened and entirely private — there is no content moderation, no parental visibility and no two-way consent requirement before contact begins.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF8F0;">🎁</div>
+      <div>
+        <div class="feat-name">Points, Gifts & In-App Purchases</div>
+        <div class="feat-desc">Skout uses a virtual points economy for sending gifts and boosting profiles. Points are purchased with real money through in-app payments. Children with access to a parent's device or saved payment method could make purchases without parental awareness.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDFB;">🌐</div>
+      <div>
+        <div class="feat-name">Global Reach With No Identity Verification</div>
+        <div class="feat-desc">Skout's user base spans the globe with millions of registered users across many countries. Registration requires only a date of birth — no identity check confirms that users are the age they claim, meaning adults can easily present as peers to children on the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age strip -->
+  <div class="age-strip">
+    <div class="age-badge">🔞</div>
+    <div class="age-text">
+      <strong>Skout Is Intended for Users 17 or Older</strong>
+      <span>The platform's open stranger-contact model, live broadcasting and unmoderated private messaging are not appropriate for children at any age. No child-safe mode or age-restricted content tier is available.</span>
+    </div>
+  </div>
+
+  <!-- Live broadcast / Shake to Chat red warning -->
+  <div class="live-note">
+    <div class="live-ico">🎲</div>
+    <div>
+      <div class="live-title">"Shake to Chat" Randomly Connects Children With Unknown Adults</div>
+      <div class="live-body">Skout's Shake to Chat feature is unique — and uniquely risky. Unlike profile browsing where a child at least chooses who they engage with, Shake to Chat removes all choice: a single gesture connects a child instantly and randomly with any adult on the platform for unmoderated real-time chat. This is one of the most indiscriminate stranger-contact mechanisms available on any mainstream social platform.</div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from Skout's random chat features, location exposure, live broadcasts and documented safety history.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Open Stranger Contact</div>
+      <div class="rc-desc">Any adult can message any child on the platform without a prior connection — no match, follow or consent is required to begin contact</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎲</span>
+      <div class="rc-name">Random Chat Feature</div>
+      <div class="rc-desc">Shake to Chat instantly connects children with random unknown adults for unmoderated conversation — with no choice, profile or filter involved</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location-Based Targeting</div>
+      <div class="rc-desc">Nearby discovery exposes a child's physical location to all local users — enabling adults in the area to specifically find and contact local children</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📺</span>
+      <div class="rc-name">Unmoderated Live Video</div>
+      <div class="rc-desc">Live broadcasts expose children to adult behaviour and inappropriate content in real time with no pre-screening or age-based filtering</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Adult Impersonation</div>
+      <div class="rc-desc">With no identity verification, adults can present as peers on Skout — leaving children with no way to confirm who they are genuinely speaking to</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📋</span>
+      <div class="rc-name">Prior Safety Incidents</div>
+      <div class="rc-desc">Skout has a documented history of child safety incidents involving adult-minor contact — a track record that warrants heightened parental caution</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Skout Allows Open Interaction Between Strangers — Including Adults and Children</div>
+        <div class="know-body">Skout's design prioritises open discovery and contact between strangers over user safety. There is no meaningful gatekeeping between adult users and any child who creates a profile — location-based discovery, random Shake to Chat and open messaging all allow adults to initiate contact with children without restriction.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Skout's History Provides Important Context for Parents</div>
+        <div class="know-body">Skout is one of the few mainstream social platforms with a publicly documented history of child safety failures, including the 2012 suspension of its teen section following reported assaults. While the company has updated its policies since, the platform's fundamental open-contact model — which made those incidents possible — remains largely unchanged. Parents should weigh this history when assessing the risk Skout presents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Install It Out of Curiosity or Peer Influence</div>
+        <div class="know-body">Skout's playful interface, discovery features and Shake to Chat mechanic can appeal to younger users looking for new social experiences. Children may encounter it through peers or social media and install it without understanding that it is an adult-facing platform with no meaningful child safety provisions.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Age Checks Are Trivially Easy to Bypass</div>
+        <div class="know-body">Skout requires only a date of birth to register. A child entering a false birthdate gains immediate, unrestricted access to the full platform — including location-based discovery, Shake to Chat with random strangers, live broadcasts and unmoderated private messaging with any adult user on the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable, simple tools to block social discovery and stranger-chat apps like Skout instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block social discovery and stranger chat apps by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow instant one-tap blocking of similar apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Skout as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build responsible digital habits around stranger-chat platforms.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Teach Children Not to Communicate With Strangers Online</div>
+        <div class="tip-body">Have clear, age-appropriate conversations about why platforms like Skout — where any adult can contact them and random chat with strangers is a built-in feature — are not safe environments. Help children understand that online strangers are genuinely unknown, that adults can misrepresent themselves as peers, and that a friendly interaction at first contact does not mean the other person is safe. Skout's history of documented incidents can be a useful, factual starting point for this conversation with older children.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧭</div>
+      <div>
+        <div class="tip-name">Discuss Privacy and Responsible Digital Behaviour</div>
+        <div class="tip-body">Talk with your child about the information they share online and what responsible digital behaviour looks like — especially on platforms where location is a primary feature. Help them understand that sharing their approximate location with unknown adults is a concrete physical risk, not just a digital one. Establish clear family expectations about which platforms are safe to use, why, and what to do if something feels wrong in an online interaction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Prevent Access to Risky Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses. Stranger-chat apps like Skout are easily reinstalled after deletion, so device-level category blocking provides more reliable protection than manually checking for specific app installs. Review device location permissions and in-app purchase settings regularly, and keep honest family conversations about online safety running alongside your parental controls — the two work best together.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🌿</span>
+    <h3 class="closing-title">Safe Exploration Starts With the Right Boundaries</h3>
+    <p class="closing-body">
+      Children are naturally curious — about the world, about people, about connection. iLimits helps you honour that curiosity while protecting the safe space it needs to flourish: clear boundaries, open conversations, and the confidence that comes from knowing your family's digital environment is one you have built together.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

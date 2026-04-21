@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream11 – App Restriction Info</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F3EF;
+    --surface: #FFFFFF;
+    --surface2: #FDFCFA;
+    --border: #E8E3DC;
+    --text-primary: #1C1A17;
+    --text-secondary: #6B6560;
+    --text-muted: #9E9790;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --amber-mid: #FDE68A;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --red-soft: #FECACA;
+    --green: #059669;
+    --green-light: #ECFDF5;
+    --blue: #2563EB;
+    --blue-light: #EFF6FF;
+    --indigo: #4338CA;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 24px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  .header {
+    background: linear-gradient(160deg, #1C1A17 0%, #2D2926 60%, #3D3530 100%);
+    padding: 36px 20px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(217,119,6,0.18) 0%, transparent 60%);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 28px;
+    background: var(--bg);
+    border-radius: 28px 28px 0 0;
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; }
+
+  .app-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .app-icon {
+    width: 68px; height: 68px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(220,38,38,0.4);
+    flex-shrink: 0;
+    font-size: 30px;
+  }
+  .app-meta { flex: 1; }
+  .app-name {
+    font-size: 26px; font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .app-platform {
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-top: 2px; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .badges {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .badge-gambling { background: rgba(217,119,6,0.2); color: #FCD34D; border: 1px solid rgba(217,119,6,0.3); }
+  .badge-risk { background: rgba(220,38,38,0.2); color: #FCA5A5; border: 1px solid rgba(220,38,38,0.3); }
+
+  .header-desc {
+    font-size: 14px; color: rgba(255,255,255,0.65);
+    line-height: 1.65; font-weight: 500;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+
+  /* ── MAIN ─────────────────────────────── */
+  .main { max-width: 480px; margin: 0 auto; padding: 24px 16px 40px; }
+
+  /* ── SECTION LABEL ─── */
+  .section-label {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+    margin-top: 4px;
+  }
+  .section-label .icon-circle {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .section-label h2 {
+    font-size: 17px; font-weight: 800;
+    letter-spacing: -0.3px; color: var(--text-primary);
+  }
+
+  /* ── CARD ─── */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card + .section-label { margin-top: 12px; }
+
+  /* ── WHAT IT DOES ─── */
+  .feature-list { list-style: none; }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; font-weight: 600; color: var(--text-primary);
+  }
+  .feature-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .feature-list li:first-child { padding-top: 0; }
+  .feat-icon {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .feat-desc { font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-top: 2px; }
+
+  /* ── RISK CARDS ─── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .risk-item {
+    background: var(--red-light);
+    border: 1px solid var(--red-soft);
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .risk-item .risk-icon { font-size: 22px; margin-bottom: 6px; }
+  .risk-item .risk-title { font-size: 12px; font-weight: 800; color: var(--red); line-height: 1.3; }
+  .risk-item .risk-sub { font-size: 11px; color: #B91C1C; font-weight: 500; margin-top: 3px; line-height: 1.4; }
+
+  /* ── IMPACT ─── */
+  .impact-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .impact-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .impact-item:first-child { padding-top: 0; }
+  .impact-bar {
+    width: 4px; border-radius: 4px; flex-shrink: 0;
+    align-self: stretch; min-height: 44px;
+  }
+  .impact-title { font-size: 14px; font-weight: 800; color: var(--text-primary); }
+  .impact-desc { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-top: 3px; line-height: 1.5; }
+
+  /* ── CHECKLIST ─── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; font-weight: 600; color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .checklist li:last-child { border-bottom: none; padding-bottom: 0; }
+  .checklist li:first-child { padding-top: 0; }
+  .check-box {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    border: 2px solid var(--amber);
+    background: var(--amber-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; margin-top: 1px;
+  }
+
+  /* ── ALTERNATIVES ─── */
+  .alt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .alt-item {
+    background: var(--green-light);
+    border: 1px solid #A7F3D0;
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .alt-icon { font-size: 26px; margin-bottom: 6px; }
+  .alt-title { font-size: 12px; font-weight: 800; color: var(--green); line-height: 1.3; }
+  .alt-sub { font-size: 11px; color: #047857; font-weight: 500; margin-top: 3px; }
+
+  /* ── TIPS ─── */
+  .tip-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tip-item:first-child { padding-top: 0; }
+  .tip-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tip-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 13px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .tip-text { font-size: 14px; font-weight: 600; color: var(--text-primary); line-height: 1.5; }
+  .tip-sub { font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-top: 2px; }
+
+  /* ── WHY CONTROLS ─── */
+  .why-card {
+    background: linear-gradient(135deg, #1E3A5F 0%, #1B2E4A 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    border: none;
+    box-shadow: var(--shadow-md);
+  }
+  .why-card h3 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .why-card p { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.7; font-weight: 500; }
+  .control-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .control-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    border-radius: 100px;
+    padding: 6px 13px;
+    font-size: 12px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+
+  /* ── CLOSING ─── */
+  .closing-card {
+    background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+    border: 1px solid #BBF7D0;
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .closing-icon { font-size: 40px; margin-bottom: 12px; }
+  .closing-card h3 { font-size: 16px; font-weight: 900; color: var(--green); margin-bottom: 10px; }
+  .closing-card p { font-size: 13px; color: #065F46; font-weight: 500; line-height: 1.7; }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px; color: var(--text-muted); font-weight: 600;
+    padding: 0 20px 8px;
+    line-height: 1.6;
+  }
+
+  /* ── RESTRICTED BANNER ─── */
+  .restricted-banner {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--red-light);
+    border: 1.5px solid var(--red-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .restricted-icon { font-size: 28px; flex-shrink: 0; }
+  .restricted-text strong { font-size: 14px; font-weight: 900; color: var(--red); display: block; }
+  .restricted-text span { font-size: 12px; color: #B91C1C; font-weight: 500; }
+
+  /* ── DIVIDER ─── */
+  .section-gap { height: 8px; }
+
+  /* stagger animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card, .risk-grid, .alt-grid, .restricted-banner, .why-card, .closing-card {
+    animation: fadeUp 0.5s ease both;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="app-row">
+      <div class="app-icon">🏏</div>
+      <div class="app-meta">
+        <div class="app-name">Dream11</div>
+        <div class="app-platform">Fantasy Sports &amp; Betting Platform</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-gambling">🎰 Gambling / Betting</span>
+      <span class="badge badge-risk">⚠️ High Risk for Children</span>
+    </div>
+    <div class="header-desc">
+      Dream11 is a fantasy sports platform where users pay real money to enter contests and win cash prizes. While marketed as a skill game, it carries significant financial and psychological risks — especially for children and teenagers.
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- RESTRICTED BANNER -->
+  <div class="restricted-banner">
+    <div class="restricted-icon">🚫</div>
+    <div class="restricted-text">
+      <strong>This App Is In Restricted Category</strong>
+      <span>Parents can choose to restrict apps like this as part of managing a child's digital environment.</span>
+    </div>
+  </div>
+
+  <!-- SECTION: WHAT IT DOES -->
+  <div class="section-label">
+    <div class="icon-circle" style="background:#EFF6FF;">📱</div>
+    <h2>What This App Does</h2>
+  </div>
+  <div class="card">
+    <ul class="feature-list">
+      <li>
+        <div class="feat-icon" style="background:#F0F9FF;">🏆</div>
+        <div>
+          <div>Fantasy Sports Platform</div>
+          <div class="feat-desc">Users build virtual cricket, football & kabaddi teams using real player stats.</div>
+        </div>
+      </li>
+      <li>
+        <div class="feat-icon" style="background:#FFF7ED;">💸</div>
+        <div>
+          <div>Requires Entry Fees</div>
+          <div class="feat-desc">Joining most contests requires depositing real money — from ₹10 to thousands.</div>
+        </div>
+      </li>
+      <li>
+        <div class="feat-icon" style="background:#FFF1F2;">🎯</div>
+        <div>
+          <div>Real Money Rewards</div>
+          <div class="feat-desc">Winners receive cash payouts. Losers lose their entry fee entirely.</div>
+        </div>
+      </li>
+      <li>
+        <div class="feat-icon" style="background:#F0FDF4;">📢</div>
+        <div>
+          <div>Promoted as a Skill Game</div>
+          <div class="feat-desc">Heavily advertised during IPL and major tournaments — normalising betting for kids.</div>
+        </div>
+      </li>
+      <li>
+        <div class="feat-icon" style="background:#FAFAF5;">🎲</div>
+        <div>
+          <div>Financial Risk Involved</div>
+          <div class="feat-desc">Outcomes depend on real match events; money can be lost quickly and repeatedly.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SECTION: WHY RESTRICTED -->
+  <div class="section-gap"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:#FEF2F2;">⚠️</div>
+    <h2>Why It's Restricted for Children</h2>
+  </div>
+  <div class="risk-grid" style="margin-bottom:16px;">
+    <div class="risk-item">
+      <div class="risk-icon">💰</div>
+      <div class="risk-title">Real Money Gambling</div>
+      <div class="risk-sub">Entry fees and cash prizes create a true gambling loop</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-icon">🧠</div>
+      <div class="risk-title">Betting Mindset</div>
+      <div class="risk-sub">Conditions young minds to seek quick money over effort</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-icon">📉</div>
+      <div class="risk-title">Financial Loss</div>
+      <div class="risk-sub">Children may lose savings or ask parents for money repeatedly</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-icon">🔁</div>
+      <div class="risk-title">Addiction Loops</div>
+      <div class="risk-sub">Reward-based design triggers compulsive behaviour</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-icon">👥</div>
+      <div class="risk-title">Peer Pressure</div>
+      <div class="risk-sub">Friends competing drives overspending to "keep up"</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-icon">📺</div>
+      <div class="risk-title">Ad Exposure</div>
+      <div class="risk-sub">Constant celebrity endorsements glamourise betting culture</div>
+    </div>
+  </div>
+
+  <!-- SECTION: HOW IT AFFECTS CHILDREN -->
+  <div class="section-gap"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:#FFF7ED;">🧒</div>
+    <h2>How It Can Affect Children</h2>
+  </div>
+  <div class="card">
+    <div class="impact-item">
+      <div class="impact-bar" style="background:#EF4444;"></div>
+      <div>
+        <div class="impact-title">Impulsive Spending Behaviour</div>
+        <div class="impact-desc">The thrill of winning encourages children to spend without thinking, often chasing losses.</div>
+      </div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-bar" style="background:#F59E0B;"></div>
+      <div>
+        <div class="impact-title">Dopamine Reward Loops</div>
+        <div class="impact-desc">Wins release dopamine, creating a cycle where children need bigger wins to feel the same thrill.</div>
+      </div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-bar" style="background:#8B5CF6;"></div>
+      <div>
+        <div class="impact-title">Reduced Academic Focus</div>
+        <div class="impact-desc">Time spent on match analysis, team-building and contests takes away from studies and physical activity.</div>
+      </div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-bar" style="background:#EC4899;"></div>
+      <div>
+        <div class="impact-title">Normalisation of Gambling</div>
+        <div class="impact-desc">Regular use makes betting feel ordinary and acceptable, shaping attitudes well into adulthood.</div>
+      </div>
+    </div>
+    <div class="impact-item">
+      <div class="impact-bar" style="background:#10B981;"></div>
+      <div>
+        <div class="impact-title">Financial Misunderstanding</div>
+        <div class="impact-desc">Children may come to believe that money is won, not earned — undermining healthy financial values.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: WARNING SIGNS -->
+  <div class="section-gap"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:#FFFBEB;">🔍</div>
+    <h2>Warning Signs for Parents</h2>
+  </div>
+  <div class="card">
+    <ul class="checklist">
+      <li>
+        <div class="check-box">❓</div>
+        <div>Frequently asking for money, pocket money top-ups or UPI access</div>
+      </li>
+      <li>
+        <div class="check-box">❓</div>
+        <div>Secretive or protective phone usage — hiding screen or closing apps quickly</div>
+      </li>
+      <li>
+        <div class="check-box">❓</div>
+        <div>Sudden strong interest in fantasy leagues, team stats or match betting</div>
+      </li>
+      <li>
+        <div class="check-box">❓</div>
+        <div>Unexplained online transactions or app purchases on linked accounts</div>
+      </li>
+      <li>
+        <div class="check-box">❓</div>
+        <div>Mood swings tied to sports outcomes — excited after wins, upset or withdrawn after losses</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SECTION: ALTERNATIVES -->
+  <div class="section-gap"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:#ECFDF5;">🌱</div>
+    <h2>Healthy Alternatives for Kids</h2>
+  </div>
+  <div class="alt-grid" style="margin-bottom:16px;">
+    <div class="alt-item">
+      <div class="alt-icon">⚽</div>
+      <div class="alt-title">Play Real Sports</div>
+      <div class="alt-sub">Cricket, football & kabaddi in real life</div>
+    </div>
+    <div class="alt-item">
+      <div class="alt-icon">🎓</div>
+      <div class="alt-title">Educational Apps</div>
+      <div class="alt-sub">Khan Academy, Duolingo, BYJU'S</div>
+    </div>
+    <div class="alt-item">
+      <div class="alt-icon">♟️</div>
+      <div class="alt-title">Strategy Games</div>
+      <div class="alt-sub">Chess, puzzles & board games — no money involved</div>
+    </div>
+    <div class="alt-item">
+      <div class="alt-icon">🎨</div>
+      <div class="alt-title">Skill-Building Apps</div>
+      <div class="alt-sub">Coding, art, music — builds real future value</div>
+    </div>
+  </div>
+
+  <!-- SECTION: TIPS FOR PARENTS -->
+  <div class="section-gap"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:#EFF6FF;">💡</div>
+    <h2>Tips for Parents</h2>
+  </div>
+  <div class="card">
+    <div class="tip-item">
+      <div class="tip-num">1</div>
+      <div>
+        <div class="tip-text">Talk openly about money and gambling</div>
+        <div class="tip-sub">Explain the difference between skill, luck, and risk in age-appropriate terms.</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">2</div>
+      <div>
+        <div class="tip-text">Teach healthy financial habits early</div>
+        <div class="tip-sub">Introduce saving, budgeting, and value of earnings through chores or projects.</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">3</div>
+      <div>
+        <div class="tip-text">Monitor app installations regularly</div>
+        <div class="tip-sub">Periodically review installed apps and digital payment accounts on shared devices.</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">4</div>
+      <div>
+        <div class="tip-text">Set healthy digital boundaries together</div>
+        <div class="tip-sub">Create screen time rules as a family — collaborative limits are easier to respect.</div>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">5</div>
+      <div>
+        <div class="tip-text">Encourage offline hobbies and activities</div>
+        <div class="tip-sub">Sports, reading, arts and social activities reduce dependency on addictive apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: WHY PARENTAL CONTROLS HELP -->
+  <div class="section-gap"></div>
+  <div class="why-card">
+    <h3>🛡️ Why Parental Controls Help</h3>
+    <p>
+      Parental controls aren't about distrust — they're about protecting children from risks they don't yet fully understand. Restricting apps like Dream11 gives children the space to develop healthy relationships with technology, money, and entertainment before they encounter real financial stakes.
+    </p>
+    <div class="control-pills">
+      <span class="control-pill">✅ Blocks gambling apps</span>
+      <span class="control-pill">✅ Limits screen time</span>
+      <span class="control-pill">✅ Filters adult content</span>
+      <span class="control-pill">✅ Builds safe habits</span>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing-card">
+    <div class="closing-icon">💚</div>
+    <h3>Technology Can Be a Positive Force</h3>
+    <p>
+      When used responsibly and with guidance, technology helps children learn, create, and grow. Parental oversight isn't a barrier — it's a bridge that helps children build the digital wisdom they'll carry for life.
+    </p>
+  </div>
+
+  <p class="footer-note">This information is provided by iLimits Parental Controls to help you make informed decisions about your child's digital environment.</p>
+
+</main>
+</body>
+</html>

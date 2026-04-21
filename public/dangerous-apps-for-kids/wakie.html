@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wakie – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Wakie brand: warm sunrise orange */
+    --wk:           #FF6D3B;
+    --wk-mid:       #E85520;
+    --wk-deep:      #9C3410;
+    --wk-light:     #FFF6F2;
+    --wk-bdr:       #FFBEA3;
+    --wk-text:      #5C1E04;
+
+    /* secondary sky blue for discovery feature */
+    --sk:           #0EA5E9;
+    --sk-light:     #F0F9FF;
+    --sk-bdr:       #BAE6FD;
+    --sk-text:      #0C4A6E;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0A00 0%, #2E1400 50%, #3D1C00 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(255,109,59,0.30) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,109,59,0.36) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.14) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,109,59,0.20);
+    border: 1px solid rgba(255,190,163,0.35);
+    color: #FFBEA3; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #9C3410 0%, #FF6D3B 55%, #FFB08A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(255,109,59,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Voice callout ── */
+  .voice-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wk-light); border: 1.5px solid var(--wk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .voice-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFD8C8; border: 1.5px solid var(--wk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .voice-title { font-size: 13px; font-weight: 700; color: var(--wk-text); line-height: 1.3; margin-bottom: 3px; }
+  .voice-body  { font-size: 12px; color: #3A0E00; font-weight: 400; line-height: 1.55; }
+
+  /* ── Dual-feature banner ── */
+  .dual-banner { display: flex; gap: 10px; margin-bottom: 14px; }
+  .dual-card {
+    flex: 1; background: var(--surface);
+    border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    padding: 13px 14px; box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .dual-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .dual-card.wk-a::before { background: linear-gradient(90deg, #FF6D3B, #FFB08A); }
+  .dual-card.wk-b::before { background: linear-gradient(90deg, #0EA5E9, #BAE6FD); }
+  .dual-lbl  { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); margin-bottom: 5px; }
+  .dual-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 4px; }
+  .dual-desc { font-size: 11.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.5; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── S1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBF0; border: 1.5px solid #FDDCB0;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDDCB0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7A3C08; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C2800; font-weight: 400; line-height: 1.5; }
+
+  /* ── Voice-specific note ── */
+  .voice-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg); border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .voice-note-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .voice-note-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .voice-note-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0A00 0%, #2E1400 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,109,59,0.28) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji  { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title  {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner     { animation: fadeUp 0.42s ease both; }
+  .card           { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid      { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card        { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box       { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip     { animation: fadeUp 0.42s ease 0.05s both; }
+  .voice-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .dual-banner    { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip     { animation: fadeUp 0.42s ease 0.04s both; }
+  .voice-note     { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing        { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔔</div>
+        <div>
+          <div class="app-name-text">Wakie</div>
+          <div class="app-sub">Stranger Voice Chat / Social Discovery</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Voice Chat & Discovery</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables conversations with unknown users through voice calls and chats</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Wakie — a social networking platform built around real-time voice conversations with strangers worldwide, combining live audio calls with open social discovery.</p>
+  </div>
+
+  <div class="voice-callout">
+    <div class="voice-ico">🎙️</div>
+    <div>
+      <div class="voice-title">Wakie Puts Children in Live Voice Conversations With Strangers — No Video, but the Same Risks</div>
+      <div class="voice-body">Unlike random video chat apps where the visual nature of the risk is immediately apparent, Wakie's voice-only format can feel less alarming to children and parents. But a live voice call with an unknown adult from anywhere in the world carries the same fundamental risks as live video — real-time exposure to inappropriate conversation, no content moderation and no way to verify who is on the other end of the line before the call is already connected.</div>
+    </div>
+  </div>
+
+  <div class="dual-banner">
+    <div class="dual-card wk-a">
+      <div class="dual-lbl">Feature 1</div>
+      <div class="dual-name">Stranger Voice Chat</div>
+      <div class="dual-desc">Live real-time audio calls with unknown users worldwide — connected instantly with no identity verification and no preview of who will answer</div>
+    </div>
+    <div class="dual-card wk-b">
+      <div class="dual-lbl">Feature 2</div>
+      <div class="dual-name">Social Discovery</div>
+      <div class="dual-desc">Browse public discussions and user profiles globally — allowing ongoing connection beyond a single voice call with strangers whose identity is unverified</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#FF6D3B;"></span> Voice Calls</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0EA5E9;"></span> Public Rooms</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Q&A Discussions</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Text Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Global Discovery</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Wakie is a <strong>social networking platform</strong> that allows users to interact with strangers through voice conversations and discussions. Users can join conversations, ask questions or speak with people from around the world through <strong>voice calls and messaging</strong>. The platform focuses on connecting people for discussions and social interaction — with no meaningful control over who answers a call or joins a public room, and no verification of age or identity at any stage of the experience.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--wk-light);">🎙️</div>
+      <div>
+        <div class="feat-name">Live Voice Calls With Unknown Users</div>
+        <div class="feat-desc">Wakie connects users to strangers through real-time audio calls — without a profile preview and without the ability to assess who will answer before the call is already live. A child using Wakie can find themselves in a voice conversation with an unknown adult within moments of opening the app, with no intermediate step, no content buffer and no way to end the call before it has already begun.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--sk-light);">🏛️</div>
+      <div>
+        <div class="feat-name">Open Public Discussion Rooms</div>
+        <div class="feat-desc">Wakie hosts public rooms and discussion threads that any user can join and participate in. These open group environments expose children to a wider range of unknown adults simultaneously, with less individual accountability than a one-to-one call and no reliable content moderation to screen what participants say during a live session.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">❓</div>
+      <div>
+        <div class="feat-name">Q&A Discussions Open to All Users</div>
+        <div class="feat-desc">Users can post questions that trigger voice responses from strangers — framing interactions as informational exchanges that feel educational or casual. This format can lower a child's awareness of the risk involved, as asking or answering a question feels qualitatively different to a conversation — but the person responding is still a stranger whose identity and intentions are entirely unverified.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Private Text Messaging With Matched Users</div>
+        <div class="feat-desc">Wakie supports private text messaging between users who have connected — entirely unmonitored, with no content screening and no visibility for parents. A voice encounter with a stranger can transition into an ongoing, private text relationship that persists long after the original call has ended and entirely outside a parent's awareness.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Anonymous Use and No Age Verification</div>
+        <div class="feat-desc">Wakie allows users to participate with limited profile information and requires only a self-reported date of birth at registration with no verification. Adults can access the platform presenting as any age, and children have no reliable method of confirming who they are speaking to during a live voice call or subsequent messaging conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from live voice interactions with unknown strangers, inappropriate conversation exposure, privacy concerns and the difficulty of verifying identity in an audio-only environment.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎙️</span>
+      <div class="rc-name">Live Voice With Strangers</div>
+      <div class="rc-desc">Children are connected to unknown adults via real-time audio with no preview and no identity check before the call is active — voice contact with a stranger carries the same fundamental risks as live video</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Conversations</div>
+      <div class="rc-desc">Live, unmoderated voice calls and open public rooms can expose children to adult content, disturbing language or harmful conversations in real time with no content filter and no advance warning</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Privacy Risks</div>
+      <div class="rc-desc">Children may share personal information — their voice, name, location or school — with unknown adults during live calls or follow-up messages, with no oversight and no record of what was disclosed</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Unverifiable User Identity</div>
+      <div class="rc-desc">Wakie provides no identity or age verification — adults can present as peers and children have no reliable way to confirm who they are speaking to during a live voice session or private message exchange</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏛️</span>
+      <div class="rc-name">Open Room Exposure</div>
+      <div class="rc-desc">Public discussion rooms expose children to multiple unknown adults simultaneously — group settings can shift quickly in tone and content, making it harder to disengage safely once a child has already joined</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Ongoing Stranger Contact</div>
+      <div class="rc-desc">Follow, messaging and room-reconnect features allow one-time voice encounters to develop into persistent private relationships between a child and an unknown adult — entirely outside parental view</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Wakie Carries a Medium–High Risk Rating</strong>
+      <span>Real-time live voice with unknown global users, open public discussion rooms, no age verification and follow-up private messaging combine to place Wakie in the medium–high risk category — elevated by the intimacy of voice contact and the absence of any content moderation.</span>
+    </div>
+  </div>
+
+  <div class="voice-note">
+    <div class="voice-note-ico">🔊</div>
+    <div>
+      <div class="voice-note-title">Voice Chat Feels Less Risky Than Video — But Carries the Same Dangers</div>
+      <div class="voice-note-body">Voice chat platforms allow real-time conversations with strangers that are just as personal, intimate and potentially harmful as live video. Because users can connect anonymously and voices alone carry no visible identifying information, children may interact with individuals whose real identity or intentions are entirely unknown — and may feel less alarmed by a voice call than a video connection, even though the risks are equivalent. The audio-only format is not a safety feature; it is simply a different medium for the same type of unverified stranger contact.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Voice Is Intimate — Live Audio With a Stranger Carries Real Risk</div>
+        <div class="know-body">Many parents are alert to the risks of live video with strangers but may perceive voice-only platforms as lower risk by comparison. In practice, a real-time voice call is a deeply personal interaction — a child hears the voice of an adult they have never met, in a live, unrecorded conversation with no parent present and no ability to verify who is speaking. The intimacy of voice can actually accelerate the development of trust between a child and an unknown adult, making the follow-up contact that Wakie enables — private messages, room reconnection — more likely to occur.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Q&A Format Normalises Stranger Contact in an Educational Wrapper</div>
+        <div class="know-body">Wakie's question-and-answer discussion format presents stranger contact as informational or intellectual exchange — asking or answering questions from people around the world. This framing can make the platform feel more legitimate and less concerning to children than a platform explicitly labelled as stranger chat. Parents should be aware that the educational or conversational framing does not change the underlying reality: every person responding to a child's question or answering their call is an unknown adult with no verified identity or age.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Open Rooms Can Expose Children to Group Adult Environments Instantly</div>
+        <div class="know-body">Wakie's public rooms allow any user to join an ongoing group audio discussion — without a preview of content, without an age filter on other participants and without any moderation that meaningfully limits what can be said. A child who joins a public room may find themselves in a live group conversation with multiple adults whose ages, identities and intentions are completely unknown, and may have difficulty disengaging from the social pressure of an active group environment once they have already joined.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Voice Calls Leave No Record — Harm Can Occur With No Evidence</div>
+        <div class="know-body">Unlike text-based platforms where message history can be reviewed after the fact, Wakie's live voice calls leave no transcript or audio record that a parent can access. A child who has a distressing or harmful conversation can close the app with no lasting evidence of what occurred — no notification generated, no record for a parent to find, and potentially no immediate signal that anything wrong has taken place. This absence of any recoverable record makes retrospective monitoring impossible and reinforces why device-level controls are significantly more effective than after-the-fact review for this category of app.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block stranger voice chat and social discovery apps like Wakie instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block stranger chat and voice chat apps by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories help quickly control similar stranger-contact apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Wakie as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around stranger voice chat, online privacy and responsible digital behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About the Risks of Communicating With Strangers Online</div>
+        <div class="tip-body">Have a direct, honest conversation with your child about why live voice calls with people they have never met carry real risk — specifically addressing the point that a voice-only format feels less alarming than video while carrying the same dangers. Help them understand that hearing someone's voice does not tell you their age, their real identity or their intentions, and that the warmth or confidence of a voice can create a false sense of trust faster than text or even video. Discuss Wakie's Q&A format specifically: explain that a question-and-answer platform does not limit who can respond, and that an adult engaging with a child's question on Wakie is still a complete stranger with no verified identity. Make it genuinely safe to come to you if they have heard something on a call that made them feel uncomfortable, confused or frightened.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Responsible Digital Behaviour and Privacy Awareness</div>
+        <div class="tip-body">Talk with your child about the specific privacy risks of voice platforms — including the fact that a voice call can reveal details they may not realise they are sharing, such as background noise identifying a location, a name called out by someone nearby or casual mentions of their school or daily routine. Help them develop a clear personal principle around online conversations with people they do not know in real life — not just what information to withhold, but the habit of recognising when a conversation is moving in a direction that feels uncomfortable and disengaging without feeling social pressure to continue. Children who have these habits internalised are significantly safer across every digital platform they use.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Manage Access to Stranger Chat Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses — tablets, secondary phones and any shared household devices included. Voice chat apps like Wakie may not be immediately recognisable by name during a manual review of installed apps, and can be reinstalled quickly after deletion. Device-level category restrictions are significantly more robust than app-by-app removal. Because voice calls leave no transcript, retrospective monitoring is not an effective safety strategy for this category of platform — preventing access before it occurs is the most reliable approach available to parents.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔔</span>
+    <h3 class="closing-title">The Safest Voice a Child Hears Online Is One They Already Know</h3>
+    <p class="closing-body">
+      Real connection is built through relationships that are known, trusted and grounded in the real world. iLimits helps you ensure your child's digital conversations reflect those same foundations — not the unpredictable voices of strangers they cannot identify, verify or protect themselves from without your support.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

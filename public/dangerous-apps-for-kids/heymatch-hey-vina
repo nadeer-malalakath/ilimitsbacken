@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeyMatch / Hey! VINA – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* HeyMatch / Hey! VINA brand: warm coral-pink */
+    --hey:          #FF6B9D;
+    --hey-mid:      #E8517F;
+    --hey-deep:     #B5305A;
+    --hey-light:    #FFF5F9;
+    --hey-bdr:      #FFBBD5;
+    --hey-text:     #6B1535;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --peach-text:   #7A2E08;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(255,107,157,0.07);
+    --shadow-sm:    0 2px 14px rgba(255,107,157,0.10);
+    --shadow-md:    0 6px 30px rgba(255,107,157,0.13);
+    --shadow-lg:    0 14px 52px rgba(255,107,157,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══════════════════════════════
+     HERO — warm mulberry-mauve
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(158deg, #1A0616 0%, #2C0A22 50%, #380C2A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(255,107,157,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.14) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,157,0.26) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.13) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #7A0E38 0%, #E8517F 55%, #FF9DC0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(255,107,157,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.warn { color: #FCD34D; }
+
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══════════════════════════════
+     MAIN
+  ══════════════════════════════ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Friendship-framing callout ── */
+  .friendship-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--hey-light);
+    border: 1.5px solid var(--hey-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .friendship-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFD9E8; border: 1.5px solid var(--hey-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .friendship-title { font-size: 13px; font-weight: 700; color: var(--hey-text); line-height: 1.3; margin-bottom: 3px; }
+  .friendship-body  { font-size: 12px; color: #7A1A3A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Dual-brand banner ── */
+  .dual-banner {
+    display: flex; gap: 10px; margin-bottom: 14px;
+  }
+  .dual-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .dual-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:3px;
+    border-radius: 3px 3px 0 0;
+  }
+  .dual-card.hey-a::before { background: linear-gradient(90deg, #FF6B9D, #FF9DC0); }
+  .dual-card.hey-b::before { background: linear-gradient(90deg, #E8517F, #FF6B9D); }
+  .dual-lbl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); margin-bottom: 5px; }
+  .dual-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 4px; }
+  .dual-desc { font-size: 11.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.5; }
+
+  /* ── Mode chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── Section 1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── "Safe" framing risk note ── */
+  .safe-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--peach-bg);
+    border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .safe-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4D4; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .safe-title { font-size: 13px; font-weight: 700; color: var(--peach-text); line-height: 1.3; margin-bottom: 3px; }
+  .safe-body  { font-size: 12px; color: #5C2000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Age strip ── */
+  .age-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--hey-light);
+    border: 1.5px solid var(--hey-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .age-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFD9E8; border: 1.5px solid var(--hey-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .age-text strong { font-size: 13.5px; font-weight: 700; color: var(--hey-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .age-text span   { font-size: 12px; color: #7A1A3A; font-weight: 400; line-height: 1.5; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0616 0%, #2C0A22 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,157,0.24) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,157,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand {
+    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px;
+  }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700; color: var(--ink-soft);
+  }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner          { animation: fadeUp 0.42s ease both; }
+  .card                { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid           { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card             { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box            { animation: fadeUp 0.42s ease 0.06s both; }
+  .age-strip           { animation: fadeUp 0.42s ease 0.05s both; }
+  .friendship-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .dual-banner         { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip          { animation: fadeUp 0.42s ease 0.04s both; }
+  .safe-note           { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing             { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">👋</div>
+        <div>
+          <div class="app-name-text">HeyMatch / Hey! VINA</div>
+          <div class="app-sub">Social Discovery / Friendship</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Discovery</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val warn">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows communication with unknown users</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of HeyMatch and Hey! VINA — two linked social discovery platforms built around meeting strangers through friendship-framed matching.</p>
+  </div>
+
+  <!-- Friendship framing callout -->
+  <div class="friendship-callout">
+    <div class="friendship-ico">🤝</div>
+    <div>
+      <div class="friendship-title">"Friendship" Framing Masks the Risks of Stranger Contact</div>
+      <div class="friendship-body">HeyMatch and Hey! VINA market themselves as friendship and social discovery apps rather than dating platforms — but their core mechanics are identical: profile-based browsing, swipe-style matching and private messaging with people users have never met. This "friendship" positioning can make the apps feel safer than they are, lowering a child's — and sometimes a parent's — guard.</div>
+    </div>
+  </div>
+
+  <!-- Dual-brand cards -->
+  <div class="dual-banner">
+    <div class="dual-card hey-a">
+      <div class="dual-lbl">App 1</div>
+      <div class="dual-name">HeyMatch</div>
+      <div class="dual-desc">General social discovery and matching app — users browse profiles and connect with new people nearby or globally</div>
+    </div>
+    <div class="dual-card hey-b">
+      <div class="dual-lbl">App 2</div>
+      <div class="dual-name">Hey! VINA</div>
+      <div class="dual-desc">Originally positioned for women seeking friendship, but open to all users seeking social connections with strangers</div>
+    </div>
+  </div>
+
+  <!-- Mode chips -->
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#FF6B9D;"></span> Swipe & Match</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Nearby Browse</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Interest Groups</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Private Chat</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      HeyMatch and Hey! VINA are <strong>social discovery and friendship-matching platforms</strong> that allow users to meet new people through profile browsing, swipe-based matching and private messaging. Users create profiles, explore nearby users or those with shared interests, and begin conversations with people they have never met — in an environment with no identity verification and minimal content oversight.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF5F9;">👋</div>
+      <div>
+        <div class="feat-name">Swipe-Based Profile Matching</div>
+        <div class="feat-desc">Like many dating apps, both platforms use swipe-style browsing to express interest in other users' profiles. Mutual interest unlocks a private messaging channel — identical in mechanic to romantic dating apps, despite the friendship-first framing.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📍</div>
+      <div>
+        <div class="feat-name">Nearby User Discovery</div>
+        <div class="feat-desc">Both apps surface users in the surrounding geographic area, enabling location-based discovery between strangers. A child's approximate location is visible to all nearby app users, allowing adults to specifically seek out and contact local younger users.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🎯</div>
+      <div>
+        <div class="feat-name">Interest-Based Groups & Discovery</div>
+        <div class="feat-desc">Users can join and browse interest-based communities within the app. While designed to foster connections around shared hobbies, these groups are open to all users including adults, creating additional channels through which unknown adults can contact children.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Unmoderated Private Messaging</div>
+        <div class="feat-desc">Matched users exchange private messages with no content moderation or parental visibility. All conversations between strangers — including between adults and any child who has created a profile — are entirely private and unscreened.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDFB;">🌐</div>
+      <div>
+        <div class="feat-name">Global User Base With No Age Verification</div>
+        <div class="feat-desc">Both platforms are accessible to a global user community. Registration requires only basic details and a date of birth — with no verification to confirm that users are the age they claim to be, meaning adults can easily create profiles presenting as younger users.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age strip -->
+  <div class="age-strip">
+    <div class="age-badge">🔞</div>
+    <div class="age-text">
+      <strong>Both Apps Are Intended for Users 17 or Older</strong>
+      <span>Despite "friendship" marketing, neither HeyMatch nor Hey! VINA has a child-safe experience or content filtering layer. Their open matching and unmoderated messaging environments are not appropriate for children at any age.</span>
+    </div>
+  </div>
+
+  <!-- "Safe framing" deceptive risk note -->
+  <div class="safe-note">
+    <div class="safe-ico">🪤</div>
+    <div>
+      <div class="safe-title">"Friendship" Apps Carry the Same Risks as Dating Apps</div>
+      <div class="safe-body">The distinction between a "friendship" app and a dating app is primarily a marketing choice, not a safety feature. Both HeyMatch and Hey! VINA use identical mechanics to apps explicitly marketed for dating — profile browsing, swipe matching and private messaging with strangers — without the content filtering or safety features that even mainstream dating platforms sometimes include. Parents should treat these apps as carrying equivalent risk.</div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from open stranger-matching, location features and the deceptive safety of "friendship" branding.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Stranger Communication</div>
+      <div class="rc-desc">Both apps connect users with people they have never met — including adults who can freely message children after a profile match</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🪤</span>
+      <div class="rc-name">Deceptive Safety Framing</div>
+      <div class="rc-desc">"Friendship" branding lowers a child's guard and may make adults and children alike underestimate the real risks of stranger contact</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location-Based Discovery</div>
+      <div class="rc-desc">Nearby browsing exposes a child's approximate physical location to all local app users — enabling adults to specifically target children in their area</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Inappropriate Conversations</div>
+      <div class="rc-desc">Unmoderated private messaging may expose children to adult, manipulative or explicit content from strangers with no content screening</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">Personal Information Risk</div>
+      <div class="rc-desc">Open profiles and private chats create opportunities for children to share personal information — names, school, location — with unknown adults</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">No Identity Verification</div>
+      <div class="rc-desc">Adults can create profiles presenting as peers with no verification — making it impossible for children to know who they are actually speaking to</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Social Discovery Apps Connect Children With Strangers — Regardless of "Friendship" Branding</div>
+        <div class="know-body">HeyMatch and Hey! VINA allow users to connect with people they have never met in real life. The friendship framing is a product positioning choice — the underlying mechanics of profile matching, location-based discovery and unmoderated private messaging are identical to those of mainstream dating apps and carry equivalent risks for younger users.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children Can Be Exposed to Unpredictable Interactions</div>
+        <div class="know-body">Because both platforms connect users with strangers, the nature of any given interaction is unpredictable. A conversation that begins innocuously can escalate. Children do not have the experience or judgement to reliably identify when a stranger's behaviour is becoming inappropriate — making adult oversight and clear boundaries essential.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Curiosity and Peer Influence Are the Primary Entry Points</div>
+        <div class="know-body">Children may install these apps because they appear to offer a less explicitly adult-focused way to meet new people — particularly in contexts where they feel lonely, are new to an area or have seen peers using similar platforms. The friendly branding and social features can make the apps feel like a safe and natural choice, masking their open-contact risks.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Age Checks Are Trivial to Bypass</div>
+        <div class="know-body">Both apps require only a date of birth to register — entering a false age takes seconds and grants full access to the platform including profile discovery, swipe matching and private messaging. No further verification is required before a child becomes visible to and contactable by the full adult user community on both platforms.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block social discovery apps like HeyMatch and Hey! VINA instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block social discovery apps entirely by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow instant blocking of similar stranger-based apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of every restriction applied</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like HeyMatch and Hey! VINA as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around online social discovery.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Teach Children About Online Safety and Privacy</div>
+        <div class="tip-body">Help your child understand that "friendship" apps carry the same risks as dating apps when they connect users with complete strangers. Discuss what personal information should never be shared — names, school, home location, phone number and photos — and explain why a friendly or relatable stranger online is not the same as a trusted person in real life. These conversations are most effective when had before a child encounters these platforms, not in response to a problem.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Communication Within Trusted Social Circles</div>
+        <div class="tip-body">If your child is drawn to these apps out of loneliness or a desire to meet new people, take it as an opportunity to understand their social needs and help meet them in safer ways — school clubs, local activities, existing friendships. Children who feel genuinely connected within their real-world social circle are far less likely to seek connection through open-access stranger platforms.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Limit Access to Stranger-Based Apps</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child uses, including tablets, shared devices and older phones. Social discovery apps are often reinstalled after deletion, so device-level restrictions provide more reliable protection than manual monitoring alone. Pair controls with regular, honest conversations about online safety for the most complete layer of protection available.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🌸</span>
+    <h3 class="closing-title">True Friendship Grows From Trust — Not Algorithms</h3>
+    <p class="closing-body">
+      Children deserve to build friendships at their own pace, with people they genuinely know and trust. iLimits helps you ensure their social world grows safely — shaped by your family's values, guided by your care, and protected from environments where the people on the other side of the screen are unknown.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>

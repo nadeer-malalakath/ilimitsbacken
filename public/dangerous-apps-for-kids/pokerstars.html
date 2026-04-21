@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PokerStars – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* PokerStars brand: deep card-table crimson */
+    --pk:           #B91C1C;
+    --pk-mid:       #991B1B;
+    --pk-deep:      #450A0A;
+    --pk-light:     #FFF5F5;
+    --pk-bdr:       #FECACA;
+    --pk-text:      #450A0A;
+
+    /* High risk red */
+    --hr-bg:        #FFF5F5;
+    --hr-bdr:       #FFBEBE;
+    --hr-text:      #800000;
+    --hr-sub:       #5C0000;
+    --hr-badge-bg:  #FFE4E4;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --gold-bg:      #FFFDF0;
+    --gold-bdr:     #FDE68A;
+    --gold-text:    #78350F;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0D0000 0%, #200505 50%, #2C0808 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(185,28,28,0.36) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(185,28,28,0.48) 0%, transparent 68%);
+    filter: blur(26px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(185,28,28,0.22);
+    border: 1px solid rgba(185,28,28,0.42);
+    color: #FECACA; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #450A0A 0%, #B91C1C 55%, #F87171 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(185,28,28,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14);
+    border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 10px;
+  }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.danger { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+    margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16);
+    border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28);
+    animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid);
+    font-weight: 400; margin-top: 5px; line-height: 1.65;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+
+  .gap { height: 6px; }
+
+  /* ── Callout ── */
+  .instant-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pk-light);
+    border: 1.5px solid var(--pk-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .instant-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--pk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .instant-title { font-size: 13px; font-weight: 700; color: var(--pk-text); line-height: 1.3; margin-bottom: 3px; }
+  .instant-body  { font-size: 12px; color: #7F1D1D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── S1 intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs);
+    position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose);
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--hr-bg);
+    border: 1.5px solid var(--hr-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--hr-badge-bg); border: 1.5px solid var(--hr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: var(--hr-text); display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: var(--hr-sub); font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note (crimson) ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pk-light);
+    border: 1.5px solid var(--pk-bdr);
+    border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--pk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--pk-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #7F1D1D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0D0000 0%, #200505 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: '';
+    position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(185,28,28,0.34) 0%, transparent 68%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .il-card::after {
+    content: '';
+    position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
+    position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    line-height: 1.65; margin-bottom: 18px; position: relative;
+  }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px 18px;
+    margin-bottom: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid);
+    border-radius: var(--radius-lg);
+    padding: 30px 22px;
+    text-align: center;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner      { animation: fadeUp 0.42s ease both; }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .instant-callout { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">♠️</div>
+        <div>
+          <div class="app-name-text">PokerStars</div>
+          <div class="app-sub">Online Gambling / Real-Money Gaming</div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Online Gambling</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val danger">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables online poker games that may involve real-money betting</div>
+      </div>
+
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">♠️ Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of PokerStars — one of the world's largest online poker platforms, designed exclusively for adult audiences and built around real-money wagering across multiple poker formats and competitive tournaments against players worldwide.</p>
+  </div>
+
+  <div class="instant-callout">
+    <div class="instant-ico">🎰</div>
+    <div>
+      <div class="instant-title">PokerStars Is a Licensed Gambling Platform Designed for Adults — Not a Casual Gaming App</div>
+      <div class="instant-body">Unlike real-money gaming apps that use familiar game formats to obscure their financial structure, PokerStars makes no pretence about what it is — a licensed online gambling platform where real money is wagered on card game outcomes against other players. It is regulated as a gambling product in most jurisdictions, designed exclusively for adult users and subject to the same legal frameworks as physical casinos and betting shops. A child accessing PokerStars is accessing an adult gambling product, not a gaming app with financial elements.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#B91C1C;"></span> Real-Money Poker</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Cash Tables</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F5A623;"></span> Buy-In Tournaments</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B5BDB;"></span> Play Money Mode</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Live Casino</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      PokerStars is <strong>one of the world's largest licensed online poker and gambling platforms</strong>, offering real-money Texas Hold'em, Omaha and other poker variants across cash tables and buy-in tournaments against players from around the world. The platform operates under gambling licences in multiple jurisdictions and is legally classified as a gambling product — not a gaming app — in most regions. In addition to poker, PokerStars includes casino game offerings and sports betting products in jurisdictions where these are licensed, extending the platform's gambling scope beyond card games alone.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--pk-light);">🃏</div>
+      <div>
+        <div class="feat-name">Real-Money Poker Cash Tables Against Global Players</div>
+        <div class="feat-desc">PokerStars operates real-money cash tables across multiple poker formats where players wager their own funds against other players in every hand. Unlike tournament formats, cash table losses are immediate and permanent — chips represent actual monetary value, and losses are deducted from a player's account balance in real time. A child accessing a cash table is placing real-money bets in a live gambling environment against experienced adult players from around the world.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🏆</div>
+      <div>
+        <div class="feat-name">Buy-In Tournaments With Real-Money Entry Fees</div>
+        <div class="feat-desc">PokerStars hosts thousands of buy-in poker tournaments daily across a wide range of entry fee levels — from micro-stakes events accessible to any user with a funded account through to high-roller tournaments with substantial buy-in amounts. Tournament entry fees are genuine financial commitments that are forfeited upon elimination, and prize pools are funded by the aggregate of all participants' buy-in fees. The breadth of available stakes creates a direct pathway from low-cost entry to increasingly significant financial commitment.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--gold-bg);">🎮</div>
+      <div>
+        <div class="feat-name">Play Money Mode That Normalises Gambling Mechanics</div>
+        <div class="feat-desc">PokerStars offers a play money mode where no real funds are wagered — a feature that may appear to make the platform accessible to younger users at lower risk. In practice, play money mode uses identical game mechanics, interface design and competitive structures as the real-money product, normalising gambling behaviour and creating familiarity with the platform before a transition to real-money play. It functions as an extended onboarding experience rather than a genuinely separate product.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">💳</div>
+      <div>
+        <div class="feat-name">Account Funding and Withdrawal Through Multiple Payment Methods</div>
+        <div class="feat-desc">PokerStars accepts account deposits via bank transfer, credit and debit cards, e-wallets and other payment methods — with winnings withdrawable back to the same channels. Once an account is funded, a child can access real-money cash tables and tournament buy-ins without returning to a deposit screen, enabling multiple gambling transactions within a single session with no mandatory parental notification or approval at each stage.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🎲</div>
+      <div>
+        <div class="feat-name">Casino Games and Extended Gambling Products</div>
+        <div class="feat-desc">Beyond poker, PokerStars offers slots, roulette, blackjack and other casino games in jurisdictions where these are licensed — extending the platform's gambling scope significantly beyond card games. A child with access to a PokerStars account may encounter and engage with a full suite of casino gambling products, all within a single integrated platform designed for adult audiences.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from direct exposure to a licensed gambling platform, real-money betting and financial loss, competitive environments built around risk and reward, the addictive psychological mechanics of poker, and play money mode normalising gambling behaviour before real-money play begins.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎰</span>
+      <div class="rc-name">Exposure to Gambling-Style Gameplay</div>
+      <div class="rc-desc">PokerStars is a licensed gambling platform — not a gaming app with gambling elements. Every aspect of its design, game mechanics and competitive structure is built around the same psychological foundations as physical casino gambling, with the same risk of harm to younger users who encounter it during formative years</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">Real-Money Betting and Financial Loss</div>
+      <div class="rc-desc">Cash table play and tournament buy-ins involve genuine financial wagers with real loss potential. Unlike gaming platforms where entry fees are the primary financial risk, poker involves repeated betting decisions within every hand — creating multiple loss events per session that can deplete a funded account rapidly</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Competitive Environments Designed Around Risk and Reward</div>
+      <div class="rc-desc">Poker's competitive structure — reading opponents, managing risk across hands and sessions, and experiencing the psychological intensity of high-stakes decisions — is specifically calibrated to maximise engagement and the desire to continue playing. These mechanics are particularly potent for younger users whose impulse-control and risk-assessment frameworks are still developing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔁</span>
+      <div class="rc-name">Potential for Addictive Gaming Behaviour</div>
+      <div class="rc-desc">Poker combines variable reward timing, near-miss outcomes, social competition and financial stakes in a format extensively studied for its association with problem gambling development. Children and adolescents are significantly more vulnerable to developing addictive relationships with gambling products than adults, and early exposure is associated with elevated long-term risk</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎮</span>
+      <div class="rc-name">Play Money Mode as a Gateway to Real-Money Gambling</div>
+      <div class="rc-desc">Play money mode uses identical game mechanics and interface design as the real-money product, creating deep familiarity with the platform's gambling environment before any financial commitment is required. This normalisation of gambling mechanics during play money sessions removes psychological barriers to the transition to real-money play</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Financial Transactions Without Parental Oversight</div>
+      <div class="rc-desc">Once a PokerStars account is funded, a child can access cash tables, pay tournament buy-ins and engage in casino games without any mandatory parental notification or approval at each transaction — making cumulative financial loss possible across multiple sessions before a parent is aware the platform is in use</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>PokerStars Carries a High Risk Rating</strong>
+      <span>As a licensed gambling platform designed exclusively for adults, PokerStars represents the clearest and most direct gambling risk in this category — involving real-money betting, casino game access, professionally designed addictive mechanics and no effective barriers preventing a child from accessing the full real-money gambling environment.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🚨</div>
+    <div>
+      <div class="control-title">PokerStars Is a Licensed Gambling Platform — It Belongs to a Different and More Serious Risk Category Than Other Gaming Apps</div>
+      <div class="control-body">PokerStars does not use gambling mechanics as a feature within a gaming product — it is a gambling product, regulated as such by licensing authorities in the jurisdictions where it operates. The risk of a child accessing PokerStars is not that a gaming app has financial elements — it is that a child is accessing an adult-regulated gambling environment identical in structure and psychological design to a physical casino. The harm potential, the addictive mechanics and the financial risk are not incidental to the platform's design — they are its core product, calibrated for an adult audience that is legally permitted to engage with them.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Online Poker Platforms Are Designed for Adult Audiences and Typically Involve Real-Money Wagers</div>
+        <div class="know-body">PokerStars is a regulated gambling product licensed for adult use — it is not a general-audience gaming app that happens to include financial elements. The platform's game mechanics, competitive structures and engagement design are calibrated for adult users who are legally permitted to gamble and who are assumed to have the financial maturity and impulse-control capacity to manage the associated risks. A child accessing this platform is accessing a product that was never designed for their age group and that carries the same category of harm risk as any other licensed gambling environment.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Not Fully Understand the Risks Associated With Gambling-Style Games</div>
+        <div class="know-body">Children who are drawn to PokerStars may approach it through the lens of a card game skill challenge — focusing on learning poker strategy, competing against others and experiencing the excitement of competitive play, without fully recognising the financial and psychological risks embedded in the platform's design. The availability of play money mode may create a misleading impression that the platform is suitable for all users, while simultaneously familiarising younger users with all the mechanics of the real-money gambling environment in preparation for a transition that the platform actively encourages.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Early Exposure to Gambling Products Is Associated With Elevated Long-Term Risk</div>
+        <div class="know-body">Research on gambling harm consistently identifies early exposure to gambling products as a significant risk factor for the development of problem gambling behaviour in adolescence and adulthood. Children and adolescents are more vulnerable to the addictive mechanics of gambling products than adults — with less developed impulse-control, greater susceptibility to variable reward systems and less financial perspective to contextualise losses. Preventing access to licensed gambling platforms during childhood and adolescence is one of the most effective risk-reduction measures available to parents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Platform Age Verification Does Not Reliably Prevent Under-Age Access</div>
+        <div class="know-body">PokerStars is legally required to verify user age before permitting access to real-money gambling — but age verification processes can be bypassed by a determined younger user with access to a parent's identification details or an existing funded account. Parents should not rely on the platform's own verification processes as the primary safeguard against a child accessing the product, and should instead combine iLimits device-level blocking with payment method management and open conversations about gambling platforms and the risks they carry.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block online gambling platforms like PokerStars instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block online gambling platforms entirely with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar apps at once</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are allowed or restricted</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like PokerStars as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child and build lasting awareness around gambling products, responsible gaming habits and the serious risks of adult-regulated platforms reaching younger users.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🗣️</div>
+      <div>
+        <div class="tip-name">Talk With Children About the Risks of Gambling-Related Games</div>
+        <div class="tip-body">Help your child understand the clear distinction between playing card games socially and using a licensed gambling platform like PokerStars — that the two share surface-level similarities but operate on entirely different financial and psychological foundations. Explain that PokerStars is a product designed for adults who are legally permitted to gamble, that its mechanics are specifically engineered to make continued play feel compelling, and that the house or other players consistently hold structural advantages that make it impossible to generate reliable financial returns through skill alone. Discuss what gambling is, what regulated gambling platforms are, and why access to them is age-restricted in the same way that alcohol and tobacco are — not as arbitrary rules, but because the harm potential for younger users is well-documented and significant. Make sure your child understands these reasons, not just the restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🤝</div>
+      <div>
+        <div class="tip-name">Encourage Responsible Gaming Habits Across All Platforms</div>
+        <div class="tip-body">Use PokerStars as a starting point for a broader, ongoing conversation about gambling awareness and responsible gaming across all digital platforms — not just this one. Discuss how gambling mechanics appear in many different product types, including some that are not regulated as gambling products, and how recognising these mechanics is a valuable skill for navigating digital environments as your child grows older. Establish household norms around gaming — time limits, the distinction between free and paid gameplay, and how to recognise when a gaming environment is designed to maximise spending or continued engagement rather than simply to entertain. Children who develop genuine media literacy around gambling mechanics, and who feel comfortable discussing what they encounter online with a parent, are significantly better protected across all platforms — not just the ones that are clearly flagged as restricted.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Controls to Restrict Access to Gambling Platforms</div>
+        <div class="tip-body">Apply iLimits restrictions across every device your child uses — tablets, secondary phones and shared family devices included. Alongside blocking PokerStars through iLimits, review all payment methods stored on your child's device, remove saved card details where possible and enable purchase confirmation or parental approval requirements at the device or app store level. Consider also reviewing whether your own PokerStars account, if you have one, is accessible on shared or family devices — a child accessing an existing funded account bypasses the platform's own age verification entirely. The combination of device-level access controls, payment method management and clear, age-appropriate conversations about gambling products provides the strongest protection available to families navigating this category of platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Protecting Children From Gambling Harm Starts Early</h3>
+    <p class="closing-body">
+      The evidence on gambling harm is clear — early exposure to gambling products during childhood and adolescence significantly increases the risk of problem gambling behaviour later in life. iLimits gives you the technical tools to prevent that access. The conversations your family has about gambling, risk and responsible behaviour provide the foundation that lasts far beyond any single restriction.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
