@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verified — iLimits</title>
+    <meta name="description" content="Your iLimits account email has been verified. You're ready to manage your family's digital wellbeing." />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Preconnect for font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ── Reset & Base ─────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+          --green-1: #3daa4f;
+          --green-2: #4cbb5e;
+          --green-3: #5dce70;
+          --green-light: #edfaf0;
+          --green-mid:   #c8f0cf;
+          --white:  #ffffff;
+          --surface:#f7fdf8;
+          --text-heading: #0f2318;
+          --text-body:    #3a5244;
+          --text-muted:   #7a9a85;
+          --border:  rgba(76, 187, 94, 0.18);
+          --shadow-card: 0 24px 64px rgba(30, 90, 50, 0.13), 0 4px 16px rgba(30, 90, 50, 0.07);
+          --shadow-btn:  0 8px 28px rgba(61, 170, 79, 0.40);
+          --radius-card: 28px;
+          --radius-btn:  50px;
+          --font: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html, body {
+          height: 100%;
+          font-family: var(--font);
+          background: var(--surface);
+          color: var(--text-body);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Background canvas ────────────────────────────────────────── */
+        .bg-canvas {
+          position: fixed; inset: 0; z-index: 0; overflow: hidden;
+          background: linear-gradient(160deg, #edfaf0 0%, #f7fdf8 45%, #f0faf5 100%);
+        }
+
+        .bg-blob {
+          position: absolute; border-radius: 50%;
+          filter: blur(72px); opacity: 0.55;
+          animation: blobFloat 8s ease-in-out infinite alternate;
+        }
+
+        .bg-blob-1 {
+          width: 520px; height: 520px;
+          background: radial-gradient(circle, #b7efc1 0%, transparent 70%);
+          top: -180px; left: -160px;
+          animation-duration: 9s;
+        }
+        .bg-blob-2 {
+          width: 420px; height: 420px;
+          background: radial-gradient(circle, #a8e6b4 0%, transparent 70%);
+          bottom: -140px; right: -120px;
+          animation-duration: 11s; animation-delay: -3s;
+        }
+        .bg-blob-3 {
+          width: 280px; height: 280px;
+          background: radial-gradient(circle, #d0f5d8 0%, transparent 70%);
+          top: 40%; left: 60%;
+          animation-duration: 13s; animation-delay: -6s;
+        }
+
+        /* subtle dot grid */
+        .bg-dots {
+          position: absolute; inset: 0;
+          background-image: radial-gradient(circle, rgba(76,187,94,0.13) 1px, transparent 1px);
+          background-size: 36px 36px;
+        }
+
+        /* floating shape accents */
+        .bg-shape {
+          position: absolute; opacity: 0.07;
+          animation: shapeFloat 14s ease-in-out infinite alternate;
+        }
+        .bg-shape-1 { top: 12%; right: 8%; width: 88px; animation-delay: -2s; }
+        .bg-shape-2 { bottom: 18%; left: 6%; width: 68px; animation-delay: -7s; }
+        .bg-shape-3 { top: 55%; right: 18%; width: 52px; animation-delay: -4s; }
+
+        @keyframes blobFloat {
+          from { transform: translate(0, 0) scale(1); }
+          to   { transform: translate(18px, -22px) scale(1.06); }
+        }
+        @keyframes shapeFloat {
+          from { transform: translateY(0) rotate(0deg); }
+          to   { transform: translateY(-16px) rotate(12deg); }
+        }
+
+        /* ── Layout wrapper ───────────────────────────────────────────── */
+        .page-wrap {
+          position: relative; z-index: 1;
+          min-height: 100vh;
+          display: flex; align-items: center; justify-content: center;
+          padding: 32px 16px;
+        }
+
+        /* ── Card ─────────────────────────────────────────────────────── */
+        .card {
+          background: var(--white);
+          border-radius: var(--radius-card);
+          box-shadow: var(--shadow-card);
+          border: 1px solid var(--border);
+          max-width: 520px; width: 100%;
+          padding: 56px 48px 48px;
+          text-align: center;
+          /* entrance animation */
+          opacity: 0;
+          transform: translateY(32px);
+          animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+        }
+
+        @keyframes cardReveal {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Logo ─────────────────────────────────────────────────────── */
+        .logo-wrap {
+          display: flex; align-items: center; justify-content: center;
+          gap: 9px;
+          margin-bottom: 36px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.4s forwards;
+        }
+
+        .logo-icon {
+          width: 34px; height: 34px;
+          background: linear-gradient(135deg, var(--green-1), var(--green-3));
+          border-radius: 9px;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 4px 12px rgba(61,170,79,0.30);
+        }
+        .logo-icon svg { width: 18px; height: 18px; fill: #fff; }
+
+        .logo-text {
+          font-size: 20px; font-weight: 800;
+          color: var(--text-heading);
+          letter-spacing: -0.4px;
+        }
+        .logo-text span { color: var(--green-1); }
+
+        /* ── Success icon ─────────────────────────────────────────────── */
+        .icon-wrap {
+          width: 96px; height: 96px;
+          margin: 0 auto 28px;
+          position: relative;
+          opacity: 0;
+          animation: fadeUp 0.55s ease 0.55s forwards;
+        }
+
+        .icon-ring {
+          width: 96px; height: 96px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mid) 100%);
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 0 0 0 rgba(76,187,94,0.4);
+          animation: pulse 2.4s ease-out 1.3s infinite;
+        }
+
+        @keyframes pulse {
+          0%   { box-shadow: 0 0 0 0   rgba(76,187,94,0.38); }
+          60%  { box-shadow: 0 0 0 18px rgba(76,187,94,0); }
+          100% { box-shadow: 0 0 0 0   rgba(76,187,94,0); }
+        }
+
+        /* SVG check draw */
+        .check-svg {
+          width: 44px; height: 44px; overflow: visible;
+        }
+        .check-circle {
+          fill: none;
+          stroke: var(--green-1);
+          stroke-width: 2.2;
+          stroke-dasharray: 150;
+          stroke-dashoffset: 150;
+          animation: drawCircle 0.55s cubic-bezier(0.4,0,0.2,1) 0.85s forwards;
+        }
+        .check-mark {
+          fill: none;
+          stroke: var(--green-1);
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-dasharray: 50;
+          stroke-dashoffset: 50;
+          animation: drawMark 0.40s cubic-bezier(0.4,0,0.2,1) 1.3s forwards;
+        }
+
+        @keyframes drawCircle {
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes drawMark {
+          to { stroke-dashoffset: 0; }
+        }
+
+        /* ── Typography ───────────────────────────────────────────────── */
+        .heading {
+          font-size: 28px; font-weight: 800;
+          color: var(--text-heading);
+          letter-spacing: -0.6px;
+          line-height: 1.2;
+          margin-bottom: 14px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.75s forwards;
+        }
+
+        .sub-text {
+          font-size: 15.5px; font-weight: 400;
+          color: var(--text-body);
+          line-height: 1.65;
+          margin-bottom: 28px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.88s forwards;
+        }
+
+        /* ── Security info box ────────────────────────────────────────── */
+        .info-box {
+          background: var(--green-light);
+          border: 1px solid var(--green-mid);
+          border-radius: 16px;
+          padding: 16px 20px;
+          margin-bottom: 32px;
+          display: flex; align-items: flex-start; gap: 13px;
+          text-align: left;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 1.0s forwards;
+        }
+
+        .info-box-icon {
+          flex-shrink: 0;
+          width: 34px; height: 34px;
+          background: linear-gradient(135deg, #3daa4f, #5dce70);
+          border-radius: 10px;
+          display: flex; align-items: center; justify-content: center;
+          margin-top: 1px;
+          box-shadow: 0 3px 10px rgba(61,170,79,0.22);
+        }
+        .info-box-icon svg { width: 16px; height: 16px; fill: #fff; }
+
+        .info-box-text {
+          font-size: 13.5px; font-weight: 500;
+          color: var(--text-body);
+          line-height: 1.6;
+        }
+        .info-box-text strong {
+          display: block;
+          font-size: 12.5px; font-weight: 700;
+          color: var(--green-1);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 4px;
+        }
+
+        /* ── CTA Button ───────────────────────────────────────────────── */
+        .btn-wrap {
+          margin-bottom: 20px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 1.12s forwards;
+        }
+
+        .btn-open {
+          display: inline-flex; align-items: center; justify-content: center;
+          gap: 9px;
+          width: 100%;
+          padding: 17px 28px;
+          font-family: var(--font);
+          font-size: 16px; font-weight: 700;
+          color: #fff;
+          background: linear-gradient(135deg, var(--green-1) 0%, var(--green-3) 100%);
+          border: none; border-radius: var(--radius-btn);
+          cursor: pointer;
+          box-shadow: var(--shadow-btn);
+          letter-spacing: -0.2px;
+          transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+          text-decoration: none;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .btn-open::before {
+          content: '';
+          position: absolute; inset: 0; border-radius: inherit;
+          background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+          pointer-events: none;
+        }
+
+        .btn-open:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 14px 38px rgba(61,170,79,0.48);
+          filter: brightness(1.04);
+        }
+        .btn-open:active {
+          transform: translateY(0);
+          box-shadow: var(--shadow-btn);
+        }
+
+        .btn-open svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+        /* loading spinner (shown after click) */
+        .btn-open .spinner {
+          display: none;
+          width: 18px; height: 18px;
+          border: 2.5px solid rgba(255,255,255,0.35);
+          border-top-color: #fff;
+          border-radius: 50%;
+          animation: spin 0.65s linear infinite;
+        }
+        .btn-open.loading .btn-label { display: none; }
+        .btn-open.loading .btn-arrow { display: none; }
+        .btn-open.loading .spinner  { display: block; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Bottom hint ──────────────────────────────────────────────── */
+        .bottom-hint {
+          font-size: 13px; font-weight: 500;
+          color: var(--text-muted);
+          letter-spacing: 0.1px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 1.22s forwards;
+        }
+        .bottom-hint svg {
+          display: inline-block; vertical-align: middle;
+          width: 14px; height: 14px; fill: var(--green-1); margin-right: 5px;
+          position: relative; top: -1px;
+        }
+
+        /* ── Shared fade-up ───────────────────────────────────────────── */
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Mobile ───────────────────────────────────────────────────── */
+        @media (max-width: 560px) {
+          .card { padding: 44px 26px 38px; }
+          .heading { font-size: 24px; }
+          .sub-text { font-size: 14.5px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-canvas" aria-hidden="true">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+    <div class="bg-dots"></div>
+
+    <!-- Shield shape -->
+    <svg class="bg-shape bg-shape-1" viewBox="0 0 88 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M44 2L6 18v28c0 24 16 46 38 54 22-8 38-30 38-54V18L44 2z" fill="#3daa4f"/>
+    </svg>
+    <!-- Family shape -->
+    <svg class="bg-shape bg-shape-2" viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="14" r="9" fill="#3daa4f"/>
+        <circle cx="48" cy="14" r="9" fill="#3daa4f"/>
+        <path d="M4 54c0-12 7-20 16-20s12 4 12 4 3-4 12-4 16 8 16 20" fill="#3daa4f"/>
+        <circle cx="34" cy="44" r="6" fill="#3daa4f"/>
+    </svg>
+    <!-- Lock shape -->
+    <svg class="bg-shape bg-shape-3" viewBox="0 0 52 64" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="26" width="44" height="32" rx="8" fill="#3daa4f"/>
+        <path d="M13 26V18a13 13 0 0126 0v8" stroke="#3daa4f" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="26" cy="43" r="4" fill="#fff" opacity="0.5"/>
+    </svg>
+</div>
+
+<!-- Main -->
+<main class="page-wrap" role="main">
+    <article class="card" aria-labelledby="page-heading">
+
+        <!-- Logo -->
+        <div class="logo-wrap" aria-label="iLimits">
+            <div class="logo-icon" aria-hidden="true">
+                <!-- shield / lock mark -->
+                <svg viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L2 5.5v7.8C2 19.1 6.4 24.6 12 27c5.6-2.4 10-7.9 10-13.7V5.5L12 1z"/>
+                </svg>
+            </div>
+            <span class="logo-text">i<span>Limits</span></span>
+        </div>
+
+        <!-- Success Icon -->
+        <div class="icon-wrap" role="img" aria-label="Email verified">
+            <div class="icon-ring">
+                <svg class="check-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="check-circle" cx="22" cy="22" r="19" />
+                    <polyline class="check-mark" points="13,22 19.5,28.5 31,15.5" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="heading" id="page-heading">Email Verified Successfully</h1>
+
+        <!-- Body copy -->
+        <p class="sub-text">
+            Your email address has been successfully verified.
+            Your iLimits account is now ready to help you build healthier digital habits
+            and manage your family's digital wellbeing with confidence.
+        </p>
+
+        <!-- Security info -->
+        <div class="info-box" role="note" aria-label="Security information">
+            <div class="info-box-icon" aria-hidden="true">
+                <!-- shield icon -->
+                <svg viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L2 5.5v7.8C2 19.1 6.4 24.6 12 27c5.6-2.4 10-7.9 10-13.7V5.5L12 1z"/>
+                </svg>
+            </div>
+            <div class="info-box-text">
+                <strong>Account Protected</strong>
+                Verification helps protect your account and ensures only authorized parents
+                can access family controls and settings.
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="btn-wrap">
+            <button
+                    class="btn-open"
+                    id="openAppBtn"
+                    type="button"
+                    aria-label="Open iLimits App"
+                    onclick="openApp()"
+            >
+                <!-- app icon -->
+                <svg class="btn-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+                </svg>
+                <span class="btn-label">Open iLimits App</span>
+                <div class="spinner" aria-hidden="true"></div>
+            </button>
+        </div>
+
+        <!-- Bottom hint -->
+        <p class="bottom-hint">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.25h-1.5v-4.5h1.5v4.5zm0-6h-1.5v-1.5h1.5v1.5z"/>
+            </svg>
+            You're all set. Open iLimits to continue.
+        </p>
+
+    </article>
+</main>
+
+<script>
+    function openApp() {
+      const btn = document.getElementById('openAppBtn');
+      btn.classList.add('loading');
+      btn.setAttribute('aria-busy', 'true');
+
+      // Attempt deep link
+      const deepLink = 'ilimits://verified';
+      const fallback = 'https://ilimits.app';
+
+      let didOpen = false;
+      const startTime = Date.now();
+
+      // Listen for page hide / blur (app opened)
+      const onVisibilityChange = () => {
+        if (document.hidden || document.visibilityState === 'hidden') {
+          didOpen = true;
+        }
+      };
+      const onBlur = () => { didOpen = true; };
+
+      document.addEventListener('visibilitychange', onVisibilityChange);
+      window.addEventListener('blur', onBlur);
+
+      // Trigger deep link
+      window.location.href = deepLink;
+
+      // Fallback after 1.5 s if app didn't open
+      setTimeout(() => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onBlur);
+
+        if (!didOpen) {
+          window.location.href = fallback;
+        } else {
+          // App opened — reset button
+          btn.classList.remove('loading');
+          btn.removeAttribute('aria-busy');
+        }
+      }, 1500);
+    }
+</script>
+</body>
+</html>

@@ -1,795 +1,466 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service – iLimits</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --rose:        #F0436A;
-  --rose-deep:   #C8284E;
-  --rose-soft:   #F9728E;
-  --blush:       #FDE8EC;
-  --blush-mid:   #FBC8D3;
-  --petal:       #FEF3F5;
-  --ink:         #18100E;
-  --ink-mid:     #3D2820;
-  --text:        #2D1F1B;
-  --muted:       #7A6560;
-  --faint:       #C4B5B0;
-  --surface:     #FFFAF9;
-  --white:       #FFFFFF;
-  --border:      #EDE0DC;
-  --border-soft: #F5ECEB;
-  --green:       #0D7A5F;
-  --green-bg:    #EDFAF5;
-  --green-border:#A7F3D0;
-  --amber:       #C47B0A;
-  --amber-bg:    #FEF7E6;
-  --amber-border:#FDE68A;
-  --blue:        #2358C8;
-  --blue-bg:     #EFF4FF;
-  --blue-border: #BFCFFF;
-  --shadow-xs:  0 1px 4px rgba(24,16,14,0.06);
-  --shadow-sm:  0 2px 12px rgba(24,16,14,0.07);
-  --shadow-md:  0 6px 28px rgba(24,16,14,0.09);
-  --shadow-lg:  0 16px 60px rgba(24,16,14,0.12);
-  --r-sm:  12px;
-  --r-md:  20px;
-  --r-lg:  28px;
-  --r-xl:  40px;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--surface);
-  color: var(--text);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ── NAV ─────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,250,249,0.88);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  border-bottom: 1px solid var(--border-soft);
-}
-.nav-inner {
-  max-width: 1000px; margin: 0 auto;
-  padding: 0 28px; height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-}
-.nav-logo-mark {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(145deg, var(--rose) 0%, var(--rose-soft) 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; color: white;
-  box-shadow: 0 4px 12px rgba(240,67,106,0.35);
-  overflow: hidden;
-}
-.nav-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
-.nav-logo span {
-  font-family: 'Fraunces', serif;
-  font-weight: 700; font-size: 1.25rem; color: var(--ink);
-}
-.nav-back {
-  display: inline-flex; align-items: center; gap: 7px;
-  color: var(--muted); text-decoration: none;
-  font-size: 0.875rem; font-weight: 600;
-  padding: 8px 16px; border-radius: 100px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  transition: color 0.2s, border-color 0.2s, transform 0.2s;
-  box-shadow: var(--shadow-xs);
-}
-.nav-back:hover { color: var(--ink); border-color: var(--faint); transform: translateY(-1px); }
-
-/* ── HERO ─────────────────────────────── */
-.hero {
-  padding: 120px 28px 96px;
-  background: linear-gradient(160deg, #FEF0F3 0%, #FDF5F7 50%, var(--surface) 100%);
-  position: relative; overflow: hidden;
-  margin-top: 64px;
-}
-.hero-orb {
-  position: absolute; border-radius: 50%; pointer-events: none;
-}
-.hero-orb.a {
-  width: 520px; height: 520px;
-  top: -120px; right: -120px;
-  background: radial-gradient(circle, rgba(240,67,106,0.09) 0%, transparent 70%);
-}
-.hero-orb.b {
-  width: 340px; height: 340px;
-  bottom: -60px; left: -80px;
-  background: radial-gradient(circle, rgba(240,67,106,0.06) 0%, transparent 70%);
-}
-.hero-inner {
-  max-width: 760px; margin: 0 auto;
-  position: relative; z-index: 1;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--white); border: 1px solid var(--blush-mid);
-  border-radius: 100px; padding: 7px 16px;
-  font-size: 0.8rem; font-weight: 700;
-  color: var(--rose-deep); margin-bottom: 24px;
-  box-shadow: var(--shadow-xs);
-}
-.badge-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--green); flex-shrink: 0;
-  animation: pulse 2.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.55; transform: scale(0.85); }
-}
-.hero h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2.6rem, 5vw, 3.8rem);
-  font-weight: 700; line-height: 1.1;
-  letter-spacing: -0.02em; color: var(--ink);
-  margin-bottom: 20px;
-}
-.hero h1 em { font-style: italic; color: var(--rose); }
-.hero-sub {
-  font-size: 1.05rem; color: var(--muted);
-  line-height: 1.75; max-width: 580px;
-  margin-bottom: 36px;
-}
-.hero-pills {
-  display: flex; flex-wrap: wrap; gap: 10px;
-}
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 100px; padding: 8px 16px;
-  font-size: 0.83rem; font-weight: 600; color: var(--ink-mid);
-  box-shadow: var(--shadow-xs);
-}
-
-/* ── TOC ─────────────────────────────── */
-.toc-wrap {
-  max-width: 760px; margin: 0 auto;
-  padding: 0 28px 0;
-}
-.toc-card {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: 28px 32px;
-  margin-bottom: 0;
-  box-shadow: var(--shadow-xs);
-}
-.toc-label {
-  font-size: 0.75rem; font-weight: 800; color: var(--rose);
-  text-transform: uppercase; letter-spacing: 0.7px;
-  margin-bottom: 16px;
-  display: flex; align-items: center; gap: 8px;
-}
-.toc-label::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
-.toc-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 4px 24px;
-}
-.toc-link {
-  display: flex; align-items: center; gap: 9px;
-  text-decoration: none; color: var(--muted);
-  font-size: 0.875rem; font-weight: 500;
-  padding: 7px 0; border-bottom: 1px solid var(--border-soft);
-  transition: color 0.2s;
-}
-.toc-link:hover { color: var(--rose); }
-.toc-num {
-  width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
-  background: var(--blush); color: var(--rose-deep);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 800;
-}
-
-/* ── CONTENT ─────────────────────────── */
-.content {
-  max-width: 760px; margin: 0 auto;
-  padding: 32px 28px 80px;
-}
-
-.intro-card {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-left: 4px solid var(--rose);
-  border-radius: var(--r-lg);
-  padding: 28px 32px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-xs);
-}
-.intro-card p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; margin: 0; }
-.intro-card p + p { margin-top: 10px; }
-.intro-card strong { color: var(--ink); font-weight: 700; }
-
-.policy-card {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-lg);
-  padding: 36px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.25s, box-shadow 0.25s;
-  scroll-margin-top: 84px;
-}
-.policy-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-
-.card-header {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 22px; padding-bottom: 18px;
-  border-bottom: 1px solid var(--border-soft);
-}
-.section-num {
-  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
-  background: var(--blush); color: var(--rose-deep);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 1.1rem; font-weight: 700;
-}
-.card-header h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.38rem; font-weight: 700;
-  color: var(--ink); letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 14px; }
-p:last-child { margin-bottom: 0; }
-p strong { color: var(--ink); font-weight: 700; }
-
-a { color: var(--rose); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-a:hover { color: var(--rose-deep); text-decoration: underline; }
-
-/* lists */
-.policy-list { list-style: none; margin: 12px 0; }
-.policy-list li {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border-soft);
-  color: var(--muted); font-size: 0.93rem; line-height: 1.65;
-}
-.policy-list li:first-child { padding-top: 0; }
-.policy-list li:last-child { border-bottom: none; padding-bottom: 0; }
-.li-check {
-  width: 22px; height: 22px; border-radius: 7px; flex-shrink: 0;
-  background: var(--blush); color: var(--rose);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; margin-top: 1px;
-}
-.policy-list li strong { color: var(--ink); font-weight: 700; }
-
-/* highlight */
-.highlight {
-  background: var(--petal);
-  border: 1px solid var(--blush-mid);
-  border-left: 4px solid var(--rose);
-  border-radius: var(--r-md);
-  padding: 18px 20px;
-  margin: 18px 0;
-  display: flex; gap: 13px; align-items: flex-start;
-}
-.highlight-icon { font-size: 19px; flex-shrink: 0; margin-top: 1px; }
-.highlight p { color: var(--ink-mid); font-weight: 600; font-size: 0.92rem; margin: 0; line-height: 1.7; }
-
-/* info highlight (blue tone) */
-.info-block {
-  background: var(--blue-bg);
-  border: 1px solid var(--blue-border);
-  border-left: 4px solid var(--blue);
-  border-radius: var(--r-md);
-  padding: 18px 20px;
-  margin: 18px 0;
-  display: flex; gap: 13px; align-items: flex-start;
-}
-.info-block p { color: #1A3A8A; font-weight: 500; font-size: 0.92rem; margin: 0; line-height: 1.7; }
-
-/* warning */
-.warning-block {
-  background: var(--amber-bg);
-  border: 1px solid var(--amber-border);
-  border-left: 4px solid var(--amber);
-  border-radius: var(--r-md);
-  padding: 18px 20px;
-  margin: 18px 0;
-  display: flex; gap: 13px; align-items: flex-start;
-}
-.warning-block p { color: #7C4A00; font-weight: 500; font-size: 0.92rem; margin: 0; line-height: 1.7; }
-
-/* feature chips for service description */
-.feature-chips {
-  display: flex; flex-wrap: wrap; gap: 9px;
-  margin: 18px 0;
-}
-.feat-chip {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: var(--petal); border: 1px solid var(--blush-mid);
-  border-radius: 100px; padding: 7px 14px;
-  font-size: 0.82rem; font-weight: 700; color: var(--rose-deep);
-}
-
-/* responsibility grid */
-.resp-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 12px; margin: 18px 0;
-}
-.resp-card {
-  background: var(--petal);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-md);
-  padding: 18px 16px;
-}
-.resp-icon { font-size: 22px; margin-bottom: 8px; display: block; }
-.resp-title { font-size: 0.875rem; font-weight: 800; color: var(--ink); margin-bottom: 5px; }
-.resp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
-
-/* sub divider label */
-.sub-label {
-  font-size: 0.75rem; font-weight: 800; color: var(--rose);
-  text-transform: uppercase; letter-spacing: 0.6px;
-  margin: 20px 0 10px;
-  display: flex; align-items: center; gap: 8px;
-}
-.sub-label::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
-
-/* contact detail row */
-.contact-row {
-  display: flex; align-items: center; gap: 13px;
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  border-radius: var(--r-md);
-  padding: 16px 20px;
-  margin-top: 16px;
-}
-.contact-row-icon { font-size: 22px; }
-.contact-row-label { font-size: 0.8rem; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 2px; }
-.contact-row a { font-size: 0.95rem; color: var(--green); font-weight: 700; }
-.contact-row a:hover { color: #065F46; }
-
-/* ── CTA ─────────────────────────────── */
-.contact-cta {
-  background: linear-gradient(145deg, var(--rose) 0%, #F9607E 50%, #FCA7B3 100%);
-  border-radius: var(--r-xl);
-  padding: 56px 48px;
-  text-align: center;
-  position: relative; overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 20px 60px rgba(240,67,106,0.28);
-}
-.contact-cta::before {
-  content: ''; position: absolute; top: -80px; right: -80px;
-  width: 300px; height: 300px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-}
-.contact-cta::after {
-  content: ''; position: absolute; bottom: -60px; left: -60px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-}
-.contact-cta h2 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  font-weight: 700; color: white;
-  letter-spacing: -0.02em; margin-bottom: 12px;
-  position: relative; z-index: 1;
-}
-.contact-cta p {
-  color: rgba(255,255,255,0.85); font-size: 1rem;
-  margin-bottom: 28px; position: relative; z-index: 1;
-}
-.cta-btns {
-  display: flex; gap: 12px; justify-content: center;
-  flex-wrap: wrap; position: relative; z-index: 1;
-}
-.cta-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: white; color: var(--rose-deep);
-  padding: 12px 26px; border-radius: 100px;
-  text-decoration: none; font-weight: 700;
-  font-size: 0.9rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
-}
-.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); color: var(--rose-deep); text-decoration: none; }
-.cta-btn-outline {
-  background: rgba(255,255,255,0.15);
-  color: white !important;
-  border: 1.5px solid rgba(255,255,255,0.4);
-  box-shadow: none;
-}
-.cta-btn-outline:hover { background: rgba(255,255,255,0.25); box-shadow: none; color: white !important; }
-
-/* ── FOOTER ──────────────────────────── */
-footer {
-  background: var(--ink); color: white;
-  padding: 36px 28px;
-}
-.footer-inner {
-  max-width: 760px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 16px;
-}
-.footer-logo {
-  display: flex; align-items: center; gap: 9px;
-  text-decoration: none;
-}
-.footer-logo-mark {
-  width: 30px; height: 30px; border-radius: 8px;
-  background: linear-gradient(145deg, var(--rose), var(--rose-soft));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; overflow: hidden;
-}
-.footer-logo-mark img { width: 100%; height: 100%; object-fit: contain; }
-.footer-logo span {
-  font-family: 'Fraunces', serif;
-  font-weight: 700; font-size: 1.05rem; color: white;
-}
-.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
-.footer-links { display: flex; gap: 18px; }
-.footer-links a {
-  font-size: 0.8rem; font-weight: 600;
-  color: rgba(255,255,255,0.45); text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: white; }
-
-/* ── RESPONSIVE ──────────────────────── */
-@media (max-width: 640px) {
-  .hero { padding: 100px 20px 72px; }
-  .toc-wrap { padding: 0 20px; }
-  .toc-grid { grid-template-columns: 1fr; }
-  .content { padding: 28px 20px 64px; }
-  .policy-card { padding: 26px 20px; }
-  .intro-card { padding: 22px 20px; }
-  .resp-grid { grid-template-columns: 1fr; }
-  .contact-cta { padding: 40px 24px; }
-  .cta-btns { flex-direction: column; align-items: center; }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark">
-        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
+<html lang="zxx">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>iLimits Technologies </title>
+      <!-- favicon  -->
+      <link rel="shortcut icon" href="assets/images/fav_icon.png" type="image/x-icon">
+      <!-- faremwork of css -->
+      <link rel="stylesheet" href="assets/css/bootstrap-lib/bootstrap.min.css.pagespeed.ce.q-kXVtGLfN.css">
+      <!-- style sheet of css -->
+      <link rel="stylesheet" href="assets/A.css,,_style.css+css,,_responsive.css+font-awesome-lib,,_icon,,_font-awesome.min.css+css,,_slick.min.css+css,,_aos.css,Mcc.jbl_g3QRR6.css.pagespeed.cf.3dH323y_22.css"/>
+      <!-- Responsive sheet of css -->
+      <link rel="stylesheet" href="assets/css/style.css">
+      <!-- fonts awsome icon link  -->
+      <!-- slick-slider link css -->
+      <!-- animation of css -->
+   </head>
+   <body>
+      <div class="site-wrapper">
+         <!-- ======== 1.1. Header section ======== -->
+         <header>
+            <nav class="navbar navbar-expand-lg container pt-lg-4 pt-3 pb-lg-4 pb-3">
+               <div class="container-fluid justify-content-lg-start justify-content-between">
+                  <!-- site logo -->
+                  <a class="nav-logo p-0" href="index.html">
+                     <figure><img src="assets/images/logo.png" style="border-radius: 20px 5px;" alt="logo" data-pagespeed-url-hash="2117012849" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></figure>
+                  </a>
+                  <!-- navigation button  -->
+                  <div class="d-flex gap-3 flex-row-reverse">
+                     <button class="open-aside" onclick="open_aside()" type="button">
+                     <i class="fa-solid fa-bars"></i>
+                     </button>
+                     <!-- navigation bar manu  -->
+                     <div class="d-flex justify-content-between gap-xl-4 gap-lg-3 w-100 align-items-center">
+                        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                           <ul class="navbar-nav d-flex justify-content-center align-items-center gap-lg-4 gap-md-3 gap-sm-2 gap-2 mb-2 mb-lg-0">
+                              <li class="nav-item">
+                                 <a class="nav-link active" href="index.html">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#About">About</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#Features">Features</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#Download">Download</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="privacy-policy.html">Privacy Policy</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="Terms.html">Terms</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#Faq">FAQ</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#Contact">Contact</a>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="search SearchModal" style="display: block;">
+                           <a href="#">
+                              <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </nav>
+            <div class="modal searchModal">
+               <button class="close-btn d-flex" onclick="closeSearchModal()">&times;</button>
+               <div class="position-relative d-flex align-items-center justify-content-center ">
+                  <input type="text" placeholder="Search..." name="search">
+                  <button class="search-btn">
+                  <img src="assets/images/icons/search.svg" alt="search" data-pagespeed-url-hash="1612877055" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                  </button>
+               </div>
+            </div>
+            <!--===== aside navigation slidebar =====-->
+            <aside>
+               <div id="mySidenav" class="right-sidbar">
+                  <div class="side-nav-logo d-flex justify-content-between align-items-center ps-2 pe-1 nav-logo">
+                     <figure class="navbar-brand">
+                        <a href="index.php">
+                        <img src="assets/images/logo.svg" alt="Logo" data-pagespeed-url-hash="2117012849" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                     </figure>
+                     <button class="fa-solid fa-xmark" onclick="close_aside()"></button>
+                  </div>
+                  <ul class="pt-4">
+                     <li class="nav-item active">
+                        <a aria-current="page" href="index.php">Home</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#About">About</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#Features">Features</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#Download">Download</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="Terms.html">Terms</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#Faq">FAQ</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#Contact">Contact</a>
+                     </li>
+                  </ul>
+               </div>
+            </aside>
+         </header>
+         <!-- ======== End of 1.1. Header section ======== -->
+         <!-- ======== End of 2.1. Subpage_Hero section ======== -->
+         <section class="Subpage_Hero">
+            <div class="container">
+               <div class="d-flex flex-column align-items-center justify-content-center text-center" data-aos="zoom-in-up">
+                  <h2>Terms of Service</h2>
+               </div>
+            </div>
+         </section>
+         <!-- ======== End of 2.1. Subpage_Hero section ======== -->
+         <div class="container">
+            <div class="section">
+               <!-- INTRO -->
+               <div class="intro-card">
+                  <p>Welcome to <strong>iLimits – Parental Control &amp; Screen Time App</strong> ("iLimits", "we", "our", or "us"). These Terms of Service ("Terms") form a legal agreement between you and iLimits governing your access to and use of our application and services.</p>
+                  <p>By downloading, installing, or using iLimits, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree, please discontinue use of the application.</p>
+               </div>
+               <!-- 1. ACCEPTANCE -->
+               <div class="policy-card" id="s1">
+                  <div class="card-header">
+                     <div class="section-num">1</div>
+                     <h2>Acceptance of Terms</h2>
+                  </div>
+                  <p>By accessing or using the iLimits application, you confirm that you are at least 18 years of age and that you have the legal authority to enter into this agreement on behalf of yourself and any child whose device you are managing.</p>
+                  <p>Your continued use of the application after any updates to these Terms constitutes your acceptance of those changes. We encourage you to review this page periodically.</p>
+                  <div class="highlight">
+                     <span class="highlight-icon">📋</span>
+                     <p>Using iLimits means you agree to these Terms. If you have questions before agreeing, please contact us at <a href="mailto:support@ilimits.app">support@ilimits.app</a> before use.</p>
+                  </div>
+               </div>
+               <!-- 2. DESCRIPTION OF SERVICE -->
+               <div class="policy-card" id="s2">
+                  <div class="card-header">
+                     <div class="section-num">2</div>
+                     <h2>Description of Service</h2>
+                  </div>
+                  <p>iLimits is a parental control and screen time management application designed to help parents and legal guardians build healthier digital habits for their families. The application provides tools including, but not limited to:</p>
+                  <div class="feature-chips">
+                     <span class="feat-chip">⏰ Screen Time Limits</span>
+                     <span class="feat-chip">🚫 App Blocking</span>
+                     <span class="feat-chip">🗂️ Category-Based Controls</span>
+                     <span class="feat-chip">📊 Usage Reports</span>
+                     <span class="feat-chip">🌙 Bedtime Schedules</span>
+                     <span class="feat-chip">🔒 Restricted Categories</span>
+                  </div>
+                  <p>iLimits is intended as an assistive tool for families. The service is designed to support — not replace — meaningful conversations about healthy technology use between parents and children.</p>
+                  <div class="info-block">
+                     <span class="highlight-icon">ℹ️</span>
+                     <p>iLimits does not provide childcare, psychological, medical, or legal advice. The tools provided are supplementary to responsible parenting and family communication.</p>
+                  </div>
+               </div>
+               <!-- 3. WHO MAY USE -->
+               <div class="policy-card" id="s3">
+                  <div class="card-header">
+                     <div class="section-num">3</div>
+                     <h2>Who May Use the Service</h2>
+                  </div>
+                  <p>iLimits is intended exclusively for <strong>parents or legal guardians</strong> who wish to manage the digital environment of a child under their care. To use the service, you must:</p>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> Be 18 years of age or older</li>
+                     <li><span class="li-check">✓</span> Be the parent, legal guardian, or have lawful authority to manage the child's device</li>
+                     <li><span class="li-check">✓</span> Use the service only for lawful purposes and within the scope described in these Terms</li>
+                     <li><span class="li-check">✓</span> Agree to all applicable local laws and regulations governing parental monitoring tools in your region</li>
+                  </ul>
+                  <div class="warning-block">
+                     <span class="highlight-icon">⚠️</span>
+                     <p>iLimits must not be used to monitor individuals without their lawful guardian's consent or in violation of any applicable law. Unauthorized surveillance is strictly prohibited.</p>
+                  </div>
+               </div>
+               <!-- 4. USER RESPONSIBILITIES -->
+               <div class="policy-card" id="s4">
+                  <div class="card-header">
+                     <div class="section-num">4</div>
+                     <h2>User Responsibilities</h2>
+                  </div>
+                  <p>As a user of iLimits, you are responsible for ensuring the application is used appropriately within your household. This includes:</p>
+                  <div class="resp-grid">
+                     <div class="resp-card">
+                        <span class="resp-icon">⚙️</span>
+                        <div class="resp-title">Configure Responsibly</div>
+                        <div class="resp-desc">Set limits and restrictions that are appropriate, fair, and proportionate to your child's age and needs.</div>
+                     </div>
+                     <div class="resp-card">
+                        <span class="resp-icon">⚖️</span>
+                        <div class="resp-title">Lawful Use Only</div>
+                        <div class="resp-desc">Use the application only in ways permitted by these Terms and applicable local laws.</div>
+                     </div>
+                     <div class="resp-card">
+                        <span class="resp-icon">🔐</span>
+                        <div class="resp-title">Secure Your Account</div>
+                        <div class="resp-desc">Maintain the confidentiality of your login credentials and prevent unauthorised access to your account.</div>
+                     </div>
+                     <div class="resp-card">
+                        <span class="resp-icon">📱</span>
+                        <div class="resp-title">Device Oversight</div>
+                        <div class="resp-desc">You are responsible for all activity that occurs on devices linked to your iLimits parent account.</div>
+                     </div>
+                  </div>
+                  <p>iLimits reserves the right to suspend or terminate accounts where misuse, fraudulent activity, or violation of these Terms is detected.</p>
+               </div>
+               <!-- 5. ACCOUNTS AND DEVICE CONNECTIONS -->
+               <div class="policy-card" id="s5">
+                  <div class="card-header">
+                     <div class="section-num">5</div>
+                     <h2>Accounts &amp; Device Connections</h2>
+                  </div>
+                  <p>To use iLimits, you will create a parent account using a valid email address. From your account, you may link one or more child devices and manage all parental control settings centrally.</p>
+                  <div class="sub-label">Account responsibilities</div>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> You are responsible for maintaining accurate and up-to-date account information</li>
+                     <li><span class="li-check">✓</span> You must not share your account credentials with unauthorised individuals</li>
+                     <li><span class="li-check">✓</span> All devices linked to your account must be devices you are lawfully authorised to manage</li>
+                     <li><span class="li-check">✓</span> You may request account deletion at any time by contacting <a href="mailto:support@ilimits.app">support@ilimits.app</a></li>
+                  </ul>
+                  <div class="info-block">
+                     <span class="highlight-icon">🔗</span>
+                     <p>Device syncing relies on a stable internet connection. Parental controls may continue to function on-device in offline mode, though real-time sync may be delayed.</p>
+                  </div>
+               </div>
+               <!-- 6. ACCEPTABLE USE -->
+               <div class="policy-card" id="s6">
+                  <div class="card-header">
+                     <div class="section-num">6</div>
+                     <h2>Acceptable Use</h2>
+                  </div>
+                  <p>You agree to use iLimits only for its intended purpose as a family screen time management tool. The following actions are strictly prohibited:</p>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✗</span> <strong>Bypassing or circumventing</strong> any parental control restrictions implemented by the application</li>
+                     <li><span class="li-check">✗</span> <strong>Reverse engineering, decompiling,</strong> or attempting to extract the source code of the application</li>
+                     <li><span class="li-check">✗</span> <strong>Using the app to monitor</strong> individuals outside the parent–child relationship without lawful authority</li>
+                     <li><span class="li-check">✗</span> <strong>Interfering with or disrupting</strong> the integrity or performance of the service or its underlying infrastructure</li>
+                     <li><span class="li-check">✗</span> <strong>Transmitting harmful content,</strong> malware, or code that could damage or impair any device or the iLimits service</li>
+                     <li><span class="li-check">✗</span> <strong>Reselling or sublicensing</strong> access to iLimits to any third party without express written consent</li>
+                  </ul>
+                  <div class="warning-block">
+                     <span class="highlight-icon">⚠️</span>
+                     <p>Violation of acceptable use policies may result in immediate account suspension and, where applicable, reporting to relevant legal authorities.</p>
+                  </div>
+               </div>
+               <!-- 7. SERVICE AVAILABILITY -->
+               <div class="policy-card" id="s7">
+                  <div class="card-header">
+                     <div class="section-num">7</div>
+                     <h2>Service Availability</h2>
+                  </div>
+                  <p>iLimits strives to provide a reliable and continuously available service, however we cannot guarantee uninterrupted access at all times. The service may be subject to:</p>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> Scheduled maintenance periods, announced in advance where possible</li>
+                     <li><span class="li-check">✓</span> Temporary outages due to factors outside our reasonable control</li>
+                     <li><span class="li-check">✓</span> Feature updates and improvements that may temporarily alter or limit functionality</li>
+                     <li><span class="li-check">✓</span> Changes to available features as the service evolves over time</li>
+                  </ul>
+                  <p>We will endeavour to notify users of significant changes to the service in advance. iLimits is not liable for losses arising from temporary service interruptions.</p>
+                  <div class="highlight">
+                     <span class="highlight-icon">✦</span>
+                     <p>We are committed to continuously improving iLimits. New features, category controls, and reporting tools are regularly added to better serve families.</p>
+                  </div>
+               </div>
+               <!-- 8. LIMITATION OF LIABILITY -->
+               <div class="policy-card" id="s8">
+                  <div class="card-header">
+                     <div class="section-num">8</div>
+                     <h2>Limitation of Liability</h2>
+                  </div>
+                  <p>iLimits is provided to assist families in managing screen time and digital access. While we are committed to providing reliable and effective tools, we cannot guarantee specific outcomes or behavioural results from the use of our application.</p>
+                  <div class="sub-label">What we do not guarantee</div>
+                  <ul class="policy-list">
+                     <li><span class="li-check">—</span> That the application will prevent all access to restricted content under all circumstances</li>
+                     <li><span class="li-check">—</span> That parental controls will produce specific changes in a child's behaviour or device usage patterns</li>
+                     <li><span class="li-check">—</span> That the service will be completely free of errors, bugs, or interruptions at all times</li>
+                  </ul>
+                  <p>To the maximum extent permitted by applicable law, iLimits and its developers shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the service.</p>
+                  <div class="info-block">
+                     <span class="highlight-icon">ℹ️</span>
+                     <p>iLimits is designed as a supportive tool. Parents remain ultimately responsible for their children's digital safety and wellbeing.</p>
+                  </div>
+               </div>
+               <!-- 9. TERMINATION -->
+               <div class="policy-card" id="s9">
+                  <div class="card-header">
+                     <div class="section-num">9</div>
+                     <h2>Termination</h2>
+                  </div>
+                  <p>Either party may terminate use of iLimits at any time.</p>
+                  <div class="sub-label">Termination by you</div>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> You may stop using the service and request account deletion at any time by contacting <a href="mailto:support@ilimits.app">support@ilimits.app</a></li>
+                     <li><span class="li-check">✓</span> Upon deletion, all personal data associated with your account will be permanently removed in accordance with our <a href="privacy-policy.html">Privacy Policy</a></li>
+                  </ul>
+                  <div class="sub-label">Termination by iLimits</div>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> We reserve the right to suspend or terminate accounts where these Terms have been materially violated</li>
+                     <li><span class="li-check">✓</span> Accounts involved in misuse, fraudulent activity, or unlawful use may be terminated without prior notice</li>
+                     <li><span class="li-check">✓</span> We will provide reasonable notice where termination is not related to misconduct</li>
+                  </ul>
+               </div>
+               <!-- 10. CHANGES TO TERMS -->
+               <div class="policy-card" id="s10">
+                  <div class="card-header">
+                     <div class="section-num">10</div>
+                     <h2>Changes to Terms</h2>
+                  </div>
+                  <p>We may update these Terms of Service periodically to reflect changes in the application, legal requirements, or our business practices. When material changes are made:</p>
+                  <ul class="policy-list">
+                     <li><span class="li-check">✓</span> The "Last Updated" date at the top of this page will be revised</li>
+                     <li><span class="li-check">✓</span> Significant changes may be communicated via in-app notifications or email to registered users</li>
+                     <li><span class="li-check">✓</span> Continued use of iLimits after changes are posted constitutes your acceptance of the revised Terms</li>
+                  </ul>
+                  <div class="highlight">
+                     <span class="highlight-icon">📋</span>
+                     <p>We encourage you to review these Terms periodically. If you disagree with any changes, you may discontinue use of the service and request account deletion.</p>
+                  </div>
+               </div>
+               <!-- 11. CONTACT -->
+               <div class="policy-card" id="s11">
+                  <div class="card-header">
+                     <div class="section-num">11</div>
+                     <h2>Contact Information</h2>
+                  </div>
+                  <p>If you have questions, concerns, or feedback regarding these Terms of Service, or if you wish to report a violation, please reach out to us. We aim to respond to all enquiries within 2 business days.</p>
+                  <div class="contact-row">
+                     <span class="contact-row-icon">📧</span>
+                     <div>
+                        <div class="contact-row-label">Support Email</div>
+                        <a href="mailto:support@ilimits.app">support@ilimits.app</a>
+                     </div>
+                  </div>
+                  <p style="margin-top: 16px;">For privacy-related enquiries, please also refer to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+               </div>
+            </div>
+         </div>
+         <footer id="Contact">
+            <div class="container">
+               <div class="d-flex justify-content-between w-100">
+                  <div class="z-1 d-flex align-items-md-start align-items-center text-md-start text-center flex-column">
+                     <figure>
+                        <a href="index.html">
+                        <img src="assets/images/logo.png" style="border-radius: 20px 5px;" alt="logo" data-pagespeed-url-hash="" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </a>
+                     </figure>
+                     <p class="m-0">iLimits is designed for parental supervision and responsible family device management. </p>
+                     <div class="d-flex gap-lg-4 gap-md-3 flex-row">
+                        <a href="#">
+                           <figure class="d-flex justify-content-center align-items-center">
+                              <i class="fa-brands fa-facebook-f"></i>
+                           </figure>
+                        </a>
+                        <a href="#">
+                           <figure class="d-flex justify-content-center align-items-center">
+                              <i class="fa-brands fa-twitter"></i>
+                           </figure>
+                        </a>
+                        <a href="#">
+                           <figure class="d-flex justify-content-center align-items-center"><i class="fa-brands fa-instagram"></i>
+                           </figure>
+                        </a>
+                        <a href="#">
+                           <figure class="d-flex justify-content-center align-items-center"><i class="fa-brands fa-linkedin"></i>
+                           </figure>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="d-flex flex-column gap-lg-4 d-flex align-items-md-start align-items-center text-md-start text-center ms-0">
+                     <h5>Address</h5>
+                     <ul>
+                        <li><a href="#">157/A Kallori, Aroli , Pappinissery , Kannur 670561</a></li>
+                        <li>
+                           Need help? Call us
+                           <a href="#">
+                           <span class="d-block">+91 7510620261</span></a>
+                        </li>
+                        <li><a href="mailto:support@ilimits.app"><span class="__cf_email__" data-cfemail="">support@ilimits.app</span></a></li>
+                     </ul>
+                  </div>
+                  <div class="d-flex gap-md-3 flex-column p-0 d-flex align-items-md-start align-items-center text-md-start text-center">
+                     <h5>DOWNLOAD THE APP</h5>
+                     <p>Download the apps you use for parental control.</p>
+                     <div class="d-flex gap-lg-3 gap-md-3">
+                        <a href="#">
+                           <div class="d-flex gap-lg-3 gap-2 justify-content-center align-items-center">
+                              <figure><img src="assets/images/icons/apple.svg" alt="apple" data-pagespeed-url-hash="3125907487" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></figure>
+                              <div>
+                                 <p>Download on the </p>
+                                 <h6>App Store</h6>
+                              </div>
+                           </div>
+                        </a>
+                        <a href="#">
+                           <div class="d-flex gap-lg-3 gap-2 justify-content-center align-items-center">
+                              <figure><img src="assets/images/icons/playstore.svg" alt="playstore" data-pagespeed-url-hash="2438967246" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></figure>
+                              <div>
+                                 <p>GET IT ON</p>
+                                 <h6>Google Play</h6>
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="w-100 text-center py-lg-4 py-3">
+                  <p>Copyright &copy; <span id="year"></span> iLimits Technologies LLP. All Rights Reserved.</p>
+               </div>
+            </div>
+            <!-- scroll to top  -->
+            <div class="scrollToTop">
+               <div class="arrowUp">
+                  <i class="fa-solid fa-arrow-up"></i>
+               </div>
+               <div class="water">
+                  <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
+                     <use xlink:href="#wave"></use>
+                  </svg>
+                  <svg viewBox="0 0 560 20" class="water_wave water_wave_front">
+                     <use xlink:href="#wave"></use>
+                  </svg>
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 560 20" style="display: none;">
+                     <symbol id="wave">
+                        <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z">
+                        </path>
+                        <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z">
+                        </path>
+                        <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z">
+                        </path>
+                        <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z">
+                        </path>
+                     </symbol>
+                  </svg>
+               </div>
+            </div>
+         </footer>
+         <!-- ======== End of 1.12. footer section ======== -->
       </div>
-      <span>iLimits</span>
-    </a>
-    <a href="index.html" class="nav-back">← Back to Home</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-orb a"></div>
-  <div class="hero-orb b"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Last Updated: March 11, 2026
-    </div>
-    <h1>Terms of <em>Service</em></h1>
-    <p class="hero-sub">These terms govern your use of the iLimits parental control application. By using iLimits, you agree to the conditions outlined below. Please read them carefully before getting started.</p>
-    <div class="hero-pills">
-      <span class="hero-pill">👨‍👩‍👧 Parent-first design</span>
-      <span class="hero-pill">📋 Transparent policies</span>
-      <span class="hero-pill">🔒 Privacy focused</span>
-      <span class="hero-pill">✦ Fair &amp; clear terms</span>
-    </div>
-  </div>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc-wrap" style="padding-top: 40px;">
-  <div class="toc-card">
-    <div class="toc-label">On this page</div>
-    <div class="toc-grid">
-      <a href="#s1" class="toc-link"><span class="toc-num">1</span> Acceptance of Terms</a>
-      <a href="#s2" class="toc-link"><span class="toc-num">2</span> Description of Service</a>
-      <a href="#s3" class="toc-link"><span class="toc-num">3</span> Who May Use the Service</a>
-      <a href="#s4" class="toc-link"><span class="toc-num">4</span> User Responsibilities</a>
-      <a href="#s5" class="toc-link"><span class="toc-num">5</span> Accounts &amp; Device Connections</a>
-      <a href="#s6" class="toc-link"><span class="toc-num">6</span> Acceptable Use</a>
-      <a href="#s7" class="toc-link"><span class="toc-num">7</span> Service Availability</a>
-      <a href="#s8" class="toc-link"><span class="toc-num">8</span> Limitation of Liability</a>
-      <a href="#s9" class="toc-link"><span class="toc-num">9</span> Termination</a>
-      <a href="#s10" class="toc-link"><span class="toc-num">10</span> Changes to Terms</a>
-      <a href="#s11" class="toc-link"><span class="toc-num">11</span> Contact Information</a>
-    </div>
-  </div>
-</div>
-
-<!-- MAIN CONTENT -->
-<main class="content">
-
-  <!-- INTRO -->
-  <div class="intro-card">
-    <p>Welcome to <strong>iLimits – Parental Control &amp; Screen Time App</strong> ("iLimits", "we", "our", or "us"). These Terms of Service ("Terms") form a legal agreement between you and iLimits governing your access to and use of our application and services.</p>
-    <p>By downloading, installing, or using iLimits, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree, please discontinue use of the application.</p>
-  </div>
-
-  <!-- 1. ACCEPTANCE -->
-  <div class="policy-card" id="s1">
-    <div class="card-header">
-      <div class="section-num">1</div>
-      <h2>Acceptance of Terms</h2>
-    </div>
-    <p>By accessing or using the iLimits application, you confirm that you are at least 18 years of age and that you have the legal authority to enter into this agreement on behalf of yourself and any child whose device you are managing.</p>
-    <p>Your continued use of the application after any updates to these Terms constitutes your acceptance of those changes. We encourage you to review this page periodically.</p>
-    <div class="highlight">
-      <span class="highlight-icon">📋</span>
-      <p>Using iLimits means you agree to these Terms. If you have questions before agreeing, please contact us at <a href="mailto:support@ilimits.app">support@ilimits.app</a> before use.</p>
-    </div>
-  </div>
-
-  <!-- 2. DESCRIPTION OF SERVICE -->
-  <div class="policy-card" id="s2">
-    <div class="card-header">
-      <div class="section-num">2</div>
-      <h2>Description of Service</h2>
-    </div>
-    <p>iLimits is a parental control and screen time management application designed to help parents and legal guardians build healthier digital habits for their families. The application provides tools including, but not limited to:</p>
-    <div class="feature-chips">
-      <span class="feat-chip">⏰ Screen Time Limits</span>
-      <span class="feat-chip">🚫 App Blocking</span>
-      <span class="feat-chip">🗂️ Category-Based Controls</span>
-      <span class="feat-chip">📊 Usage Reports</span>
-      <span class="feat-chip">🌙 Bedtime Schedules</span>
-      <span class="feat-chip">🔒 Restricted Categories</span>
-    </div>
-    <p>iLimits is intended as an assistive tool for families. The service is designed to support — not replace — meaningful conversations about healthy technology use between parents and children.</p>
-    <div class="info-block">
-      <span class="highlight-icon">ℹ️</span>
-      <p>iLimits does not provide childcare, psychological, medical, or legal advice. The tools provided are supplementary to responsible parenting and family communication.</p>
-    </div>
-  </div>
-
-  <!-- 3. WHO MAY USE -->
-  <div class="policy-card" id="s3">
-    <div class="card-header">
-      <div class="section-num">3</div>
-      <h2>Who May Use the Service</h2>
-    </div>
-    <p>iLimits is intended exclusively for <strong>parents or legal guardians</strong> who wish to manage the digital environment of a child under their care. To use the service, you must:</p>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> Be 18 years of age or older</li>
-      <li><span class="li-check">✓</span> Be the parent, legal guardian, or have lawful authority to manage the child's device</li>
-      <li><span class="li-check">✓</span> Use the service only for lawful purposes and within the scope described in these Terms</li>
-      <li><span class="li-check">✓</span> Agree to all applicable local laws and regulations governing parental monitoring tools in your region</li>
-    </ul>
-    <div class="warning-block">
-      <span class="highlight-icon">⚠️</span>
-      <p>iLimits must not be used to monitor individuals without their lawful guardian's consent or in violation of any applicable law. Unauthorized surveillance is strictly prohibited.</p>
-    </div>
-  </div>
-
-  <!-- 4. USER RESPONSIBILITIES -->
-  <div class="policy-card" id="s4">
-    <div class="card-header">
-      <div class="section-num">4</div>
-      <h2>User Responsibilities</h2>
-    </div>
-    <p>As a user of iLimits, you are responsible for ensuring the application is used appropriately within your household. This includes:</p>
-    <div class="resp-grid">
-      <div class="resp-card">
-        <span class="resp-icon">⚙️</span>
-        <div class="resp-title">Configure Responsibly</div>
-        <div class="resp-desc">Set limits and restrictions that are appropriate, fair, and proportionate to your child's age and needs.</div>
-      </div>
-      <div class="resp-card">
-        <span class="resp-icon">⚖️</span>
-        <div class="resp-title">Lawful Use Only</div>
-        <div class="resp-desc">Use the application only in ways permitted by these Terms and applicable local laws.</div>
-      </div>
-      <div class="resp-card">
-        <span class="resp-icon">🔐</span>
-        <div class="resp-title">Secure Your Account</div>
-        <div class="resp-desc">Maintain the confidentiality of your login credentials and prevent unauthorised access to your account.</div>
-      </div>
-      <div class="resp-card">
-        <span class="resp-icon">📱</span>
-        <div class="resp-title">Device Oversight</div>
-        <div class="resp-desc">You are responsible for all activity that occurs on devices linked to your iLimits parent account.</div>
-      </div>
-    </div>
-    <p>iLimits reserves the right to suspend or terminate accounts where misuse, fraudulent activity, or violation of these Terms is detected.</p>
-  </div>
-
-  <!-- 5. ACCOUNTS AND DEVICE CONNECTIONS -->
-  <div class="policy-card" id="s5">
-    <div class="card-header">
-      <div class="section-num">5</div>
-      <h2>Accounts &amp; Device Connections</h2>
-    </div>
-    <p>To use iLimits, you will create a parent account using a valid email address. From your account, you may link one or more child devices and manage all parental control settings centrally.</p>
-
-    <div class="sub-label">Account responsibilities</div>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> You are responsible for maintaining accurate and up-to-date account information</li>
-      <li><span class="li-check">✓</span> You must not share your account credentials with unauthorised individuals</li>
-      <li><span class="li-check">✓</span> All devices linked to your account must be devices you are lawfully authorised to manage</li>
-      <li><span class="li-check">✓</span> You may request account deletion at any time by contacting <a href="mailto:support@ilimits.app">support@ilimits.app</a></li>
-    </ul>
-    <div class="info-block">
-      <span class="highlight-icon">🔗</span>
-      <p>Device syncing relies on a stable internet connection. Parental controls may continue to function on-device in offline mode, though real-time sync may be delayed.</p>
-    </div>
-  </div>
-
-  <!-- 6. ACCEPTABLE USE -->
-  <div class="policy-card" id="s6">
-    <div class="card-header">
-      <div class="section-num">6</div>
-      <h2>Acceptable Use</h2>
-    </div>
-    <p>You agree to use iLimits only for its intended purpose as a family screen time management tool. The following actions are strictly prohibited:</p>
-    <ul class="policy-list">
-      <li><span class="li-check">✗</span> <strong>Bypassing or circumventing</strong> any parental control restrictions implemented by the application</li>
-      <li><span class="li-check">✗</span> <strong>Reverse engineering, decompiling,</strong> or attempting to extract the source code of the application</li>
-      <li><span class="li-check">✗</span> <strong>Using the app to monitor</strong> individuals outside the parent–child relationship without lawful authority</li>
-      <li><span class="li-check">✗</span> <strong>Interfering with or disrupting</strong> the integrity or performance of the service or its underlying infrastructure</li>
-      <li><span class="li-check">✗</span> <strong>Transmitting harmful content,</strong> malware, or code that could damage or impair any device or the iLimits service</li>
-      <li><span class="li-check">✗</span> <strong>Reselling or sublicensing</strong> access to iLimits to any third party without express written consent</li>
-    </ul>
-    <div class="warning-block">
-      <span class="highlight-icon">⚠️</span>
-      <p>Violation of acceptable use policies may result in immediate account suspension and, where applicable, reporting to relevant legal authorities.</p>
-    </div>
-  </div>
-
-  <!-- 7. SERVICE AVAILABILITY -->
-  <div class="policy-card" id="s7">
-    <div class="card-header">
-      <div class="section-num">7</div>
-      <h2>Service Availability</h2>
-    </div>
-    <p>iLimits strives to provide a reliable and continuously available service, however we cannot guarantee uninterrupted access at all times. The service may be subject to:</p>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> Scheduled maintenance periods, announced in advance where possible</li>
-      <li><span class="li-check">✓</span> Temporary outages due to factors outside our reasonable control</li>
-      <li><span class="li-check">✓</span> Feature updates and improvements that may temporarily alter or limit functionality</li>
-      <li><span class="li-check">✓</span> Changes to available features as the service evolves over time</li>
-    </ul>
-    <p>We will endeavour to notify users of significant changes to the service in advance. iLimits is not liable for losses arising from temporary service interruptions.</p>
-    <div class="highlight">
-      <span class="highlight-icon">✦</span>
-      <p>We are committed to continuously improving iLimits. New features, category controls, and reporting tools are regularly added to better serve families.</p>
-    </div>
-  </div>
-
-  <!-- 8. LIMITATION OF LIABILITY -->
-  <div class="policy-card" id="s8">
-    <div class="card-header">
-      <div class="section-num">8</div>
-      <h2>Limitation of Liability</h2>
-    </div>
-    <p>iLimits is provided to assist families in managing screen time and digital access. While we are committed to providing reliable and effective tools, we cannot guarantee specific outcomes or behavioural results from the use of our application.</p>
-    <div class="sub-label">What we do not guarantee</div>
-    <ul class="policy-list">
-      <li><span class="li-check">—</span> That the application will prevent all access to restricted content under all circumstances</li>
-      <li><span class="li-check">—</span> That parental controls will produce specific changes in a child's behaviour or device usage patterns</li>
-      <li><span class="li-check">—</span> That the service will be completely free of errors, bugs, or interruptions at all times</li>
-    </ul>
-    <p>To the maximum extent permitted by applicable law, iLimits and its developers shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the service.</p>
-    <div class="info-block">
-      <span class="highlight-icon">ℹ️</span>
-      <p>iLimits is designed as a supportive tool. Parents remain ultimately responsible for their children's digital safety and wellbeing.</p>
-    </div>
-  </div>
-
-  <!-- 9. TERMINATION -->
-  <div class="policy-card" id="s9">
-    <div class="card-header">
-      <div class="section-num">9</div>
-      <h2>Termination</h2>
-    </div>
-    <p>Either party may terminate use of iLimits at any time.</p>
-    <div class="sub-label">Termination by you</div>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> You may stop using the service and request account deletion at any time by contacting <a href="mailto:support@ilimits.app">support@ilimits.app</a></li>
-      <li><span class="li-check">✓</span> Upon deletion, all personal data associated with your account will be permanently removed in accordance with our <a href="privacy-policy.html">Privacy Policy</a></li>
-    </ul>
-    <div class="sub-label">Termination by iLimits</div>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> We reserve the right to suspend or terminate accounts where these Terms have been materially violated</li>
-      <li><span class="li-check">✓</span> Accounts involved in misuse, fraudulent activity, or unlawful use may be terminated without prior notice</li>
-      <li><span class="li-check">✓</span> We will provide reasonable notice where termination is not related to misconduct</li>
-    </ul>
-  </div>
-
-  <!-- 10. CHANGES TO TERMS -->
-  <div class="policy-card" id="s10">
-    <div class="card-header">
-      <div class="section-num">10</div>
-      <h2>Changes to Terms</h2>
-    </div>
-    <p>We may update these Terms of Service periodically to reflect changes in the application, legal requirements, or our business practices. When material changes are made:</p>
-    <ul class="policy-list">
-      <li><span class="li-check">✓</span> The "Last Updated" date at the top of this page will be revised</li>
-      <li><span class="li-check">✓</span> Significant changes may be communicated via in-app notifications or email to registered users</li>
-      <li><span class="li-check">✓</span> Continued use of iLimits after changes are posted constitutes your acceptance of the revised Terms</li>
-    </ul>
-    <div class="highlight">
-      <span class="highlight-icon">📋</span>
-      <p>We encourage you to review these Terms periodically. If you disagree with any changes, you may discontinue use of the service and request account deletion.</p>
-    </div>
-  </div>
-
-  <!-- 11. CONTACT -->
-  <div class="policy-card" id="s11">
-    <div class="card-header">
-      <div class="section-num">11</div>
-      <h2>Contact Information</h2>
-    </div>
-    <p>If you have questions, concerns, or feedback regarding these Terms of Service, or if you wish to report a violation, please reach out to us. We aim to respond to all enquiries within 2 business days.</p>
-    <div class="contact-row">
-      <span class="contact-row-icon">📧</span>
-      <div>
-        <div class="contact-row-label">Support Email</div>
-        <a href="mailto:support@ilimits.app">support@ilimits.app</a>
-      </div>
-    </div>
-    <p style="margin-top: 16px;">For privacy-related enquiries, please also refer to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
-  </div>
-
-  <!-- CTA -->
-  <div class="contact-cta">
-    <h2>Questions About These Terms?</h2>
-    <p>We're here to help. Reach out and our team will get back to you promptly.</p>
-    <div class="cta-btns">
-      <a href="mailto:support@ilimits.app" class="cta-btn">📧 Email Support</a>
-      <a href="index.html" class="cta-btn cta-btn-outline">🌐 Back to Website</a>
-    </div>
-  </div>
-
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a href="index.html" class="footer-logo">
-      <div class="footer-logo-mark">
-        <img src="assets/logo.png" alt="iLimits" onerror="this.parentElement.innerHTML='⏱'">
-      </div>
-      <span>iLimits</span>
-    </a>
-    <span class="footer-copy">© 2026 iLimits. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="mailto:support@ilimits.app">Contact</a>
-    </div>
-  </div>
-</footer>
-
-</body>
+      <!-- bootstrap min javascript -->
+      <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/javascript-lib/bootstrap.min.js.pagespeed.ce.oIeS9Ri1Hw.js"></script>
+      <!-- j Query -->
+      <script src="assets/js/jquery.js.pagespeed.jm.29OAZzvhfX.js"></script>
+      <!-- slick slider js -->
+      <script src="assets/js/slick.min.js+custom.js+aos.js.pagespeed.jc.Q6GXj0FnG-.js"></script><script>eval(mod_pagespeed_7Mrc5U7w4C);</script>
+      <!-- main javascript -->
+      <script>eval(mod_pagespeed_3WrDD5PgDn);</script>
+      <!-- animation from javascript -->
+      <script>eval(mod_pagespeed_17Zrze69Pq);</script>
+   </body>
 </html>

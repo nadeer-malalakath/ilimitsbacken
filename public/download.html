@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Downloading iLimits...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        window.onload = function() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(ua)) {
+                window.location.replace(
+                    "https://play.google.com/store/apps/details?id=com.timenest.app"
+                );
+            } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                window.location.replace(
+                    "https://apps.apple.com/in/app/ilimits-parental-controls/id6766422963"
+                );
+            } else {
+                window.location.replace(
+                    "https://ilimits.app"
+                );
+            }
+        };
+    </script>
+</head>
+<body>
+<p>Redirecting...</p>
+</body>
+</html>

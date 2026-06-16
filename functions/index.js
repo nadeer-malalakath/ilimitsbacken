@@ -94,118 +94,7 @@ exports.deleteChildAccount = base.https.onCall(async (data, context) => {
 // ─────────────────────────────────────────
 // PIN MANAGEMENT
 // ─────────────────────────────────────────
-exports.verifyParentPin = base.https.onCall(async (data, context) => {
 
-  if (!context.auth) throw new functions.https.HttpsError("unauthenticated");
-  if (!context.app) throw new functions.https.HttpsError("failed-precondition");
-
-  const uid = context.auth.uid;
-  const pin = data.pin;
-
-  // 🔹 Step 1: get current user
-  const userSnap = await db.collection("users").doc(uid).get();
-  if (!userSnap.exists) {
-    throw new functions.https.HttpsError("not-found");
-  }
-
-  const user = userSnap.data();
-
-  // 🔹 Step 2: resolve parent
-  let targetUid = uid;
-
-  if (user.role === "child") {
-    if (!user.parentId) {
-      throw new functions.https.HttpsError("failed-precondition", "No parent linked");
-    }
-    targetUid = user.parentId;
-  }
-
-  const ref = db.collection("users").doc(targetUid);
-
-  const snap = await ref.get();
-  if (!snap.exists) throw new functions.https.HttpsError("not-found");
-
-  const parent = snap.data();
-
-  if (!parent.pinHash) {
-    throw new functions.https.HttpsError("failed-precondition", "PIN not set");
-  }
-
-  const valid = await bcrypt.compare(pin, parent.pinHash);
-
-  return db.runTransaction(async (tx) => {
-
-    const fresh = await tx.get(ref);
-    const data = fresh.data();
-
-    const attempts = data.pinAttempts || 0;
-    const last = data.lastPinAttempt || 0;
-
-    if (attempts >= 5 && Date.now() - last < 5 * 60 * 1000) {
-      throw new functions.https.HttpsError("resource-exhausted", "Try later");
-    }
-
-    if (!valid) {
-      tx.update(ref, {
-        pinAttempts: attempts + 1,
-        lastPinAttempt: Date.now()
-      });
-      throw new functions.https.HttpsError("permission-denied", "Invalid PIN");
-    }
-
-    tx.update(ref, { pinAttempts: 0 });
-
-    return { success: true };
-  });
-});
-
-// VERIFY PIN (OPTIMIZED)
-exports.verifyParentPin = base.https.onCall(async (data, context) => {
-
-  if (!context.auth) throw new functions.https.HttpsError("unauthenticated");
-  if (!context.app) throw new functions.https.HttpsError("failed-precondition");
-
-  const uid = context.auth.uid;
-  const pin = data.pin;
-
-  const ref = db.collection("users").doc(uid);
-  const snap = await ref.get();
-
-  if (!snap.exists) throw new functions.https.HttpsError("not-found");
-
-  const user = snap.data();
-
-  if (!user.pinHash) {
-    throw new functions.https.HttpsError("failed-precondition", "PIN not set");
-  }
-
-  const valid = await bcrypt.compare(pin, user.pinHash);
-
-  return db.runTransaction(async (tx) => {
-
-    const fresh = await tx.get(ref);
-    const data = fresh.data();
-
-    const attempts = data.pinAttempts || 0;
-    const last = data.lastPinAttempt || 0;
-
-    if (attempts >= 5 && Date.now() - last < 5 * 60 * 1000) {
-      throw new functions.https.HttpsError("resource-exhausted", "Try later");
-    }
-
-    if (!valid) {
-      tx.update(ref, {
-        pinAttempts: attempts + 1,
-        lastPinAttempt: Date.now()
-      });
-      throw new functions.https.HttpsError("permission-denied", "Invalid PIN");
-    }
-
-    tx.update(ref, { pinAttempts: 0 });
-
-    return { success: true };
-  });
-});
 
 // ─────────────────────────────────────────
 // CHANGE PIN — fixed
@@ -272,6 +161,35 @@ exports.changeParentPin = functions
       console.error("Firestore update failed:", e);
       throw new functions.https.HttpsError("internal", "Failed to save PIN");
     }
+
+    return { success: true };
+  });
+
+  exports.setParentPin = base.https.onCall(async (data, context) => {
+
+    if (!context.auth) throw new functions.https.HttpsError("unauthenticated");
+    if (!context.app) throw new functions.https.HttpsError("failed-precondition");
+
+    const { pin } = data;
+
+    if (!pin || pin.length < 4) {
+      throw new functions.https.HttpsError("invalid-argument", "PIN must be at least 4 digits");
+    }
+
+    const ref = db.collection("users").doc(context.auth.uid);
+    const snap = await ref.get();
+
+    // 🚨 Prevent overwrite (important)
+    if (snap.exists && snap.get("pinHash")) {
+      throw new functions.https.HttpsError("failed-precondition", "PIN already set");
+    }
+
+    const hash = await bcrypt.hash(pin, 8);
+
+    await ref.set({
+      pinHash: hash,
+      pinUpdatedAt: admin.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
 
     return { success: true };
   });
@@ -767,7 +685,7 @@ exports.handlePlayRTDN = functions
     try {
       // 🔥 Generate Firebase verification link
       const link = await admin.auth().generateEmailVerificationLink(email, {
-        url: "https://ilimits.app/verified"
+        url: "https://ilimits.app/verified.html"
       });
 
       // ✨ Premium email template
@@ -987,85 +905,205 @@ exports.handlePlayRTDN = functions
       return { isActive, isExpired, plan, expiresAt: expiryMs };
     });
 
-    exports.notifyParentOnAlert = functions
-      .region("asia-south1")
-      .firestore
-      .document("children/{childId}/alerts/{alertId}")
-      .onCreate(async (snap, context) => {
-        const { childId } = context.params;
-        const alert = snap.data();
+ exports.notifyParentOnAlert = functions
+   .region("asia-south1")
+   .firestore
+   .document("children/{childId}/alerts/{alertId}")
+   .onCreate(async (snap, context) => {
 
-        // 1. Get the child doc to find parentId
-        const childDoc = await db.collection("children").doc(childId).get();
-        if (!childDoc.exists) return;
+       const childRef =
+         db.collection("children").doc(context.params.childId);
 
-        const parentId = childDoc.data().parentId;
-        const childName = childDoc.data().name || "Your child";
-        if (!parentId) return;
+       await childRef.update({
+         unreadAlertCount: admin.firestore.FieldValue.increment(1),
+         lastAlertAt: admin.firestore.FieldValue.serverTimestamp()
+       });
 
-        // 2. Get parent's FCM token
-        const parentDoc = await db.collection("users").doc(parentId).get();
-        if (!parentDoc.exists) return;
+     const RESTRICTED_PACKAGES = new Set([
+       "com.tinder", "com.bumble.app", "com.dream11.fantasy", "com.mpl.mobile",
+       "com.winzo.gold", "com.omegle.app", "com.monkey.video.chat", "com.pornhub.android",
+       "com.xvideos.android", "com.hld.intelliscan", "com.hinge.app", "com.okcupid.okcupid",
+       "com.match.android.matchapp", "com.grindrapp.android", "com.badoo.mobile",
+       "com.azar", "com.omega.video.chat", "com.livetalk.meet", "com.heymatch.android",
+       "com.my11circle", "com.fantasypower.app", "com.adda52.android", "com.pokerstars.mobile",
+       "com.xnxx.video", "com.penthouse.android", "com.naughtydog.app", "com.hily.app",
+       "com.coffeemeetsbagel", "com.jaumo", "com.chatspin.android", "com.livu", "com.holla",
+       "com.parallel.space", "com.lbe.parallel.intl", "com.excelliance.multiaccounts",
+       "com.applisto.appcloner", "com.calculator.vault", "com.hideitpro", "com.smartlock.applock",
+       "com.apkpure.aegon", "com.aapkpure.aegon", "com.uptodown", "com.qooapp.qoohelper",
+       "com.privateinternetaccess.android", "com.psiphon3", "com.free.vpn.unblock.messenger",
+       "com.vpn.turbo", "com.snap.vpn", "com.uxin.vpnmaster", "com.vpnhub.android",
+       "com.tunnelbear.android", "com.cloudflare.onedotonedotonedotone", "com.nordvpn.android",
+       "com.expressvpn.vpn", "com.protonvpn.android", "com.windscribe.vpn", "com.ipvanish.android",
+       "com.kik.android", "com.skout.android", "com.meetme.android.hornet", "com.mico",
+       "com.liveme.android", "com.tango.me", "com.bigo.live", "com.yy.hiyo", "com.lamour.lite",
+       "com.tumile.android", "com.photovault.photohide", "com.vaulty", "com.hidephoto.video",
+       "com.calculator.lock.hide.app", "com.app.calculator.vault", "com.vault.hiddenapps",
+       "com.hideitpro.vault", "com.safe.galleryvault", "com.thinkyeah.galleryvault",
+       "com.parallel.space.lite", "com.parallel.space.pro", "com.excelliance.dualaid",
+       "com.ludashi.dualspace", "com.trendmicro.tmas", "com.cloneapp.parallelspace",
+       "com.app.hider.master", "com.doubleopen.app", "com.aptoide.android", "cm.aptoide.pt",
+       "com.getjar.mobile", "org.fdroid.fdroid", "com.tutuapp", "com.mobilism.android",
+       "com.filehide.filelocker", "com.hidefile.photo.video", "com.secretvault.app",
+       "com.photohide.privategallery", "org.torproject.android", "org.torproject.torbrowser",
+       "org.torproject.torbrowser_alpha", "com.duapps.recorder", "com.mobzapp.screenrecorder",
+       "com.kimcy929.screenrecorder", "com.hecorat.screenrecorder.free", "com.dnschanger.no.root",
+       "com.inetinet.proxy", "com.scheler.supervpn", "com.fast.free.unblock.thunder.vpn",
+       "com.kiwibrowser.browser", "org.mozilla.firefox.focus", "com.alohabrowser.browser"
+     ]);
 
-        const fcmToken = parentDoc.data().fcmToken;
-        if (!fcmToken) {
-          console.log("No FCM token for parent:", parentId);
-          return;
-        }
+     const { childId } = context.params;
+     const alert = snap.data();
 
-        // 3. Build the message based on alert type
-        const messages = {
-          accessibility_disabled: {
-            title: `${childName}'s monitoring is off`,
-            body: "Accessibility permission was disabled on the child's device."
-          },
-          app_limit_reached: {
-            title: `${childName} hit a time limit`,
-            body: `${alert.appName || "An app"} limit was reached.`
-          },
-          blocked_app_opened: {
-            title: `${childName} tried a blocked app`,
-            body: `${alert.appName || "A blocked app"} was attempted.`
-          }
-        };
-
-        const msg = messages[alert.type] || {
-          title: `Alert for ${childName}`,
-          body: alert.message || "A new alert was triggered."
-        };
-
-        // 4. Send via FCM
-        try {
-          await admin.messaging().send({
-            token: fcmToken,
-            notification: {
-              title: msg.title,
-              body: msg.body
-            },
-            data: {
-              type: alert.type || "generic",
-              childId,
-              alertId: context.params.alertId,
-              timestamp: String(alert.timestamp || Date.now())
-            },
-            android: {
-              priority: "high",
-              notification: {
-                channelId: "my_channel_id",  // matches NOTIFICATION_CHANNEL_ID in your service
-                sound: "default"
-              }
-            }
-          });
-          console.log("Parent notified:", parentId, "for alert type:", alert.type);
-        } catch (e) {
-          if (e.code === "messaging/registration-token-not-registered") {
-            // Token is stale — clear it so we don't retry
-            await db.collection("users").doc(parentId).update({ fcmToken: admin.firestore.FieldValue.delete() });
-          } else {
-            console.error("FCM send failed:", e.message);
-          }
-        }
+      console.log("ALERT RECEIVED", {
+        time: new Date().toISOString(),
+        childId,
+        alertId: context.params.alertId,
+        type: alert.type,
+        severity: alert.severity,
+        timestamp: alert.timestamp
       });
+
+     // 1. Get child doc
+     const childDoc = await db.collection("children").doc(childId).get();
+     if (!childDoc.exists) return;
+
+     const parentId  = childDoc.data().parentId;
+     const childName = childDoc.data().name || "Your child";
+     if (!parentId) return;
+
+     // 2. Get parent FCM token
+     const parentDoc = await db.collection("users").doc(parentId).get();
+     if (!parentDoc.exists) return;
+
+     const fcmToken = parentDoc.data().fcmToken;
+     console.log("PARENT LOOKUP", {
+       time: new Date().toISOString(),
+       parentId,
+       hasToken: !!fcmToken,
+       tokenPrefix: fcmToken ? fcmToken.substring(0, 20) : null
+     });
+     if (!fcmToken) {
+       console.log("No FCM token for parent:", parentId);
+       return;
+     }
+
+     // 3. Determine if restricted install
+     const isRestrictedInstall = alert.type === "app_installed" &&
+       RESTRICTED_PACKAGES.has(alert.packageName);
+
+     // 4. Build message
+     const messages = {
+       accessibility_disabled: {
+         title: `${childName}'s monitoring is off`,
+         body:  "Accessibility permission was disabled on the child's device."
+       },
+       app_limit_reached: {
+         title: `${childName} hit a time limit`,
+         body:  `${alert.appName || "An app"} limit was reached.`
+       },
+       blocked_app_opened: {
+         title: `${childName} tried a blocked app`,
+         body:  `${alert.appName || "A blocked app"} was attempted.`
+       },
+       app_installed: isRestrictedInstall ? {
+         title: `⚠️ Restricted App Install Alert`,
+         body:  `${childName} installed ${alert.appName || alert.packageName}, which is on the restricted apps list.`
+       } : {
+         title: `${childName} installed an app`,
+         body:  `${alert.appName || "An app"} was installed`
+       },
+       app_uninstalled: {
+         title: `${childName} removed an app`,
+         body:  `${alert.appName || "An app"} was removed`
+       }
+     };
+
+     const msg = messages[alert.type] || {
+       title: `Alert for ${childName}`,
+       body:  alert.message || "A new alert was triggered."
+     };
+
+     const severity = isRestrictedInstall ? "critical" : (alert.severity || "info");
+
+     // 5. Send data-only FCM — no notification block so onMessageReceived always fires
+     try {
+
+        console.log("FCM SEND START", {
+          time: new Date().toISOString(),
+          parentId,
+          type: alert.type,
+          title: msg.title,
+          severity
+        });
+         const startTime = Date.now();
+        const category =
+          alert.type === "app_installed"
+            ? (
+                isRestrictedInstall
+                  ? "RESTRICTED_APP_INSTALLED"
+                  : "APP_INSTALLED"
+              )
+            : undefined;
+       const response = await admin.messaging().send({
+         token: fcmToken,
+          notification: {
+             title: msg.title,
+             body: msg.body
+           },
+         data: {
+           type: alert.type || "generic",
+           childId,
+           alertId: context.params.alertId,
+           timestamp: String(alert.timestamp || Date.now()),
+           title: msg.title,
+           body: msg.body,
+           severity,
+           packageName: alert.packageName || "",
+           appName: alert.appName || "",
+           category: category || ""
+         },
+         android: {
+           priority: "high"
+         },
+
+          apns: {
+            headers: {
+              "apns-priority": "10"
+            },
+            payload: {
+                  aps: {
+                    alert: {
+                      title: msg.title,
+                      body: msg.body
+                    },
+                    sound: "default",
+                    ...(category ? { category } : {})
+                  }
+                }
+              }
+       });
+       console.log("FCM SEND SUCCESS", {
+         time: new Date().toISOString(),
+         response,
+         durationMs: Date.now() - startTime,
+         parentId,
+         type: alert.type
+       });
+     } catch (e) {
+       if (e.code === "messaging/registration-token-not-registered") {
+         await db.collection("users").doc(parentId).update({
+           fcmToken: admin.firestore.FieldValue.delete()
+         });
+       } else {
+         console.error("FCM SEND FAILED", {
+           code: e.code,
+           message: e.message,
+           stack: e.stack
+         });
+       }
+     }
+   });
 
       exports.initializeTrial = functions
           .region("asia-south1")
@@ -1104,3 +1142,489 @@ exports.handlePlayRTDN = functions
 
           return { status: "initialized" };
       });
+
+      exports.handleRevenueCatWebhook = functions
+        .region("asia-south1")
+        .runWith({
+          timeoutSeconds: 15,
+          memory: "256MB",
+        })
+        .https.onRequest(async (req, res) => {
+          // ── 1. Authorize ────────────────────────────────────────────────────────
+          const secret = functions.config().revenuecat?.webhook_secret;
+          if (secret && req.headers["authorization"] !== secret) {
+            console.warn("❌ Unauthorized RevenueCat webhook attempt");
+            return res.status(401).send("Unauthorized");
+          }
+
+          try {
+            // ── 2. Validate event payload ────────────────────────────────────────
+            const event = req.body?.event;
+            if (!event) {
+              console.log("❌ Missing RevenueCat event");
+              return res.status(400).send("Missing event");
+            }
+            console.log("🔥 RevenueCat Event:", JSON.stringify(event));
+
+            const { type, product_id: productId = "", store } = event;
+
+            // ── 3. Resolve UID ───────────────────────────────────────────────────
+            // app_user_id  = CURRENT id — becomes the real Firebase UID after logIn()
+            // original_app_user_id = FIRST-EVER id — almost always $RCAnonymousID, useless
+            // aliases[]    = all known ids; scan as last resort for a non-anonymous one
+            //
+            // Priority: app_user_id (if real) → first non-anonymous alias → reject
+            const isAnon = (id) => !id || id.startsWith("$RCAnonymousID");
+
+            const uid = !isAnon(event.app_user_id)
+              ? event.app_user_id
+              : (event.aliases || []).find((a) => !isAnon(a));
+
+            if (!uid) {
+              console.log("❌ No valid UID — user not logged in yet. app_user_id:", event.app_user_id);
+              return res.status(200).send("Ignored anonymous user");
+            }
+
+            // ── 4. Skip unknown / unhandled event types ──────────────────────────
+            const ACTIVE_TYPES = new Set([
+              "INITIAL_PURCHASE",
+              "RENEWAL",
+              "UNCANCELLATION",
+              "NON_RENEWING_PURCHASE",
+            ]);
+            const INACTIVE_TYPES = new Set(["CANCELLATION", "EXPIRATION"]);
+            const KNOWN_TYPES = new Set([
+              ...ACTIVE_TYPES,
+              ...INACTIVE_TYPES,
+              "BILLING_ISSUE",
+              "PRODUCT_CHANGE",
+            ]);
+
+            if (!KNOWN_TYPES.has(type)) {
+              console.log("⚠️ Unhandled event type, skipping:", type);
+              return res.status(200).send("Ignored");
+            }
+
+            // ── 5. Parse expiration safely ───────────────────────────────────────
+            const expirationAtMs =
+              event.expiration_at_ms != null
+                ? Number(event.expiration_at_ms) || Number.MAX_SAFE_INTEGER
+                : Number.MAX_SAFE_INTEGER;
+
+            // ── 6. Determine isActive ────────────────────────────────────────────
+            const isLifetime = productId.includes("lifetime");
+            let isActive = false;
+
+            if (isLifetime) {
+              isActive = true;
+            } else if (ACTIVE_TYPES.has(type)) {
+              isActive = expirationAtMs > Date.now();
+            } else if (INACTIVE_TYPES.has(type)) {
+              isActive = false;
+            } else if (type === "BILLING_ISSUE") {
+              // Respect RevenueCat grace period — user still has access during it
+              const grace = event.grace_period_expires_at_ms;
+              isActive = grace ? Number(grace) > Date.now() : false;
+            } else if (type === "PRODUCT_CHANGE") {
+              // Mid-cycle plan change: treat as active if not yet expired
+              isActive = expirationAtMs > Date.now();
+            }
+
+            // ── 7. Determine plan ────────────────────────────────────────────────
+            let plan = "UNKNOWN";
+            if (productId.includes("lifetime")) {
+              plan = "LIFETIME";
+            } else if (productId.includes("year")) {
+              plan = "YEARLY";
+            } else if (productId.includes("month")) {
+              plan = "MONTHLY";
+            }
+
+            if (plan === "UNKNOWN") {
+              console.warn("⚠️ Unrecognized productId pattern:", productId);
+            }
+
+            // ── 8. Determine entitlement ─────────────────────────────────────────
+            const entitlement = event.entitlement_ids?.[0];
+            if (!entitlement) {
+              console.warn("⚠️ No entitlement_ids on event for uid:", uid);
+            }
+
+            // ── 9. Determine autoRenew ───────────────────────────────────────────
+            // Active non-lifetime subscription that hasn't expired or been cancelled
+            const autoRenew =
+              !isLifetime &&
+              expirationAtMs > Date.now() &&
+              type !== "EXPIRATION" &&
+              type !== "CANCELLATION";
+
+            // ── 10. Deduplicate event ────────────────────────────────────────────
+            // RevenueCat retries on failure — same event must never be processed twice
+            const eventId = event.id;
+            if (!eventId) {
+              console.warn("⚠️ Missing RevenueCat event.id — skipping dedup");
+            } else {
+              const eventRef = db.collection("revenueCatEvents").doc(eventId);
+              const existing = await eventRef.get();
+              if (existing.exists) {
+                console.log("⏭️ Duplicate RevenueCat event skipped:", eventId);
+                return res.status(200).send("Duplicate");
+              }
+              // Mark as processed before writing user doc to prevent race conditions
+              await eventRef.set({
+                uid,
+                type,
+                processedAt: admin.firestore.FieldValue.serverTimestamp(),
+              });
+            }
+
+            // ── 11. Protect lifetime users from accidental downgrade ─────────────
+            const userRef = db.collection("users").doc(uid);
+            const userSnap = await userRef.get();
+            const currentPremium = userSnap.data()?.premium;
+            if (currentPremium?.plan === "LIFETIME" && !isLifetime) {
+              console.log("⏭️ Skipping downgrade for lifetime user:", uid);
+              return res.status(200).send("Lifetime protected");
+            }
+
+            // ── 12. Write to Firestore ───────────────────────────────────────────
+            await userRef.set(
+              {
+                premium: {
+                  verified: true,
+                  entitlement: entitlement ?? "premium",
+                  isActive,
+                  plan,
+                  expiresAt: isLifetime ? Number.MAX_SAFE_INTEGER : expirationAtMs,
+                  autoRenew,
+                  productId,
+                  source: store ?? "unknown",
+                  revenueCatEvent: type,
+                  lastUpdatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                },
+              },
+              { merge: true }
+            );
+
+            console.log(`✅ Premium updated for ${uid} — type=${type} active=${isActive} plan=${plan}`);
+            return res.status(200).send("OK");
+          } catch (e) {
+            console.error("❌ RevenueCat webhook error:", e);
+            return res.status(500).send("Internal Error");
+          }
+        });
+
+        exports.verifyParentPin = base.https.onCall(async (data, context) => {
+
+          console.log("========== verifyParentPin START ==========");
+
+          if (!context.auth) {
+            console.log("❌ No auth context");
+            throw new functions.https.HttpsError("unauthenticated");
+          }
+
+          if (!context.app) {
+            console.log("❌ No app check context");
+            throw new functions.https.HttpsError("failed-precondition");
+          }
+
+          const uid = context.auth.uid;
+          const pin = String(data.pin || "").trim();
+
+          console.log("📱 Caller UID:", uid);
+          console.log("🔢 PIN Length:", pin.length);
+
+          const userSnap = await db.collection("users").doc(uid).get();
+
+          if (!userSnap.exists) {
+            console.log("❌ User document not found:", uid);
+            throw new functions.https.HttpsError(
+              "not-found",
+              "User not found"
+            );
+          }
+
+          const user = userSnap.data();
+
+          console.log("👤 User Role:", user.role);
+          console.log("👨‍👩‍👧 Parent ID:", user.parentId || null);
+
+          let targetUid = uid;
+
+          if (user.role === "child") {
+
+            if (!user.parentId) {
+              console.log("❌ Child has no parentId");
+              throw new functions.https.HttpsError(
+                "failed-precondition",
+                "No parent linked"
+              );
+            }
+
+            targetUid = user.parentId;
+          }
+
+          console.log("🎯 Target UID:", targetUid);
+
+          const ref = db.collection("users").doc(targetUid);
+          const snap = await ref.get();
+
+          console.log("📄 Parent Doc Exists:", snap.exists);
+
+          if (!snap.exists) {
+            console.log("❌ Parent document missing:", targetUid);
+            throw new functions.https.HttpsError(
+              "not-found",
+              "Parent document not found"
+            );
+          }
+
+          const parent = snap.data();
+
+          console.log("🔐 Has pinHash:", !!parent.pinHash);
+
+          if (!parent.pinHash) {
+            console.log("❌ Parent PIN not configured");
+            throw new functions.https.HttpsError(
+              "failed-precondition",
+              "PIN not set"
+            );
+          }
+
+          const valid = await bcrypt.compare(pin, parent.pinHash);
+
+          console.log("✅ PIN Valid:", valid);
+
+          return db.runTransaction(async (tx) => {
+
+            const fresh = await tx.get(ref);
+            const d = fresh.data();
+
+            const attempts = d.pinAttempts || 0;
+            const last = d.lastPinAttempt || 0;
+
+            console.log("📊 Attempts:", attempts);
+            console.log("🕒 Last Attempt:", last);
+
+            if (
+              attempts >= 5 &&
+              Date.now() - last < 5 * 60 * 1000
+            ) {
+
+              console.log("🚫 Rate limited");
+
+              throw new functions.https.HttpsError(
+                "resource-exhausted",
+                "Too many attempts. Try in 5 minutes."
+              );
+            }
+
+            if (!valid) {
+
+              console.log("❌ Invalid PIN entered");
+
+              tx.update(ref, {
+                pinAttempts: attempts + 1,
+                lastPinAttempt: Date.now()
+              });
+
+              throw new functions.https.HttpsError(
+                "permission-denied",
+                "Invalid PIN"
+              );
+            }
+
+            console.log("🎉 PIN verification successful");
+
+            tx.update(ref, {
+              pinAttempts: 0,
+              lastPinAttempt: null
+            });
+
+            console.log("========== verifyParentPin SUCCESS ==========");
+
+            return {
+              success: true
+            };
+          });
+
+        });
+
+        exports.monitorOfflineChildren = functions
+          .region("asia-south1")
+          .runWith({ timeoutSeconds: 540, memory: "256MB" })
+          .pubsub.schedule("every 60 minutes")
+          .timeZone("Asia/Kolkata")
+          .onRun(async (context) => {
+
+            console.log("========== monitorOfflineChildren START ==========");
+
+            const now = Date.now();
+            const childrenSnap = await db.collection("children").get();
+
+            if (childrenSnap.empty) {
+              console.log("No children found. Exiting.");
+              return null;
+            }
+
+            console.log(`Processing ${childrenSnap.size} children...`);
+
+            const results = await Promise.allSettled(
+              childrenSnap.docs.map(async (childDoc) => {
+
+                const childId = childDoc.id;
+                const child   = childDoc.data();
+                const name    = child.name || "Child";
+
+                if (child.isActivated === false) {
+                  console.log(`[${childId}] Child inactive. Skipping offline monitoring.`);
+                  return;
+                }
+
+                try {
+                  console.log(`[${childId}] Processing: ${name}`);
+
+                  // ── Read lastSyncAt from child doc (no subcollection query) ─────────
+                  const lastSyncAt = child.lastSyncAt;
+
+                  if (!lastSyncAt) {
+                    console.log(`[${childId}] No lastSyncAt on child doc. Skipping.`);
+                    return;
+                  }
+
+                  const lastSyncAtMs = typeof lastSyncAt.toMillis === "function"
+                    ? lastSyncAt.toMillis()
+                    : Number(lastSyncAt);
+
+                  if (!lastSyncAtMs || Number.isNaN(lastSyncAtMs)) {
+                    console.log(`[${childId}] Invalid lastSyncAt. Skipping.`);
+                    return;
+                  }
+
+                  const hoursOffline     = (now - lastSyncAtMs) / (1000 * 60 * 60);
+                  const safeHoursOffline = Math.max(0, hoursOffline);
+
+                  const offline12hSent = child.offline12hSent === true;
+                  const offline16hSent = child.offline16hSent === true;
+
+                  console.log(`[${childId}] hoursOffline=${safeHoursOffline.toFixed(2)} 12hSent=${offline12hSent} 16hSent=${offline16hSent}`);
+
+                  const childRef  = db.collection("children").doc(childId);
+                  const alertsRef = childRef.collection("alerts");
+
+                  // ── BACK ONLINE ──────────────────────────────────────────────────────
+                  if (safeHoursOffline < 1 && (offline12hSent || offline16hSent)) {
+
+                    console.log(`[${childId}] Back online. Creating alert + resetting flags.`);
+
+                    await Promise.all([
+                      alertsRef.add({
+                        type:      "device_back_online",
+                        severity:  "info",
+                        message: `${name}'s device is back online.`,
+                        timestamp: Date.now()
+                      }),
+                      childRef.update({
+                        offline12hSent: false,
+                        offline16hSent: false
+                      })
+                    ]);
+
+                    console.log(`[${childId}] ✅ back_online alert created.`);
+                    return;
+                  }
+
+                  // ── OFFLINE CRITICAL (16h) ───────────────────────────────────────────
+                  if (safeHoursOffline >= 16 && !offline16hSent) {
+
+                    console.log(`[${childId}] Offline >= 16h. Creating critical alert.`);
+
+                    await Promise.all([
+                      alertsRef.add({
+                        type:      "device_offline_critical",
+                        severity:  "critical",
+                        message: `${name}'s device has not connected to iLimits for over 16 hours.`,
+                        timestamp: Date.now()
+                      }),
+                      childRef.update({
+                        offline16hSent: true,
+                        offline12hSent: true   // prevent stale 12h backfill
+                      })
+                    ]);
+
+                    console.log(`[${childId}] ✅ offline_critical alert created.`);
+                    return;
+                  }
+
+                  // ── OFFLINE WARNING (12h) ────────────────────────────────────────────
+                  if (safeHoursOffline >= 12 && !offline12hSent) {
+
+                    console.log(`[${childId}] Offline >= 12h. Creating warning alert.`);
+
+                    await Promise.all([
+                      alertsRef.add({
+                        type:      "device_offline_warning",
+                        severity:  "critical",
+                        message: `${name}'s device has not connected to iLimits for 12 hours.`,
+                        timestamp: Date.now()
+                      }),
+                      childRef.update({
+                        offline12hSent: true
+                      })
+                    ]);
+
+                    console.log(`[${childId}] ✅ offline_warning alert created.`);
+                    return;
+                  }
+
+                  console.log(`[${childId}] No state transition. Nothing to do.`);
+
+                } catch (err) {
+                  console.error(`[${childId}] ❌ Error:`, err.message);
+                }
+              })
+            );
+
+            const failed = results.filter(r => r.status === "rejected").length;
+            console.log(`========== monitorOfflineChildren END — ${results.length} processed, ${failed} failed ==========`);
+
+            return null;
+          });
+
+          exports.deleteOldAlerts = functions
+            .region("asia-south1")
+            .runWith({ timeoutSeconds: 540, memory: "256MB" })
+            .pubsub.schedule("every 24 hours")
+            .timeZone("Asia/Kolkata")
+            .onRun(async () => {
+
+              const cutoff = Date.now() - (3 * 24 * 60 * 60 * 1000);
+
+              const childrenSnap = await db.collection("children").get();
+
+              for (const childDoc of childrenSnap.docs) {
+
+                const alertsSnap = await db
+                  .collection("children")
+                  .doc(childDoc.id)
+                  .collection("alerts")
+                  .where("timestamp", "<", cutoff)
+                  .get();
+
+                if (alertsSnap.empty) continue;
+
+                const batch = db.batch();
+
+                alertsSnap.docs.forEach(doc => {
+                  batch.delete(doc.ref);
+                });
+
+                await batch.commit();
+
+                console.log(
+                  `Deleted ${alertsSnap.size} alerts for child ${childDoc.id}`
+                );
+              }
+
+              return null;
+            });
